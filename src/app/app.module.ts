@@ -12,7 +12,7 @@ import { RouterModule } from '@angular/router';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchComponent } from './search/search.component';
-import { ListComponent } from './list/list.component';
+
 import { AuthComponent } from './auth/auth.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
@@ -34,7 +34,6 @@ import { AuthServiceService } from './auth-service.service';
     HomeComponent,
     ProductDetailsComponent,
     SearchComponent,
-    ListComponent,
     AuthComponent,
     LoginComponent,
     RegisterComponent,
@@ -52,7 +51,7 @@ import { AuthServiceService } from './auth-service.service';
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'products/:id', component:ProductComponent },
       { path: 'achats', component:ProductComponent },
-      { path: 'list', component:ListComponent },
+      
       { path: '**', redirectTo: 'home', pathMatch: 'full' }
       
     ]),
