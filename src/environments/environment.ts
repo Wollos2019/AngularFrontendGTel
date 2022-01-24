@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  apiUrl : 'http://freecodegram.test/api/'
+  apiUrl : 'http://localhost:8000/api/'
 };
 
-export const baseUrl = 'http://freecodegram.test/api/';
+export const baseUrl = 'http://localhost:8000/api/';
 
 /*
  * For easier debugging in development mode, you can import the following file

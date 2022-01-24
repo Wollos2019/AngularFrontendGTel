@@ -7,7 +7,7 @@ import { IProduct } from '../product/product';
   providedIn: 'root'
 })
 export class ProductService {
-  private _url = 'http://freecodegram.test/api/products';
+  private _url = 'http://localhost:8000/api/products';
 
   constructor(private http:HttpClient) { }
   
@@ -21,7 +21,7 @@ export class ProductService {
   }
 
   // update(product:IProduct) : Observable<IProduct> {
-  //   return this.http.put<IProduct>('http://freecodegram.test/api/products/'+product.id, product);
+  //   return this.http.put<IProduct>('http://localhost:8000/api/products/'+product.id, product);
   // }
 
   update(product:IProduct) : Observable<IProduct> {
@@ -35,7 +35,7 @@ export class ProductService {
   search(x:string) : Observable<IProduct> {
     console.log('ici');
     console.log(x);
-    return this.http.get<IProduct>('http://freecodegram.test/api/products/search/'+x);
+    return this.http.get<IProduct>('http://localhost:8000/api/products/search/'+x);
   }
   
 }

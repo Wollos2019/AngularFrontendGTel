@@ -53,7 +53,7 @@ export class ProductComponent implements OnInit {
     //   'Authorization': `Bearer ${localStorage.getItem('token')}`
     // });
 
-    // this.http.get('http://freecodegram.test/api/products', {headers:headers}).subscribe(
+    // this.http.get('http://localhost:8000/api/products', {headers:headers}).subscribe(
     //   result => this.products = result
     // );
     this.getList();

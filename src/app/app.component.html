@@ -6,12 +6,12 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
+    <ul class="navbar-nav" *ngIf="authenticated">
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['/home']">Accueil <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/products']">Commercial</a>
+        <a class="nav-link" [routerLink]="['/commercial']">Commercial</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['/search']">Ressource</a>
@@ -19,9 +19,9 @@
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['/home']">Achat</a>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
+      </li> -->
     </ul>
   </div>
   <div class="float-right">
@@ -33,10 +33,12 @@
         <a class="nav-link" [routerLink]="['/register']">register</a>
       </li>
     </ul>
-
+  </div>
+  <div class="float-right">
     <ul class="navbar-nav" *ngIf="authenticated">
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" (click)="logout()">logout</a>
+        <!-- <a class="button" (click)="logout()">logout</a> -->
+        <button class="btn btn-outline-secondary" (click)="logout()">logout</button>
       </li>
     </ul>
   </div>

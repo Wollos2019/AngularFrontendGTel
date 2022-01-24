@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
     // );
 
     this.getUsers().subscribe(result => {
-      console.log(result);
+      
       Emitters.authEmitter.emit(true);
     },
       err => {

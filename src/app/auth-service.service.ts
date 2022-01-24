@@ -25,7 +25,7 @@ export class AuthServiceService {
   }
 
   login(data: any):Observable<any>{
-    console.log("deuxième !")
+    
     return this.http.post<any>(baseUrl+'login',data)
     .pipe(
       map(({users,token}) => {
@@ -36,7 +36,7 @@ export class AuthServiceService {
         localStorage.setItem('token', token);
         localStorage.setItem('currentUser', JSON.stringify(user));
         this.userSubject.next(user);
-        console.log('but !');
+        console.log(user);
         return user;
       })
     );
@@ -59,7 +59,7 @@ export class AuthServiceService {
   // }
 
   logout() {
-    console.log('executed');
+    
     this.http.post<any>('http://localhost:8000/api/logout', {})
     .subscribe(res => {
       if(res.status='200'){
