@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Emitters } from './emitters/emitters';
 import { AuthServiceService } from './auth-service.service';
 import { Router } from '@angular/router';
@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  
+
+  @ViewChild('content', {static:false}) el!:ElementRef;
   authenticated = false;
 
   constructor(private authService:AuthServiceService, private http:HttpClient, private router:Router) { }
