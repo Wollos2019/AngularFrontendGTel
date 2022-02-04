@@ -27,6 +27,7 @@ import { TokenInterceptorService } from './interceptors/token-interceptor.servic
 import { LoggoutComponent } from './loggout/loggout.component';
 import { AuthServiceService } from './auth-service.service';
 import { CommercialComponent } from './commercial/commercial.component';
+import { MainAppComponent } from './template/main-app/main-app.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { CommercialComponent } from './commercial/commercial.component';
     LoginComponent,
     RegisterComponent,
     LoggoutComponent,
-    CommercialComponent
+    CommercialComponent,
+    MainAppComponent
   ],
   imports: [
     BrowserModule,
