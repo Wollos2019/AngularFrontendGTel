@@ -20,6 +20,10 @@ export class ProductService {
     return this.http.post<IProduct>(this._url, product);
   }
 
+  sum() : Observable<any> {
+    return this.http.get(this._url);
+  }
+
   // update(product:IProduct) : Observable<IProduct> {
   //   return this.http.put<IProduct>('http://localhost:8000/api/products/'+product.id, product);
   // }

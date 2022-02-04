@@ -27,7 +27,8 @@ import { TokenInterceptorService } from './interceptors/token-interceptor.servic
 import { LoggoutComponent } from './loggout/loggout.component';
 import { AuthServiceService } from './auth-service.service';
 import { CommercialComponent } from './commercial/commercial.component';
-import { MainAppComponent } from './template/main-app/main-app.component';
+import { FactureComponent } from './facture/facture.component';
+import { ClientComponent } from './client/client.component';
 
 @NgModule({
   declarations: [
@@ -41,13 +42,15 @@ import { MainAppComponent } from './template/main-app/main-app.component';
     RegisterComponent,
     LoggoutComponent,
     CommercialComponent,
-    MainAppComponent,
+    FactureComponent,
+    ClientComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
+    RouterModule.forRoot([]),
     ModalModule.forRoot(),
     ReactiveFormsModule,
     BrowserAnimationsModule,

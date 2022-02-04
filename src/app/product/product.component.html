@@ -1,64 +1,102 @@
-<div style="text-align: center;">
-  <h1>Liste des produits</h1>
-</div>
+<!-- Vertical navbar -->
+<div class="vertical-nav bg-white"  id="sidebar">
 
-<div style="text-align: center;">
-    <button type="button" class="btn btn-primary mb-2" (click)="openModal(template)">Ajouter un produit</button>
-</div>
+  <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Rubriques</p>
 
-<table class="table">
-    <thead class="thead-light">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Nom</th>
-        <th scope="col">Description</th>
-        <th scope="col">Prix</th>
-        <th scope="col">Durée</th>
-        <th scope="col">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let product of products; index as i">
-        <th scope="row">{{i+1}}</th>
-        <td>{{product.name}}</td>
-        <td>{{product.description}}</td>
-        <td>{{product.price}}</td>
-        <td>{{product.slug}}</td>
-        <td>
-          <button type="button" class="btn btn-info mr-1" (click)="openModal(template, product)">Modifier</button>
-          <button type="button" class="btn btn-danger" (click)="delete(product)">Supprimer</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
- 
-  
-<ng-template #template>
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">{{modalTitle}}</h4>
-    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
-      <span aria-hidden="true" class="visually-hidden">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div class="form-group">
-      <label for="exampleInputEmail1">Product Name</label>
-      <input type="text" class="form-control" placeholder="Enter Product Name" [formControl]="name">
-      <small *ngIf="name.errors?.['required'] && showError"><b> *Name is required.</b></small>
+  <ul class="nav flex-column bg-white mb-0">
+    <li class="nav-item">
+      <a href="#" class="nav-link text-dark font-italic bg-light">
+                <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                Liste des clients
+            </a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link text-dark font-italic">
+                <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+                Liste des produits
+            </a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link text-dark font-italic">
+                <i class="fa fa-cubes mr-3 text-primary fa-fw"></i>
+                Etablir un bon d'entrée de caisse
+            </a>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="['/facture']" class="nav-link text-dark font-italic">
+                <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
+                Etablir une facture
+            </a>
+    </li>
+  </ul>
+</div>
+<!-- End vertical navbar -->
+
+<div class="page-content p-2" id="content">
+
+    <div style="text-align: center;">
+      <h1>Liste des produits</h1>
     </div>
-    <div class="form-group">
-      <label for="exampleInputEmail1">Product Slug</label>
-      <input type="text" class="form-control" placeholder="Enter Product Slug" [formControl]="slug">
-      <small *ngIf="slug.errors?.['required'] && showError"><b> *Slug is required.</b></small>
+
+    <div style="text-align: center;">
+        <button type="button" class="btn btn-primary mb-2" (click)="openModal(template)">Ajouter un produit</button>
     </div>
-    <div class="form-group">
-      <label for="exampleInputEmail1">Product Description</label>
-      <input type="text" class="form-control" placeholder="Enter Product Description" [formControl]="description">
-    </div>
-    <div class="form-group">
-      <label for="exampleInputEmail1">Product Price</label>
-      <input type="number" class="form-control" placeholder="Enter Product Price" [formControl]="price">
-    </div>
-    <button type="button" class="btn btn-primary mb-2" (click)="save()">{{btnTitle}}</button>
-  </div>
-</ng-template>
+
+    <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Description</th>
+            <th scope="col">Prix</th>
+            <th scope="col">Durée</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products; index as i">
+            <th scope="row">{{i+1}}</th>
+            <td>{{product.name}}</td>
+            <td>{{product.description}}</td>
+            <td>{{product.price}}</td>
+            <td>{{product.slug}}</td>
+            <td>
+              <button type="button" class="btn btn-info mr-1" (click)="openModal(template, product)">Modifier</button>
+              <button type="button" class="btn btn-danger" (click)="delete(product)">Supprimer</button>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+    
+      
+    <ng-template #template>
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{modalTitle}}</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+          <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Product Name</label>
+          <input type="text" class="form-control" placeholder="Enter Product Name" [formControl]="name">
+          <small *ngIf="name.errors?.['required'] && showError"><b> *Name is required.</b></small>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Product Slug</label>
+          <input type="text" class="form-control" placeholder="Enter Product Slug" [formControl]="slug">
+          <small *ngIf="slug.errors?.['required'] && showError"><b> *Slug is required.</b></small>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Product Description</label>
+          <input type="text" class="form-control" placeholder="Enter Product Description" [formControl]="description">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Product Price</label>
+          <input type="number" class="form-control" placeholder="Enter Product Price" [formControl]="price">
+        </div>
+        <button type="button" class="btn btn-primary mb-2" (click)="save()">{{btnTitle}}</button>
+      </div>
+    </ng-template>
+
+</div>

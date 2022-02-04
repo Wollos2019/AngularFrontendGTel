@@ -18,6 +18,13 @@ export class HomeComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    // console.log(this.currentUser);
+
+    // if (this.currentUser) {
+    //   Emitters.authEmitter.emit(true);
+    // } else {
+    //     Emitters.authEmitter.emit(false);
+    //   }
     // this.http.get('http://localhost:8000/api/user', {withCredentials:true}).subscribe(
     //   res => {
     //     console.log(res);
@@ -29,7 +36,7 @@ export class HomeComponent implements OnInit {
     //   }
     // );
 
-    this.getUsers().subscribe(result => {
+    this.getUsers().subscribe(() => {
       
       Emitters.authEmitter.emit(true);
     },
