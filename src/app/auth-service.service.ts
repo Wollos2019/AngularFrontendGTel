@@ -65,9 +65,11 @@ export class AuthServiceService {
       if(res.status='200'){
                 
                 this.router.navigate(['/loggout']);
+                localStorage.removeItem('currentUser');
+                this.userSubject.next(null!);
       }
     });
-    localStorage.removeItem('currentUser');
-    this.userSubject.next(null!);
+    // localStorage.removeItem('currentUser');
+    // this.userSubject.next(null!);
   }
 }

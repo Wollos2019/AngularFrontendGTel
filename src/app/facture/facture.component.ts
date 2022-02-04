@@ -16,7 +16,7 @@ export class FactureComponent implements OnInit {
   @ViewChild('content', {static:false}) el!:ElementRef;
   //@ViewChild('content') content!:ElementRef;
   generatePdf(){
-    let pdf = new jsPDF('p', 'pt', 'a4');
+    let pdf = new jsPDF('l', 'pt', 'a4');
     pdf.html(this.el.nativeElement, {
       callback:(pdf) => {
         pdf.output("dataurlnewwindow");

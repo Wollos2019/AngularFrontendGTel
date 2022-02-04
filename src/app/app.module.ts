@@ -28,6 +28,7 @@ import { LoggoutComponent } from './loggout/loggout.component';
 import { AuthServiceService } from './auth-service.service';
 import { CommercialComponent } from './commercial/commercial.component';
 import { FactureComponent } from './facture/facture.component';
+import { ClientComponent } from './client/client.component';
 
 @NgModule({
   declarations: [
@@ -41,24 +42,15 @@ import { FactureComponent } from './facture/facture.component';
     RegisterComponent,
     LoggoutComponent,
     CommercialComponent,
-    FactureComponent
+    FactureComponent,
+    ClientComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    RouterModule.forRoot([
-      { path: 'home', component:HomeComponent },
-      { path: 'products', component:ProductComponent },
-      { path: 'search', component:SearchComponent },
-      { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'products/:id', component:ProductComponent },
-      { path: 'achats', component:ProductComponent },
-      
-      { path: '**', redirectTo: 'home', pathMatch: 'full' }
-      
-    ]),
+    RouterModule.forRoot([]),
     ModalModule.forRoot(),
     ReactiveFormsModule,
     BrowserAnimationsModule,
