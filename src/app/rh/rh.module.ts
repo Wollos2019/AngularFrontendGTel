@@ -3,13 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { RhRoutingModule } from './rh-routing.module';
 import { ngxLoadingAnimationTypes, NgxLoadingModule } from 'ngx-loading';
-import { MainRhComponent } from './template/main-rh/main-rh.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
-    MainRhComponent,
-    DashboardComponent
+  
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
