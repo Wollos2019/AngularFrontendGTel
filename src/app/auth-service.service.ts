@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { baseUrl, environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment';
 import { User } from './models/user.model';
 import { map } from 'rxjs/operators';
 
@@ -20,13 +20,13 @@ export class AuthServiceService {
       this.user = this.userSubject.asObservable();
   }
 
-  public get userValue(): User {
-    return this.userSubject.value;
-  }
+  // public get userValue(): User {
+  //   return this.userSubject.value;
+  // }
 
   login(data: any):Observable<any>{
     
-    return this.http.post<any>(baseUrl+'login',data)
+    return this.http.post<any>(environment.apiUrl+'login',data)
     .pipe(
       map(({users,token}) => {
         let user: User = {
