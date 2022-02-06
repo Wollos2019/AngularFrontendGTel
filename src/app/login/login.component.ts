@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
         if(result) {
           
           //alert(result.message);
-          this.router.navigate(['/home']);
+          this.router.navigate(['/dashbord']);
         } else {
           alert(result);
         }
