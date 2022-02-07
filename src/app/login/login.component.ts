@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthServiceService } from '../auth-service.service';
@@ -14,10 +14,18 @@ export class LoginComponent implements OnInit {
   constructor(private authService:AuthServiceService,
               
               private router:Router,
-              private formBuilder:FormBuilder) { }
+            
+            
+              ) { }
 
   ngOnInit(): void {
     this.formInit();
+    const body = document.getElementsByTagName('body')[0];
+    body.classList.remove('sidebar-mini');
+    body.classList.add('login-page');
+  }
+  ngAfterViewInit(): void {
+ 
   }
 
   formInit() {
@@ -35,6 +43,7 @@ export class LoginComponent implements OnInit {
   }
   
   loginProcess() {
+    this.router.navigate(['/dashbord']);
     if(this.formGroup.valid) {
       this.authService.login(this.formGroup.value).subscribe(result=>{
         if(result) {

@@ -30,7 +30,7 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="../../dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+              <img src="assets/dist/img/user2-160x160.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   Brad Diesel
@@ -46,7 +46,7 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="../../dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <img src="assets/dist/img/user2-160x160.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   John Pierce
@@ -62,7 +62,7 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="../../dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <img src="assets/dist/img/user2-160x160.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   Nora Silvester
@@ -155,7 +155,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a routerLink="/" class="nav-link">
+            <a routerLink="/" class="nav-link"  routerLinkActive="active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashbord
@@ -175,7 +175,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../layout/top-nav.html" class="nav-link">
+                <a routerLink="/rh/personals" routerLinkActive="active"  class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Employés</p>
                 </a>
@@ -221,35 +221,48 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a routerLink="../config/departments" class="nav-link">
+                <a routerLink="/config/departments" class="nav-link"  routerLinkActive="active">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Departements</p>
                 </a>
-                <a routerLink="../config/fonctions" class="nav-link">
+
+                <a routerLink="/config/departments" class="nav-link"  routerLinkActive="active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Grade</p>
+                </a>
+                <a routerLink="/config/departments" class="nav-link"  routerLinkActive="active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Banque</p>
+                </a>
+                <a routerLink="/config/departments" class="nav-link"  routerLinkActive="active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Categories</p>
+                </a>
+                <a routerLink="/config/fonctions" class="nav-link"  routerLinkActive="active">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Fonctions</p>
                 </a>
                 
-                <a routerLink="../config/working_days"  class="nav-link">
+                <a routerLink="/config/working_days"  class="nav-link"  routerLinkActive="active">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Jours de travaillés</p>
+                  <p>Jours de travail</p>
                 </a>
 
-                <a routerLink="config/holidays"  class="nav-link">
+                <a routerLink="/config/holidays"  class="nav-link"  routerLinkActive="active">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Jours de fériés</p>
                 </a>
 
-                <a routerLink="config/leave_requests"  class="nav-link">
+                <a routerLink="/config/leave_requests"  class="nav-link"  routerLinkActive="active">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Demandes congés</p>
                 </a>
 
-                <a routerLink="config/type_absences"  class="nav-link">
+                <a routerLink="/config/type_absences"  class="nav-link"  routerLinkActive="active">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Types d'absences</p>
                 </a>
-                <a routerLink="config/pay"  class="nav-link">
+                <a routerLink="/config/pay"  class="nav-link"  routerLinkActive="active">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Paie</p>
                 </a>

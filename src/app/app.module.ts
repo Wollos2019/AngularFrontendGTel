@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,20 +14,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { TokenInterceptorService } from './interceptors/token-interceptor.service';
 import { AuthServiceService } from './auth-service.service';
 import { CommercialComponent } from './commercial/commercial.component';
 import { MainAppComponent } from './template/main-app/main-app.component';
 import { NavComponent } from './template/nav/nav.component';
+import { ToastrModule } from 'ngx-toastr';
+import { SharedModule } from './shared/shared.module';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     AppComponent,
     ProductComponent,
@@ -37,25 +35,24 @@ import { NavComponent } from './template/nav/nav.component';
     CommercialComponent,
     MainAppComponent,
     NavComponent,
+    
   
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
    // RouterModule.forRoot([]),
     ModalModule.forRoot(),
-    ReactiveFormsModule,
+    BrowserModule,
     BrowserAnimationsModule,
-    FlexLayoutModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatCardModule,
-    MatToolbarModule,
-    FormsModule,
-    ReactiveFormsModule,
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    }),
+    SharedModule
+    
   ],
   providers: [
     AuthServiceService,
