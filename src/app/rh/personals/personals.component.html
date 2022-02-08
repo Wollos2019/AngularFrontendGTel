@@ -18,7 +18,24 @@
                     <!-- /.card-header -->
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
+                               
+                                <div class="form-group">
+                                    <label for="civilite"> Titre civilité<span class="text-danger">*</span></label>
+                                    <select id="civilite" class="form-control" formControlName="civilite"
+                                        [ngClass]="{ 'is-invalid': submitted && f.civilite.errors }">
+                                        <option selected="selected" value="">Selectionnez</option>
+                                        <option value="1">Madame</option>
+                                        <option value="2">Monsieur</option>
+                                       
+
+                                    </select>
+                                    <div *ngIf="submitted && f.civilite.errors" class="invalid-feedback">
+                                        <div *ngIf="f.civilite.errors.required">Champ requis</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="name">Nom<span class="text-danger">*</span></label>
                                     <input formControlName="lastname" type="text" class="form-control" id="name"
@@ -29,7 +46,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="prenom">Prénom</label>
                                     <input formControlName="firstname" type="text" class="form-control" id="prenom"
