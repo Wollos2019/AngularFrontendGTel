@@ -8,11 +8,9 @@ import { ProductComponent } from './product/product.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { ProductDetailsComponent } from './product/product-details/product-details.component';
-import { RouterModule } from '@angular/router';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchComponent } from './search/search.component';
-
 import { AuthComponent } from './auth/auth.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
@@ -25,7 +23,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RegisterComponent } from './register/register.component';
 import { TokenInterceptorService } from './interceptors/token-interceptor.service';
 import { LoggoutComponent } from './loggout/loggout.component';
-import { AuthServiceService } from './auth-service.service';
+import { AuthServiceService } from './services/auth/auth-service.service';
 import { CommercialComponent } from './commercial/commercial.component';
 import { MainAppComponent } from './template/main-app/main-app.component';
 

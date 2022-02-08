@@ -3,32 +3,30 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { baseUrl, environment } from 'src/environments/environment';
-import { User } from './models/user.model';
+import { User } from '../../models/user.model';
 import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthServiceService {
   private userSubject: BehaviorSubject<User>;
   public user: Observable<User>;
 
-  constructor(private http: HttpClient, private router:Router) {
+  constructor(private http: HttpClient, private router: Router) {
     this.userSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser')!)
     );
-      this.user = this.userSubject.asObservable();
+    this.user = this.userSubject.asObservable();
   }
 
   public get userValue(): User {
     return this.userSubject.value;
   }
 
-  login(data: any):Observable<any>{
-    
-    return this.http.post<any>(baseUrl+'login',data)
-    .pipe(
-      map(({users,token}) => {
+  login(data: any): Observable<any> {
+    return this.http.post<any>(baseUrl + 'login', data).pipe(
+      map(({ users, token }) => {
         let user: User = {
           email: users.email,
           token: token,
@@ -59,14 +57,13 @@ export class AuthServiceService {
   // }
 
   logout() {
-    
-    this.http.post<any>('http://localhost:8000/api/logout', {})
-    .subscribe(res => {
-      if(res.status='200'){
-                
-                this.router.navigate(['/loggout']);
-      }
-    });
+    this.http
+      .post<any>('http://localhost:8000/api/logout', {})
+      .subscribe((res) => {
+        if ((res.status = '200')) {
+          this.router.navigate(['/loggout']);
+        }
+      });
     localStorage.removeItem('currentUser');
     this.userSubject.next(null!);
   }

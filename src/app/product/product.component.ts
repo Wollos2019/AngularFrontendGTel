@@ -4,17 +4,17 @@ import { IProduct } from './product';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 import { FormControl, Validators } from '@angular/forms';
-import { AuthServiceService } from '../auth-service.service';
+import { AuthServiceService } from '../services/auth/auth-service.service';
 import { User } from '../models/user.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.scss']
+  styleUrls: ['./product.component.scss'],
 })
 export class ProductComponent implements OnInit {
-  currentUser! : User;
+  currentUser!: User;
   public products = [] as any;
   public selectedProduct = <IProduct>{};
   public modalTitle = '';
@@ -26,13 +26,19 @@ export class ProductComponent implements OnInit {
   public showError = false;
   modalRef?: BsModalRef;
 
-  constructor(private service : ProductService, private modalService: BsModalService,
-    private authenticationService : AuthServiceService, private http: HttpClient ) {
-      this.authenticationService.user.subscribe(user => this.currentUser = user);
-     }
+  constructor(
+    private service: ProductService,
+    private modalService: BsModalService,
+    private authenticationService: AuthServiceService,
+    private http: HttpClient
+  ) {
+    this.authenticationService.user.subscribe(
+      (user) => (this.currentUser = user)
+    );
+  }
 
-  openModal(template: TemplateRef<any>, product?:IProduct) {
-    if(product) {
+  openModal(template: TemplateRef<any>, product?: IProduct) {
+    if (product) {
       this.modalTitle = 'Edit Product';
       this.btnTitle = 'Update';
       this.selectedProduct = product;
@@ -59,26 +65,22 @@ export class ProductComponent implements OnInit {
     this.getList();
   }
 
-  getList () {
-    this.service.list()
-      .subscribe(response => this.products = response);
-      
+  getList() {
+    this.service.list().subscribe((response) => (this.products = response));
   }
 
-
-  insertProduct () {
-    this.service.add(this.products).subscribe(response => {
+  insertProduct() {
+    this.service.add(this.products).subscribe((response) => {
       this.getList();
-    })
+    });
   }
 
-  delete(product:IProduct) {
-    this.service.delete(product)
-    .subscribe(response => this.getList());
+  delete(product: IProduct) {
+    this.service.delete(product).subscribe((response) => this.getList());
   }
 
-  save(){
-    if(!this.name.value || !this.description.value || !this.price.value) {
+  save() {
+    if (!this.name.value || !this.description.value || !this.price.value) {
       this.showError = true;
       return;
     }
@@ -88,9 +90,8 @@ export class ProductComponent implements OnInit {
     this.selectedProduct.price = this.price.value;
     this.selectedProduct.slug = this.slug.value;
 
-    if(this.btnTitle == 'Update') {
-      this.service.update(this.selectedProduct)
-      .subscribe(response =>{
+    if (this.btnTitle == 'Update') {
+      this.service.update(this.selectedProduct).subscribe((response) => {
         this.getList();
         this.reset();
         this.showError = false;
@@ -98,8 +99,7 @@ export class ProductComponent implements OnInit {
       });
     } else {
       console.log(this.selectedProduct);
-      this.service.add(this.selectedProduct)
-      .subscribe(response =>{
+      this.service.add(this.selectedProduct).subscribe((response) => {
         this.getList();
         this.reset();
         this.showError = false;
@@ -108,11 +108,10 @@ export class ProductComponent implements OnInit {
     }
   }
 
-  reset () {
+  reset() {
     this.name.reset();
     this.description.reset();
     this.price.reset();
     this.slug.reset();
   }
-
 }

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthServiceService } from 'src/app/auth-service.service';
+import { AuthServiceService } from 'src/app/services/auth/auth-service.service';
 import { Emitters } from 'src/app/emitters/emitters';
 
 @Component({

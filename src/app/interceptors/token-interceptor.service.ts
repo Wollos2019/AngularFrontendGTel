@@ -1,37 +1,43 @@
-import { Injectable, Injector} from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
-import { AuthServiceService } from 'src/app/auth-service.service';
-
+import {
+  HttpRequest,
+  HttpHandler,
+  HttpEvent,
+  HttpInterceptor,
+} from '@angular/common/http';
+import { AuthServiceService } from 'src/app/services/auth/auth-service.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TokenInterceptorService implements HttpInterceptor {
+  constructor(private authService: AuthServiceService) {}
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
+    if (this.authService.userValue) {
+      const { token } = this.authService.userValue;
 
-  constructor(private authService: AuthServiceService) { }
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-      if(this.authService.userValue) {
-          const { token } = this.authService.userValue;
-          
-          if(token) {
-            req = req.clone({
-              setHeaders: {
-                Authorization: `Bearer ${token}`,
-              },
-            });
-          }
+      if (token) {
+        req = req.clone({
+          setHeaders: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      }
+    }
+    return next.handle(req).pipe(
+      catchError((err) => {
+        if (err.status === 401) {
+          this.authService.logout();
         }
-          return next.handle(req).pipe(
-            catchError((err) => {
-              if (err.status === 401) {
-                this.authService.logout();
-              }
-              const error = err.error.message || err.statusText;
-              return throwError(error);
-            })
-          );
+        const error = err.error.message || err.statusText;
+        return throwError(error);
+      })
+    );
   }
 
   // constructor(private injector: Injector) {}
