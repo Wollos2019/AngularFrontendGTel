@@ -19,9 +19,11 @@ import { AuthServiceService } from './auth-service.service';
 import { CommercialComponent } from './commercial/commercial.component';
 import { MainAppComponent } from './template/main-app/main-app.component';
 import { NavComponent } from './template/nav/nav.component';
-import { ToastrModule } from 'ngx-toastr';
+
 import { SharedModule } from './shared/shared.module';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -42,7 +44,7 @@ import { CommonModule } from '@angular/common';
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-   // RouterModule.forRoot([]),
+    //RouterModule.forRoot([]),
     ModalModule.forRoot(),
     BrowserModule,
     BrowserAnimationsModule,

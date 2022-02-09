@@ -21,6 +21,7 @@ const routes: Routes = [
     path: '',
     component: MainAppComponent,
     children: [
+      { path: 'clients', component: ClientComponent},
       { path: 'commercial', component: CommercialComponent },
       { path: 'dashbord', component: HomeComponent },
       { path: 'products', component: ProductComponent },
