@@ -1,0 +1,208 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 mt-3">
+            <form [formGroup]="editForm">
+                <div class="card card-default">
+                    <div class="card-header">
+                        <h3 class="card-title">Ajouter un Nouveau employé</h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <!-- <button type="button" class="btn btn-tool" data-card-widget="remove">
+                      <i class="fas fa-times"></i>
+                    </button> -->
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                               
+                                <div class="form-group">
+                                    <label for="civilite"> Titre civilité<span class="text-danger">*</span></label>
+                                    <select id="civilite" class="form-control" formControlName="civilite"
+                                        [ngClass]="{ 'is-invalid': submitted && f.civilite.errors }">
+                                        <option selected="selected" value="">Selectionnez</option>
+                                        <option value="1">Madame</option>
+                                        <option value="2">Monsieur</option>
+                                       
+
+                                    </select>
+                                    <div *ngIf="submitted && f.civilite.errors" class="invalid-feedback">
+                                        <div *ngIf="f.civilite.errors.required">Champ requis</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="name">Nom<span class="text-danger">*</span></label>
+                                    <input formControlName="lastname" type="text" class="form-control" id="name"
+                                        [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }" placeholder="Nom">
+                                </div>
+                                <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
+                                    <div *ngIf="f.lastname.errors.required">Champ requis</div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="prenom">Prénom</label>
+                                    <input formControlName="firstname" type="text" class="form-control" id="prenom"
+                                        placeholder="Prénom">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="email">Email<span class="text-danger">*</span></label>
+                                    <input formControlName="email" type="email" class="form-control" id="email"
+                                        placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Sexe<span class="text-danger">*</span></label><br>
+                                    <div class="icheck-primary d-inline mr-5">
+                                        <input formControlName="sexe" type="radio" id="homme" [value]="'male'">
+                                        <label for="homme">
+                                            Homme
+                                        </label>
+                                    </div>
+                                    <div class="icheck-primary d-inline">
+                                        <input formControlName="sexe" type="radio" id="femme" [value]="'femele'">
+                                        <label for="femme">
+                                            Femme
+                                        </label>
+                                    </div>
+                                </div>
+                                <div *ngIf="submitted && f.sexe.errors" class="invalid-feedback">
+                                    <div *ngIf="f.sexe.errors.required">Champ requis</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="cni">CNI</label>
+                                    <input formControlName="cni" type="text" class="form-control" id="cni"
+                                        placeholder="CNI">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="cnps">CNPS</label>
+                                    <input formControlName="cnps" type="text" class="form-control" id="cnps"
+                                        placeholder="CNPS">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Statut matrimonial<span class="text-danger">*</span></label>
+                                    <select class="form-control" formControlName="matrimonial"
+                                        [ngClass]="{ 'is-invalid': submitted && f.matrimonial.errors }">
+                                        <option selected="selected">Sectionnez</option>
+                                        <option value="celibataire">Célibataire</option>
+                                        <option value="marie">Marié</option>
+
+                                    </select>
+                                </div>
+                                <div *ngIf="submitted && f.matrimonial.errors" class="invalid-feedback">
+                                    <div *ngIf="f.matrimonial.errors.required">Champ requis</div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="dateNaissance">Date de naissance<span
+                                            class="text-danger">*</span></label>
+                                    <input formControlName="dateNaissance" type="date" class="form-control"
+                                        id="dateNaissance"
+                                        [ngClass]="{ 'is-invalid': submitted && f.dateNaissance.errors }">
+                                </div>
+                                <div *ngIf="submitted && f.dateNaissance.errors" class="invalid-feedback">
+                                    <div *ngIf="f.dateNaissance.errors.required">Champ requis</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Nombre d'enfant</label>
+                                    <input formControlName="numberChild" type="number" value="0" class="form-control"
+                                        id="name" placeholder="Nombre d'enfant">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="photo">Photo</label>
+                                    <input type="file" class="form-control" id="photo">
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="phone">Téléphone</label>
+                                    <input formControlName="phone" type="text" class="form-control" id="phone"
+                                        placeholder="Téléphone">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Adresse">Adresse</label>
+                                    <input formControlName="address" type="text" class="form-control" id="Adresse"
+                                        placeholder="Adresse">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="ville">Ville</label>
+                                    <input formControlName="town" type="text" class="form-control" id="ville"
+                                        placeholder="Ville">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Pays<span class="text-danger">*</span></label>
+                                    <select formControlName="country" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.country.errors }">
+                                        <option selected="selected">Sectionnez le pays</option>
+                                        <option value="gabon">Gabon</option>
+                                        <option value="cameroun">Cameroun</option>
+
+                                    </select>
+                                </div>
+                                <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
+                                    <div *ngIf="f.country.errors.required">Champ requis</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-info float-right" (click)="save()">Enregistrer</button>
+                    </div>
+
+                    <!-- /.card-body -->
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<ngx-loading
+[show]="loading"
+[config]="{ backdropBorderRadius: '3px' }"
+></ngx-loading>

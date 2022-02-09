@@ -2,69 +2,29 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { baseUrl, environment } from 'src/environments/environment';
-import { User } from '../../models/user.model';
-import { map } from 'rxjs/operators';
-
+import { environment } from 'src/environments/environment';
+import { User } from 'src/app/models/user.model';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthServiceService {
-  private userSubject: BehaviorSubject<User>;
-  public user: Observable<User>;
-
-  constructor(private http: HttpClient, private router: Router) {
-    this.userSubject = new BehaviorSubject<User>(
-      JSON.parse(localStorage.getItem('currentUser')!)
-    );
-    this.user = this.userSubject.asObservable();
-  }
-
-  public get userValue(): User {
-    return this.userSubject.value;
-  }
+export class AuthService {
+  userSubject = new BehaviorSubject<User | null>(null);
+  URL_API = environment.apiUrl;
+  constructor(private http: HttpClient, private router: Router) {}
 
   login(data: any): Observable<any> {
-    return this.http.post<any>(baseUrl + 'login', data).pipe(
-      map(({ users, token }) => {
-        let user: User = {
-          email: users.email,
-          token: token,
-        };
-        localStorage.setItem('token', token);
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        this.userSubject.next(user);
-        console.log(user);
-        return user;
-      })
-    );
+    return this.http.post<any>(`${this.URL_API}login`, data);
   }
 
-  // login(username: string, password: string) {
-  //   return this.http
-  //     .post<any>(`${environment.apiUrl}api/login`, { username, password })
-  //     .pipe(
-  //       map(({token}) => {
-  //         let user: User = {
-  //           email: username,
-  //           token: token,
-  //         };
-  //         localStorage.setItem('currentUser', JSON.stringify(user));
-  //         this.userSubject.next(user);
-  //         return user;
-  //       })
-  //     );
-  // }
-
   logout() {
-    this.http
-      .post<any>('http://localhost:8000/api/logout', {})
-      .subscribe((res) => {
-        if ((res.status = '200')) {
-          this.router.navigate(['/loggout']);
-        }
-      });
-    localStorage.removeItem('currentUser');
-    this.userSubject.next(null!);
+    return this.http.get<any>(`${this.URL_API}logout`);
+  }
+
+  me(): Observable<User> {
+    return this.http.get<User>(`${this.URL_API}me`);
+  }
+
+  getInfo(): Observable<User | null> {
+    return this.userSubject.asObservable();
   }
 }

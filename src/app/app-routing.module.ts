@@ -1,35 +1,32 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoggoutComponent } from './loggout/loggout.component';
 import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
 import { CommercialComponent } from './commercial/commercial.component';
 import { MainAppComponent } from './template/main-app/main-app.component';
-import { HomeComponent } from './home/home.component';
 import { ProductComponent } from './product/product.component';
-import { SearchComponent } from './search/search.component';
-
+import { DashboardComponent } from './template/dashboard/dashboard.component';
 const routes: Routes = [
+  { path: 'login', component: LoginComponent },
   {
     path: 'rh',
     loadChildren: () => import('./rh/rh.module').then((m) => m.RhModule),
   },
   {
+    path: 'config',
+    loadChildren: () =>
+      import('./config/config.module').then((m) => m.ConfigModule),
+  },
+  {
     path: '',
     component: MainAppComponent,
     children: [
-      { path: 'login', component: LoginComponent },
-      { path: 'register', component: RegisterComponent },
-      { path: 'loggout', component: LoggoutComponent },
       { path: 'commercial', component: CommercialComponent },
-      { path: 'home', component: HomeComponent },
+      { path: 'dashbord', component: DashboardComponent },
       { path: 'products', component: ProductComponent },
-      { path: 'search', component: SearchComponent },
-
       { path: 'products/:id', component: ProductComponent },
       { path: 'achats', component: ProductComponent },
-      { path: '**', redirectTo: 'home', pathMatch: 'full' },
-      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: '**', redirectTo: 'dashbord', pathMatch: 'full' },
+      { path: '', redirectTo: 'dashbord', pathMatch: 'full' },
     ],
   },
 ];

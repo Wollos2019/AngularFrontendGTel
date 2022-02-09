@@ -4,7 +4,6 @@ import { IProduct } from './product';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 import { FormControl, Validators } from '@angular/forms';
-import { AuthServiceService } from '../services/auth/auth-service.service';
 import { User } from '../models/user.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -29,13 +28,9 @@ export class ProductComponent implements OnInit {
   constructor(
     private service: ProductService,
     private modalService: BsModalService,
-    private authenticationService: AuthServiceService,
+
     private http: HttpClient
-  ) {
-    this.authenticationService.user.subscribe(
-      (user) => (this.currentUser = user)
-    );
-  }
+  ) {}
 
   openModal(template: TemplateRef<any>, product?: IProduct) {
     if (product) {

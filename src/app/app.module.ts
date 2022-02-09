@@ -1,65 +1,53 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductComponent } from './product/product.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HomeComponent } from './home/home.component';
 import { ProductDetailsComponent } from './product/product-details/product-details.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SearchComponent } from './search/search.component';
-import { AuthComponent } from './auth/auth.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { RegisterComponent } from './register/register.component';
-import { TokenInterceptorService } from './interceptors/token-interceptor.service';
-import { LoggoutComponent } from './loggout/loggout.component';
-import { AuthServiceService } from './services/auth/auth-service.service';
+import { AuthService } from './services/auth/auth-service.service';
 import { CommercialComponent } from './commercial/commercial.component';
 import { MainAppComponent } from './template/main-app/main-app.component';
+import { NavComponent } from './template/nav/nav.component';
+import { SharedModule } from './shared/shared.module';
+import { CommonModule } from '@angular/common';
+import { ToastrModule } from 'ngx-toastr';
+import { DashboardComponent } from './template/dashboard/dashboard.component';
+import { TokenInterceptorService } from './services/interceptors/token-interceptor.service';
 
 @NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     AppComponent,
     ProductComponent,
-    HomeComponent,
     ProductDetailsComponent,
-    SearchComponent,
-    AuthComponent,
     LoginComponent,
-    RegisterComponent,
-    LoggoutComponent,
     CommercialComponent,
     MainAppComponent,
+    NavComponent,
+    DashboardComponent,
   ],
   imports: [
-    BrowserModule,
+    CommonModule,
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
     ModalModule.forRoot(),
-    ReactiveFormsModule,
+    BrowserModule,
     BrowserAnimationsModule,
-    FlexLayoutModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatCardModule,
-    MatToolbarModule,
-    FormsModule,
-    ReactiveFormsModule,
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    }),
+    SharedModule,
   ],
   providers: [
-    AuthServiceService,
+    AuthService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
