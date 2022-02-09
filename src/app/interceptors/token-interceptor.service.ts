@@ -12,22 +12,19 @@ export class TokenInterceptorService implements HttpInterceptor {
 
   constructor(private authService: AuthServiceService) { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-      if(this.authService.userValue) {
-          const { token } = this.authService.userValue;
-          
-          if(token) {
-            req = req.clone({
-              setHeaders: {
-                Authorization: `Bearer ${token}`,
-              },
-            });
-          }
-        }
+    const  token =  localStorage.getItem('token');
+    if(token) {
+      req = req.clone({
+        setHeaders: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    }
           return next.handle(req).pipe(
             catchError((err) => {
-              if (err.status === 401) {
-                this.authService.logout();
-              }
+              // if (err.status === 401) {
+              //   this.authService.logout();
+              // }
               const error = err.error.message || err.statusText;
               return throwError(error);
             })

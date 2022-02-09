@@ -20,9 +20,12 @@ export class MainAppComponent implements OnInit {
   title = 'AngFront';
 
   ngOnInit(): void {
-    Emitters.authEmitter.subscribe((auth: boolean) => {
-      this.authenticated = auth;
-    });
+    // Emitters.authEmitter.subscribe((auth: boolean) => {
+    //   this.authenticated = auth;
+    // });
+    const body = document.getElementsByTagName('body')[0];
+    body.classList.remove('login-page');
+    body.classList.add('sidebar-mini');
   }
 
   logout(): void {
