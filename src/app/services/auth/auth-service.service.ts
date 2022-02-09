@@ -27,4 +27,7 @@ export class AuthService {
   getInfo(): Observable<User | null> {
     return this.userSubject.asObservable();
   }
+  getValue(): string | null {
+    return localStorage.getItem('token');
+  }
 }
