@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ToastrModule } from 'ngx-toastr';
 import { ngxLoadingAnimationTypes, NgxLoadingModule } from 'ngx-loading';
 import { TruncatePipe } from '../pipes/truncate.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -20,12 +19,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       tertiaryColour: '#ffffff',
     }),
   ],
-  exports:[
-    ReactiveFormsModule,
-    FormsModule,
-    NgxLoadingModule,
-   
-    TruncatePipe
-  ]
+  exports: [ReactiveFormsModule, FormsModule, NgxLoadingModule, TruncatePipe],
 })
-export class SharedModule { }
+export class SharedModule {}

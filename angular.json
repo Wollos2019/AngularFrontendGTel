@@ -34,17 +34,17 @@
               "src/assets"
             ],
             "styles": [
-            "src/assets/plugins/fontawesome-free/css/all.min.css",
-            "src/assets/dist/css/adminlte.min.css",
-            "node_modules/ngx-toastr/toastr.css"
+              "src/assets/plugins/fontawesome-free/css/all.min.css",
+              "src/assets/dist/css/adminlte.min.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
               "src/assets/plugins/jquery/jquery.min.js",
               "src/assets/plugins/bootstrap/js/bootstrap.bundle.min.js",
-            "src/assets/dist/js/adminlte.js" ,
-            "src/assets/dist/js/demo.js",
-            "src/assets/dist/js/pages/dashboard3.js"
-                     ]
+              "src/assets/dist/js/adminlte.js",
+              "src/assets/dist/js/demo.js",
+              "src/assets/dist/js/pages/dashboard3.js"
+            ]
           },
           "configurations": {
             "production": {

@@ -2,11 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { CommercialComponent } from './commercial/commercial.component';
-import { FactureComponent } from './facture/facture.component';
-import { ClientComponent } from './client/client.component';
-import { HomeComponent } from './home/home.component';
-import { ProductComponent } from './product/product.component';
 import { MainAppComponent } from './template/main-app/main-app.component';
+import { ProductComponent } from './product/product.component';
+import { DashboardComponent } from './template/dashboard/dashboard.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
@@ -15,15 +13,16 @@ const routes: Routes = [
   },
   {
     path: 'config',
-    loadChildren: () => import('./config/config.module').then((m) => m.ConfigModule),
+    loadChildren: () =>
+      import('./config/config.module').then((m) => m.ConfigModule),
   },
   {
     path: '',
     component: MainAppComponent,
     children: [
-      { path: 'clients', component: ClientComponent},
+      //{ path: 'clients', component: ClientComponent},
       { path: 'commercial', component: CommercialComponent },
-      { path: 'dashbord', component: HomeComponent },
+      { path: 'dashbord', component: DashboardComponent },
       { path: 'products', component: ProductComponent },
       { path: 'products/:id', component: ProductComponent },
       { path: 'achats', component: ProductComponent },

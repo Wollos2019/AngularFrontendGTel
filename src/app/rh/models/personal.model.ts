@@ -4,18 +4,21 @@ export interface IPersonal {
      firstname?: string;
      email?: string;
      cni?: string;
-     sex?: string;
+     gender?: GENDER;
      cnps?: string;
-     matrimonial?: string;
      numberChild?: string;
      phone?: string;
      address?: string;
-     dateNaissance?: string;
+     birthday?: string;
      country?: string;
      town?: string;
      status?:STATUS;
      created_at?: Date;
      update_at?: Date;
+     civility?:number;
+     isAdmin?:boolean;
+     courriel?:string;
+     marital?:MARITAL
 }
 
 export class Personal implements IPersonal {
@@ -25,21 +28,34 @@ export class Personal implements IPersonal {
     public firstname?: string,
     public email?: string,
     public cni?: string,
-    public sex?: string,
+    public gender?: GENDER,
     public cnps?: string,
-    public matrimonial?: string,
     public numberChild?: string,
     public phone?: string,
     public address?: string,
-    public dateNaissance?: string,
+    public birthday?: string,
     public country?: string,
     public town?: string,
+    public civility?:number,
     public status?:STATUS,
     public created_at?: Date,
-    public update_at?: Date
+    public update_at?: Date,
+    public isAdmin?:boolean,
+    public courriel?:string,
+    public marital?:MARITAL
   ) {}
 }
 export enum STATUS{
   ENABLE="ENABLE",
   DISABLE="DISABLE"
+}
+export enum MARITAL{
+  SINGLE="SINGLE",
+  MARRIED="MARRIED",
+  DIVORCE='DIVORCE'
+}
+
+export enum GENDER{
+  MALE='MALE',
+  FEMALE='FEMALE'
 }
