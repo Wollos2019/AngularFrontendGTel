@@ -175,14 +175,28 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="../layout/top-nav.html" class="nav-link">
+              <a [routerLink]="['/commercial/clients']"
+              routerLinkActive="active"
+              class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>2</p>
+                <p>Clients</p>
               </a>
 
               <a href="../layout/top-nav.html" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>1</p>
+                <p>Commandes</p>
+              </a>
+
+              <a href="../layout/top-nav.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Factures</p>
+              </a>
+
+              <a [routerLink]="['/commercial/produits']"
+              routerLinkActive="active"
+              class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Produits</p>
               </a>
             </li>
           </ul>

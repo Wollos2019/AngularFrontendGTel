@@ -1,6 +1,6 @@
 export interface Iclient {
     idClient : String;
-    firstName : String;
+    nom : String;
     email : String;
     telephone : String;
     adresse : String;

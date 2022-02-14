@@ -10,7 +10,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './services/auth/auth-service.service';
-import { CommercialComponent } from './commercial/commercial.component';
+
 import { MainAppComponent } from './template/main-app/main-app.component';
 import { NavComponent } from './template/nav/nav.component';
 import { SharedModule } from './shared/shared.module';
@@ -18,18 +18,20 @@ import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { DashboardComponent } from './template/dashboard/dashboard.component';
 import { TokenInterceptorService } from './services/interceptors/token-interceptor.service';
+import { ClientsModule } from './modules/commercial/clients/clients.module';
+import { CommandesComponent } from './Commercial/commandes/commandes.component';
+import { ProduitsModule } from './modules/commercial/produits/produits.module';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     AppComponent,
-    ProductComponent,
     ProductDetailsComponent,
     LoginComponent,
-    CommercialComponent,
     MainAppComponent,
     NavComponent,
     DashboardComponent,
+    CommandesComponent,
   ],
   imports: [
     CommonModule,
@@ -46,6 +48,8 @@ import { TokenInterceptorService } from './services/interceptors/token-intercept
       preventDuplicates: true,
     }),
     SharedModule,
+    ClientsModule,
+    ProduitsModule,
   ],
   providers: [
     AuthService,

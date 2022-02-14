@@ -31,16 +31,15 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let client of clients; index as i">
-                        <th scope="row">{{i+1}}</th>
-                        <td>{{client.name}}</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                      <tr *ngFor="let client of clients;">
+                        <th>{{client.id}}</th>
+                        <td>{{client.nom}}</td>
+                        <td>{{client.email}}</td>
+                        <td>{{client.telephone}}</td>
+                        <td>{{client.adresse}}</td>
                         <td>
                             <button type="button" class="btn btn-info mr-1" (click)="openModal(template, client)">Modifier</button>
-                            <button type="button" class="btn btn-danger" (click)="delete(client)">Supprimer</button>
+                            <button type="button" class="btn btn-primary" (click)="openModal2(template2, client)">Commander</button>
                         </td>
                       </tr>
                     </tbody>
@@ -58,26 +57,81 @@
                 </div>
                 <div class="modal-body">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Product Name</label>
-                    <input type="text" class="form-control" placeholder="Entrer le nom du client" formControlName="name">
-                    <small *ngIf="name.errors?.['required'] && showError"><b> *Name is required.</b></small>
+                    <label for="Input1">Nom du client</label>
+                    <input type="text" class="form-control" placeholder="Entrer le nom du client" [formControl]="name">
+                    <small *ngIf="name.errors?.['required'] && showError"><b> *Le nom est requis.</b></small>
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Product Slug</label>
-                    <input type="text" class="form-control" placeholder="Entrer l'émail du client" formControlName="email">
-                    <small *ngIf="slug.errors?.['required'] && showError"><b> *Slug is required.</b></small>
+                    <label for="Input1">L'émail du client</label>
+                    <input type="text" class="form-control" placeholder="Entrer l'émail du client" [formControl]="email">
+                    <small *ngIf="email.errors?.['required'] && showError"><b> *L'émail est requis.</b></small>
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Product Description</label>
-                    <input type="text" class="form-control" placeholder="Entrer le numéro de téléphone" formControlName="Telephone">
+                    <label for="Input1">Numéro de téléphone</label>
+                    <input type="text" class="form-control" placeholder="Entrer le numéro de téléphone" [formControl]="telephone">
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Product Price</label>
-                    <input type="number" class="form-control" placeholder="Entrer l'adresse du client" formControlName="Adresse">
+                    <label for="Input1">Adresse du client</label>
+                    <input type="text" class="form-control" placeholder="Entrer l'adresse du client" [formControl]="adresse">
                   </div>
                   <button type="button" class="btn btn-primary mb-2" (click)="save()">{{btnTitle}}</button>
+                  <button type="button" class="btn btn-danger mb-2 ml-2" (click)="delete(selectedClient)">Supprimer</button>
                 </div>
             </ng-template>
+
+            <ng-template #template2>
+              <div class="modal-header">
+                <h4 class="modal-title pull-left">{{modalTitle}}</h4>
+                <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+                  <span aria-hidden="true" class="visually-hidden">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <input type="checkbox" aria-label="Checkbox for following text input">
+                    </div>
+                    <span class="input-group-text" id="basic-addon3">Spot publicitaire</span>
+                  </div>
+                  <input type="number" class="form-control" placeholder="Entrer la quantité">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button">+</button>
+                    <button class="btn btn-outline-secondary" type="button">-</button>
+                  </div>
+                </div>
+
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <input type="checkbox" aria-label="Checkbox for following text input">
+                    </div>
+                    <span class="input-group-text" id="basic-addon3">Couverture médiatique</span>
+                  </div>
+                  <input type="number" class="form-control" placeholder="Entrer la quantité">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button">+</button>
+                    <button class="btn btn-outline-secondary" type="button">-</button>
+                  </div>
+                </div>
+
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <input type="checkbox" aria-label="Checkbox for following text input">
+                    </div>
+                    <span class="input-group-text" id="basic-addon3">Bande déroulante</span>
+                  </div>
+                  <input type="number" class="form-control" placeholder="Entrer la quantité">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button">+</button>
+                    <button class="btn btn-outline-secondary" type="button">-</button>
+                  </div>
+                </div>
+                
+                <button type="button" class="btn btn-primary mb-2" >{{btnTitle}}</button>
+              </div>
+          </ng-template>
 
         </div>
     </div>

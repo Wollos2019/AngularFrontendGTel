@@ -4,8 +4,6 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { Iclient } from './client';
 import { ClientService } from './services/client.service';
-import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser'
 
 @Component({
   selector: 'app-client',
@@ -35,13 +33,32 @@ openModal(template: TemplateRef<any>, client?:Iclient) {
     this.modalTitle = 'Modifier un client';
     this.btnTitle = 'Modifier';
     this.selectedClient = client;
-    this.name.setValue(client.firstName);
+    console.log(client);
+    this.name.setValue(client.nom);
     this.email.setValue(client.email);
     this.telephone.setValue(client.telephone);
     this.adresse.setValue(client.adresse);
   } else {
-    this.modalTitle = 'Add Product';
-    this.btnTitle = 'Save';
+    this.modalTitle = 'Ajouter un client';
+    this.btnTitle = 'Enregistrer';
+    this.reset();
+  }
+  this.modalRef = this.modalService.show(template);
+}
+
+openModal2(template: TemplateRef<any>, client?:Iclient) {
+  if(client) {
+    this.modalTitle = 'Enregistrer une commande';
+    this.btnTitle = 'Enregistrer';
+    this.selectedClient = client;
+    console.log(client);
+    this.name.setValue(client.nom);
+    this.email.setValue(client.email);
+    this.telephone.setValue(client.telephone);
+    this.adresse.setValue(client.adresse);
+  } else {
+    this.modalTitle = 'Ajouter un client';
+    this.btnTitle = 'Enregistrer';
     this.reset();
   }
   this.modalRef = this.modalService.show(template);
@@ -53,7 +70,7 @@ ngOnInit(): void {
 
 getList () {
   this.service.list()
-    .subscribe(response => this.clients = response);    
+    .subscribe(response => this.clients = response['data']);    
 }
 
 save(){
@@ -62,12 +79,12 @@ save(){
     return;
   }
 
-  this.selectedClient.firstName = this.name.value;
+  this.selectedClient.nom = this.name.value;
   this.selectedClient.email = this.email.value;
   this.selectedClient.telephone = this.telephone.value;
   this.selectedClient.adresse = this.adresse.value;
 
-  if(this.btnTitle == 'Update') {
+  if(this.btnTitle == 'Modifier') {
     this.service.update(this.selectedClient)
     .subscribe(response =>{
       this.getList();
