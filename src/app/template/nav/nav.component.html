@@ -153,15 +153,30 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a
-                [routerLink]="['/rh/personals']"
-                routerLinkActive="active"
-                class="nav-link"
-              >
-                <i class="far fa-circle nav-icon"></i>
-                <p>Employés</p>
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-circle"></i>
+                <p>
+                 Employés
+                  <i class="right fas fa-angle-left"></i>
+                </p>
               </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a   [routerLink]="['/rh/personals']" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Créer</p>
+                  </a>
+                </li>
+               
+                <li class="nav-item">
+                  <a  [routerLink]="['/rh/personals/list']" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Liste</p>
+                  </a>
+                </li>
+              </ul>
             </li>
+           
           </ul>
         </li>
 
@@ -292,6 +307,15 @@
                 <i class="far fa-circle nav-icon"></i>
                 <p>Types d'absences</p>
               </a>
+
+              <a
+              routerLink="/config/sessions"
+              class="nav-link"
+              [routerLinkActive]="['active']"
+            >
+              <i class="far fa-circle nav-icon"></i>
+              <p>Sessions</p>
+            </a>
               <a
                 routerLink="/config/pay"
                 class="nav-link"

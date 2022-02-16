@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainAppComponent } from '../template/main-app/main-app.component';
+import { ListPersonalComponent } from './personals/list-personal/list-personal.component';
 import { PersonalsComponent } from './personals/personals.component';
 
 
@@ -10,8 +11,14 @@ const routes: Routes = [
   component: MainAppComponent,
   children: [{
     path:'personals',
-    component:PersonalsComponent
-  }]
+    component:PersonalsComponent 
+  },
+  {
+    path:'personals/list',
+    component:ListPersonalComponent
+    
+  }
+]
  }
 ];
 

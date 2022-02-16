@@ -6,6 +6,8 @@ import { Civility } from '../model/civility.model';
 import { Country } from '../model/countries.model';
 import { Department } from '../model/department.model';
 import { Fonction } from '../model/fonctions.model';
+import { HoliDay } from '../model/holiDay.model';
+import { Session } from '../model/sessions.model';
 import { WorkingDay } from '../model/working_days.model';
 
 @Injectable({
@@ -13,7 +15,7 @@ import { WorkingDay } from '../model/working_days.model';
 })
 export class ConfigService {
   URL_CONFIG = environment.URL_CONFIG;
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
   /**
    * GESTION DES FONCTIONS
    */
@@ -137,4 +139,48 @@ export class ConfigService {
       civility
     );
   }
+
+
+  /**
+    * GESTION DES SESSIONS
+    */
+  getAllSessions(params = ''): Observable<Session[] | null | undefined> {
+    if (params) {
+      return this.httpClient.get<Session[]>(
+        `${this.URL_CONFIG}sessions?${params}`
+      );
+    }
+    return this.httpClient.get<Session[]>(`${this.URL_CONFIG}sessions`);
+  }
+
+  /**
+   * recuperer les jours fériés d'une année en fonction d'une date
+   * @param year 
+   * @returns 
+   */
+  getAllHoliDayByYearSession(year:number):Observable<any>{
+    return this.httpClient.get<any[]>(`${this.URL_CONFIG}sessions/${year}/year`);
+  }
+
+  /**
+  * GESTION DES HOLIDAYS
+  */
+  createHoliDayBySession(holiDay: HoliDay): Observable<HoliDay> {
+    return this.httpClient.post<HoliDay>(
+      `${this.URL_CONFIG}holidays`,
+      holiDay
+    );
+  }
+  getAllHoliDays(params = ''): Observable<HoliDay[]> {
+    if (params) {
+      return this.httpClient.get<HoliDay[]>(
+        `${this.URL_CONFIG}holidays?${params}`
+      );
+    }
+    return this.httpClient.get<HoliDay[]>(`${this.URL_CONFIG}holidays`);
+  }
+
+
+
 }
+
