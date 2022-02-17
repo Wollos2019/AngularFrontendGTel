@@ -13,7 +13,7 @@ export class ClientService {
   
 
   list () : Observable<any> {
-    return this.http.get<any>('http://localhost:8000/api/commercial/clients');
+    return this.http.get<any>(this._url);
   }
 
   add(client:Iclient) : Observable<Iclient> {

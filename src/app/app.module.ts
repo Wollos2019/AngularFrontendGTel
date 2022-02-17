@@ -21,6 +21,7 @@ import { TokenInterceptorService } from './services/interceptors/token-intercept
 import { ClientsModule } from './modules/commercial/clients/clients.module';
 import { CommandesComponent } from './Commercial/commandes/commandes.component';
 import { ProduitsModule } from './modules/commercial/produits/produits.module';
+import { CommandesModule } from './modules/commercial/commandes/commandes.module';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -30,8 +31,8 @@ import { ProduitsModule } from './modules/commercial/produits/produits.module';
     LoginComponent,
     MainAppComponent,
     NavComponent,
-    DashboardComponent,
-    CommandesComponent,
+    DashboardComponent
+    
   ],
   imports: [
     CommonModule,
@@ -49,7 +50,8 @@ import { ProduitsModule } from './modules/commercial/produits/produits.module';
     }),
     SharedModule,
     ClientsModule,
-    ProduitsModule,
+    ProduitsModule
+    
   ],
   providers: [
     AuthService,

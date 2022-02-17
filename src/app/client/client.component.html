@@ -32,7 +32,7 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="let client of clients;">
-                        <th>{{client.id}}</th>
+                        <td>{{client.id}}</td>
                         <td>{{client.nom}}</td>
                         <td>{{client.email}}</td>
                         <td>{{client.telephone}}</td>
@@ -86,50 +86,19 @@
                   <span aria-hidden="true" class="visually-hidden">&times;</span>
                 </button>
               </div>
-              <div class="modal-body">
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">
-                      <input type="checkbox" aria-label="Checkbox for following text input">
+              <div class="modal-body">               
+                <tr *ngFor="let product of products; index as i">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <input type="checkbox" aria-label="Checkbox for following text input" (click)="checked(product)">
+                      </div>
+                      <span class="input-group-text" id="basic-addon3">{{product.name}}</span>
                     </div>
-                    <span class="input-group-text" id="basic-addon3">Spot publicitaire</span>
+                    <input type="number" [(ngModel)]="listServiceFeature[product.id]" class="form-control" placeholder="Entrer la quantité">
                   </div>
-                  <input type="number" class="form-control" placeholder="Entrer la quantité">
-                  <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button">+</button>
-                    <button class="btn btn-outline-secondary" type="button">-</button>
-                  </div>
-                </div>
-
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">
-                      <input type="checkbox" aria-label="Checkbox for following text input">
-                    </div>
-                    <span class="input-group-text" id="basic-addon3">Couverture médiatique</span>
-                  </div>
-                  <input type="number" class="form-control" placeholder="Entrer la quantité">
-                  <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button">+</button>
-                    <button class="btn btn-outline-secondary" type="button">-</button>
-                  </div>
-                </div>
-
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">
-                      <input type="checkbox" aria-label="Checkbox for following text input">
-                    </div>
-                    <span class="input-group-text" id="basic-addon3">Bande déroulante</span>
-                  </div>
-                  <input type="number" class="form-control" placeholder="Entrer la quantité">
-                  <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button">+</button>
-                    <button class="btn btn-outline-secondary" type="button">-</button>
-                  </div>
-                </div>
-                
-                <button type="button" class="btn btn-primary mb-2" >{{btnTitle}}</button>
+                </tr>
+                <button type="button" class="btn btn-primary mb-2" (click)="save2()" >{{btnTitle}}</button>
               </div>
           </ng-template>
 
