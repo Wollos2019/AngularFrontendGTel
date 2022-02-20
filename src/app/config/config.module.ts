@@ -14,6 +14,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { ngxLoadingAnimationTypes, NgxLoadingModule } from 'ngx-loading';
+import { CountriesComponent } from './countries/countries.component';
+import { CivilitiesComponent } from './civilities/civilities.component';
+import { CaterogiesComponent } from './caterogies/caterogies.component';
+import { BanksComponent } from './banks/banks.component';
+import { RegionsComponent } from './regions/regions.component';
+import { SessionComponent } from './session/session.component';
 
 
 @NgModule({
@@ -25,7 +31,13 @@ import { ngxLoadingAnimationTypes, NgxLoadingModule } from 'ngx-loading';
     LeaveRequestsComponent,
     TypeAbsencesComponent,
     PayComponent,
-    FonctionsComponent
+    FonctionsComponent,
+    CountriesComponent,
+    CivilitiesComponent,
+    CaterogiesComponent,
+    BanksComponent,
+    RegionsComponent,
+    SessionComponent
   ],
   imports: [
     CommonModule,
