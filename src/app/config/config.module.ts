@@ -19,6 +19,7 @@ import { CivilitiesComponent } from './civilities/civilities.component';
 import { CaterogiesComponent } from './caterogies/caterogies.component';
 import { BanksComponent } from './banks/banks.component';
 import { RegionsComponent } from './regions/regions.component';
+import { SessionComponent } from './session/session.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { RegionsComponent } from './regions/regions.component';
     CivilitiesComponent,
     CaterogiesComponent,
     BanksComponent,
-    RegionsComponent
+    RegionsComponent,
+    SessionComponent
   ],
   imports: [
     CommonModule,

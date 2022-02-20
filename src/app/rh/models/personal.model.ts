@@ -10,7 +10,7 @@ export interface IPersonal {
      phone?: string;
      address?: string;
      birthday?: string;
-     country?: string;
+     countryId?: number;
      town?: string;
      status?:STATUS;
      created_at?: Date;
@@ -18,7 +18,16 @@ export interface IPersonal {
      civility?:number;
      isAdmin?:boolean;
      courriel?:string;
-     marital?:MARITAL
+     marital?:MARITAL;
+     password?:string;
+     salary?:number;
+     contract?:CONTRACT;
+     fonction?:string;
+     dateStart?:Date;
+     dateEnd?:Date;
+     departmentId?:number;
+    
+
 }
 
 export class Personal implements IPersonal {
@@ -34,7 +43,7 @@ export class Personal implements IPersonal {
     public phone?: string,
     public address?: string,
     public birthday?: string,
-    public country?: string,
+    public countryId?: number,
     public town?: string,
     public civility?:number,
     public status?:STATUS,
@@ -42,8 +51,33 @@ export class Personal implements IPersonal {
     public update_at?: Date,
     public isAdmin?:boolean,
     public courriel?:string,
-    public marital?:MARITAL
+    public marital?:MARITAL,
+    public salary?:number,
+    public contract?:CONTRACT,
+    public fonction?:string,
+    public dateStart?:Date,
+    public dateEnd?:Date,
+    public password?:string,
+    public departmentId?:number
+
+  
+
+    
   ) {}
+
+  getStatus(status?: string): any {
+    switch (status) {
+      case 'ENABLE':
+          return  {value:'ACTIVER',class:'badge-success'}
+        break;
+        case 'DISABLE':
+          return  {value:'DESACTIVER',class:'badge-danger'} 
+          break;
+      default:
+        break;
+    }
+ 
+  }
 }
 export enum STATUS{
   ENABLE="ENABLE",
@@ -58,4 +92,9 @@ export enum MARITAL{
 export enum GENDER{
   MALE='MALE',
   FEMALE='FEMALE'
+}
+export enum CONTRACT{
+  CDD='cdd',
+  CDI='cdi',
+  STAGEAIRE='stageaire'
 }

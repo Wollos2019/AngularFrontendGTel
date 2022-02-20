@@ -10,6 +10,7 @@ import { FonctionsComponent } from './fonctions/fonctions.component';
 import { HolidaysComponent } from './holidays/holidays.component';
 import { PayComponent } from './pay/pay.component';
 import { RegionsComponent } from './regions/regions.component';
+import { SessionComponent } from './session/session.component';
 import { TypeAbsencesComponent } from './type-absences/type-absences.component';
 import { WorkingDaysComponent } from './working-days/working-days.component';
 
@@ -57,6 +58,11 @@ const routes: Routes = [
       {
         path: 'banks',
         component: BanksComponent,
+      },
+
+      {
+        path: 'sessions',
+        component: SessionComponent,
       },
       {
         path: 'categories',
