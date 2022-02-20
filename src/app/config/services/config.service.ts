@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Absence } from '../model/absence.model';
 import { Civility } from '../model/civility.model';
 import { Country } from '../model/countries.model';
 import { Department } from '../model/department.model';
@@ -140,6 +141,12 @@ export class ConfigService {
     );
   }
 
+  deleteCivility(id: number): Observable<Civility> {
+    return this.httpClient.delete<Civility>(
+      `${this.URL_CONFIG}civilities/${id}`
+    );
+  }
+
 
   /**
     * GESTION DES SESSIONS
@@ -180,6 +187,24 @@ export class ConfigService {
     return this.httpClient.get<HoliDay[]>(`${this.URL_CONFIG}holidays`);
   }
 
+
+   /**
+  * GESTION DES TYPE ABSENCES
+  */
+    createAbsence(absence: Absence): Observable<Absence> {
+      return this.httpClient.post<Absence>(
+        `${this.URL_CONFIG}absences`,
+        absence
+      );
+    }
+    getAllAbsences(params = ''): Observable<Absence[]> {
+      if (params) {
+        return this.httpClient.get<Absence[]>(
+          `${this.URL_CONFIG}absences?${params}`
+        );
+      }
+      return this.httpClient.get<Absence[]>(`${this.URL_CONFIG}absences`);
+    }
 
 
 }

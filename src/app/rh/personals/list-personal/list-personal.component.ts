@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { getImage } from 'src/app/util/images';
 import { Personal } from '../../models/personal.model';
 import { RhService } from '../../services/rh.service';
 
@@ -12,11 +13,13 @@ export class ListPersonalComponent implements OnInit {
   personals!:Personal[];
   personal=new Personal();
   loading=false;
+  images!:any;
 
   constructor(private toastr: ToastrService,    private rhService:RhService) { }
 
   ngOnInit(): void {
     this.getAllPersonals();
+    this.images=getImage();
   }
   getAllPersonals(params=''):void{
     this.loading = true;

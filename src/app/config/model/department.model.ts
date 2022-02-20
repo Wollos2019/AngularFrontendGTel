@@ -5,14 +5,18 @@ export interface IDepartment {
   status?:STATUS;
   created_at?: Date;
   update_at?: Date;
+  appends?:IAppends
 }
-
+interface IAppends{
+  countEmployee?:number;
+}
 export class Department implements IDepartment {
   constructor(
     public id?: number,
     public name?: string,
     public description?: string,
     public status?:STATUS,
+    public appends?:IAppends,
     public created_at?: Date,
     public update_at?: Date
   ) {}

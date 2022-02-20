@@ -18,38 +18,45 @@ export class RhService {
    getAllPersonals(params = ''): Observable<Personal[]> {
      if(params){
       return this.httpClient.get<Personal[]>(
-        `${this.URL_RH}personals?${params}`
+        `${this.URL_RH}employees?${params}`
       );
      }
      return this.httpClient.get<Personal[]>(
-      `${this.URL_RH}personals`
+      `${this.URL_RH}employees`
     );
     
   }
 
   getOnePersonal(id: number): Observable<Personal> {
     return this.httpClient.get<Personal>(
-      `${this.URL_RH}personals/${id}`
+      `${this.URL_RH}employees/${id}`
     );
   }
 
   deletePersonal(id: number): Observable<Personal> {
     return this.httpClient.delete<Personal>(
-      `${this.URL_RH}personals/${id}`
+      `${this.URL_RH}employees/${id}`
     );
   }
 
   createPersonal(personal: Personal): Observable<Personal> {
     return this.httpClient.post<Personal>(
-      `${this.URL_RH}personals`,
+      `${this.URL_RH}employees`,
       personal
     );
   }
 
   updatePersonal(personal: Personal): Observable<Personal> {
     return this.httpClient.post<Personal>(
-      `${this.URL_RH}personals`,
+      `${this.URL_RH}employees`,
       personal
+    );
+  }
+
+  uploadPhotoPersonal(personalId?:number,image?:any): Observable<Personal> {
+    return this.httpClient.post<Personal>(
+      `${this.URL_RH}employees/${personalId}/images`,
+      image
     );
   }
 

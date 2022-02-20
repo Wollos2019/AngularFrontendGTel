@@ -15,7 +15,7 @@ export interface IPersonal {
      status?:STATUS;
      created_at?: Date;
      update_at?: Date;
-     civility?:number;
+     civilityId?:number;
      isAdmin?:boolean;
      courriel?:string;
      marital?:MARITAL;
@@ -26,6 +26,9 @@ export interface IPersonal {
      dateStart?:Date;
      dateEnd?:Date;
      departmentId?:number;
+     appends?:IAppends;
+     placeBirth?:string;
+    country?:number
     
 
 }
@@ -45,7 +48,7 @@ export class Personal implements IPersonal {
     public birthday?: string,
     public countryId?: number,
     public town?: string,
-    public civility?:number,
+    public civilityId?:number,
     public status?:STATUS,
     public created_at?: Date,
     public update_at?: Date,
@@ -58,17 +61,23 @@ export class Personal implements IPersonal {
     public dateStart?:Date,
     public dateEnd?:Date,
     public password?:string,
-    public departmentId?:number
+    public departmentId?:number,
+    public appends?:IAppends,
+   public  placeBirth?:string,
+   public country?:number
 
   
 
     
-  ) {}
+  ) {
+    this.appends?.url!=appends?.url;
+  }
 
+ 
   getStatus(status?: string): any {
     switch (status) {
       case 'ENABLE':
-          return  {value:'ACTIVER',class:'badge-success'}
+          return  {value:'En service',class:'badge-success'}
         break;
         case 'DISABLE':
           return  {value:'DESACTIVER',class:'badge-danger'} 
@@ -97,4 +106,10 @@ export enum CONTRACT{
   CDD='cdd',
   CDI='cdi',
   STAGEAIRE='stageaire'
+}
+
+interface IAppends{
+  url?:string;
+  name?:string;
+
 }

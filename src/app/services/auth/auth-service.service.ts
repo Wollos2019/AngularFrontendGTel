@@ -10,7 +10,7 @@ import { User } from 'src/app/models/user.model';
 export class AuthService {
   userSubject = new BehaviorSubject<User | null>(null);
   URL_API = environment.apiUrl;
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient) {}
 
   login(data: any): Observable<any> {
     return this.http.post<any>(`${this.URL_API}login`, data);

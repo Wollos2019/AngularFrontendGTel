@@ -18,6 +18,7 @@ import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { DashboardComponent } from './template/dashboard/dashboard.component';
 import { TokenInterceptorService } from './services/interceptors/token-interceptor.service';
+import { DashboardService } from './services/dashboard.service';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -48,6 +49,7 @@ import { TokenInterceptorService } from './services/interceptors/token-intercept
   ],
   providers: [
     AuthService,
+    DashboardService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,

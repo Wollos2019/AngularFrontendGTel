@@ -1,1 +1,145 @@
-<p>type-absences works!</p>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h1 class="card-title">Type d'absence</h1>
+                    <button class="btn btn-info float-right" type="button"  data-toggle="modal" data-target="#modalDepartment">Nouveau</button>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr class="bg-dark text-white">
+                          <th scope="col">#</th>
+                          <th scope="col">Type</th>
+                          <th scope="col">Titre</th>
+                          <th scope="col">Coleur</th>
+                          <th scope="col">Status</th>
+                          <th scope="col">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <ng-container *ngIf="absences && absences.length">
+                          <tr *ngFor="let a of absences; let i = index">
+                            <th scope="row">{{ i + 1 }}</th>
+                            <td>{{ a.type }}</td> 
+                            <td>{{ a.title }}</td> 
+                            <td> <span class="badge"  [style.background]="a.color">{{ a.color }}</span></td> 
+                           <td> <span class="badge" [ngClass]=" absence.getStatus(a.status).class">{{
+                            absence.getStatus(a.status).value
+                          }}</span></td>
+                            <td>
+                             actions
+                            </td>
+                          </tr>
+                        </ng-container>
+                        <ng-container *ngIf="!absences?.length">
+                          <tr><td colspan="6" class=" text-center">Aucune données trouvées</td></tr>
+                        </ng-container>
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- /.card-body -->
+                  <div class="card-footer clearfix">
+                    <ul class="pagination pagination-sm m-0 float-right">
+                      <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+                      <li class="page-item"><a class="page-link" href="#">1</a></li>
+                      
+                      <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <!-- /.card -->
+    
+               
+                <!-- /.card -->
+              </div>
+        </div>
+    </div>
+</section>
+<div class="modal fade" id="modalDepartment">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Ajouter un nouveau type d'absence</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form class="form-horizontal" [formGroup]="editForm">
+        <div class="modal-body">
+          
+             
+                <div class="form-group row">
+                    <label for="type" 
+                    class=" col-form-label" 
+                   >
+                    type<span class="text-danger">*</span> </label>
+                    <div class="col-sm-10">
+                        <select id="type" class="form-control" formControlName="type"
+                        [ngClass]="{ 'is-invalid': submitted && f.type.errors }">
+                        <option selected="selected" value="">---</option>
+                        <option [value]="'congé légal'">congé légal</option>
+                        <option [value]="'congé autorisé'">congé autorisé</option>
+                    </select>
+
+                         <div *ngIf="submitted && f.type.errors" class="invalid-feedback">
+                          <div *ngIf="f.type.errors.required">Champ requis</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="title" 
+                    class=" col-form-label" 
+                   >
+                    Titre<span class="text-danger">*</span> </label>
+                    <div class="col-sm-10">
+                      <input type="text" 
+                          formControlName="title"  
+                         class="form-control" id="title" placeholder="Entrer le titre"
+                         [ngClass]="{ 'is-invalid': submitted && f.title.errors }"
+                         >
+
+                         <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                          <div *ngIf="f.title.errors.required">Champ requis</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="color" 
+                    class=" col-form-label" 
+                   >
+                    Coleur<span class="text-danger">*</span> </label>
+                    <div class="col-sm-9">
+                      <input type="color" 
+                          formControlName="color"  
+                         class="form-control" id="color"
+                         [ngClass]="{ 'is-invalid': submitted && f.title.errors }"
+                         >
+
+                         <div *ngIf="submitted && f.color.errors" class="invalid-feedback">
+                          <div *ngIf="f.color.errors.required">Champ requis</div>
+                        </div>
+                    </div>
+                </div>
+           
+        </div>
+        <div class="modal-footer ">
+        
+          <button type="button" class="btn btn-primary btn-sm float-right" (click)="save()">Enregistrer</button>
+        </div>
+      </form>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+
+  <ngx-loading
+  [show]="loading"
+  [config]="{ backdropBorderRadius: '3px' }"
+></ngx-loading>

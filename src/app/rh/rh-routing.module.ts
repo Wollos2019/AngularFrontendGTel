@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainAppComponent } from '../template/main-app/main-app.component';
+import { PersonalProfilComponent } from './personals/personal-profil/personal-profil.component';
 import { ListPersonalComponent } from './personals/list-personal/list-personal.component';
 import { PersonalsComponent } from './personals/personals.component';
 
@@ -16,6 +17,11 @@ const routes: Routes = [
   {
     path:'personals/list',
     component:ListPersonalComponent
+    
+  },
+  {
+    path:'personals/:personalId/show',
+    component:PersonalProfilComponent
     
   }
 ]

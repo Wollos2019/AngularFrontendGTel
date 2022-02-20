@@ -37,7 +37,9 @@ export class WorkingDaysComponent implements OnInit {
 
       this.daysL.push(
         this.fb.group(new FormControl(false))
-      )
+      );
+      console.log(this.daysL);
+      
     })
   }
   save():void{
@@ -58,7 +60,7 @@ export class WorkingDaysComponent implements OnInit {
 
     if(event.target.checked){
       //  const formArray :FormArray =this.editForm.get('days') as FormArray;
-      if(event.target.value){
+     
         console.log(event.target.value);
       // formArray.push( new FormControl(event.target.value));
       // }else{
@@ -68,7 +70,7 @@ export class WorkingDaysComponent implements OnInit {
       //     return;
       //     }
       //   })
-      }
+     
     
     }
   }
@@ -79,7 +81,7 @@ export class WorkingDaysComponent implements OnInit {
     this.configService.getAllWorkings().subscribe({
       next: (workings: any) => {
         this.loading = false;
-        console.log(workings);
+      
         this.workings = workings;
         this.listDays(workings);
       },

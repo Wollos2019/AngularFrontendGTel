@@ -5,17 +5,20 @@ import { PersonalsComponent } from './personals/personals.component';
 import { SharedModule } from '../shared/shared.module';
 import { RhService } from './services/rh.service';
 import { ListPersonalComponent } from './personals/list-personal/list-personal.component';
+import { PersonalProfilComponent } from './personals/personal-profil/personal-profil.component';
+
 
 @NgModule({
   declarations: [
     PersonalsComponent,
-    ListPersonalComponent
+    ListPersonalComponent,
+    PersonalProfilComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     CommonModule,
-    SharedModule,
     RhRoutingModule,
+    SharedModule,
   ],
   providers:[RhService]
 })
