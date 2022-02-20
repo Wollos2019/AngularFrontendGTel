@@ -18,6 +18,7 @@ export class CommandesComponent implements OnInit {
   public modalTitle = '';
   public btnTitle = '';
   public name = new FormControl('', Validators.required);
+  
   public description = new FormControl('', Validators.required);
   public price = new FormControl('', Validators.required);
   public slug = new FormControl('', Validators.required);

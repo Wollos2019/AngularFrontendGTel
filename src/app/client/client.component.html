@@ -91,11 +91,11 @@
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <div class="input-group-text">
-                        <input type="checkbox" aria-label="Checkbox for following text input" (click)="checked(product)">
+                        <input type="checkbox" aria-label="Checkbox for following text input" (click)="checked(product)" [formControl]="checkbox">
                       </div>
                       <span class="input-group-text" id="basic-addon3">{{product.name}}</span>
                     </div>
-                    <input type="number" [(ngModel)]="listServiceFeature[product.id]" class="form-control" placeholder="Entrer la quantité">
+                    <input type="number" [(ngModel)]="listServiceFeature[product.id]" class="form-control" placeholder="Entrer la quantité" [formMethod]="input">
                   </div>
                 </tr>
                 <button type="button" class="btn btn-primary mb-2" (click)="save2()" >{{btnTitle}}</button>

@@ -17,6 +17,7 @@ import { Router } from '@angular/router';
 })
 export class ClientComponent implements OnInit {
   listServiceFeature: any = [];
+
   public clients = [] as any;
   public products = <IProduct[]>{};
   public selectedClient: any;
@@ -29,10 +30,12 @@ export class ClientComponent implements OnInit {
   public email = new FormControl('', Validators.required);
   public telephone = new FormControl('', Validators.required);
   public adresse = new FormControl('', Validators.required);
+  public checkbox = new FormControl('', Validators.required);
   public c1 = new FormControl('', Validators.required);
   public i1 = new FormControl('', Validators.required);
   public c2 = new FormControl('', Validators.required);
   public i2 = new FormControl('', Validators.required);
+  public input = new FormControl('', Validators.required);
   public quantity = new FormControl('', Validators.required);
   public showError = false;
   modalRef?: BsModalRef;
@@ -88,7 +91,7 @@ ngOnInit(): void {
 }
 
 getList () {
-  this.service.list().subscribe(response => {this.clients = response['data'];console.log(this.clients);});
+  this.service.list().subscribe(response => {this.clients = response['data']});
   this.serviceP.list().subscribe(response => this.products = response);
       
 }
@@ -154,9 +157,10 @@ save2(){
   //   });
   // }
 
-  // for (var val of this.selectedProducts){
-  //   val.quantity = this.listServiceFeature[val.id]
-  // }
+  for (var val of this.selectedProducts){
+    val.quantity = this.listServiceFeature[val.id];
+  }
+  
   
 
   //this.commande.date = new Date();
@@ -169,10 +173,10 @@ save2(){
         this.router.navigate(['/commercial/commandes']);
       }
       this.showError = false;
+      this.selectedProducts = [];
       this.modalRef?.hide();
     });
     console.log(this.selectedClient);
-
 }
 
 delete(product:Iclient) {
@@ -188,15 +192,39 @@ reset () {
 }
 
 checked(product:IProduct) {
+  this.selectedProduct = product;
   this.selectedProduct.id = product.id
   this.selectedProduct.name = product.name;
-  this.selectedProduct.checked = true;
-  if(product)
-  {this.selectedProduct.quantity = this.listServiceFeature[this.selectedProduct.id];}
+  this.selectedProduct.checked = this.checkbox.value;
+  this.selectedProduct.quantity = this.input.value;
+  
   console.log(this.selectedProduct.checked, this.selectedProduct.name);
   //console.log(this.selectedProduct.quantity);
-  console.log(this.listServiceFeature); 
-  this.selectedProducts.push(this.selectedProduct);
+  console.log(this.listServiceFeature);
+  // this.selectedProducts.forEach(function (value:IProduct, selectedProduct) {
+  //   if (value.id != this.selectedProduct.id && this.selectedProduct.checked==true) {
+  //     this.selectedProducts.push(this.selectedProduct);
+  //   }
+  // });
+  
+  if(this.selectedProducts.includes(this.selectedProduct)) {
+    var key = this.selectedProducts.indexOf(this.selectedProduct, 0);
+    if (key > -1) {
+      this.selectedProducts.splice(key, 1);
+    }
+  } else {
+    this.selectedProducts.push(this.selectedProduct);
+  }
+  console.log(this.selectedProducts.includes(this.selectedProduct.id));
+  // for(var val of this.selectedProducts){
+  //   if (val.id != this.selectedProduct.id && this.selectedProduct.checked==true) {
+  //     this.selectedProducts.push(this.selectedProduct);
+  //   } else if(val.id == this.selectedProduct.id && this.selectedProduct.checked==false) {
+  //     var key = this.selectedProducts.indexOf(this.selectedProduct);
+  //     delete this.selectedProducts[key];
+  //   }
+  // }
+  
   console.log(this.selectedProducts);
 }
 
