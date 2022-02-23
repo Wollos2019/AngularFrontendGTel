@@ -1,32 +1,27 @@
 <div class="page-content" id="content">
 
     <div style="text-align: center;">
-      <h1>Liste des produits</h1>
-    </div>
-
-    <div style="text-align: center;">
-        <button type="button" class="btn btn-primary mb-2" (click)="openModal(template)">Ajouter un produit</button>
+      <h1>Liste des commandes</h1>
     </div>
 
     <table class="table">
         <thead class="thead-light">
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Nom</th>
-            <th scope="col">Description</th>
-            <th scope="col">Prix</th>
-            <th scope="col">Action</th>
+            <th scope="col">Contenu</th>
+            <th scope="col">Nom du client</th>
+            <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let product of products; index as i">
+          <tr *ngFor="let order of orders; index as i">
             <th scope="row">{{i+1}}</th>
-            <td>{{product.name}}</td>
-            <td>{{product.description}}</td>
-            <td>{{product.price}}</td>
+            <!-- <td>{{order.date}}</td> -->
+            <td>{{order.contenu}}</td>
+            <td>{{order.nomClient}}</td>
             <td>
-              <button type="button" class="btn btn-info mr-1" (click)="openModal(template, product)">Modifier</button>
-              <button type="button" class="btn btn-danger" (click)="delete(product)">Supprimer</button>
+              <button type="button" class="btn btn-info mr-1" (click)="openModal(template, order)">Modifier</button>
+              <!-- <button type="button" class="btn btn-danger" (click)="delete(order)">Supprimer</button> -->
             </td>
           </tr>
         </tbody>
@@ -54,7 +49,7 @@
           <label for="exampleInputEmail1">Product Price</label>
           <input type="number" class="form-control" placeholder="Enter Product Price" [formControl]="price">
         </div>
-        <button type="button" class="btn btn-primary mb-2" (click)="save()">{{btnTitle}}</button>
+        <button type="button" class="btn btn-primary mb-2">{{btnTitle}}</button>
       </div>
     </ng-template>
 

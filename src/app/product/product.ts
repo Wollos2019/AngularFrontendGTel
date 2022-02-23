@@ -3,5 +3,6 @@ export interface IProduct {
     name : string,
     description : string,
     price : string,
-    slug : string
+    checked : boolean,
+    quantity : number
 }
