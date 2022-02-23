@@ -67,6 +67,16 @@ export class ConfigService {
     return this.httpClient.get<Department[]>(`${this.URL_CONFIG}departments`);
   }
 
+  getAllEmployeesDepartment(id:number,params = ''): Observable<Department[]> {
+    if (params) {
+      return this.httpClient.get<Department[]>(
+        `${this.URL_CONFIG}departments/${id}/employees?${params}`
+      );
+    }
+    return this.httpClient.get<Department[]>(`${this.URL_CONFIG}departments/${id}/employees`);
+  }
+
+
   getOneDepartment(departmentId: number): Observable<Department> {
     return this.httpClient.get<Department>(
       `${this.URL_CONFIG}departments/${departmentId}`
@@ -99,6 +109,13 @@ export class ConfigService {
 
   getAllWorkings(): Observable<WorkingDay[]> {
     return this.httpClient.get<WorkingDay[]>(`${this.URL_CONFIG}working_days`);
+  }
+
+  createWorkings(workings: any): Observable<any> {
+    return this.httpClient.post<any>(
+      `${this.URL_CONFIG}working_days`,
+      workings
+    );
   }
 
   /**
@@ -165,7 +182,7 @@ export class ConfigService {
    * @param year 
    * @returns 
    */
-  getAllHoliDayByYearSession(year:number):Observable<any>{
+  getAllHoliDayByYearSession(year: number): Observable<any> {
     return this.httpClient.get<any[]>(`${this.URL_CONFIG}sessions/${year}/year`);
   }
 
@@ -188,23 +205,23 @@ export class ConfigService {
   }
 
 
-   /**
-  * GESTION DES TYPE ABSENCES
-  */
-    createAbsence(absence: Absence): Observable<Absence> {
-      return this.httpClient.post<Absence>(
-        `${this.URL_CONFIG}absences`,
-        absence
+  /**
+ * GESTION DES TYPE ABSENCES
+ */
+  createAbsence(absence: Absence): Observable<Absence> {
+    return this.httpClient.post<Absence>(
+      `${this.URL_CONFIG}absences`,
+      absence
+    );
+  }
+  getAllAbsences(params = ''): Observable<Absence[]> {
+    if (params) {
+      return this.httpClient.get<Absence[]>(
+        `${this.URL_CONFIG}absences?${params}`
       );
     }
-    getAllAbsences(params = ''): Observable<Absence[]> {
-      if (params) {
-        return this.httpClient.get<Absence[]>(
-          `${this.URL_CONFIG}absences?${params}`
-        );
-      }
-      return this.httpClient.get<Absence[]>(`${this.URL_CONFIG}absences`);
-    }
+    return this.httpClient.get<Absence[]>(`${this.URL_CONFIG}absences`);
+  }
 
 
 }

@@ -26,9 +26,9 @@
                     <td>{{ a.name }}</td>
                     <td> <span class="badge badge-info "> {{a.appends?.countEmployee}}</span></td>
                     <td>
-                      <button title="liste des employés" class="btn btn-light btn-sm mr-1" type="button">
+                      <a title="liste des employés" class="btn btn-light btn-sm mr-1" type="button" [routerLink]="['/config/departments',a.id,'employees']">
                         <i class="icofont-users size-18 text-primary"></i>
-                      </button>
+                      </a>
                      
                       <button title="voir" type="button" class="btn btn-primary btn-light btn-sm">
                         <i class="icofont-ui-delete text-danger"></i>

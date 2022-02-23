@@ -48,7 +48,7 @@ export class RhService {
 
   updatePersonal(personal: Personal): Observable<Personal> {
     return this.httpClient.post<Personal>(
-      `${this.URL_RH}employees`,
+      `${this.URL_RH}employees/${personal.id}`,
       personal
     );
   }

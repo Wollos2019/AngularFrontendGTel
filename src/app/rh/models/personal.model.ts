@@ -1,3 +1,5 @@
+import { IDepartment } from "src/app/config/model/department.model";
+
 export interface IPersonal {
    id?: number;
      lastname?: string;
@@ -28,7 +30,8 @@ export interface IPersonal {
      departmentId?:number;
      appends?:IAppends;
      placeBirth?:string;
-    country?:number
+    country?:number;
+    _method?:string
     
 
 }
@@ -64,7 +67,8 @@ export class Personal implements IPersonal {
     public departmentId?:number,
     public appends?:IAppends,
    public  placeBirth?:string,
-   public country?:number
+   public country?:number,
+   public _method?:string
 
   
 
@@ -103,13 +107,14 @@ export enum GENDER{
   FEMALE='FEMALE'
 }
 export enum CONTRACT{
-  CDD='cdd',
-  CDI='cdi',
-  STAGEAIRE='stageaire'
+  CDD='CDD',
+  CDI='CDI',
+  STAGEAIRE='STAGEAIRE'
 }
 
 interface IAppends{
   url?:string;
   name?:string;
+  department:IDepartment
 
 }

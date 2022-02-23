@@ -6,6 +6,7 @@ import { CaterogiesComponent } from './caterogies/caterogies.component';
 import { CivilitiesComponent } from './civilities/civilities.component';
 import { CountriesComponent } from './countries/countries.component';
 import { DepartmentComponent } from './department/department.component';
+import { ListUserDeparmentComponent } from './department/list-user-deparment/list-user-deparment.component';
 import { FonctionsComponent } from './fonctions/fonctions.component';
 import { HolidaysComponent } from './holidays/holidays.component';
 import { PayComponent } from './pay/pay.component';
@@ -22,6 +23,10 @@ const routes: Routes = [
       {
         path: 'departments',
         component: DepartmentComponent,
+      },
+      {
+        path: 'departments/:id/employees',
+        component: ListUserDeparmentComponent,
       },
       {
         path: 'fonctions',

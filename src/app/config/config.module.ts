@@ -20,6 +20,7 @@ import { CaterogiesComponent } from './caterogies/caterogies.component';
 import { BanksComponent } from './banks/banks.component';
 import { RegionsComponent } from './regions/regions.component';
 import { SessionComponent } from './session/session.component';
+import { ListUserDeparmentComponent } from './department/list-user-deparment/list-user-deparment.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { SessionComponent } from './session/session.component';
     CaterogiesComponent,
     BanksComponent,
     RegionsComponent,
-    SessionComponent
+    SessionComponent,
+    ListUserDeparmentComponent
   ],
   imports: [
     CommonModule,

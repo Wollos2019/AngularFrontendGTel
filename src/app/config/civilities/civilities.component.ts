@@ -108,7 +108,7 @@ export class CivilitiesComponent implements OnInit {
             console.log(responseError);
             if(responseError.error.code==409){
               this.toastr.error(
-                responseError.error.error,
+                responseError.error.errors,
                 'Error'
               );
             }else{

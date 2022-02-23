@@ -1,3 +1,5 @@
+import { Personal } from "src/app/rh/models/personal.model";
+
 export interface IDepartment {
   id?: number;
   name?: string;
@@ -9,6 +11,7 @@ export interface IDepartment {
 }
 interface IAppends{
   countEmployee?:number;
+  employees?:Personal[]
 }
 export class Department implements IDepartment {
   constructor(

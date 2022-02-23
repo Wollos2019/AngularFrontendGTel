@@ -34,6 +34,8 @@
                           <th scope="col">Prénom</th>
                           <th scope="col">Téléphone</th>
                           <th scope="col">Email</th>
+                          <th scope="col">Département</th>
+                          <th scope="col">Fonction</th>
                           <th scope="col">Status</th>
                           <th scope="col">Action</th>
                         </tr>
@@ -47,6 +49,8 @@
                             <td>{{ p.firstname }}</td> 
                             <td>{{ p.phone }}</td> 
                             <td>{{ p.email }}</td> 
+                            <td>{{ p.appends?.department?.name }}</td> 
+                            <td>{{ p.fonction }}</td> 
                             <td><span class="badge" [ngClass]="personal.getStatus(p.status)?.class">{{personal.getStatus(p.status)?.value}}</span> </td> 
                            
                             <td>
@@ -57,7 +61,7 @@
                           </tr>
                         </ng-container>
                         <ng-container *ngIf="!personals?.length">
-                          <tr><td colspan="8" class=" text-center">Aucune données trouver</td></tr>
+                          <tr><td colspan="10" class=" text-center">Aucune données trouver</td></tr>
                         </ng-container>
                       </tbody>
                     </table>

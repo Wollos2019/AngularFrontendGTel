@@ -315,7 +315,7 @@
                                       class="text-danger">*</span></label>
                               <select id="contrat" class="form-control" formControlName="contrat"
                                   [ngClass]="{ 'is-invalid': submitted && f.contrat.errors }">
-                                  <option  value="">---</option>
+                                  <option  value=""  selected="selected">---</option>
                                   <option [value]="CONTRACT.CDI">CDI</option>
                                   <option [value]="CONTRACT.CDD">CDD</option>
                                   <option [value]="CONTRACT.STAGEAIRE">Stageaire</option>
@@ -352,8 +352,8 @@
               </div>
                 <div class="row">
                   <div class="col-12 float-right">
-                    <button title="Supprimer" class="btn btn-danger ml-2 float-right" type="button">Supprimer</button>
-                    <button title="Modifier" class="btn btn-info  float-right" type="button">Modifier</button>
+                    <button (click)="openModalConfirm()" title="Supprimer" class="btn btn-sm btn-danger ml-2 float-right" type="button">Supprimer</button>
+                    <button (click)="update()" title="Modifier" class="btn  btn-info  float-right" type="button">Modifier</button>
                    
                   </div>
                 </div>
@@ -378,4 +378,7 @@
     </div>
     <!-- /.row -->
   </div><!-- /.container-fluid -->
+  <app-confirm-modal (actionConfirm)="deletePersonale($event)"></app-confirm-modal>
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+
 </section>
