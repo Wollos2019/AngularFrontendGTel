@@ -1,26 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { RhRoutingModule } from './rh-routing.module';
-import { ngxLoadingAnimationTypes, NgxLoadingModule } from 'ngx-loading';
-import { MainRhComponent } from './template/main-rh/main-rh.component';
+import { PersonalsComponent } from './personals/personals.component';
+import { SharedModule } from '../shared/shared.module';
+import { RhService } from './services/rh.service';
+import { ListPersonalComponent } from './personals/list-personal/list-personal.component';
 
 @NgModule({
   declarations: [
-    MainRhComponent
+    PersonalsComponent,
+    ListPersonalComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     CommonModule,
-    NgxLoadingModule.forRoot({
-      animationType: ngxLoadingAnimationTypes.wanderingCubes,
-      backdropBackgroundColour: 'rgba(0,0,0,0.1)',
-      backdropBorderRadius: '4px',
-      primaryColour: '#ffffff',
-      secondaryColour: '#ffffff',
-      tertiaryColour: '#ffffff',
-    }),
+    SharedModule,
     RhRoutingModule,
   ],
+  providers:[RhService]
 })
 export class RhModule {}

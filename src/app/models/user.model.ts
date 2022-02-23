@@ -1,4 +1,8 @@
 export class User {
-    email!: string;
-    token?: string;
+  email?: string;
+  lastname?: string;
+  firstname?: string;
+  token?: string;
+  phone?: string;
+  address?: string;
 }

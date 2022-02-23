@@ -1,0 +1,202 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h1 class="card-title">Liste des Pays</h1>
+            <button
+              class="btn btn-info float-right"
+              type="button"
+              data-toggle="modal"
+              data-target="#modalDepartment"
+            >
+              Nouveau
+            </button>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <table class="table table-bordered">
+              <thead>
+                <tr class="bg-dark text-white">
+                  <th scope="col">#</th>
+                  <th scope="col">Nom</th>
+                  <th scope="col">Code</th>
+                  <th scope="col">Abreviation 1</th>
+                  <th scope="col">Abreviation 2</th>
+                  <th scope="col">Code Téléphone</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngIf="countries && countries.length">
+                  <tr *ngFor="let c of countries; let i = index">
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>{{ c.name }}</td>
+                    <td>{{ c.code }}</td>
+                    <td>{{ c.abbreviation1 }}</td>
+                    <td>{{ c.abbreviation2 }}</td>
+                    <td>{{ c.codePhone }}</td>
+                    <td>
+                      <span class="badge badge-info">{{
+                        country.getStatus(c.status)
+                      }}</span>
+                    </td>
+
+                    <td>actions</td>
+                  </tr>
+                </ng-container>
+                <ng-container *ngIf="!countries?.length">
+                  <tr>
+                    <td colspan="8" class="text-center">
+                      Aucune données trouver
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
+          <div class="card-footer clearfix">
+            <ul class="pagination pagination-sm m-0 float-right">
+              <li class="page-item">
+                <a class="page-link" href="#">&laquo;</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+
+              <li class="page-item">
+                <a class="page-link" href="#">&raquo;</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /.card -->
+
+        <!-- /.card -->
+      </div>
+    </div>
+  </div>
+</section>
+<div class="modal fade" id="modalDepartment">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Ajouter un pays</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form class="form-horizontal" [formGroup]="editForm">
+        <div class="modal-body">
+          <div class="form-group row">
+            <div class="col-md-12">
+              <label for="nom" class="col-form-label">
+                Nom<span class="text-danger">*</span>
+              </label>
+              <input
+                type="text"
+                formControlName="name"
+                class="form-control"
+                id="nom"
+                placeholder="GABON"
+                [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+              />
+
+              <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                <div *ngIf="f.name.errors.required">Champ requis</div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <label for="code" class="col-form-label"> Code </label>
+              <input
+                type="text"
+                formControlName="code"
+                class="form-control"
+                id="code"
+                placeholder="266"
+              />
+            </div>
+
+            <div class="col-md-12">
+              <label for="codePhone" class="col-form-label">
+                Code Téléphone<span class="text-danger">*</span>
+              </label>
+              <input
+                type="text"
+                formControlName="codePhone"
+                class="form-control"
+                id="nom"
+                placeholder="241"
+                [ngClass]="{ 'is-invalid': submitted && f.codePhone.errors }"
+              />
+
+              <div
+                *ngIf="submitted && f.codePhone.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.codePhone.errors.required">Champ requis</div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <label for="abbreviation1" class="col-form-label">
+                Code ISO 3166 a 3 caractères<span class="text-danger">*</span>
+              </label>
+              <input
+                type="text"
+                formControlName="abbreviation1"
+                class="form-control"
+                id="abbreviation1"
+                placeholder="GAB"
+                [ngClass]="{
+                  'is-invalid': submitted && f.abbreviation1.errors
+                }"
+              />
+
+              <div
+                *ngIf="submitted && f.abbreviation1.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.abbreviation1.errors.required">Champ requis</div>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <label for="abbreviation2" class="col-form-label">
+                Code ISO 3166 a 3 caractères<span class="text-danger">*</span>
+              </label>
+              <input
+                type="text"
+                formControlName="abbreviation2"
+                class="form-control"
+                id="abbreviation2"
+                placeholder="GA"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-primary btn-sm float-right"
+            (click)="save()"
+          >
+            Enregistrer
+          </button>
+        </div>
+      </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<ngx-loading
+  [show]="loading"
+  [config]="{ backdropBorderRadius: '3px' }"
+></ngx-loading>

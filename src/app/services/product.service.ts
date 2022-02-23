@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { IProduct } from '../product/product';
 
 @Injectable({
@@ -8,16 +9,21 @@ import { IProduct } from '../product/product';
 })
 export class ProductService {
   private _url = 'http://localhost:8000/api/products';
+  URL_COMMER = environment.URL_COMMER;
 
   constructor(private http:HttpClient) { }
   
 
   list () : Observable<IProduct[]> {
-    return this.http.get<IProduct[]>(this._url);
+    return this.http.get<IProduct[]>(`${this.URL_COMMER}products`);
   }
 
   add(product:IProduct) : Observable<IProduct> {
-    return this.http.post<IProduct>(this._url, product);
+    return this.http.post<IProduct>(`${this.URL_COMMER}products`, product);
+  }
+
+  sum() : Observable<any> {
+    return this.http.get(this._url);
   }
 
   // update(product:IProduct) : Observable<IProduct> {
