@@ -10,78 +10,53 @@ import { ConfigService } from '../services/config.service';
   styleUrls: ['./working-days.component.scss']
 })
 export class WorkingDaysComponent implements OnInit {
- 
-  loading=false;
-  workings?:WorkingDay[];
+
+  loading = false;
+  workings?: WorkingDay[];
   editForm: FormGroup;
+  checkArray?: number[] = [];
+  STATUS = STATUS;
 
   constructor(private toastr: ToastrService,
     private fb: FormBuilder,
-    private configService:ConfigService) {
-      this.editForm = this.fb.group({
-        days: new FormArray([]),
-       
-      });
-     }
+    private configService: ConfigService) {
+    this.editForm = this.fb.group({
+      days: this.fb.group([]),
+
+    });
+  }
 
   ngOnInit(): void {
 
     this.getAllWorkingDay();
+    this
   }
 
-  get daysL(): any {
-    return this.editForm.controls['days'] as FormArray;
-  }
-  listDays(workings:WorkingDay[]): void{
-    workings.forEach((day)=>{
 
-      this.daysL.push(
-        this.fb.group(new FormControl(false))
-      )
-    })
-  }
-  save():void{
-
-    console.log(this.editForm.value.days);
-    const daySelected=this.editForm.value.days.map(
-      (checked:any,i:number)=>
-      checked? this.workings![i].id:null).filter((v:any)=>v !==null);
-
-      console.log(daySelected);
-      
-    
-
-    
-  }
-  onCheckChange(event:any):void{
-
-
-    if(event.target.checked){
-      //  const formArray :FormArray =this.editForm.get('days') as FormArray;
-      if(event.target.value){
-        console.log(event.target.value);
-      // formArray.push( new FormControl(event.target.value));
-      // }else{
-      //   formArray.controls.forEach((value:any,i)=>{
-      //     if(value.value===event.target.value){
-      //     formArray.removeAt(i);
-      //     return;
-      //     }
-      //   })
+  save(): void {
+    this.configService.createWorkings({days:this.checkArray!}).subscribe({
+      next: () => {
+        this.toastr.success('mise a jour effectué');
+      },
+      error: () => {
+        this.toastr.error(
+          "Une Erreur c'est produite l'hors de la recupération des donnnées ",
+          'Error'
+        );
       }
-    
-    }
+    })
+
+
+
   }
 
 
-  getAllWorkingDay(): void{
+  getAllWorkingDay(): void {
     this.loading = true;
     this.configService.getAllWorkings().subscribe({
       next: (workings: any) => {
         this.loading = false;
-        console.log(workings);
         this.workings = workings;
-        this.listDays(workings);
       },
       error: (error: any) => {
         this.loading = false;
@@ -94,5 +69,27 @@ export class WorkingDaysComponent implements OnInit {
       },
     });
   }
+  onCheckboxChange(e: any) {
+
+    let val = e.target.value as number;
+
+    if (e.target.checked) {
+      this.checkArray!.push(val);
+      console.log('select', this.checkArray);
+    } else {
+
+      this.checkArray!.forEach((item: any) => {
+        if (item == e.target.value) {
+          this.checkArray = this.checkArray?.filter(e => e !== item);
+
+          return;
+        }
+
+      });
+      console.log('move', this.checkArray);
+    }
+
+  }
+
 
 }

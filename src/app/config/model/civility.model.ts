@@ -5,6 +5,7 @@ export interface ICivility {
   status?: number;
   created_at?: Date;
   update_at?: Date;
+  abbreviation?:string;
 }
 
 export class Civility implements ICivility {
@@ -14,7 +15,8 @@ export class Civility implements ICivility {
     public description?: string,
     public status?: number,
     public created_at?: Date,
-    public update_at?: Date
+    public update_at?: Date,
+    public abbreviation?:string
   ) {}
 
   getStatus(status?: number): string {

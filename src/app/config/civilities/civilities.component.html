@@ -35,7 +35,12 @@
                         {{ civility.getStatus(a.status) }}</span
                       >
                     </td>
-                    <td>actions</td>
+                    <td>
+                      <a href="javacript:void(0)" (click)="openModalConfirm(a.id)"  data-toggle="modal" title="Supprimer" type="button" class="btn btn-primary btn-light btn-sm">
+                        <i class="icofont-ui-delete text-danger"></i>
+                    </a>
+                  
+                    </td>
                   </tr>
                 </ng-container>
                 <ng-container *ngIf="!civilities?.length">
@@ -68,6 +73,11 @@
       </div>
     </div>
   </div>
+  <app-confirm-modal (actionConfirm)="deleteC($event)"></app-confirm-modal>
+  <ngx-loading
+  [show]="loading"
+  [config]="{ backdropBorderRadius: '3px' }"
+></ngx-loading>
 </section>
 <div class="modal fade" id="modalDepartment">
   <div class="modal-dialog">
@@ -104,6 +114,27 @@
               </div>
             </div>
           </div>
+
+          <div class="form-group row">
+            <label for="abbreviation" class="col-form-label">
+              Abbreviation<span class="text-danger">*</span>
+            </label>
+            <div class="col-sm-10">
+              <input
+                type="text"
+                formControlName="abbreviation"
+                class="form-control"
+                id="abbreviation"
+                placeholder="Entrer l' abbreviation"
+              
+              />
+
+              
+            </div>
+          </div>
+
+
+         
         </div>
         <div class="modal-footer">
           <button
@@ -121,7 +152,6 @@
   <!-- /.modal-dialog -->
 </div>
 
-<ngx-loading
-  [show]="loading"
-  [config]="{ backdropBorderRadius: '3px' }"
-></ngx-loading>
+
+
+

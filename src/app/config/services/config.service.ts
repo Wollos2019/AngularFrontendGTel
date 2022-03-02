@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Absence } from '../model/absence.model';
 import { Civility } from '../model/civility.model';
 import { Country } from '../model/countries.model';
 import { Department } from '../model/department.model';
@@ -66,6 +67,16 @@ export class ConfigService {
     return this.httpClient.get<Department[]>(`${this.URL_CONFIG}departments`);
   }
 
+  getAllEmployeesDepartment(id:number,params = ''): Observable<Department[]> {
+    if (params) {
+      return this.httpClient.get<Department[]>(
+        `${this.URL_CONFIG}departments/${id}/employees?${params}`
+      );
+    }
+    return this.httpClient.get<Department[]>(`${this.URL_CONFIG}departments/${id}/employees`);
+  }
+
+
   getOneDepartment(departmentId: number): Observable<Department> {
     return this.httpClient.get<Department>(
       `${this.URL_CONFIG}departments/${departmentId}`
@@ -98,6 +109,13 @@ export class ConfigService {
 
   getAllWorkings(): Observable<WorkingDay[]> {
     return this.httpClient.get<WorkingDay[]>(`${this.URL_CONFIG}working_days`);
+  }
+
+  createWorkings(workings: any): Observable<any> {
+    return this.httpClient.post<any>(
+      `${this.URL_CONFIG}working_days`,
+      workings
+    );
   }
 
   /**
@@ -140,6 +158,12 @@ export class ConfigService {
     );
   }
 
+  deleteCivility(id: number): Observable<Civility> {
+    return this.httpClient.delete<Civility>(
+      `${this.URL_CONFIG}civilities/${id}`
+    );
+  }
+
 
   /**
     * GESTION DES SESSIONS
@@ -158,7 +182,7 @@ export class ConfigService {
    * @param year 
    * @returns 
    */
-  getAllHoliDayByYearSession(year:number):Observable<any>{
+  getAllHoliDayByYearSession(year: number): Observable<any> {
     return this.httpClient.get<any[]>(`${this.URL_CONFIG}sessions/${year}/year`);
   }
 
@@ -180,6 +204,24 @@ export class ConfigService {
     return this.httpClient.get<HoliDay[]>(`${this.URL_CONFIG}holidays`);
   }
 
+
+  /**
+ * GESTION DES TYPE ABSENCES
+ */
+  createAbsence(absence: Absence): Observable<Absence> {
+    return this.httpClient.post<Absence>(
+      `${this.URL_CONFIG}absences`,
+      absence
+    );
+  }
+  getAllAbsences(params = ''): Observable<Absence[]> {
+    if (params) {
+      return this.httpClient.get<Absence[]>(
+        `${this.URL_CONFIG}absences?${params}`
+      );
+    }
+    return this.httpClient.get<Absence[]>(`${this.URL_CONFIG}absences`);
+  }
 
 
 }

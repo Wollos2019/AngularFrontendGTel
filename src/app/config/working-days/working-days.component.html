@@ -1,5 +1,5 @@
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" *ngIf="workings">
         <div class=" col-md-8 mt-5">
             <div class="card card-default">
                 <div class="card-header">
@@ -14,9 +14,9 @@
                           <!-- checkbox -->
                           <div class="form-group">
                           
-                              <div class="form-check"  formArrayName="days"  *ngFor="let d of daysL.controls; let i = index">
-                                <input class="form-check-input" type="checkbox"   [formArrayName]="i" id="{{i}}" />
-                                <label class="form-check-label" for="{{i}}">  {{workings?workings[i]?.day:''}}</label>
+                              <div class="form-check" *ngFor="let d of workings; let i = index">
+                                <input [checked]="d.status===STATUS.ENABLE" class="form-check-input" type="checkbox" [value]="d.id"  id="{{i}}" (change)="onCheckboxChange($event)"/>
+                                <label class="form-check-label" for="{{i}}">  {{d.name}}</label>
                               </div>
                            
                            
@@ -29,7 +29,7 @@
                   </div>
                   <!-- /.card-body -->
                   <div class="card-footer">
-                    <button type="button" class="btn btn-info  float-right" (click)="save()" [disabled]="true">Enregigtrer</button>
+                    <button type="button" class="btn btn-info  float-right" (click)="save()" >Enregigtrer</button>
                   
                   </div>
                   <!-- /.card-footer -->

@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ProductComponent } from './product/product.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProductDetailsComponent } from './product/product-details/product-details.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -18,10 +17,9 @@ import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { DashboardComponent } from './template/dashboard/dashboard.component';
 import { TokenInterceptorService } from './services/interceptors/token-interceptor.service';
+import { DashboardService } from './services/dashboard.service';
 import { ClientsModule } from './modules/commercial/clients/clients.module';
-import { CommandesComponent } from './Commercial/commandes/commandes.component';
 import { ProduitsModule } from './modules/commercial/produits/produits.module';
-import { CommandesModule } from './modules/commercial/commandes/commandes.module';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -55,6 +53,7 @@ import { CommandesModule } from './modules/commercial/commandes/commandes.module
   ],
   providers: [
     AuthService,
+    DashboardService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
