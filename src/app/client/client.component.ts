@@ -9,6 +9,7 @@ import { ProductService } from '../services/product.service';
 import { Icommande } from '../Commercial/commandes/commandes';
 import { CommandeService } from '../Commercial/commandes/services/commande.service';
 import { Router } from '@angular/router';
+import { IproductSelected } from '../product/productSelected';
 
 @Component({
   selector: 'app-client',
@@ -19,11 +20,13 @@ export class ClientComponent implements OnInit {
   listServiceFeature: any = [];
 
   public clients = [] as any;
+  public contenus = '';
   public products = <IProduct[]>{};
   public selectedClient: any;
-  public selectedProduct = <IProduct>{};
+  public selectedProduct = <IproductSelected>{};
   public selectedProducts : any = [];
   public commande = <Icommande>{};
+  public commandeContenus = [] as any;
   public modalTitle = '';
   public btnTitle = '';
   public name = new FormControl('', Validators.required);
@@ -37,6 +40,7 @@ export class ClientComponent implements OnInit {
   public i2 = new FormControl('', Validators.required);
   public input = new FormControl('', Validators.required);
   public quantity = new FormControl('', Validators.required);
+  public idCommande = '';
   public showError = false;
   modalRef?: BsModalRef;
   public arr: FormControl[] = [this.c1, this.c2];
@@ -72,7 +76,6 @@ openModal2(template: TemplateRef<any>, client?:Iclient) {
     this.btnTitle = 'Enregistrer';
     this.selectedClient = client;
     
-    //this.idClient = client.idClient;
     this.name.setValue(client.nom);
     this.email.setValue(client.email);
     this.telephone.setValue(client.telephone);
@@ -101,7 +104,7 @@ save(){
     this.showError = true;
     return;
   }
-  //this.orderTitel = 
+   
   this.selectedClient.nom = this.name.value;
   this.selectedClient.email = this.email.value;
   this.selectedClient.telephone = this.telephone.value;
@@ -128,55 +131,36 @@ save(){
 }
 
 save2(){
-  // if(!this.name.value || !this.email.value || !this.telephone.value) {
-  //   this.showError = true;
-  //   return;
-  // }
-   
-  // //this.commande.contenu = this.name.value;
-  // this.selectedClient.email = this.email.value;
-  // this.selectedClient.telephone = this.telephone.value;
-  // this.selectedClient.adresse = this.adresse.value;
-
-  // if(this.btnTitle == 'Modifier') {
-  //   this.service.update(this.selectedClient)
-  //   .subscribe(response =>{
-  //     this.getList();
-  //     this.reset();
-  //     this.showError = false;
-  //     this.modalRef?.hide();
-  //   });
-  // } else {
-  //   console.log(this.selectedClient);
-  //   this.service.add(this.selectedClient)
-  //   .subscribe(response =>{
-  //     this.getList();
-  //     this.reset();
-  //     this.showError = false;
-  //     this.modalRef?.hide();
-  //   });
-  // }
 
   for (var val of this.selectedProducts){
     val.quantity = this.listServiceFeature[val.id];
   }
   
-  
+  for (var val of this.selectedProducts) {
+    this.contenus = " Nom du produit: "+val.productName+" Quantity: "+val.quantity+this.contenus;
+  }
 
-  //this.commande.date = new Date();
-  this.commande.contenu = JSON.stringify(this.selectedProducts);
+  this.commande.contenu = this.contenus;
   this.commande.idClient = this.selectedClient.id;
   this.commande.nomClient = this.selectedClient.nom
   this.serviceC.add(this.commande)
     .subscribe(response =>{
       if(response){
+        this.commandeContenus.push(response);
         this.router.navigate(['/commercial/commandes']);
       }
       this.showError = false;
+      this.idCommande = this.commandeContenus[0].id;
+      for (var val of this.selectedProducts) {
+        val.idCommande = this.idCommande;
+        console.log(this.selectedProducts);
+        this.serviceC.addProduct(val)
+        .subscribe( response => console.log(response));
+      }
       this.selectedProducts = [];
       this.modalRef?.hide();
     });
-    console.log(this.selectedClient);
+    console.log(this.commandeContenus);
 }
 
 delete(product:Iclient) {
@@ -191,41 +175,22 @@ reset () {
   this.adresse.reset();
 }
 
-checked(product:IProduct) {
-  this.selectedProduct = product;
-  this.selectedProduct.id = product.id
-  this.selectedProduct.name = product.name;
-  this.selectedProduct.checked = this.checkbox.value;
-  this.selectedProduct.quantity = this.input.value;
-  
-  console.log(this.selectedProduct.checked, this.selectedProduct.name);
-  //console.log(this.selectedProduct.quantity);
-  console.log(this.listServiceFeature);
-  // this.selectedProducts.forEach(function (value:IProduct, selectedProduct) {
-  //   if (value.id != this.selectedProduct.id && this.selectedProduct.checked==true) {
-  //     this.selectedProducts.push(this.selectedProduct);
-  //   }
-  // });
-  
-  if(this.selectedProducts.includes(this.selectedProduct)) {
-    var key = this.selectedProducts.indexOf(this.selectedProduct, 0);
-    if (key > -1) {
-      this.selectedProducts.splice(key, 1);
+  checked(product: IProduct) {
+    this.selectedProduct = product;
+    this.selectedProduct.idProduct = product.id
+    this.selectedProduct.productName = product.productName;
+    this.selectedProduct.checked = this.checkbox.value;
+    //this.selectedProduct.quantity = this.input.value;
+
+    if (this.selectedProducts.includes(this.selectedProduct)) {
+      var key = this.selectedProducts.indexOf(this.selectedProduct, 0);
+      if (key > -1) {
+        this.selectedProducts.splice(key, 1);
+      }
+    } else {
+      this.selectedProducts.push(this.selectedProduct);
     }
-  } else {
-    this.selectedProducts.push(this.selectedProduct);
+    console.log(this.selectedProducts);
   }
-  console.log(this.selectedProducts.includes(this.selectedProduct.id));
-  // for(var val of this.selectedProducts){
-  //   if (val.id != this.selectedProduct.id && this.selectedProduct.checked==true) {
-  //     this.selectedProducts.push(this.selectedProduct);
-  //   } else if(val.id == this.selectedProduct.id && this.selectedProduct.checked==false) {
-  //     var key = this.selectedProducts.indexOf(this.selectedProduct);
-  //     delete this.selectedProducts[key];
-  //   }
-  // }
-  
-  console.log(this.selectedProducts);
-}
 
 }

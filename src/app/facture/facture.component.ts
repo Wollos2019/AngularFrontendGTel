@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../models/user.model';
 import { jsPDF } from "jspdf";
 import html2canvas from 'html2canvas';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-facture',
@@ -12,6 +13,7 @@ import html2canvas from 'html2canvas';
   styleUrls: ['./facture.component.scss']
 })
 export class FactureComponent implements OnInit {
+  URL_COMMER = environment.URL_COMMER;
 
   @ViewChild('content', {static:false}) el!:ElementRef;
   //@ViewChild('content') content!:ElementRef;
@@ -26,7 +28,7 @@ export class FactureComponent implements OnInit {
 
   // public openPDF():void {
   //   let DATA = document.getElementById('content');
-        
+      
   //   html2canvas(DATA!).then(canvas => {
         
   //       let fileWidth = 208;
@@ -41,9 +43,29 @@ export class FactureComponent implements OnInit {
   //   });     
   // }
 
+  public openPDF(): void {
+    let DATA: any = document.getElementById('htmlData');
+    html2canvas(DATA).then((canvas) => {
+      let fileWidth = 208;
+      let fileHeight = (canvas.height * fileWidth) / canvas.width;
+      const FILEURI = canvas.toDataURL('image/png');
+      let PDF = new jsPDF('p', 'mm', 'a4');
+      let position = 0;
+      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
+      PDF.save('angular-demo.pdf');
+    });
+  }
+
   currentUser! : User;
   public products = [] as any;
+  
   public amount = '' as any;
+  public prices = [20000, 50000];
+  public totals = [20000, 50000];
+  public montantT = this.prices[0] + this.prices[1];
+  public rabais = (this.montantT * 20) / 100;
+  public tva = ((this.montantT - this.rabais) * 18) / 100;
+  public totalN = this.montantT - this.rabais + this.tva;
 
   constructor(private service : ProductService,
     private authenticationService : AuthServiceService, private http: HttpClient ) {
@@ -51,26 +73,25 @@ export class FactureComponent implements OnInit {
      }
 
   ngOnInit(): void {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
-    });
-
-    this.http.get('http://localhost:8000/api/productsSum', {headers:headers}).subscribe(
-      result => this.amount = result
-    );
-    this.getList();
-    //this.getSum();
-    console.log(this.amount);
+    //this.getList();
+    this.getAmount();
+    for(var val of this.products){
+      let i=0;
+      this.totals[i] = (1 * this.prices[i]);
+    }
+     console.log(this.totals);
   }
 
   getList () {
     this.service.list()
-      .subscribe(response => this.products = response);     
+      .subscribe(response => this.products = response);       
   }
 
-  // getSum () {
-  //   this.service.sum()
-  //     .subscribe(response => this.amount = response);
-  // }
+  getAmount () {
+    
+    return this.http.get<any>(`${this.URL_COMMER}commandeDetails`)
+    .subscribe(response => this.products = response);
+  }
+
 
 }

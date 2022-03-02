@@ -5,6 +5,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CommandeService } from './services/commande.service';
 import { Icommande } from './commandes';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-commandes',
@@ -13,6 +14,7 @@ import { Icommande } from './commandes';
 })
 export class CommandesComponent implements OnInit {
 
+  public contenus : any;
   public orders = [] as any;
   public selectedOrder = <Icommande>{};
   public modalTitle = '';
@@ -28,7 +30,7 @@ export class CommandesComponent implements OnInit {
   constructor(
     private service: CommandeService,
     private modalService: BsModalService,
-
+    private router : Router,
     private http: HttpClient
   ) {}
 
@@ -54,7 +56,13 @@ export class CommandesComponent implements OnInit {
 
   getList() {
     this.service.list().subscribe(response=> this.orders = response);
+    
   }
+
+  modifier() {
+    this.router.navigate(['/commercial/factures']);
+  }
+  
 
   // insertProduct() {
   //   this.service.add(this.products).subscribe((response) => {

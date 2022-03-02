@@ -1,8 +1,6 @@
 export interface IProduct {
     id : number,
-    name : string,
+    productName : string,
     description : string,
-    price : string,
-    checked : boolean,
-    quantity : number
+    price : string
 }

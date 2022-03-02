@@ -16,11 +16,11 @@
         <tbody>
           <tr *ngFor="let order of orders; index as i">
             <th scope="row">{{i+1}}</th>
-            <!-- <td>{{order.date}}</td> -->
             <td>{{order.contenu}}</td>
             <td>{{order.nomClient}}</td>
             <td>
-              <button type="button" class="btn btn-info mr-1" (click)="openModal(template, order)">Modifier</button>
+              <!-- <button type="button" class="btn btn-info mr-1" (click)="openModal(template, order)">Modifier</button> -->
+              <button type="button" class="btn btn-info mr-1" (click)="modifier()">Facturer</button>
               <!-- <button type="button" class="btn btn-danger" (click)="delete(order)">Supprimer</button> -->
             </td>
           </tr>
