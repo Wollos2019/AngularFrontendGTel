@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
-import { Civility } from '../model/civility.model';
-import { Department } from '../model/department.model';
-import { ConfigService } from '../services/config.service';
+import {Component, OnInit} from '@angular/core';
+import {Validators, FormBuilder} from '@angular/forms';
+import {ToastrService} from 'ngx-toastr';
+import {Civility} from '../model/civility.model';
+import {Department} from '../model/department.model';
+import {ConfigService} from '../services/config.service';
+
 declare var $: any;
+
 @Component({
   selector: 'app-civilities',
   templateUrl: './civilities.component.html',
@@ -19,18 +21,22 @@ export class CivilitiesComponent implements OnInit {
   civilities?: Civility[];
   civility = new Civility();
   loading = false;
+
   constructor(
     private toastr: ToastrService,
     private fb: FormBuilder,
     private configService: ConfigService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.getAllCivilities();
   }
+
   get f(): any {
     return this.editForm?.controls;
   }
+
   save(): void {
     this.submitted = true;
 
@@ -39,7 +45,7 @@ export class CivilitiesComponent implements OnInit {
     }
     this.submitted = false;
     console.log(this.editForm.value);
-    const { name, description } = this.editForm.value;
+    const {name, description} = this.editForm.value;
     this.civility.description = description;
     this.civility.name = name;
     this.loading = true;

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { LeaveRequestsComponent } from './leave-requests.component';
+import {LeaveRequestsComponent} from './leave-requests.component';
 
 describe('LeaveRequestsComponent', () => {
   let component: LeaveRequestsComponent;
@@ -8,9 +8,9 @@ describe('LeaveRequestsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LeaveRequestsComponent ]
+      declarations: [LeaveRequestsComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

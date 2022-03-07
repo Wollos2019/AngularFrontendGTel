@@ -15,12 +15,14 @@ export class Civility implements ICivility {
     public status?: number,
     public created_at?: Date,
     public update_at?: Date
-  ) {}
+  ) {
+  }
 
   getStatus(status?: number): string {
     return status === 1 ? 'ACTIVER' : 'DESACTIVER';
   }
 }
+
 export enum STATUS {
   ENABLE = 'ENABLE',
   DISABLE = 'DISABLE',

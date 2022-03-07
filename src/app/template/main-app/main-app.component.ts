@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+
 @Component({
   selector: 'app-main-app',
   templateUrl: './main-app.component.html',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class MainAppComponent implements OnInit {
   authenticated = false;
 
-  constructor() {}
+  constructor() {
+  }
+
   title = 'AngFront';
 
   ngOnInit(): void {

@@ -1,19 +1,22 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { Civility } from '../model/civility.model';
-import { Country } from '../model/countries.model';
-import { Department } from '../model/department.model';
-import { Fonction } from '../model/fonctions.model';
-import { WorkingDay } from '../model/working_days.model';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {environment} from 'src/environments/environment';
+import {Civility} from '../model/civility.model';
+import {Country} from '../model/countries.model';
+import {Department} from '../model/department.model';
+import {Fonction} from '../model/fonctions.model';
+import {WorkingDay} from '../model/working_days.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ConfigService {
   URL_CONFIG = environment.URL_CONFIG;
-  constructor(private httpClient: HttpClient) {}
+
+  constructor(private httpClient: HttpClient) {
+  }
+
   /**
    * GESTION DES FONCTIONS
    */

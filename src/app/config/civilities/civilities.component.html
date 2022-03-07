@@ -18,33 +18,33 @@
           <div class="card-body">
             <table class="table table-bordered">
               <thead>
-                <tr class="bg-dark text-white">
-                  <th scope="col">#</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Status</th>
-                  <th scope="col">Action</th>
-                </tr>
+              <tr class="bg-dark text-white">
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+              </tr>
               </thead>
               <tbody>
-                <ng-container *ngIf="civilities && civilities.length">
-                  <tr *ngFor="let a of civilities; let i = index">
-                    <th scope="row">{{ i + 1 }}</th>
-                    <td>{{ a.name }}</td>
-                    <td>
+              <ng-container *ngIf="civilities && civilities.length">
+                <tr *ngFor="let a of civilities; let i = index">
+                  <th scope="row">{{ i + 1 }}</th>
+                  <td>{{ a.name }}</td>
+                  <td>
                       <span class="badge badge-info">
                         {{ civility.getStatus(a.status) }}</span
                       >
-                    </td>
-                    <td>actions</td>
-                  </tr>
-                </ng-container>
-                <ng-container *ngIf="!civilities?.length">
-                  <tr>
-                    <td colspan="4" class="text-center">
-                      Aucune données trouver
-                    </td>
-                  </tr>
-                </ng-container>
+                  </td>
+                  <td>actions</td>
+                </tr>
+              </ng-container>
+              <ng-container *ngIf="!civilities?.length">
+                <tr>
+                  <td colspan="4" class="text-center">
+                    Aucune données trouver
+                  </td>
+                </tr>
+              </ng-container>
               </tbody>
             </table>
           </div>

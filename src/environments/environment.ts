@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  apiUrl : 'http://localhost:8000/api/',
-  URL_RH :'http://localhost:8000/api/rh/v1/',
-  URL_CONFIG :'http://localhost:8000/api/config/v1/'
-  
+  apiUrl: 'http://localhost:8000/api/',
+  URL_RH: 'http://localhost:8000/api/rh/v1/',
+  URL_CONFIG: 'http://localhost:8000/api/config/v1/'
+
 };
 
 /*

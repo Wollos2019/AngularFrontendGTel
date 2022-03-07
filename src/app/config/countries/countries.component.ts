@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
-import { Country } from '../model/countries.model';
-import { Department } from '../model/department.model';
-import { ConfigService } from '../services/config.service';
+import {Component, OnInit} from '@angular/core';
+import {Validators, FormBuilder} from '@angular/forms';
+import {ToastrService} from 'ngx-toastr';
+import {Country} from '../model/countries.model';
+import {Department} from '../model/department.model';
+import {ConfigService} from '../services/config.service';
+
 declare var $: any;
+
 @Component({
   selector: 'app-countries',
   templateUrl: './countries.component.html',
@@ -24,18 +26,22 @@ export class CountriesComponent implements OnInit {
   countries?: Country[];
   country = new Country();
   loading = false;
+
   constructor(
     private toastr: ToastrService,
     private fb: FormBuilder,
     private configService: ConfigService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.getAllCountries();
   }
+
   get f(): any {
     return this.editForm?.controls;
   }
+
   save(): void {
     this.submitted = true;
 
@@ -44,7 +50,7 @@ export class CountriesComponent implements OnInit {
     }
     this.submitted = false;
     console.log(this.editForm.value);
-    const { name, description, abbreviation1, abbreviation2, code, codePhone } =
+    const {name, description, abbreviation1, abbreviation2, code, codePhone} =
       this.editForm.value;
     this.country.description = description;
     this.country.name = name;

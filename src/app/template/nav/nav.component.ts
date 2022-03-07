@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { Subscription } from 'rxjs';
-import { User } from 'src/app/models/user.model';
-import { AuthService } from 'src/app/services/auth/auth-service.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {Subscription} from 'rxjs';
+import {User} from 'src/app/models/user.model';
+import {AuthService} from 'src/app/services/auth/auth-service.service';
 
 @Component({
   selector: 'app-nav',
@@ -13,6 +13,7 @@ import { AuthService } from 'src/app/services/auth/auth-service.service';
 export class NavComponent implements OnInit {
   infoSubscription!: Subscription;
   currentUser!: User | null;
+
   constructor(
     private authService: AuthService,
     private toastr: ToastrService,
@@ -26,7 +27,8 @@ export class NavComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   deconnexion(): void {
     this.authService.logout().subscribe({

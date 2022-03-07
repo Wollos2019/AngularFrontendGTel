@@ -3,36 +3,36 @@
 </div>
 
 <div style="text-align: center;">
-    <button type="button" class="btn btn-primary mb-2" (click)="openModal(template)">Ajouter un produit</button>
+  <button type="button" class="btn btn-primary mb-2" (click)="openModal(template)">Ajouter un produit</button>
 </div>
 
 <table class="table">
-    <thead class="thead-light">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Nom</th>
-        <th scope="col">Description</th>
-        <th scope="col">Prix</th>
-        <th scope="col">Durée</th>
-        <th scope="col">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let product of products; index as i">
-        <th scope="row">{{i+1}}</th>
-        <td>{{product.name}}</td>
-        <td>{{product.description}}</td>
-        <td>{{product.price}}</td>
-        <td>{{product.slug}}</td>
-        <td>
-          <button type="button" class="btn btn-info mr-1" (click)="openModal(template, product)">Modifier</button>
-          <button type="button" class="btn btn-danger" (click)="delete(product)">Supprimer</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
- 
-  
+  <thead class="thead-light">
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Nom</th>
+    <th scope="col">Description</th>
+    <th scope="col">Prix</th>
+    <th scope="col">Durée</th>
+    <th scope="col">Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let product of products; index as i">
+    <th scope="row">{{i + 1}}</th>
+    <td>{{product.name}}</td>
+    <td>{{product.description}}</td>
+    <td>{{product.price}}</td>
+    <td>{{product.slug}}</td>
+    <td>
+      <button type="button" class="btn btn-info mr-1" (click)="openModal(template, product)">Modifier</button>
+      <button type="button" class="btn btn-danger" (click)="delete(product)">Supprimer</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+
 <ng-template #template>
   <div class="modal-header">
     <h4 class="modal-title pull-left">{{modalTitle}}</h4>
