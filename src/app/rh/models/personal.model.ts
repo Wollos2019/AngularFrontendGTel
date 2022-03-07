@@ -1,4 +1,5 @@
 import { IDepartment } from "src/app/config/model/department.model";
+import { Fonction } from "src/app/config/model/fonctions.model";
 
 export interface IPersonal {
    id?: number;
@@ -23,7 +24,7 @@ export interface IPersonal {
      marital?:MARITAL;
      password?:string;
      salary?:number;
-     contract?:CONTRACT;
+     contractId?:number;
      fonction?:string;
      dateStart?:Date;
      dateEnd?:Date;
@@ -59,8 +60,8 @@ export class Personal implements IPersonal {
     public courriel?:string,
     public marital?:MARITAL,
     public salary?:number,
-    public contract?:CONTRACT,
-    public fonction?:string,
+    public contractId?:number,
+    public fonctionId?:string,
     public dateStart?:Date,
     public dateEnd?:Date,
     public password?:string,
@@ -115,6 +116,7 @@ export enum CONTRACT{
 interface IAppends{
   url?:string;
   name?:string;
-  department:IDepartment
+  department:IDepartment,
+  fonction:Fonction
 
 }

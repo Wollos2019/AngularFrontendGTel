@@ -6,6 +6,7 @@ import { iif } from 'rxjs';
 import { Civility } from 'src/app/config/model/civility.model';
 import { Country } from 'src/app/config/model/countries.model';
 import { Department } from 'src/app/config/model/department.model';
+import { Fonction } from 'src/app/config/model/fonctions.model';
 import { ConfigService } from 'src/app/config/services/config.service';
 import { passwordGenerate } from 'src/app/util/generate_password';
 import { extractErrorMessagesFromErrorResponse } from 'src/app/util/http_error_response';
@@ -47,7 +48,7 @@ export class PersonalsComponent implements OnInit {
     departmentId: [{ value: '', disabled: true }, [Validators.required]],
     salaire: ['', [Validators.required]],
     fonction: ['', [Validators.required]],
-    contrat: ['', [Validators.required]],
+    contractId: ['', [Validators.required]],
     dateStart: ['', [Validators.required]],
     dateEnd: [''],
     password: [''],
@@ -55,6 +56,8 @@ export class PersonalsComponent implements OnInit {
     placeBirth: ['']
   });
   passwordCheck = false;
+  fonctions!: Fonction[];
+  contracts!: Fonction[];
 
   constructor(private toastr: ToastrService,
     private fb: FormBuilder,
@@ -66,6 +69,7 @@ export class PersonalsComponent implements OnInit {
     this.getCountry();
     this.getAllCivilities();
     this.getAllDepartments();
+    this.getAllContracts();
     this.editForm.get('email')?.valueChanges.subscribe((data: string) => {
       this.editForm.get('email1')?.setValue(data);
     })
@@ -92,8 +96,8 @@ export class PersonalsComponent implements OnInit {
       sexe,
       civilite,
       password,
-      fonction,
-      contrat,
+      fonctionId,
+      contractId,
       email1,
       dateStart,
       dateEnd,
@@ -117,11 +121,11 @@ export class PersonalsComponent implements OnInit {
     this.personal.lastname = lastname;
     this.personal.cnps = cnps;
     this.personal.civilityId = civilite;
-    this.personal.contract = contrat;
+    this.personal.contractId = contractId;
     this.personal.dateEnd = dateEnd;
     this.personal.dateStart = dateStart;
     this.personal.password = password;
-    this.personal.fonction = fonction;
+    this.personal.fonctionId = fonctionId;
     this.personal.departmentId = departmentId;
     this.personal.placeBirth = placeBirth;
     this.personal.salary=salaire;
@@ -206,6 +210,40 @@ export class PersonalsComponent implements OnInit {
         this.editForm.updateValueAndValidity();
 
         console.log(civilities);
+
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log('Error', error);
+
+      }
+    })
+  }
+  getAllContracts(): void {
+    this.configService.getAllContracts('per_page=*').subscribe({
+      next: (contracts: Fonction[]) => {
+        this.contracts = contracts;
+        this.editForm.get('contractId')?.enable();
+        this.editForm.updateValueAndValidity();
+     
+        
+        console.log(contracts);
+
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log('Error', error);
+
+      }
+    })
+  }
+
+  getAllFonctions(): void {
+    this.configService.getAllFonctions('per_page=*').subscribe({
+      next: (fonctions: Fonction[]) => {
+        this.fonctions = fonctions;
+        this.editForm.get('fonction')?.enable();
+        this.editForm.updateValueAndValidity();
+
+        console.log(fonctions);
 
       },
       error: (error: HttpErrorResponse) => {

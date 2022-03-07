@@ -34,11 +34,14 @@ export class WorkingDaysComponent implements OnInit {
 
 
   save(): void {
+    this.loading = true;
     this.configService.createWorkings({days:this.checkArray!}).subscribe({
       next: () => {
         this.toastr.success('mise a jour effectué');
+        this.loading = false;
       },
       error: () => {
+        this.loading = false;
         this.toastr.error(
           "Une Erreur c'est produite l'hors de la recupération des donnnées ",
           'Error'
@@ -57,6 +60,11 @@ export class WorkingDaysComponent implements OnInit {
       next: (workings: any) => {
         this.loading = false;
         this.workings = workings;
+        workings.forEach((d:any) => {
+          if(d.status===STATUS.ENABLE){
+            this.checkArray?.push(d.id);
+          }
+        });
       },
       error: (error: any) => {
         this.loading = false;
@@ -70,11 +78,12 @@ export class WorkingDaysComponent implements OnInit {
     });
   }
   onCheckboxChange(e: any) {
-
+    console.log(this.checkArray);
+    
     let val = e.target.value as number;
 
     if (e.target.checked) {
-      this.checkArray!.push(val);
+      this.checkArray!.push(Number(val) );
       console.log('select', this.checkArray);
     } else {
 

@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Civility } from '../model/civility.model';
-import { Department } from '../model/department.model';
 import { ConfigService } from '../services/config.service';
 declare var $: any;
 @Component({

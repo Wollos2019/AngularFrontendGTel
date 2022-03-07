@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Absence } from '../model/absence.model';
 import { Civility } from '../model/civility.model';
+import { Contract } from '../model/contract.model';
 import { Country } from '../model/countries.model';
 import { Department } from '../model/department.model';
 import { Fonction } from '../model/fonctions.model';
@@ -222,6 +223,25 @@ export class ConfigService {
     }
     return this.httpClient.get<Absence[]>(`${this.URL_CONFIG}absences`);
   }
+
+
+    /**
+ * GESTION DES TYPE CONTRATS
+ */
+     createContract(contract: Contract): Observable<Contract> {
+      return this.httpClient.post<Contract>(
+        `${this.URL_CONFIG}contracts`,
+        contract
+      );
+    }
+    getAllContracts(params = ''): Observable<Contract[]> {
+      if (params) {
+        return this.httpClient.get<Contract[]>(
+          `${this.URL_CONFIG}contracts?${params}`
+        );
+      }
+      return this.httpClient.get<Contract[]>(`${this.URL_CONFIG}contracts`);
+    }
 
 
 }

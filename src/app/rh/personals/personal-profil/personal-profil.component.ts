@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Civility } from 'src/app/config/model/civility.model';
 import { Country } from 'src/app/config/model/countries.model';
 import { Department } from 'src/app/config/model/department.model';
+import { Fonction } from 'src/app/config/model/fonctions.model';
 import { ConfigService } from 'src/app/config/services/config.service';
 import { extractErrorMessagesFromErrorResponse } from 'src/app/util/http_error_response';
 import { getImage } from 'src/app/util/images';
@@ -43,8 +44,8 @@ export class PersonalProfilComponent implements OnInit {
     civilite: [{ value: '', disabled: true }, [Validators.required]],
     departmentId: [{ value: '', disabled: true }, [Validators.required]],
     salaire: ['', [Validators.required]],
-    fonction: ['', [Validators.required]],
-    contrat: ['', [Validators.required]],
+    fonctionId: ['', [Validators.required]],
+    contractId: ['', [Validators.required]],
     dateStart: ['', [Validators.required]],
     dateEnd: [''],
     password: [''],
@@ -57,6 +58,8 @@ export class PersonalProfilComponent implements OnInit {
   GENDER = GENDER;
   CONTRACT = CONTRACT;
   imagePersonel: any;
+  fonctions!: Fonction[];
+  contracts!: Fonction[];
   constructor(private toastr: ToastrService, private activeRoute: ActivatedRoute, private rhService: RhService, private fb: FormBuilder,
     private configService: ConfigService, private router:Router) { }
 
@@ -67,6 +70,8 @@ export class PersonalProfilComponent implements OnInit {
     this.getCountry();
     this.getAllCivilities();
     this.getAllDepartments();
+    this.getAllFonctions();
+    this.getAllContracts();
 
   }
   get f(): any {
@@ -84,6 +89,42 @@ export class PersonalProfilComponent implements OnInit {
       error: (error: HttpErrorResponse) => {
         console.log(error);
 
+
+      }
+    })
+  }
+  getAllFonctions(): void {
+    this.configService.getAllFonctions('per_page=*').subscribe({
+      next: (fonctions: Fonction[]) => {
+        this.fonctions = fonctions;
+        this.editForm.get('fonction')?.enable();
+        this.editForm.updateValueAndValidity();
+
+        console.log(fonctions);
+
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log('Error', error);
+
+      }
+    })
+  }
+
+  
+
+  getAllContracts(): void {
+    this.configService.getAllContracts('per_page=*').subscribe({
+      next: (contracts: Fonction[]) => {
+        this.contracts = contracts;
+        this.editForm.get('contractId')?.enable();
+        this.editForm.updateValueAndValidity();
+     
+
+        console.log(contracts);
+
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log('Error', error);
 
       }
     })
@@ -153,10 +194,9 @@ export class PersonalProfilComponent implements OnInit {
     this.editForm.get('address')?.setValue(personal.address);
     this.editForm.get('departmentId')?.setValue(personal.departmentId);
     this.editForm.get('salaire')?.setValue(personal.salary);
-    this.editForm.get('fonction')?.setValue(personal.fonction);
-    this.editForm.get('contrat')?.setValue(personal.contract);
-    console.log(personal.contract);
-    
+    this.editForm.get('fonctionId')?.setValue(personal.fonctionId);
+    this.editForm.get('contractId')?.setValue(personal.contractId);
+   
     this.editForm.get('dateStart')?.setValue(personal.dateStart);
     this.editForm.get('dateEnd')?.setValue(personal.dateEnd);
     this.per.id=personal.id;
@@ -180,8 +220,8 @@ export class PersonalProfilComponent implements OnInit {
       sexe,
       civilite,
       password,
-      fonction,
-      contrat,
+      fonctionId,
+      contractId,
       email1,
       dateStart,
       dateEnd,
@@ -205,11 +245,11 @@ export class PersonalProfilComponent implements OnInit {
     this.per.lastname = lastname;
     this.per.cnps = cnps;
     this.per.civilityId = civilite;
-    this.per.contract = contrat;
+    this.per.contractId = contractId;
     this.per.dateEnd = dateEnd;
     this.per.dateStart = dateStart;
     this.per.password = password;
-    this.per.fonction = fonction;
+    this.per.fonctionId = fonctionId;
     this.per.departmentId = departmentId;
     this.per.placeBirth = placeBirth;
     this.per.salary = salaire;

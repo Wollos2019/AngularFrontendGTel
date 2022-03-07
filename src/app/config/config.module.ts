@@ -21,6 +21,7 @@ import { BanksComponent } from './banks/banks.component';
 import { RegionsComponent } from './regions/regions.component';
 import { SessionComponent } from './session/session.component';
 import { ListUserDeparmentComponent } from './department/list-user-deparment/list-user-deparment.component';
+import { ContratComponent } from './contrat/contrat.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { ListUserDeparmentComponent } from './department/list-user-deparment/lis
     BanksComponent,
     RegionsComponent,
     SessionComponent,
-    ListUserDeparmentComponent
+    ListUserDeparmentComponent,
+    ContratComponent
   ],
   imports: [
     CommonModule,

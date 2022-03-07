@@ -1,18 +1,18 @@
 <section class="content-header">
     <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1>Nouveau employé</h1>
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Nouveau employé</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a [routerLink]="'/'">Dashbord</a></li>
+                    <li class="breadcrumb-item active">Nouveau employé</li>
+                </ol>
+            </div>
         </div>
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a [routerLink]="'/'">Dashbord</a></li>
-            <li class="breadcrumb-item active">Nouveau employé</li>
-          </ol>
-        </div>
-      </div>
     </div><!-- /.container-fluid -->
-  </section>
+</section>
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -21,7 +21,7 @@
                     <div class="card card-default">
                         <div class="card-header">
                             <h3 class="card-title">Ajouter un Nouveau employé</h3>
-    
+
                             <div class="card-tools">
                                 <button title="reduire" type="button" class="btn btn-tool" data-card-widget="collapse">
                                     <i class="fas fa-minus"></i>
@@ -37,12 +37,12 @@
                                 <div class="col-12">
                                     <app-upload-image (sendImage)="getImage($event)">
                                     </app-upload-image>
-                
+
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
-    
+
                                     <div class="form-group">
                                         <label for="civilite"> Titre civilité<span class="text-danger">*</span></label>
                                         <select id="civilite" class="form-control" formControlName="civilite"
@@ -51,10 +51,10 @@
                                             <ng-container *ngIf="civilities">
                                                 <option [value]="c.id" *ngFor="let c of civilities">{{c.name}}</option>
                                             </ng-container>
-    
-    
-    
-    
+
+
+
+
                                         </select>
                                         <div *ngIf="submitted && f.civilite.errors" class="invalid-feedback">
                                             <div *ngIf="f.civilite.errors.required">Champ requis</div>
@@ -65,13 +65,14 @@
                                     <div class="form-group">
                                         <label for="name">Nom<span class="text-danger">*</span></label>
                                         <input formControlName="lastname" type="text" class="form-control" id="name"
-                                            [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }" placeholder="Nom">
+                                            [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }"
+                                            placeholder="Nom">
                                     </div>
                                     <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
                                         <div *ngIf="f.lastname.errors.required">Champ requis</div>
                                     </div>
                                 </div>
-    
+
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="prenom">Prénom</label>
@@ -88,7 +89,7 @@
                                             placeholder="Email">
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="sexe">Genre<span class="text-danger">*</span></label>
@@ -102,8 +103,8 @@
                                             <div *ngIf="f.sexe.errors.required">Champ requis</div>
                                         </div>
                                     </div>
-                                  
-                                    
+
+
                                 </div>
                             </div>
                             <div class="row">
@@ -124,8 +125,8 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="child">Nombre d'enfant</label>
-                                        <input formControlName="numberChild" type="number" value="0" class="form-control"
-                                            id="child" placeholder="Nombre d'enfant">
+                                        <input formControlName="numberChild" type="number" value="0"
+                                            class="form-control" id="child" placeholder="Nombre d'enfant">
                                     </div>
                                 </div>
                             </div>
@@ -137,21 +138,20 @@
                                         <select id="matrimonial" class="form-control" formControlName="matrimonial"
                                             [ngClass]="{ 'is-invalid': submitted && f.matrimonial.errors }">
                                             <option selected="selected" value="">---</option>
-                                            <option  [value]="MARITAL.SINGLE">Célibataire</option>
+                                            <option [value]="MARITAL.SINGLE">Célibataire</option>
                                             <option [value]="MARITAL.MARRIED">Marié</option>
                                             <option [value]="MARITAL.DIVORCE">Divorcé</option>
-    
+
                                         </select>
                                     </div>
                                     <div *ngIf="submitted && f.matrimonial.errors" class="invalid-feedback">
                                         <div *ngIf="f.matrimonial.errors.required">Champ requis</div>
                                     </div>
                                 </div>
-    
+
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="dateNaissance">Née le :<span
-                                                class="text-danger">*</span></label>
+                                        <label for="dateNaissance">Née le :<span class="text-danger">*</span></label>
                                         <input formControlName="dateNaissance" type="date" class="form-control"
                                             id="dateNaissance"
                                             [ngClass]="{ 'is-invalid': submitted && f.dateNaissance.errors }">
@@ -164,14 +164,13 @@
                                     <div class="form-group">
                                         <label for="placeBirth">à</label>
                                         <input formControlName="placeBirth" type="text" class="form-control"
-                                            id="placeBirth"
-                                          >
+                                            id="placeBirth" placeholder="Lieu de naissance">
                                     </div>
-                                    
+
                                 </div>
                             </div>
-    
-                           
+
+
                             <hr>
                             <div class="row">
                                 <div class="col-md-6">
@@ -181,7 +180,7 @@
                                             placeholder="Téléphone">
                                     </div>
                                 </div>
-    
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="Adresse">Adresse</label>
@@ -202,9 +201,9 @@
                                                     {{c.name}}
                                                 </option>
                                             </ng-container>
-    
-    
-    
+
+
+
                                         </select>
                                     </div>
                                     <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
@@ -225,11 +224,11 @@
                                             placeholder="Ville">
                                     </div>
                                 </div>
-    
-                               
+
+
                             </div>
-                            <h2>Poste</h2>
-    
+                            <h4>Contrat</h4>
+
                             <hr>
                             <div class="row">
                                 <div class="col-md-4">
@@ -258,16 +257,22 @@
                                         <div *ngIf="f.salaire.errors.required">Champ requis</div>
                                     </div>
                                 </div>
-    
-                                <div class="col-md-4">
+
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="fonction">Fonction<span class="text-danger">*</span></label>
-                                        <input formControlName="fonction" type="text" class="form-control" id="fonction"
-                                            [ngClass]="{ 'is-invalid': submitted && f.fonction.errors }"
-                                            placeholder="Fonction">
+                                        <select id="fonction" class="form-control" formControlName="fonctionId"
+                                            [ngClass]="{ 'is-invalid': submitted && f.fonctionId.errors }">
+                                            <option value="''">---</option>
+                                            <ng-container *ngIf="fonctions">
+                                                <option *ngFor="let f of fonctions" [value]="f.id">
+                                                    {{f.name}}
+                                                </option>
+                                            </ng-container>
+                                        </select>
                                     </div>
-                                    <div *ngIf="submitted && f.fonction.errors" class="invalid-feedback">
-                                        <div *ngIf="f.fonction.errors.required">Champ requis</div>
+                                    <div *ngIf="submitted && f.fonctionId.errors" class="invalid-feedback">
+                                        <div *ngIf="f.fonctionId.errors.required">Champ requis</div>
                                     </div>
                                 </div>
                             </div>
@@ -277,35 +282,38 @@
                                         <div class="form-group">
                                             <label for="contrat">Type de contrat<span
                                                     class="text-danger">*</span></label>
-                                            <select id="contrat" class="form-control" formControlName="contrat"
-                                                [ngClass]="{ 'is-invalid': submitted && f.contrat.errors }">
-                                                <option selected="selected" value="">---</option>
-                                                <option [value]="CONTRACT.CDI">CDI</option>
-                                                <option [value]="CONTRACT.CDD">CDD</option>
-                                                <option [value]="CONTRACT.STAGEAIRE">Stageaire</option>
+                                            <select id="contrat" class="form-control" formControlName="contractId"
+                                                [ngClass]="{ 'is-invalid': submitted && f.contractId.errors }">
+                                                <option value="" selected="selected">---</option>
+                                                <ng-container *ngIf="contracts">
+                                                    <option [value]="c.id" *ngFor="let c of contracts">{{c.name}}
+                                                    </option>
+                                                </ng-container>
+
+
                                             </select>
-                                            <div *ngIf="submitted && f.contrat.errors" class="invalid-feedback">
-                                                <div *ngIf="f.contrat.errors.required">Champ requis</div>
+                                            <div *ngIf="submitted && f.contractId.errors" class="invalid-feedback">
+                                                <div *ngIf="f.contractId.errors.required">Champ requis</div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-    
-    
-    
-    
+
+
+
+
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="dateStart">Date d'entrée<span class="text-danger">*</span></label>
-                                        <input formControlName="dateStart" type="date" class="form-control" id="dateStart"
-                                            [ngClass]="{ 'is-invalid': submitted && f.dateStart.errors }"
+                                        <input formControlName="dateStart" type="date" class="form-control"
+                                            id="dateStart" [ngClass]="{ 'is-invalid': submitted && f.dateStart.errors }"
                                             placeholder="Date d'entrée" />
                                         <div *ngIf="submitted && f.dateStart.errors" class="invalid-feedback">
                                             <div *ngIf="f.dateStart.errors.required">Champ requis</div>
                                         </div>
                                     </div>
                                 </div>
-    
+
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="dateEnd">Date de sortie</label>
@@ -322,14 +330,14 @@
                                         <div class="custom-control custom-switch">
                                             <input (change)="getValueSpace($event)" type="checkbox"
                                                 class="custom-control-input" id="customSwitch1">
-    
+
                                             <label class="custom-control-label" for="customSwitch1">Accèss a espace
                                                 employé?</label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-    
+
                             <div class="row" *ngIf="passwordCheck">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -337,44 +345,46 @@
                                         <input formControlName="email1" type="text" class="form-control" id="email1"
                                             [ngClass]="{ 'is-invalid': submitted && f.email1.errors }"
                                             placeholder="email de connexion">
-                                            <div *ngIf="submitted && f.email1.errors" class="invalid-feedback">
-                                                <div *ngIf="f.email1.errors.required">Champ requis</div>
-                                                <div *ngIf="f.email1.errors.email">adresse email invalide</div>
-                                            </div>
+                                        <div *ngIf="submitted && f.email1.errors" class="invalid-feedback">
+                                            <div *ngIf="f.email1.errors.required">Champ requis</div>
+                                            <div *ngIf="f.email1.errors.email">adresse email invalide</div>
+                                        </div>
                                     </div>
-                                  
+
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="password">Mot de passe</label>
-                                     
-                                        <input   [ngClass]="{ 'is-invalid': submitted && f.password.errors }" formControlName="password" type="text" class="form-control" id="password"
+
+                                        <input [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+                                            formControlName="password" type="text" class="form-control" id="password"
                                             placeholder="Mot de passe">
-                                            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                                                <div *ngIf="f.password.errors.required">Champ requis</div>
-                                                <div *ngIf="f.password.errors.minlength">le mot de passe doit contenir au moins 6 carateres</div>
-                                            </div>
+                                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                            <div *ngIf="f.password.errors.required">Champ requis</div>
+                                            <div *ngIf="f.password.errors.minlength">le mot de passe doit contenir au
+                                                moins 6 carateres</div>
+                                        </div>
                                     </div>
-                                  
+
                                 </div>
                             </div>
-    
+
                             <h4>Banques</h4>
                             <hr>
                             <h4>Contact d'urgence</h4>
                             <hr>
-    
+
                         </div>
                         <div class="card-footer">
                             <button class="btn btn-info float-right" type="button" (click)="save()">Enregistrer</button>
                         </div>
-    
+
                         <!-- /.card-body -->
                         <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
                     </div>
                 </form>
             </div>
         </div>
-      
+
     </div>
 </section>
