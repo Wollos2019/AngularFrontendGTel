@@ -1,0 +1,22 @@
+<div id="confirm" class="modal fade">
+	<div class="modal-dialog modal-confirm">
+		<div class="modal-content">
+			<div class="modal-header text-center">
+				<div class="icon-box">
+					<i class="icofont-close-line">&#xE5CD;</i>
+				</div>	<br>			
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			</div>
+            <h4 class="m-0">{{title}}</h4>	
+			<div class="modal-body">
+				<p>{{message}}</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" data-dismiss="modal">{{btnCancel}}</button>
+				<button type="button" class="btn btn-danger" (click)="actionC()">{{btnConfirm}}</button>
+			</div>
+		</div>
+	</div>
+</div>     
+
+

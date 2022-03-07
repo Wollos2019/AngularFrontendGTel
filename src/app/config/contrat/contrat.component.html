@@ -1,0 +1,203 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <h1 class="card-title">Type de contrat</h1>
+              <button
+                class="btn btn-info float-right"
+                type="button"
+                data-toggle="modal"
+                data-target="#modalContract"
+              >
+                Nouveau
+              </button>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table class="table table-bordered">
+                <thead>
+                  <tr class="bg-dark text-white">
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Total essai</th>
+                    <th scope="col">Durée</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngIf="contracts && contracts.length">
+                    <tr *ngFor="let a of contracts; let i = index">
+                      <th scope="row">{{ i + 1 }}</th>
+                      <td>{{ a.name }}</td>
+                      <td>
+                        <span class="badge badge-info">
+                            {{a.test}}
+                          </span
+                        >
+                      </td>
+                      <td>
+                        <span class="badge badge-info">
+                            {{contract.getTerm(a.term,a.termMeasure)}}
+                          </span
+                        >
+                      </td>
+                     
+                      <td>
+                        <a href="javacript:void(0)"   data-toggle="modal" title="Supprimer" type="button" class="btn btn-primary btn-light btn-sm">
+                          <i class="icofont-ui-delete text-danger"></i>
+                      </a>
+                    
+                      </td>
+                    </tr>
+                  </ng-container>
+                  <ng-container *ngIf="!contracts?.length">
+                    <tr>
+                      <td colspan="5" class="text-center">
+                        Aucune données trouver
+                      </td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer clearfix">
+              <ul class="pagination pagination-sm m-0 float-right">
+                <li class="page-item">
+                  <a class="page-link" href="#">&laquo;</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+  
+                <li class="page-item">
+                  <a class="page-link" href="#">&raquo;</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- /.card -->
+  
+          <!-- /.card -->
+        </div>
+      </div>
+    </div>
+    <!-- <app-confirm-modal (actionConfirm)="deleteC($event)"></app-confirm-modal> -->
+    <ngx-loading
+    [show]="loading"
+    [config]="{ backdropBorderRadius: '3px' }"
+  ></ngx-loading>
+  </section>
+<div class="modal fade" id="modalContract">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Ajouter un type de contrat</h4>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form class="form-horizontal" [formGroup]="editForm">
+          <div class="modal-body">
+            <div class="form-group row">
+              <label for="nom" class="col-form-label">
+                Nom<span class="text-danger">*</span>
+              </label>
+              <div class="col-sm-12">
+                <input
+                  type="text"
+                  formControlName="name"
+                  class="form-control"
+                  id="nom"
+                  placeholder="Entrer le nom"
+                  [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+                />
+  
+                <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                  <div *ngIf="f.name.errors.required">Champ requis</div>
+                </div>
+              </div>
+            </div>  
+            <div class="form-group row">
+                <label for="test" class="col-form-label">
+                  Total essai<span class="text-danger">*</span>
+                </label>
+                <div class="col-sm-12">
+                  <input
+                    type="text"
+                    formControlName="test"
+                    class="form-control"
+                    id="test"
+                    placeholder="Total essai"
+                    [ngClass]="{ 'is-invalid': submitted && f.test.errors }"
+                  />
+    
+                  <div *ngIf="submitted && f.test.errors" class="invalid-feedback">
+                    <div *ngIf="f.test.errors.required">Champ requis</div>
+                  </div>
+                </div>
+              </div> 
+              
+              <div class="form-group row">
+                <label for="term" class="col-form-label">
+                 Durée<span class="text-danger">*</span>
+                </label>
+                <div class="col-sm-12">
+                  <input
+                    type="text"
+                    formControlName="term"
+                    class="form-control"
+                    id="term"
+                    placeholder="Durée"
+                    [ngClass]="{ 'is-invalid': submitted && f.test.errors }"
+                  />
+    
+                  <div *ngIf="submitted && f.test.errors" class="invalid-feedback">
+                    <div *ngIf="f.test.errors.required">Champ requis</div>
+                  </div>
+                </div>
+              </div>  
+
+              <div class="form-group row">
+                <label for="termMeasure" class="col-form-label">
+                  Type Durée<span class="text-danger">*</span>
+                </label>
+                <select id="termMeasure" class="form-control col-sm-12" formControlName="termMeasure"
+                [ngClass]="{ 'is-invalid': submitted && f.termMeasure.errors }">
+                <option selected="selected" value="">---</option>
+                <option [value]="measure.DAY">Jour</option>
+                <option [value]="measure.SEMAINE">Semaine</option>
+                <option [value]="measure.MONTH">Mois</option>
+                <option [value]="measure.YEAR">Annnée</option>
+
+              </select>
+              <div *ngIf="submitted && f.termMeasure.errors" class="invalid-feedback">
+                <div *ngIf="f.termMeasure.errors.required">Champ requis</div>
+              </div>
+              </div>  
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-primary btn-sm float-right"
+              (click)="save()"
+            >
+              Enregistrer
+            </button>
+          </div>
+        </form>
+      </div>
+    
+    </div>
+  
+  </div> 
+  
+  
+  
+  
+  

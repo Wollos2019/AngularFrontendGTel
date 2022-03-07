@@ -49,7 +49,7 @@ export class NavComponent implements OnInit {
       .subscribe((info: User | null) => {
         if (info) {
           this.currentUser = info;
-          console.log(info);
+          // console.log(info);
         } else {
           this.getInfoUser();
         }

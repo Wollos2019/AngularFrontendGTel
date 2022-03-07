@@ -4,36 +4,65 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h1 class="card-title">Jours fériés</h1>
-            <button
-              class="btn btn-info float-right"
-              type="button"
-              data-toggle="modal"
-              data-target="#modal-default"
+            <h1 class="card-title h1">Jours fériés: {{ currentYear }}</h1>
+            <div
+              class="btn-group float-right"
+              role="group"
+              aria-label=" basic holiday"
             >
-              Ajouter
-            </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                (click)="prev()"
+                [disabled]="currentYear <= 2022"
+              >
+                < Précedent
+              </button>
+              <button type="button" class="btn btn-default">
+                {{ currentYear }}
+              </button>
+              <button type="button" class="btn btn-primary" (click)="next()">
+                Suivant >
+              </button>
+            </div>
           </div>
           <!-- /.card-header -->
           <div class="card-body">
             <table class="table table-bordered">
               <thead>
-              <tr>
-                <th style="width: 10px">#</th>
-                <th>Date</th>
-                <th>Description</th>
-                <th>Actions</th>
-              </tr>
+                <tr>
+                  <th style="width: 10px">#</th>
+                  <th>Nom</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
               </thead>
               <tbody>
-              <tr>
-                <td>1.</td>
-                <td>01-01-2021</td>
-                <td>nouvel l'an</td>
-                <td>action</td>
-              </tr>
+                <ng-container *ngIf="holiDays && holiDays.length">
+                  <tr *ngFor="let h of holiDays; let i = index">
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>{{ h.name }}</td>
+                    <td>{{ h.date }}</td>
+                    <td>action</td>
+                  </tr>
+                </ng-container>
               </tbody>
+              <ng-container *ngIf="!holiDays?.length">
+                <tr>
+                  <td colspan="4" class="text-center">
+                    Aucune données trouver
+                  </td>
+                </tr>
+              </ng-container>
             </table>
+            <button
+              class="btn btn-info float-right mt-2"
+              type="button"
+              data-toggle="modal"
+              data-target="#modalHoliDay"
+            >
+              Ajouter
+            </button>
           </div>
           <!-- /.card-body -->
           <div class="card-footer clearfix">
@@ -56,11 +85,11 @@
     </div>
   </div>
 </section>
-<div class="modal fade" id="modal-default">
+<div class="modal fade" id="modalHoliDay">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Ajouter un nouveau département</h4>
+        <h4 class="modal-title">Ajouter un jour férié : {{ currentYear }}</h4>
         <button
           type="button"
           class="close"
@@ -74,7 +103,7 @@
         <form class="form-horizontal">
           <div class="form-group row">
             <label for="nom" class="col-form-label"
-            >Nom<span class="text-danger">*</span>
+              >Nom<span class="text-danger">*</span>
             </label>
             <div class="col-sm-10">
               <input
@@ -83,6 +112,15 @@
                 id="nom"
                 placeholder="Entrer le nom"
               />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="date" class="col-form-label"
+              >Date<span class="text-danger">*</span>
+            </label>
+            <div class="col-sm-10">
+              <input type="date" class="form-control" id="date" />
             </div>
           </div>
         </form>
@@ -97,3 +135,8 @@
   </div>
   <!-- /.modal-dialog -->
 </div>
+
+<ngx-loading
+  [show]="loading"
+  [config]="{ backdropBorderRadius: '3px' }"
+></ngx-loading>

@@ -1,0 +1,19 @@
+<ng-container >
+    <div class="avatar-upload">
+        <div class="avatar-edit">
+            <input title="profil" type="file" id="imageUpload" accept=".png, .jpg, .jpeg" (change)="getImage($event)" />
+            <label for="imageUpload" class=" size-21 ml-5" >
+              <i class="icofont-edit-alt m-2"></i>  
+            </label>
+        </div>
+        <div class="avatar-preview">
+    
+            <div id="imagePreview" [style.background-image]="imageSrc">
+            </div>
+        </div>
+    </div>
+    
+ 
+    
+</ng-container>
+

@@ -1,0 +1,124 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>liste des employés</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a [routerLink]="'/'">Dashbord</a></li>
+          <li class="breadcrumb-item active">liste des employés</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+</section>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <a
+              class="btn btn-info float-right"
+              type="button"
+              [routerLink]="['/rh/personals']"
+              >Nouveau</a
+            >
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <table class="table table-bordered">
+              <thead>
+                <tr class="bg-dark text-white">
+                  <th scope="col">#</th>
+                  <th scope="col">Photo</th>
+                  <th scope="col">Nom</th>
+                  <th scope="col">Prénom</th>
+                  <th scope="col">Téléphone</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Nombre de contract</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngIf="personals && personals.length">
+                  <tr *ngFor="let p of personals; let i = index">
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td class="text-center">
+                      <img
+                        [src]="p.appends?.url ? p.appends?.url : images.profil"
+                        alt=""
+                        width="50"
+                        height="50"
+                        class="rounded-circle"
+                      />
+                    </td>
+                    <td>{{ p.appends?.name }}</td>
+                    <td>{{ p.firstname }}</td>
+                    <td>{{ p.phone }}</td>
+                    <td>{{ p.email }}</td>
+                    <td>
+                      <span class="badge badge-primary">{{
+                        p.appends?.contracts?.length
+                      }}</span>
+                    </td>
+                    <td>
+                      <span
+                        class="badge"
+                        [ngClass]="personal.getStatus(p.status)?.class"
+                        >{{ personal.getStatus(p.status)?.value }}</span
+                      >
+                    </td>
+
+                    <td>
+                      <a
+                        title="Profil"
+                        type="button"
+                        class="btn btn-primary btn-light btn-sm"
+                        [routerLink]="['/rh/personals', p.id, 'show']"
+                      >
+                        <i class="icofont-ui-user text-info"></i>
+                      </a>
+                    </td>
+                  </tr>
+                </ng-container>
+                <ng-container *ngIf="!personals?.length">
+                  <tr>
+                    <td colspan="10" class="text-center">
+                      Aucune données trouver
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
+          <div class="card-footer clearfix">
+            <ul class="pagination pagination-sm m-0 float-right">
+              <li class="page-item">
+                <a class="page-link" href="#">&laquo;</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+
+              <li class="page-item">
+                <a class="page-link" href="#">&raquo;</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /.card -->
+
+        <!-- /.card -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<ngx-loading
+  [show]="loading"
+  [config]="{ backdropBorderRadius: '3px' }"
+></ngx-loading>

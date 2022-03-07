@@ -1,0 +1,249 @@
+<table class="table table-bordered">
+  <thead>
+    <tr class="bg-dark text-white">
+      <th scope="col">#</th>
+      <th scope="col">Département</th>
+      <th scope="col">Fonction</th>
+      <th scope="col">Salaire</th>
+      <th scope="col">Date debut</th>
+      <th scope="col">Date fin</th>
+      <th scope="col">Durée</th>
+      <th scope="col">Status</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngIf="contracts?.length">
+      <tr *ngFor="let c of contracts; let i = index">
+        <th>{{ i + 1 }}</th>
+        <td>{{ c.pivot?.departmentId }}</td>
+        <td>{{ c.pivot?.fonctionId }}</td>
+        <td>{{ c.pivot?.salary }}</td>
+        <td>{{ c.pivot?.dateStart }}</td>
+        <td>{{ c.pivot?.dateEnd }}</td>
+
+        <td></td>
+        <td></td>
+        <td>
+          <button
+            title="Modifier"
+            type="button"
+            class="btn btn-primary btn-light btn-sm"
+            (click)="openContract(c)"
+          >
+            <i class="icofont-ui-edit text-info size-21"></i>
+          </button>
+
+          <button
+            title="Modifier"
+            type="button"
+            class="btn btn-primary btn-light btn-sm"
+            (click)="print(c)"
+          >
+            <i class="icofont-print text-danger size-21"></i>
+          </button>
+        </td>
+      </tr>
+    </ng-container>
+    <ng-container *ngIf="!contracts?.length">
+      <tr>
+        <td colspan="9" class="text-center">Aucune information trouvée</td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
+<div class="modal fade" id="modalContract">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Modifier le contrat</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="editForm">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="department"
+                  >Département<span class="text-danger">*</span></label
+                >
+                <select
+                  id="department"
+                  class="form-control"
+                  formControlName="departmentId"
+                  [ngClass]="{
+                    'is-invalid': submitted && f.departmentId.errors
+                  }"
+                >
+                  <option selected="selected" value="">---</option>
+                  <ng-container *ngIf="departemnts">
+                    <option [value]="d.id" *ngFor="let d of departemnts">
+                      {{ d.name }}
+                    </option>
+                  </ng-container>
+                </select>
+                <div
+                  *ngIf="submitted && f.departmentId.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f.departmentId.errors.required">Champ requis</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="salary"
+                  >Salaire de base<span class="text-danger">*</span></label
+                >
+                <input
+                  formControlName="salary"
+                  type="text"
+                  class="form-control"
+                  id="salary"
+                  [ngClass]="{
+                    'is-invalid': submitted && f.salary.errors
+                  }"
+                  placeholder="Salaire de base"
+                />
+              </div>
+              <div
+                *ngIf="submitted && f.salary.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.salary.errors.required">Champ requis</div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="fonction"
+                  >Fonction<span class="text-danger">*</span></label
+                >
+                <select
+                  id="fonction"
+                  class="form-control"
+                  formControlName="fonctionId"
+                  [ngClass]="{
+                    'is-invalid': submitted && f.fonctionId.errors
+                  }"
+                >
+                  <option value="''">---</option>
+                  <ng-container *ngIf="fonctions">
+                    <option *ngFor="let f of fonctions" [value]="f.id">
+                      {{ f.name }}
+                    </option>
+                  </ng-container>
+                </select>
+              </div>
+              <div
+                *ngIf="submitted && f.fonctionId.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.fonctionId.errors.required">Champ requis</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="form-group">
+                  <label for="contrat"
+                    >Type de contrat<span class="text-danger">*</span></label
+                  >
+                  <select
+                    id="contrat"
+                    class="form-control"
+                    formControlName="contractId"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.contractId.errors
+                    }"
+                  >
+                    <option value="" selected="selected">---</option>
+                    <ng-container *ngIf="contracts">
+                      <option [value]="c.id" *ngFor="let c of contracts">
+                        {{ c.name }}
+                      </option>
+                    </ng-container>
+                  </select>
+                  <div
+                    *ngIf="submitted && f.contractId.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.contractId.errors.required">Champ requis</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="dateStart"
+                  >Date d'entrée<span class="text-danger">*</span></label
+                >
+                <input
+                  formControlName="dateStart"
+                  type="date"
+                  class="form-control"
+                  id="dateStart"
+                  [ngClass]="{
+                    'is-invalid': submitted && f.dateStart.errors
+                  }"
+                  placeholder="Date d'entrée"
+                />
+                <div
+                  *ngIf="submitted && f.dateStart.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f.dateStart.errors.required">Champ requis</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="dateEnd">Date de sortie</label>
+                <input
+                  formControlName="dateEnd"
+                  type="date"
+                  class="form-control"
+                  id="dateEnd"
+                  placeholder="Date d'entrée"
+                />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-12 float-right">
+            <button
+              (click)="openModalConfirm()"
+              title="Supprimer"
+              class="btn btn-sm btn-danger ml-2 float-right"
+              type="button"
+            >
+              Supprimer
+            </button>
+            <button
+              (click)="update()"
+              title="Modifier"
+              class="btn btn-sm btn-info float-right"
+              type="button"
+            >
+              Modifier
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,208 +1,650 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12 mt-3">
-      <form [formGroup]="editForm">
-        <div class="card card-default">
-          <div class="card-header">
-            <h3 class="card-title">Ajouter un Nouveau employé</h3>
-
-            <div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                <i class="fas fa-minus"></i>
-              </button>
-              <!-- <button type="button" class="btn btn-tool" data-card-widget="remove">
-        <i class="fas fa-times"></i>
-      </button> -->
-            </div>
-          </div>
-          <!-- /.card-header -->
-          <div class="card-body">
-            <div class="row">
-              <div class="col-md-4">
-
-                <div class="form-group">
-                  <label for="civilite"> Titre civilité<span class="text-danger">*</span></label>
-                  <select id="civilite" class="form-control" formControlName="civilite"
-                          [ngClass]="{ 'is-invalid': submitted && f.civilite.errors }">
-                    <option selected="selected" value="">Selectionnez</option>
-                    <option value="1">Madame</option>
-                    <option value="2">Monsieur</option>
-
-
-                  </select>
-                  <div *ngIf="submitted && f.civilite.errors" class="invalid-feedback">
-                    <div *ngIf="f.civilite.errors.required">Champ requis</div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label for="name">Nom<span class="text-danger">*</span></label>
-                  <input formControlName="lastname" type="text" class="form-control" id="name"
-                         [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }" placeholder="Nom">
-                </div>
-                <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
-                  <div *ngIf="f.lastname.errors.required">Champ requis</div>
-                </div>
-              </div>
-
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label for="prenom">Prénom</label>
-                  <input formControlName="firstname" type="text" class="form-control" id="prenom"
-                         placeholder="Prénom">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="email">Email<span class="text-danger">*</span></label>
-                  <input formControlName="email" type="email" class="form-control" id="email"
-                         placeholder="Email">
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Sexe<span class="text-danger">*</span></label><br>
-                  <div class="icheck-primary d-inline mr-5">
-                    <input formControlName="sexe" type="radio" id="homme" [value]="'male'">
-                    <label for="homme">
-                      Homme
-                    </label>
-                  </div>
-                  <div class="icheck-primary d-inline">
-                    <input formControlName="sexe" type="radio" id="femme" [value]="'femele'">
-                    <label for="femme">
-                      Femme
-                    </label>
-                  </div>
-                </div>
-                <div *ngIf="submitted && f.sexe.errors" class="invalid-feedback">
-                  <div *ngIf="f.sexe.errors.required">Champ requis</div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="cni">CNI</label>
-                  <input formControlName="cni" type="text" class="form-control" id="cni"
-                         placeholder="CNI">
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="cnps">CNPS</label>
-                  <input formControlName="cnps" type="text" class="form-control" id="cnps"
-                         placeholder="CNPS">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Statut matrimonial<span class="text-danger">*</span></label>
-                  <select class="form-control" formControlName="matrimonial"
-                          [ngClass]="{ 'is-invalid': submitted && f.matrimonial.errors }">
-                    <option selected="selected">Sectionnez</option>
-                    <option value="celibataire">Célibataire</option>
-                    <option value="marie">Marié</option>
-
-                  </select>
-                </div>
-                <div *ngIf="submitted && f.matrimonial.errors" class="invalid-feedback">
-                  <div *ngIf="f.matrimonial.errors.required">Champ requis</div>
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="dateNaissance">Date de naissance<span
-                    class="text-danger">*</span></label>
-                  <input formControlName="dateNaissance" type="date" class="form-control"
-                         id="dateNaissance"
-                         [ngClass]="{ 'is-invalid': submitted && f.dateNaissance.errors }">
-                </div>
-                <div *ngIf="submitted && f.dateNaissance.errors" class="invalid-feedback">
-                  <div *ngIf="f.dateNaissance.errors.required">Champ requis</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Nombre d'enfant</label>
-                  <input formControlName="numberChild" type="number" value="0" class="form-control"
-                         id="name" placeholder="Nombre d'enfant">
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="photo">Photo</label>
-                  <input type="file" class="form-control" id="photo">
-                </div>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="phone">Téléphone</label>
-                  <input formControlName="phone" type="text" class="form-control" id="phone"
-                         placeholder="Téléphone">
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="Adresse">Adresse</label>
-                  <input formControlName="address" type="text" class="form-control" id="Adresse"
-                         placeholder="Adresse">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="ville">Ville</label>
-                  <input formControlName="town" type="text" class="form-control" id="ville"
-                         placeholder="Ville">
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Pays<span class="text-danger">*</span></label>
-                  <select formControlName="country" class="form-control"
-                          [ngClass]="{ 'is-invalid': submitted && f.country.errors }">
-                    <option selected="selected">Sectionnez le pays</option>
-                    <option value="gabon">Gabon</option>
-                    <option value="cameroun">Cameroun</option>
-
-                  </select>
-                </div>
-                <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
-                  <div *ngIf="f.country.errors.required">Champ requis</div>
-                </div>
-              </div>
-            </div>
-
-
-          </div>
-          <div class="card-footer">
-            <button class="btn btn-info float-right" (click)="save()">Enregistrer</button>
-          </div>
-
-          <!-- /.card-body -->
-
-        </div>
-      </form>
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Nouveau employé</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a [routerLink]="'/'">Dashbord</a></li>
+          <li class="breadcrumb-item active">Nouveau employé</li>
+        </ol>
+      </div>
     </div>
   </div>
-</div>
-<ngx-loading
-  [show]="loading"
-  [config]="{ backdropBorderRadius: '3px' }"
-></ngx-loading>
+  <!-- /.container-fluid -->
+</section>
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 mt-3">
+        <form [formGroup]="editForm">
+          <div class="card card-default">
+            <div class="card-header">
+              <h3 class="card-title">Ajouter un Nouveau employé</h3>
+
+              <div class="card-tools">
+                <button
+                  title="reduire"
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="collapse"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+                <!-- <button type="button" class="btn btn-tool" data-card-widget="remove">
+                          <i class="fas fa-times"></i>
+                        </button> -->
+              </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12">
+                  <app-upload-image (sendImage)="getImage($event)">
+                  </app-upload-image>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="civilite">
+                      Titre civilité<span class="text-danger">*</span></label
+                    >
+                    <select
+                      id="civilite"
+                      class="form-control"
+                      formControlName="civilite"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.civilite.errors
+                      }"
+                    >
+                      <option selected="selected" value="">---</option>
+                      <ng-container *ngIf="civilities">
+                        <option [value]="c.id" *ngFor="let c of civilities">
+                          {{ c.name }}
+                        </option>
+                      </ng-container>
+                    </select>
+                    <div
+                      *ngIf="submitted && f.civilite.errors"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f.civilite.errors.required">Champ requis</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="name"
+                      >Nom<span class="text-danger">*</span></label
+                    >
+                    <input
+                      formControlName="lastname"
+                      type="text"
+                      class="form-control"
+                      id="name"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.lastname.errors
+                      }"
+                      placeholder="Nom"
+                    />
+                  </div>
+                  <div
+                    *ngIf="submitted && f.lastname.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.lastname.errors.required">Champ requis</div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="prenom">Prénom</label>
+                    <input
+                      formControlName="firstname"
+                      type="text"
+                      class="form-control"
+                      id="prenom"
+                      placeholder="Prénom"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input
+                      formControlName="email"
+                      type="email"
+                      class="form-control"
+                      id="email"
+                      placeholder="Email"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="sexe"
+                      >Genre<span class="text-danger">*</span></label
+                    >
+                    <select
+                      id="sexe"
+                      class="form-control"
+                      formControlName="sexe"
+                      [ngClass]="{ 'is-invalid': submitted && f.sexe.errors }"
+                    >
+                      <option selected="selected" value="">---</option>
+                      <option [value]="GENDER.MALE">Homme</option>
+                      <option [value]="GENDER.FEMALE">Femme</option>
+                    </select>
+                    <div
+                      *ngIf="submitted && f.sexe.errors"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f.sexe.errors.required">Champ requis</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="cni">CNI</label>
+                    <input
+                      formControlName="cni"
+                      type="text"
+                      class="form-control"
+                      id="cni"
+                      placeholder="CNI"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="cnps">CNPS</label>
+                    <input
+                      formControlName="cnps"
+                      type="text"
+                      class="form-control"
+                      id="cnps"
+                      placeholder="CNPS"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="child">Nombre d'enfant</label>
+                    <input
+                      formControlName="numberChild"
+                      type="number"
+                      value="0"
+                      class="form-control"
+                      id="child"
+                      placeholder="Nombre d'enfant"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="matrimonial"
+                      >Statut matrimonial<span class="text-danger"
+                        >*</span
+                      ></label
+                    >
+                    <select
+                      id="matrimonial"
+                      class="form-control"
+                      formControlName="matrimonial"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.matrimonial.errors
+                      }"
+                    >
+                      <option selected="selected" value="">---</option>
+                      <option [value]="MARITAL.SINGLE">Célibataire</option>
+                      <option [value]="MARITAL.MARRIED">Marié</option>
+                      <option [value]="MARITAL.DIVORCE">Divorcé</option>
+                    </select>
+                  </div>
+                  <div
+                    *ngIf="submitted && f.matrimonial.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.matrimonial.errors.required">
+                      Champ requis
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="dateNaissance"
+                      >Née le :<span class="text-danger">*</span></label
+                    >
+                    <input
+                      formControlName="dateNaissance"
+                      type="date"
+                      class="form-control"
+                      id="dateNaissance"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.dateNaissance.errors
+                      }"
+                    />
+                  </div>
+                  <div
+                    *ngIf="submitted && f.dateNaissance.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.dateNaissance.errors.required">
+                      Champ requis
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="placeBirth">à</label>
+                    <input
+                      formControlName="placeBirth"
+                      type="text"
+                      class="form-control"
+                      id="placeBirth"
+                      placeholder="Lieu de naissance"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <hr />
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="phone">Téléphone</label>
+                    <input
+                      formControlName="phone"
+                      type="text"
+                      class="form-control"
+                      id="phone"
+                      placeholder="Téléphone"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="Adresse">Adresse</label>
+                    <input
+                      formControlName="address"
+                      type="text"
+                      class="form-control"
+                      id="Adresse"
+                      placeholder="Adresse"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="country"
+                      >Pays<span class="text-danger">*</span></label
+                    >
+                    <select
+                      id="country"
+                      formControlName="country"
+                      class="form-control"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.country.errors
+                      }"
+                    >
+                      <option selected="selected" value="">---</option>
+                      <ng-container *ngIf="countries">
+                        <option [value]="c.id" *ngFor="let c of countries">
+                          {{ c.name }}
+                        </option>
+                      </ng-container>
+                    </select>
+                  </div>
+                  <div
+                    *ngIf="submitted && f.country.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.country.errors.required">Champ requis</div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="region">Province/Region</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="vregionille"
+                      placeholder="rovince/Region"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="ville">Ville</label>
+                    <input
+                      formControlName="town"
+                      type="text"
+                      class="form-control"
+                      id="ville"
+                      placeholder="Ville"
+                    />
+                  </div>
+                </div>
+              </div>
+              <h4>Contrat</h4>
+
+              <hr />
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="name"
+                      >Salaire de base<span class="text-danger">*</span></label
+                    >
+                    <input
+                      formControlName="salaire"
+                      type="text"
+                      class="form-control"
+                      id="salaire"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.salaire.errors
+                      }"
+                      placeholder="Salaire de base"
+                    />
+                  </div>
+                  <div
+                    *ngIf="submitted && f.salaire.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.salaire.errors.required">Champ requis</div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="department"
+                      >Département<span class="text-danger">*</span></label
+                    >
+                    <select
+                      id="department"
+                      class="form-control"
+                      formControlName="departmentId"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.departmentId.errors
+                      }"
+                    >
+                      <option selected="selected" value="">---</option>
+                      <ng-container *ngIf="departemnts">
+                        <option [value]="d.id" *ngFor="let d of departemnts">
+                          {{ d.name }}
+                        </option>
+                      </ng-container>
+                    </select>
+                    <div
+                      *ngIf="submitted && f.departmentId.errors"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f.departmentId.errors.required">
+                        Champ requis
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="fonction"
+                      >Fonction<span class="text-danger">*</span></label
+                    >
+                    <select
+                      id="fonction"
+                      class="form-control"
+                      formControlName="fonctionId"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.fonctionId.errors
+                      }"
+                    >
+                      <option value="">---</option>
+                      <ng-container *ngIf="fonctions">
+                        <option *ngFor="let f of fonctions" [value]="f.id">
+                          {{ f.name }}
+                        </option>
+                      </ng-container>
+                    </select>
+                  </div>
+                  <div
+                    *ngIf="submitted && f.fonctionId.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.fonctionId.errors.required">Champ requis</div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div
+                  [ngClass]="
+                    contractSelect && contractSelect.term !== 0
+                      ? 'col-md-4'
+                      : 'col-md-6'
+                  "
+                >
+                  <div class="form-group">
+                    <div class="form-group">
+                      <label for="contrat"
+                        >Type de contrat<span class="text-danger"
+                          >*</span
+                        ></label
+                      >
+                      <select
+                        id="contrat"
+                        class="form-control"
+                        formControlName="contractId"
+                        [ngClass]="{
+                          'is-invalid': submitted && f.contractId.errors
+                        }"
+                      >
+                        <option value="" selected="selected">---</option>
+                        <ng-container *ngIf="contracts">
+                          <option [ngValue]="c" *ngFor="let c of contracts">
+                            {{ c.name }}
+                          </option>
+                        </ng-container>
+                      </select>
+                      <div
+                        *ngIf="submitted && f.contractId.errors"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f.contractId.errors.required">
+                          Champ requis
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  [ngClass]="
+                    contractSelect && contractSelect.term !== 0
+                      ? 'col-md-4'
+                      : 'col-md-6'
+                  "
+                >
+                  <div class="form-group">
+                    <label for="dateStart"
+                      >Date d'entrée<span class="text-danger">*</span></label
+                    >
+                    <input
+                      formControlName="dateStart"
+                      type="date"
+                      class="form-control"
+                      id="dateStart"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.dateStart.errors
+                      }"
+                      placeholder="Date d'entrée"
+                    />
+                    <div
+                      *ngIf="submitted && f.dateStart.errors"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f.dateStart.errors.required">
+                        Champ requis
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="col-md-4"
+                  *ngIf="contractSelect && contractSelect.term !== 0"
+                >
+                  <div class="form-group">
+                    <label for="dateEnd"
+                      >Date de sortie<span class="text-danger">*</span></label
+                    >
+                    <input
+                      formControlName="dateEnd"
+                      type="date"
+                      class="form-control"
+                      id="dateEnd"
+                      placeholder="Date d'entrée"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.dateEnd && f.dateEnd.errors
+                      }"
+                    />
+                    <div
+                      *ngIf="submitted && f?.dateEnd?.errors"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f?.dateEnd?.errors?.required">
+                        Champ requis
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="row my-4"
+                *ngIf="contractSelect && contractSelect.term"
+              >
+                <div class="col-md-12">
+                  <span class="alert-success alert">
+                    Ce contract a une durée valide de :
+                    {{
+                      objectContract.getTerm(
+                        contractSelect.term,
+                        contractSelect.termMeasure
+                      )
+                    }}
+                    <span *ngIf="contractSelect.test"
+                      >renouvellable {{ contractSelect.test }} fois
+                    </span>
+                  </span>
+                </div>
+              </div>
+              <h4>Accès a espace employé</h4>
+              <hr />
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <div class="custom-control custom-switch">
+                      <input
+                        (change)="getValueSpace($event)"
+                        type="checkbox"
+                        class="custom-control-input"
+                        id="customSwitch1"
+                      />
+
+                      <label class="custom-control-label" for="customSwitch1"
+                        >Accèss a espace employé?</label
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row" *ngIf="passwordCheck">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="email1">email</label>
+                    <input
+                      formControlName="email1"
+                      type="text"
+                      class="form-control"
+                      id="email1"
+                      [ngClass]="{ 'is-invalid': submitted && f.email1.errors }"
+                      placeholder="email de connexion"
+                    />
+                    <div
+                      *ngIf="submitted && f.email1.errors"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f.email1.errors.required">Champ requis</div>
+                      <div *ngIf="f.email1.errors.email">
+                        adresse email invalide
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="password">Mot de passe</label>
+
+                    <input
+                      [ngClass]="{
+                        'is-invalid': submitted && f.password.errors
+                      }"
+                      formControlName="password"
+                      type="text"
+                      class="form-control"
+                      id="password"
+                      placeholder="Mot de passe"
+                    />
+                    <div
+                      *ngIf="submitted && f.password.errors"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f.password.errors.required">Champ requis</div>
+                      <div *ngIf="f.password.errors.minlength">
+                        le mot de passe doit contenir au moins 6 carateres
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <h4>Banques</h4>
+              <hr />
+              <h4>Contact d'urgence</h4>
+              <hr />
+            </div>
+            <div class="card-footer">
+              <button
+                [disabled]="!contractSelect"
+                class="btn btn-info float-right"
+                type="button"
+                (click)="save()"
+              >
+                Enregistrer
+              </button>
+            </div>
+
+            <!-- /.card-body -->
+            <ngx-loading
+              [show]="loading"
+              [config]="{ backdropBorderRadius: '3px' }"
+            ></ngx-loading>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

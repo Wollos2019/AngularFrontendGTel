@@ -18,33 +18,44 @@
           <div class="card-body">
             <table class="table table-bordered">
               <thead>
-              <tr class="bg-dark text-white">
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Status</th>
-                <th scope="col">Action</th>
-              </tr>
+                <tr class="bg-dark text-white">
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Action</th>
+                </tr>
               </thead>
               <tbody>
-              <ng-container *ngIf="civilities && civilities.length">
-                <tr *ngFor="let a of civilities; let i = index">
-                  <th scope="row">{{ i + 1 }}</th>
-                  <td>{{ a.name }}</td>
-                  <td>
+                <ng-container *ngIf="civilities && civilities.length">
+                  <tr *ngFor="let a of civilities; let i = index">
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>{{ a.name }}</td>
+                    <td>
                       <span class="badge badge-info">
                         {{ civility.getStatus(a.status) }}</span
                       >
-                  </td>
-                  <td>actions</td>
-                </tr>
-              </ng-container>
-              <ng-container *ngIf="!civilities?.length">
-                <tr>
-                  <td colspan="4" class="text-center">
-                    Aucune données trouver
-                  </td>
-                </tr>
-              </ng-container>
+                    </td>
+                    <td>
+                      <a
+                        href="javacript:void(0)"
+                        (click)="openModalConfirm(a.id)"
+                        data-toggle="modal"
+                        title="Supprimer"
+                        type="button"
+                        class="btn btn-primary btn-light btn-sm"
+                      >
+                        <i class="icofont-ui-delete text-danger"></i>
+                      </a>
+                    </td>
+                  </tr>
+                </ng-container>
+                <ng-container *ngIf="!civilities?.length">
+                  <tr>
+                    <td colspan="4" class="text-center">
+                      Aucune données trouver
+                    </td>
+                  </tr>
+                </ng-container>
               </tbody>
             </table>
           </div>
@@ -68,6 +79,11 @@
       </div>
     </div>
   </div>
+  <app-confirm-modal (actionConfirm)="deleteC($event)"></app-confirm-modal>
+  <ngx-loading
+    [show]="loading"
+    [config]="{ backdropBorderRadius: '3px' }"
+  ></ngx-loading>
 </section>
 <div class="modal fade" id="modalDepartment">
   <div class="modal-dialog">
@@ -104,6 +120,21 @@
               </div>
             </div>
           </div>
+
+          <div class="form-group row">
+            <label for="abbreviation" class="col-form-label">
+              Abbreviation<span class="text-danger">*</span>
+            </label>
+            <div class="col-sm-10">
+              <input
+                type="text"
+                formControlName="abbreviation"
+                class="form-control"
+                id="abbreviation"
+                placeholder="Entrer l' abbreviation"
+              />
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
           <button
@@ -120,8 +151,3 @@
   </div>
   <!-- /.modal-dialog -->
 </div>
-
-<ngx-loading
-  [show]="loading"
-  [config]="{ backdropBorderRadius: '3px' }"
-></ngx-loading>

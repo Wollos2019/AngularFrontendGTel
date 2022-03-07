@@ -1,3 +1,7 @@
+import { Contract } from 'src/app/config/model/contract.model';
+import { IDepartment } from 'src/app/config/model/department.model';
+import { Fonction } from 'src/app/config/model/fonctions.model';
+
 export interface IPersonal {
   id?: number;
   lastname?: string;
@@ -10,15 +14,20 @@ export interface IPersonal {
   phone?: string;
   address?: string;
   birthday?: string;
-  country?: string;
+  countryId?: number;
   town?: string;
   status?: STATUS;
   created_at?: Date;
   update_at?: Date;
-  civility?: number;
+  civilityId?: number;
   isAdmin?: boolean;
   courriel?: string;
-  marital?: MARITAL
+  marital?: MARITAL;
+  password?: string;
+  appends?: IAppends;
+  placeBirth?: string;
+  country?: number;
+  _method?: string;
 }
 
 export class Personal implements IPersonal {
@@ -34,31 +43,59 @@ export class Personal implements IPersonal {
     public phone?: string,
     public address?: string,
     public birthday?: string,
-    public country?: string,
+    public countryId?: number,
     public town?: string,
-    public civility?: number,
+    public civilityId?: number,
     public status?: STATUS,
     public created_at?: Date,
     public update_at?: Date,
     public isAdmin?: boolean,
     public courriel?: string,
-    public marital?: MARITAL
+    public marital?: MARITAL,
+    public password?: string,
+    public appends?: IAppends,
+    public placeBirth?: string,
+    public country?: number,
+    public _method?: string
   ) {
+    this.appends?.url != appends?.url;
+  }
+
+  getStatus(status?: string): any {
+    switch (status) {
+      case 'ENABLE':
+        return { value: 'En service', class: 'badge-success' };
+        break;
+      case 'DISABLE':
+        return { value: 'DESACTIVER', class: 'badge-danger' };
+        break;
+      default:
+        break;
+    }
   }
 }
-
 export enum STATUS {
-  ENABLE = "ENABLE",
-  DISABLE = "DISABLE"
+  ENABLE = 'ENABLE',
+  DISABLE = 'DISABLE',
 }
-
 export enum MARITAL {
-  SINGLE = "SINGLE",
-  MARRIED = "MARRIED",
-  DIVORCE = 'DIVORCE'
+  SINGLE = 'SINGLE',
+  MARRIED = 'MARRIED',
+  DIVORCE = 'DIVORCE',
 }
 
 export enum GENDER {
   MALE = 'MALE',
-  FEMALE = 'FEMALE'
+  FEMALE = 'FEMALE',
+}
+export enum CONTRACT {
+  CDD = 'CDD',
+  CDI = 'CDI',
+  STAGEAIRE = 'STAGEAIRE',
+}
+
+interface IAppends {
+  url?: string;
+  name?: string;
+  contracts?: Contract[];
 }

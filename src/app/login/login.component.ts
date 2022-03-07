@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
     const body = document.getElementsByTagName('body')[0];
     body.classList.remove('sidebar-mini');
     body.classList.add('login-page');
+    body.classList.add('box');
   }
 
   ngAfterViewInit(): void {
