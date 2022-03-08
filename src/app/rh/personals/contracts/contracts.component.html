@@ -22,7 +22,7 @@
         <td>{{ c.pivot?.dateStart }}</td>
         <td>{{ c.pivot?.dateEnd }}</td>
 
-        <td></td>
+        <td><span class="badge" [ngClass]="conct.getStatus(c.pivot?.status).class"> {{conct.getStatus(c.pivot?.status).value}}</span> </td>
         <td></td>
         <td>
           <button

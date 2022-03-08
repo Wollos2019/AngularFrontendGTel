@@ -48,8 +48,8 @@ export class PersonalProfilComponent implements OnInit {
     numberChild: [0],
     dateNaissance: ['', [Validators.required]],
     civilite: [{ value: '', disabled: true }, [Validators.required]],
-    dateStart: ['', [Validators.required]],
-    dateEnd: [''],
+ //   dateStart: ['', [Validators.required]],
+    //dateEnd: [''],
     password: [''],
     email1: [''],
     placeBirth: [''],
@@ -163,9 +163,8 @@ export class PersonalProfilComponent implements OnInit {
       password,
 
       email1,
-
       placeBirth,
-      salaire,
+     
     } = this.editForm.value;
 
     this.per.address = address;
@@ -189,6 +188,8 @@ export class PersonalProfilComponent implements OnInit {
     this.per._method = 'PUT';
 
     if (this.editForm.invalid) {
+      console.log(this.editForm);
+      
       return;
     }
 

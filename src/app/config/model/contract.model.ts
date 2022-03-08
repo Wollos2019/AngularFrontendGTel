@@ -41,6 +41,19 @@ export class Contract implements IContract {
     public pivot?: IPivot
   ) {}
 
+   getStatus(status?: string): any {
+    switch (status) {
+      case 'pending':
+        return { value: 'En cours', class: 'badge-warning' };
+        break;
+      case 'closed':
+        return { value: 'DESACTIVER', class: 'badge-danger' };
+        break;
+      default:
+        break;
+    }
+  }
+
   getTerm(term?: number, termMeasure?: Measure): string {
     if (termMeasure == Measure.DAY && term !== 0) {
       return term + ' Jour(s)';

@@ -5,6 +5,7 @@ import { PersonalProfilComponent } from './personals/personal-profil/personal-pr
 import { ListPersonalComponent } from './personals/list-personal/list-personal.component';
 import { PersonalsComponent } from './personals/personals.component';
 import { PrintContractComponent } from './personals/print-contract/print-contract.component';
+import { LeaveRequestsComponent } from './leave-requests/leave-requests.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,10 @@ const routes: Routes = [
       {
         path: 'personals',
         component: PersonalsComponent,
+      },
+      {
+        path: 'leaves',
+        component: LeaveRequestsComponent,
       },
       {
         path: 'personals/list',

@@ -16,6 +16,7 @@ declare var $: any;
 export class ContractsComponent implements OnInit {
   @Input() contracts?: Contract[];
   contract!: Contract;
+  conct=new Contract();
   editForm = this.fb.group({
     salary: [null, [Validators.required]],
     departmentId: ['', [Validators.required]],
@@ -75,7 +76,7 @@ export class ContractsComponent implements OnInit {
 
   getAllContracts(): void {
     this.configService.getAllContracts('per_page=*').subscribe({
-      next: (contracts: Fonction[]) => {
+      next: (contracts: Contract[]) => {
         this.contractsData = contracts;
         this.editForm.get('contractId')?.enable();
         this.editForm.updateValueAndValidity();

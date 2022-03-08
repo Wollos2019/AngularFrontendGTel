@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { iif } from 'rxjs';
 import { Civility } from 'src/app/config/model/civility.model';
 import { Contract } from 'src/app/config/model/contract.model';
 import { Country } from 'src/app/config/model/countries.model';
@@ -120,6 +119,12 @@ export class PersonalsComponent implements OnInit {
       password,
       email1,
       placeBirth,
+      salaire,
+      dateStart,
+      dateEnd,
+      fonctionId,
+      departmentId,
+      contractId
     } = this.editForm.value;
 
     this.personal.address = address;
@@ -136,10 +141,15 @@ export class PersonalsComponent implements OnInit {
     this.personal.lastname = lastname;
     this.personal.cnps = cnps;
     this.personal.civilityId = civilite;
-
     this.personal.password = password;
-
     this.personal.placeBirth = placeBirth;
+    this.personal.salary=salaire;
+    this.personal.contractId=contractId;
+    this.personal.fonctionId=fonctionId;
+    this.personal.departmentId=departmentId;
+    this.personal.dateStart=dateStart;
+    this.personal.dateEnd=dateEnd;
+    
 
     if (this.editForm.invalid) {
       return;

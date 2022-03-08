@@ -28,6 +28,12 @@ export interface IPersonal {
   placeBirth?: string;
   country?: number;
   _method?: string;
+  salary?:number;
+  fonctionId?:number;
+  contractId?:number;
+  departmentId?:number;
+  dateStart?:Date;
+  dateEnd?:Date;
 }
 
 export class Personal implements IPersonal {
@@ -56,7 +62,13 @@ export class Personal implements IPersonal {
     public appends?: IAppends,
     public placeBirth?: string,
     public country?: number,
-    public _method?: string
+    public fonctionId?:number,
+    public departmentId?:number,
+    public salary?:number,
+    public contractId?:number,
+    public _method?: string,
+    public dateStart?:Date,
+    public dateEnd?:Date
   ) {
     this.appends?.url != appends?.url;
   }
