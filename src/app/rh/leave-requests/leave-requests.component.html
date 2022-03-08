@@ -1,26 +1,105 @@
 <section class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1>Gestion des congés</h1>
-        </div>
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a [routerLink]="'/'">Dashbord</a></li>
-            <li class="breadcrumb-item active">Gestion des congés</li>
-          </ol>
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Gestion des congés</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a [routerLink]="'/'">Dashbord</a></li>
+          <li class="breadcrumb-item active">Gestion des congés</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+</section>
+
+<section class="content" *ngIf="!loading">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">gestion des congés</div>
+          <div class="card-body">
+            <div class="row justify-content-center">
+              <div class="col-6">
+                <div class="btn-group" role="group" aria-label=" basic holiday">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="prev()"
+                    [disabled]="currentMonth === 1"
+                  >
+                    < Précedent
+                  </button>
+                  <button type="button" class="btn btn-default">
+                    {{ getMonthString(currentMonth) | uppercase }}
+                    {{ currentYear }}
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="next()"
+                    [disabled]="currentMonth === 12"
+                  >
+                    Suivant >
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="row my-3" *ngIf="nombreDay && nombreDay.length">
+              <div class="col-12">
+                <table class="table table-bordered">
+                  <thead>
+                    <th *ngFor="let day of nombreDay; let i = index">
+                      {{ nombreDay[i] }}
+                    </th>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let u of users">
+                      <td>{{ u.name }}</td>
+                      <ng-container
+                        *ngFor="let day of nombreDay; let i = index"
+                      >
+                        <td
+                          *ngIf="i > 0"
+                          [ngClass]="getHoli(currentMonth, day)"
+                          (click)="getUser(day, u)"
+                        ></td>
+                      </ng-container>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <!-- /.container-fluid -->
-  </section>
-
-<section class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-
-            </div>
-        </div>
-    </div>
+  </div>
 </section>
+
+<div class="modal fade" id="modalLeave">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Ajouter un congé</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="card-body">icicicicicii</div>
+    </div>
+  </div>
+</div>
+<ngx-loading
+  [show]="loading"
+  [config]="{ backdropBorderRadius: '3px' }"
+></ngx-loading>
