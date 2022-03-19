@@ -169,7 +169,7 @@ export class ConfigService {
   /**
    * GESTION DES SESSIONS
    */
-  getAllSessions(params = ''): Observable<Session[] | null | undefined> {
+  getAllSessions(params = ''): Observable<any> {
     if (params) {
       return this.httpClient.get<Session[]>(
         `${this.URL_CONFIG}sessions?${params}`

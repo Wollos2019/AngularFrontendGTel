@@ -6,6 +6,7 @@ import { ListPersonalComponent } from './personals/list-personal/list-personal.c
 import { PersonalsComponent } from './personals/personals.component';
 import { PrintContractComponent } from './personals/print-contract/print-contract.component';
 import { LeaveRequestsComponent } from './leave-requests/leave-requests.component';
+import { PresenceComponent } from './presence/presence.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
       {
         path: 'leaves',
         component: LeaveRequestsComponent,
+      },
+      {
+        path: 'presences',
+        component: PresenceComponent,
       },
       {
         path: 'personals/list',

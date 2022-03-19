@@ -9,6 +9,7 @@ import { PersonalProfilComponent } from './personals/personal-profil/personal-pr
 import { ContractsComponent } from './personals/contracts/contracts.component';
 import { PrintContractComponent } from './personals/print-contract/print-contract.component';
 import { LeaveRequestsComponent } from './leave-requests/leave-requests.component';
+import { PresenceComponent } from './presence/presence.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { LeaveRequestsComponent } from './leave-requests/leave-requests.componen
     ContractsComponent,
     PrintContractComponent,
     LeaveRequestsComponent,
+    PresenceComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [CommonModule, RhRoutingModule, SharedModule],
