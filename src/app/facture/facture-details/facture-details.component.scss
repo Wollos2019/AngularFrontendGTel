@@ -1,0 +1,36 @@
+body{
+    background: #000;
+}
+
+.padding{
+    padding: 2rem !important;
+}
+
+.card{
+    margin-bottom: 30px;
+    border:none;
+    box-shadow: 0px 1px 2px 1px rgba(154,154,204,0.22);
+}
+
+.card-haeder{
+    background-color: #fff;
+    border-bottom: 1px solid #e6e6f2;
+}
+
+h3{
+    font-size: 20px;
+}
+
+h5{
+    font-size: 15px;
+    line-height: 26px;
+    color: #3d405c;
+}
+
+.text-dark{
+    color: #3d405c !important;
+}
+
+.logo img {
+    height: 60px;
+}

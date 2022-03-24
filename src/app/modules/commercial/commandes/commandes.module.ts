@@ -6,6 +6,8 @@ import { CommandesComponent } from 'src/app/Commercial/commandes/commandes.compo
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CommandeService } from 'src/app/Commercial/commandes/services/commande.service';
 import { FactureComponent } from 'src/app/facture/facture.component';
+import { NgxPrintModule } from 'ngx-print';
+import { FactureDetailsComponent } from 'src/app/facture/facture-details/facture-details.component';
 
 
 @NgModule({
@@ -16,6 +18,7 @@ import { FactureComponent } from 'src/app/facture/facture.component';
   imports: [
     CommonModule,
     SharedModule,
+    NgxPrintModule,
     CommandesRoutingModule
   ],
   providers:[CommandeService]

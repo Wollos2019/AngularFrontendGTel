@@ -20,6 +20,8 @@ import { TokenInterceptorService } from './services/interceptors/token-intercept
 import { DashboardService } from './services/dashboard.service';
 import { ClientsModule } from './modules/commercial/clients/clients.module';
 import { ProduitsModule } from './modules/commercial/produits/produits.module';
+import { NgxPrintModule } from 'ngx-print';
+import { FactureDetailsComponent } from './facture/facture-details/facture-details.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -29,7 +31,8 @@ import { ProduitsModule } from './modules/commercial/produits/produits.module';
     LoginComponent,
     MainAppComponent,
     NavComponent,
-    DashboardComponent
+    DashboardComponent,
+    FactureDetailsComponent
     
   ],
   imports: [
@@ -40,6 +43,7 @@ import { ProduitsModule } from './modules/commercial/produits/produits.module';
     //RouterModule.forRoot([]),
     ModalModule.forRoot(),
     BrowserModule,
+    NgxPrintModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 5000,

@@ -6,6 +6,14 @@ import { User } from '../models/user.model';
 import { jsPDF } from "jspdf";
 import html2canvas from 'html2canvas';
 import { environment } from 'src/environments/environment';
+import { CommandeDetaisService } from '../Commercial/commandes/services/commande-detais.service';
+import jsPDFInvoiceTemplate, { OutputType } from 'jspdf-invoice-template';
+import { IProduct } from '../product/product';
+import { Observable } from 'rxjs';
+import { FactureService } from './services/facture.service';
+import { IFacture } from './ifacture';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-facture',
@@ -18,11 +26,22 @@ export class FactureComponent implements OnInit {
   @ViewChild('content', {static:false}) el!:ElementRef;
   //@ViewChild('content') content!:ElementRef;
   generatePdf(){
-    let pdf = new jsPDF('l', 'pt', 'a4');
+    let pdf = new jsPDF('l', 'pt', 'letter');
     pdf.html(this.el.nativeElement, {
       callback:(pdf) => {
         pdf.output("dataurlnewwindow");
       }
+    });
+  }
+
+  public convertToPDF() {
+    html2canvas(document.getElementById("htmlData")!).then(canvas => {
+      const contentDataURL = canvas.toDataURL('image/png');
+      let pdf = new jsPDF('p', 'mm', 'a4');
+      var width = pdf.internal.pageSize.getWidth();
+      var height = canvas.height * width / canvas.width;
+      pdf.addImage(contentDataURL, 'PNG', 1, 1, width, height);
+      pdf.save('output.pdf');
     });
   }
 
@@ -47,10 +66,10 @@ export class FactureComponent implements OnInit {
     let DATA: any = document.getElementById('htmlData');
     html2canvas(DATA).then((canvas) => {
       let fileWidth = 208;
-      let fileHeight = (canvas.height * fileWidth) / canvas.width;
+      let fileHeight = ((canvas.height * fileWidth) / canvas.width);
       const FILEURI = canvas.toDataURL('image/png');
       let PDF = new jsPDF('p', 'mm', 'a4');
-      let position = 0;
+      let position = 5;
       PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
       PDF.save('angular-demo.pdf');
     });
@@ -58,40 +77,38 @@ export class FactureComponent implements OnInit {
 
   currentUser! : User;
   public products = [] as any;
-  
+  public orders = [] as any;
+  public totals = [] as any;
   public amount = '' as any;
-  public prices = [20000, 50000];
-  public totals = [20000, 50000];
-  public montantT = this.prices[0] + this.prices[1];
-  public rabais = (this.montantT * 20) / 100;
-  public tva = ((this.montantT - this.rabais) * 18) / 100;
-  public totalN = this.montantT - this.rabais + this.tva;
+  public montantT = 0;
+  public rabais = 0;
+  public tva = 0;
+  public totalN = 0;
 
-  constructor(private service : ProductService,
-    private authenticationService : AuthServiceService, private http: HttpClient ) {
+  constructor(private service : ProductService, private serviceD : CommandeDetaisService,
+    private authenticationService : AuthServiceService, private http: HttpClient,
+    private serviceFac : FactureService, private router : Router ) {
       this.authenticationService.user.subscribe(user => this.currentUser = user);
      }
 
   ngOnInit(): void {
     //this.getList();
-    this.getAmount();
-    for(var val of this.products){
-      let i=0;
-      this.totals[i] = (1 * this.prices[i]);
-    }
-     console.log(this.totals);
+    this.getFacture();
+    //this.getTotalAmount();
   }
 
   getList () {
     this.service.list()
-      .subscribe(response => this.products = response);       
+      .subscribe((data:IProduct[]) => this.products = data);      
   }
 
-  getAmount () {
-    
-    return this.http.get<any>(`${this.URL_COMMER}commandeDetails`)
-    .subscribe(response => this.products = response);
+  getFacture () {
+    this.serviceFac.list()
+    .subscribe((data:IFacture[]) => this.orders = data);
   }
 
+  getDetails(order:IFacture) {
+    this.router.navigate(['/commercial/factures/'+ order.id]);
+  }
 
 }

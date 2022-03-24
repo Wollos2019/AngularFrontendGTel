@@ -20,37 +20,35 @@
             <td>{{order.nomClient}}</td>
             <td>
               <!-- <button type="button" class="btn btn-info mr-1" (click)="openModal(template, order)">Modifier</button> -->
-              <button type="button" class="btn btn-info mr-1" (click)="modifier()">Facturer</button>
+              <button type="button" class="btn btn-info mr-1" (click)="openModal(template,order)">Facturer</button>
               <!-- <button type="button" class="btn btn-danger" (click)="delete(order)">Supprimer</button> -->
             </td>
+
+            <ng-template #template>
+              <div class="modal-header">
+                <h4 class="modal-title pull-left">TVA et Reduction</h4>
+                <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+                  <span aria-hidden="true" class="visually-hidden">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">                
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <input type="checkbox" aria-label="Checkbox for following text input" (click)="checked(order)" [formControl]="checkbox">
+                      </div>
+                      <span class="input-group-text" id="basic-addon3">Inclure la TVA</span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="Input1">Pourcentage de la réduction</label>
+                    <input type="number" class="form-control" placeholder="Pourcentage de la réduction" [formControl]="reduction">
+                  </div>
+                <button type="button" class="btn btn-primary mb-2" (click)="saveOrder(order)" >Valider</button>
+              </div>
+            </ng-template>
+
           </tr>
         </tbody>
     </table>
-    
-      
-    <ng-template #template>
-      <div class="modal-header">
-        <h4 class="modal-title pull-left">{{modalTitle}}</h4>
-        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
-          <span aria-hidden="true" class="visually-hidden">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label for="exampleInputEmail1">Product Name</label>
-          <input type="text" class="form-control" placeholder="Enter Product Name" [formControl]="name">
-          <small *ngIf="name.errors?.['required'] && showError"><b> *Name is required.</b></small>
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Product Description</label>
-          <input type="text" class="form-control" placeholder="Enter Product Description" [formControl]="description">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Product Price</label>
-          <input type="number" class="form-control" placeholder="Enter Product Price" [formControl]="price">
-        </div>
-        <button type="button" class="btn btn-primary mb-2">{{btnTitle}}</button>
-      </div>
-    </ng-template>
-
 </div>

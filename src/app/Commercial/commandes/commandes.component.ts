@@ -6,6 +6,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CommandeService } from './services/commande.service';
 import { Icommande } from './commandes';
 import { Router } from '@angular/router';
+import { IFacture } from 'src/app/facture/ifacture';
+import { FactureService } from 'src/app/facture/services/facture.service';
 
 @Component({
   selector: 'app-commandes',
@@ -16,10 +18,13 @@ export class CommandesComponent implements OnInit {
 
   public contenus : any;
   public orders = [] as any;
+  public invoice = <IFacture>{};
   public selectedOrder = <Icommande>{};
   public modalTitle = '';
   public btnTitle = '';
   public name = new FormControl('', Validators.required);
+  public checkbox = new FormControl('', Validators.required);
+  public reduction = new FormControl('', Validators.required);
   
   public description = new FormControl('', Validators.required);
   public price = new FormControl('', Validators.required);
@@ -29,9 +34,9 @@ export class CommandesComponent implements OnInit {
 
   constructor(
     private service: CommandeService,
+    private serviceFac: FactureService,
     private modalService: BsModalService,
-    private router : Router,
-    private http: HttpClient
+    private router : Router
   ) {}
 
   openModal(template: TemplateRef<any>, order?: Icommande) {
@@ -59,10 +64,19 @@ export class CommandesComponent implements OnInit {
     
   }
 
-  modifier() {
-    this.router.navigate(['/commercial/factures']);
+  saveOrder(order:Icommande) {
+    this.invoice.nomClient = order.nomClient;
+    this.invoice.idClient = order.idClient;
+    this.invoice.idCommande = order.id;
+    this.serviceFac.add(this.invoice).subscribe(()=>{
+      this.router.navigate(['/commercial/factures']);
+    });
+    console.log(order.nomClient);    
   }
-  
+
+  checked(order:Icommande) {
+    order.tvaAccountable = true;
+  }
 
   // insertProduct() {
   //   this.service.add(this.products).subscribe((response) => {

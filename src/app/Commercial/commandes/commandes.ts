@@ -1,7 +1,15 @@
+import { IProduct } from "src/app/product/product";
+
 export interface Icommande {
-    id : String;
+    id : string;
     date : Date;
-    contenu : String;
-    idClient : String;
-    nomClient : String;
+    contenu : string;
+    appends : IAppends;
+    idClient : number;
+    nomClient : string;
+    tvaAccountable : boolean;
+}
+
+interface IAppends{
+    products:IProduct;
 }

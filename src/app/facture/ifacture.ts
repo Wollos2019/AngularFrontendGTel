@@ -1,6 +1,6 @@
 export interface IFacture {
     id : number;
-    date : Date;
-    referenceId : String;
-    montant : number
+    nomClient : string;
+    idClient : number;
+    idCommande : string;
 }
