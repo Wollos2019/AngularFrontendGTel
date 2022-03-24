@@ -5,8 +5,14 @@
         <div class="card">
           <div class="card-header">
             <h1 class="card-title">Départements/Services</h1>
-            <button class="btn btn-info float-right" type="button" data-toggle="modal"
-              data-target="#modalDepartment">Nouveau</button>
+            <button
+              class="btn btn-info float-right"
+              type="button"
+              data-toggle="modal"
+              data-target="#modalDepartment"
+            >
+              Nouveau
+            </button>
           </div>
           <!-- /.card-header -->
           <div class="card-body">
@@ -24,13 +30,30 @@
                   <tr *ngFor="let a of departments; let i = index">
                     <th scope="row">{{ i + 1 }}</th>
                     <td>{{ a.name }}</td>
-                    <td> <span class="badge badge-info "> {{a.appends?.countEmployee}}</span></td>
                     <td>
-                      <a title="liste des employés" class="btn btn-light btn-sm mr-1" type="button" [routerLink]="['/config/departments',a.id,'employees']">
+                      <span class="badge badge-info">
+                        {{ a.appends?.countEmployee }}</span
+                      >
+                    </td>
+                    <td>
+                      <a
+                        title="liste des employés"
+                        class="btn btn-light btn-sm mr-1"
+                        type="button"
+                        [routerLink]="[
+                          '/config/departments',
+                          a.id,
+                          'employees'
+                        ]"
+                      >
                         <i class="icofont-users size-18 text-primary"></i>
                       </a>
-                     
-                      <button title="voir" type="button" class="btn btn-primary btn-light btn-sm">
+
+                      <button
+                        title="voir"
+                        type="button"
+                        class="btn btn-primary btn-light btn-sm"
+                      >
                         <i class="icofont-ui-delete text-danger"></i>
                       </button>
                     </td>
@@ -38,7 +61,9 @@
                 </ng-container>
                 <ng-container *ngIf="!departments?.length">
                   <tr>
-                    <td colspan="4" class=" text-center">Aucune données trouver</td>
+                    <td colspan="4" class="text-center">
+                      Aucune données trouver
+                    </td>
                   </tr>
                 </ng-container>
               </tbody>
@@ -47,15 +72,18 @@
           <!-- /.card-body -->
           <div class="card-footer clearfix">
             <ul class="pagination pagination-sm m-0 float-right">
-              <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">&laquo;</a>
+              </li>
               <li class="page-item"><a class="page-link" href="#">1</a></li>
 
-              <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">&raquo;</a>
+              </li>
             </ul>
           </div>
         </div>
         <!-- /.card -->
-
 
         <!-- /.card -->
       </div>
@@ -67,30 +95,45 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Ajouter un nouveau département</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <form class="form-horizontal" [formGroup]="editForm">
         <div class="modal-body">
-
           <div class="form-group row">
-            <label for="nom" class=" col-form-label">
-              Nom<span class="text-danger">*</span> </label>
+            <label for="nom" class="col-form-label">
+              Nom<span class="text-danger">*</span>
+            </label>
             <div class="col-sm-10">
-              <input type="text" formControlName="name" class="form-control" id="nom" placeholder="Entrer le nom"
-                [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+              <input
+                type="text"
+                formControlName="name"
+                class="form-control"
+                id="nom"
+                placeholder="Entrer le nom"
+                [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+              />
 
               <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
                 <div *ngIf="f.name.errors.required">Champ requis</div>
               </div>
             </div>
           </div>
-
         </div>
-        <div class="modal-footer ">
-
-          <button type="button" class="btn btn-primary btn-sm float-right" (click)="save()">Enregistrer</button>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-primary btn-sm float-right"
+            (click)="save()"
+          >
+            Enregistrer
+          </button>
         </div>
       </form>
     </div>
@@ -99,4 +142,7 @@
   <!-- /.modal-dialog -->
 </div>
 
-<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+<ngx-loading
+  [show]="loading"
+  [config]="{ backdropBorderRadius: '3px' }"
+></ngx-loading>

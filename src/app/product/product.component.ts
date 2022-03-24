@@ -1,11 +1,11 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { ProductService } from '../services/product.service';
-import { IProduct } from './product';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import {Component, OnInit, TemplateRef} from '@angular/core';
+import {ProductService} from '../services/product.service';
+import {IProduct} from './product';
+import {BsModalService, BsModalRef} from 'ngx-bootstrap/modal';
 
-import { FormControl, Validators } from '@angular/forms';
-import { User } from '../models/user.model';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {FormControl, Validators} from '@angular/forms';
+import {User} from '../models/user.model';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Component({
   selector: 'app-product',
@@ -28,9 +28,9 @@ export class ProductComponent implements OnInit {
   constructor(
     private service: ProductService,
     private modalService: BsModalService,
-
     private http: HttpClient
-  ) {}
+  ) {
+  }
 
   openModal(template: TemplateRef<any>, product?: IProduct) {
     if (product) {

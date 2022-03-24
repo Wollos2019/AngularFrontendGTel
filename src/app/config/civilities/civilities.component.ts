@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Civility } from '../model/civility.model';
-import { Department } from '../model/department.model';
 import { ConfigService } from '../services/config.service';
 declare var $: any;
+
 @Component({
   selector: 'app-civilities',
   templateUrl: './civilities.component.html',
@@ -14,7 +14,7 @@ declare var $: any;
 export class CivilitiesComponent implements OnInit {
   editForm = this.fb.group({
     name: [null, [Validators.required]],
-    abbreviation:[null],
+    abbreviation: [null],
     description: [null],
   });
   submitted = false;
@@ -31,9 +31,11 @@ export class CivilitiesComponent implements OnInit {
   ngOnInit(): void {
     this.getAllCivilities();
   }
+
   get f(): any {
     return this.editForm?.controls;
   }
+
   save(): void {
     this.submitted = true;
 
@@ -42,10 +44,10 @@ export class CivilitiesComponent implements OnInit {
     }
     this.submitted = false;
     console.log(this.editForm.value);
-    const { name, description,abbreviation } = this.editForm.value;
+    const { name, description, abbreviation } = this.editForm.value;
     this.civility.description = description;
     this.civility.name = name;
-    this.civility.abbreviation=abbreviation;
+    this.civility.abbreviation = abbreviation;
     this.loading = true;
     this.configService.createCivility(this.civility).subscribe({
       next: () => {
@@ -86,44 +88,35 @@ export class CivilitiesComponent implements OnInit {
     });
   }
 
-  openModalConfirm(id?:number):void{
-    this.civilityId=id;
+  openModalConfirm(id?: number): void {
+    this.civilityId = id;
     $('#confirm').modal('show');
   }
-  deleteC(ev:boolean):void{
-    this.loading=true;
-    if(ev===true){
+  deleteC(ev: boolean): void {
+    this.loading = true;
+    if (ev === true) {
       $('#confirm').modal('hide');
       console.log(this.civilityId);
-      
-      this.configService.deleteCivility(Number(this.civilityId)).subscribe(
-        {
-          next:()=>{
-            this.toastr.success('Suppression effectué !!');
-            this.loading=false;
-            this.getAllCivilities();
-          },
-          error:(responseError:HttpErrorResponse)=>{
-            this.loading=false;
-            console.log(responseError);
-            if(responseError.error.code==409){
-              this.toastr.error(
-                responseError.error.errors,
-                'Error'
-              );
-            }else{
-              this.toastr.error(
-                "Une Erreur c'est produite l'hors de la suppression",
-                'Error'
-              );
-            }
-            
-           
-           
+
+      this.configService.deleteCivility(Number(this.civilityId)).subscribe({
+        next: () => {
+          this.toastr.success('Suppression effectué !!');
+          this.loading = false;
+          this.getAllCivilities();
+        },
+        error: (responseError: HttpErrorResponse) => {
+          this.loading = false;
+          console.log(responseError);
+          if (responseError.error.code == 409) {
+            this.toastr.error(responseError.error.errors, 'Error');
+          } else {
+            this.toastr.error(
+              "Une Erreur c'est produite l'hors de la suppression",
+              'Error'
+            );
           }
-        }
-      );
+        },
+      });
     }
-    
   }
 }

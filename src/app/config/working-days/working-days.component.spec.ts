@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { WorkingDaysComponent } from './working-days.component';
+import {WorkingDaysComponent} from './working-days.component';
 
 describe('WorkingDaysComponent', () => {
   let component: WorkingDaysComponent;
@@ -8,9 +8,9 @@ describe('WorkingDaysComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WorkingDaysComponent ]
+      declarations: [WorkingDaysComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

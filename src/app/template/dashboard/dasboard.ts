@@ -1,4 +1,5 @@
 export interface IDashboard{
-    countDepartment?:number
-    countEmployee?:number
+    countDepartment?:number;
+    countEmployee?:number;
+    countWorkingDay?:number;
 }

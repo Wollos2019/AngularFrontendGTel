@@ -4,6 +4,7 @@ import { MainAppComponent } from '../template/main-app/main-app.component';
 import { BanksComponent } from './banks/banks.component';
 import { CaterogiesComponent } from './caterogies/caterogies.component';
 import { CivilitiesComponent } from './civilities/civilities.component';
+import { ContratComponent } from './contrat/contrat.component';
 import { CountriesComponent } from './countries/countries.component';
 import { DepartmentComponent } from './department/department.component';
 import { ListUserDeparmentComponent } from './department/list-user-deparment/list-user-deparment.component';
@@ -76,6 +77,10 @@ const routes: Routes = [
       {
         path: 'regions',
         component: RegionsComponent,
+      },
+      {
+        path: 'contracts',
+        component: ContratComponent,
       },
     ],
   },

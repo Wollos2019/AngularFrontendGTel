@@ -10,24 +10,24 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-
-  @ViewChild('content', {static:false}) el!:ElementRef;
+  @ViewChild('content', { static: false }) el!: ElementRef;
   authenticated = false;
 
-  constructor(private authService:AuthServiceService, private http:HttpClient, private router:Router) { }
+  constructor(
+    private authService: AuthServiceService,
+    private http: HttpClient,
+    private router: Router
+  ) {}
   title = 'AngFront';
 
   ngOnInit(): void {
-      Emitters.authEmitter.subscribe(
-        (auth:boolean) => {
-          this.authenticated = auth;
-          
-        }
-      );
+    Emitters.authEmitter.subscribe((auth: boolean) => {
+      this.authenticated = auth;
+    });
   }
 
   logout(): void {
     this.authService.logout();
-    this.authenticated = false; 
+    this.authenticated = false;
   }
 }

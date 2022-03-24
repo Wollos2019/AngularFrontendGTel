@@ -8,7 +8,7 @@ import { UploadImageComponent } from './upload-image/upload-image.component';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 
 @NgModule({
-  declarations: [TruncatePipe,UploadImageComponent, ConfirmModalComponent],
+  declarations: [TruncatePipe, UploadImageComponent, ConfirmModalComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -22,6 +22,13 @@ import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
       tertiaryColour: '#ffffff',
     }),
   ],
-  exports: [ConfirmModalComponent,UploadImageComponent,ReactiveFormsModule, FormsModule, NgxLoadingModule, TruncatePipe],
+  exports: [
+    ConfirmModalComponent,
+    UploadImageComponent,
+    ReactiveFormsModule,
+    FormsModule,
+    NgxLoadingModule,
+    TruncatePipe,
+  ],
 })
 export class SharedModule {}

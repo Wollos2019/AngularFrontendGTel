@@ -7,27 +7,30 @@ import { IDashboard } from './dasboard';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
   data!: IDashboard;
 
-  constructor(private dashboradService:DashboardService,private toarst:ToastrService) { }
+  constructor(
+    private dashboradService: DashboardService,
+    private toarst: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.getData();
   }
 
-  getData():void{
+  getData(): void {
     this.dashboradService.getDashboard().subscribe({
-      next:(response:IDashboard)=>{
-        this.data=response;
+      next: (response: IDashboard) => {
+        this.data = response;
         console.log(this.data);
-        
-      },error:(error:HttpErrorResponse)=>{
+      },
+      error: (error: HttpErrorResponse) => {
         console.log(error);
-        this.toarst.error('une erreur c\'est produite','Error');
-      }
-    })
+        this.toarst.error("une erreur c'est produite", 'Error');
+      },
+    });
   }
 }

@@ -6,20 +6,23 @@ import { SharedModule } from '../shared/shared.module';
 import { RhService } from './services/rh.service';
 import { ListPersonalComponent } from './personals/list-personal/list-personal.component';
 import { PersonalProfilComponent } from './personals/personal-profil/personal-profil.component';
-
+import { ContractsComponent } from './personals/contracts/contracts.component';
+import { PrintContractComponent } from './personals/print-contract/print-contract.component';
+import { LeaveRequestsComponent } from './leave-requests/leave-requests.component';
+import { PresenceComponent } from './presence/presence.component';
 
 @NgModule({
   declarations: [
     PersonalsComponent,
     ListPersonalComponent,
-    PersonalProfilComponent
+    PersonalProfilComponent,
+    ContractsComponent,
+    PrintContractComponent,
+    LeaveRequestsComponent,
+    PresenceComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [
-    CommonModule,
-    RhRoutingModule,
-    SharedModule,
-  ],
-  providers:[RhService]
+  imports: [CommonModule, RhRoutingModule, SharedModule],
+  providers: [RhService],
 })
 export class RhModule {}

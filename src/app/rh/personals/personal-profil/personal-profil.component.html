@@ -7,118 +7,220 @@
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a [routerLink]="'/'">Dashbord</a></li>
-          <li class="breadcrumb-item "><a [routerLink]="'/rh/personals/list'"> liste des employés</a></li>
-          <li class="breadcrumb-item active">{{personal?personal.id:''}}</li>
+          <li class="breadcrumb-item">
+            <a [routerLink]="'/rh/personals/list'"> liste des employés</a>
+          </li>
+          <li class="breadcrumb-item active">
+            {{ personal ? personal.id : "" }}
+          </li>
         </ol>
       </div>
     </div>
-  </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.container-fluid -->
 </section>
+<form [formGroup]="editForm">
+  <section class="content" *ngIf="personal">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-3">
+          <!-- Profile Image -->
+          <div class="card card-primary card-outline">
+            <div class="card-body box-profile">
+              <div class="text-center">
+                <img
+                  class="profile-user-img img-fluid img-circle"
+                  [src]="
+                    personal.appends?.url
+                      ? personal.appends?.url
+                      : images.profil
+                  "
+                  alt="User profile picture"
+                />
+              </div>
 
-<section class="content" *ngIf="personal">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-3">
+              <h3 class="profile-username text-center">
+                {{ personal.appends?.name }}
+              </h3>
 
-        <!-- Profile Image -->
-        <div class="card card-primary card-outline">
-          <div class="card-body box-profile">
-            <div class="text-center">
-              <img class="profile-user-img img-fluid img-circle"
-                [src]="personal.appends?.url?personal.appends?.url:images.profil" alt="User profile picture">
+              <!-- <p class="text-muted text-center">{{ personal.fonctionId }}</p> -->
+
+              <ul class="list-group list-group-unbordered mb-3">
+                <li class="list-group-item">
+                  <b>Matricule:</b>
+                  <a class="float-right text-muted">GBT00{{ personal.id }}</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Status</b>
+                  <a class="float-right">
+                    <span
+                      class="badge"
+                      [ngClass]="per.getStatus(personal.status)?.class"
+                      >{{ per.getStatus(personal.status)?.value }}</span
+                    >
+                  </a>
+                </li>
+                <li class="list-group-item">
+                  <b>Membre depuis:</b>
+                  <a class="float-right">{{
+                    personal.created_at | date: "dd/mm/yyyy"
+                  }}</a>
+                </li>
+              </ul>
             </div>
-
-            <h3 class="profile-username text-center">{{personal.appends?.name}}</h3>
-
-            <p class="text-muted text-center">{{personal.fonction}}</p>
-
-            <ul class="list-group list-group-unbordered mb-3">
-              <li class="list-group-item">
-                <b>Matricule:</b> <a class="float-right text-muted ">GBT00{{personal.id}}</a>
-              </li>
-              <li class="list-group-item">
-                <b>Status</b> <a class="float-right">
-                  <span class="badge"
-                    [ngClass]="per.getStatus(personal.status)?.class">{{per.getStatus(personal.status)?.value}}</span>
-                </a>
-              </li>
-              <li class="list-group-item">
-                <b>Membre depuis:</b> <a class="float-right">{{personal.dateStart}}</a>
-              </li>
-            
-            </ul>
+            <!-- /.card-body -->
           </div>
-          <!-- /.card-body -->
+          <!-- /.card -->
+
+          <!-- /.card -->
         </div>
-        <!-- /.card -->
+        <!-- /.col -->
+        <div class="col-md-9">
+          <div class="card card-primary card-outline card-outline-tabs">
+            <div class="card-header p-0 border-bottom-0">
+              <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+                <li class="nav-item">
+                  <a
+                    class="nav-link active"
+                    id="custom-tabs-one-info-tab"
+                    data-toggle="pill"
+                    href="#custom-tabs-one-info"
+                    role="tab"
+                    aria-controls="custom-tabs-one-info"
+                    aria-selected="true"
+                    ><i class="icofont-info"></i> Informations</a
+                  >
+                </li>
 
-        <!-- /.card -->
-      </div>
-      <!-- /.col -->
-      <div class="col-md-9">
-        <div class="card card-primary card-outline card-outline-tabs">
-          <div class="card-header p-0 border-bottom-0">
-            <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
-              <li class="nav-item">
-                <a class="nav-link active" id="custom-tabs-one-info-tab" data-toggle="pill" href="#custom-tabs-one-info"
-                  role="tab" aria-controls="custom-tabs-one-info" aria-selected="true"><i class="icofont-info"></i>
-                  Informations</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" id="custom-tabs-one-paie-tab" data-toggle="pill" href="#custom-tabs-one-paie"
-                  role="tab" aria-controls="custom-tabs-one-paie" aria-selected="false"><i
-                    class="icofont-history"></i>Historique de paiement</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" id="custom-tabs-one-conges-tab" data-toggle="pill" href="#custom-tabs-one-conges"
-                  role="tab" aria-controls="custom-tabs-one-conges" aria-selected="false"><i
-                    class="icofont-calendar"></i>gestion des congés</a>
-              </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    id="custom-tabs-one-contrat-tab"
+                    data-toggle="pill"
+                    href="#custom-tabs-one-contrat"
+                    role="tab"
+                    aria-controls="custom-tabs-one-contrat"
+                    aria-selected="false"
+                    ><i class="icofont-notebook"></i>Contrats</a
+                  >
+                </li>
 
-            </ul>
-          </div>
-          <div class="card-body">
-            <div class="tab-content" id="custom-tabs-four-tabContent">
-              <div class="tab-pane fade show active" id="custom-tabs-one-info" role="tabpanel"
-                aria-labelledby="custom-tabs-one-info-tab">
-                <form [formGroup]="editForm">
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    id="custom-tabs-one-paie-tab"
+                    data-toggle="pill"
+                    href="#custom-tabs-one-paie"
+                    role="tab"
+                    aria-controls="custom-tabs-one-paie"
+                    aria-selected="false"
+                    ><i class="icofont-history"></i>Historique de paiement</a
+                  >
+                </li>
+                <li class="nav-item" role="list">
+                  <a
+                    class="nav-link"
+                    id="custom-tabs-one-conges-tab"
+                    data-toggle="pill"
+                    href="#custom-tabs-one-conges"
+                    role="tab"
+                    aria-controls="custom-tabs-one-conges"
+                    aria-selected="false"
+                    ><i class="icofont-calendar"></i>gestion des congés</a
+                  >
+                </li>
+
+                <li class="nav-item" role="list">
+                  <a
+                    class="nav-link"
+                    id="custom-tabs-one-badge-tab"
+                    data-toggle="pill"
+                    href="#custom-tabs-one-badge"
+                    role="tab"
+                    aria-controls="custom-tabs-one-badge"
+                    aria-selected="false"
+                    ><i class="icofont-badge"></i>Badge</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="card-body">
+              <div class="tab-content" id="custom-tabs-four-tabContent">
+                <div
+                  class="tab-pane fade show active"
+                  id="custom-tabs-one-info"
+                  role="tabpanel"
+                  aria-labelledby="custom-tabs-one-info-tab"
+                >
                   <div class="row">
                     <div class="col-md-4">
-
                       <div class="form-group">
-                        <label for="civilite"> Titre civilité<span class="text-danger">*</span></label>
-                        <select id="civilite" class="form-control" formControlName="civilite"
-                          [ngClass]="{ 'is-invalid': submitted && f.civilite.errors }">
+                        <label for="civilite">
+                          Titre civilité<span class="text-danger"
+                            >*</span
+                          ></label
+                        >
+                        <select
+                          id="civilite"
+                          class="form-control"
+                          formControlName="civilite"
+                          [ngClass]="{
+                            'is-invalid': submitted && f.civilite.errors
+                          }"
+                        >
                           <option selected="selected" value="">---</option>
                           <ng-container *ngIf="civilities">
-                            <option [value]="c.id" *ngFor="let c of civilities">{{c.name}}</option>
+                            <option [value]="c.id" *ngFor="let c of civilities">
+                              {{ c.name }}
+                            </option>
                           </ng-container>
-
-
-
-
                         </select>
-                        <div *ngIf="submitted && f.civilite.errors" class="invalid-feedback">
-                          <div *ngIf="f.civilite.errors.required">Champ requis</div>
+                        <div
+                          *ngIf="submitted && f.civilite.errors"
+                          class="invalid-feedback"
+                        >
+                          <div *ngIf="f.civilite.errors.required">
+                            Champ requis
+                          </div>
                         </div>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label for="name">Nom<span class="text-danger">*</span></label>
-                        <input formControlName="lastname" type="text" class="form-control" id="name"
-                          [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }" placeholder="Nom">
+                        <label for="name"
+                          >Nom<span class="text-danger">*</span></label
+                        >
+                        <input
+                          formControlName="lastname"
+                          type="text"
+                          class="form-control"
+                          id="name"
+                          [ngClass]="{
+                            'is-invalid': submitted && f.lastname.errors
+                          }"
+                          placeholder="Nom"
+                        />
                       </div>
-                      <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
-                        <div *ngIf="f.lastname.errors.required">Champ requis</div>
+                      <div
+                        *ngIf="submitted && f.lastname.errors"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f.lastname.errors.required">
+                          Champ requis
+                        </div>
                       </div>
                     </div>
 
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="prenom">Prénom</label>
-                        <input formControlName="firstname" type="text" class="form-control" id="prenom"
-                          placeholder="Prénom">
+                        <input
+                          formControlName="firstname"
+                          type="text"
+                          class="form-control"
+                          id="prenom"
+                          placeholder="Prénom"
+                        />
                       </div>
                     </div>
                   </div>
@@ -127,258 +229,355 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="email">Email</label>
-                        <input formControlName="email" type="email" class="form-control" id="email" placeholder="Email">
+                        <input
+                          formControlName="email"
+                          type="email"
+                          class="form-control"
+                          id="email"
+                          placeholder="Email"
+                        />
                       </div>
                     </div>
 
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="sexe">Genre<span class="text-danger">*</span></label>
-                        <select id="sexe" class="form-control" formControlName="sexe"
-                          [ngClass]="{ 'is-invalid': submitted && f.sexe.errors }">
+                        <label for="sexe"
+                          >Genre<span class="text-danger">*</span></label
+                        >
+                        <select
+                          id="sexe"
+                          class="form-control"
+                          formControlName="sexe"
+                          [ngClass]="{
+                            'is-invalid': submitted && f.sexe.errors
+                          }"
+                        >
                           <option selected="selected" value="">---</option>
                           <option [value]="GENDER.MALE">Homme</option>
                           <option [value]="GENDER.FEMALE">Femme</option>
                         </select>
-                        <div *ngIf="submitted && f.sexe.errors" class="invalid-feedback">
+                        <div
+                          *ngIf="submitted && f.sexe.errors"
+                          class="invalid-feedback"
+                        >
                           <div *ngIf="f.sexe.errors.required">Champ requis</div>
                         </div>
                       </div>
-
-
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="cni">CNI</label>
-                        <input formControlName="cni" type="text" class="form-control" id="cni" placeholder="CNI">
+                        <input
+                          formControlName="cni"
+                          type="text"
+                          class="form-control"
+                          id="cni"
+                          placeholder="CNI"
+                        />
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="cnps">CNPS</label>
-                        <input formControlName="cnps" type="text" class="form-control" id="cnps" placeholder="CNPS">
+                        <input
+                          formControlName="cnps"
+                          type="text"
+                          class="form-control"
+                          id="cnps"
+                          placeholder="CNPS"
+                        />
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="child">Nombre d'enfant</label>
-                        <input formControlName="numberChild" type="number" value="0" class="form-control" id="child"
-                          placeholder="Nombre d'enfant">
+                        <input
+                          formControlName="numberChild"
+                          type="number"
+                          value="0"
+                          class="form-control"
+                          id="child"
+                          placeholder="Nombre d'enfant"
+                        />
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label for="matrimonial">Statut matrimonial<span class="text-danger">*</span></label>
-                        <select id="matrimonial" class="form-control" formControlName="matrimonial"
-                          [ngClass]="{ 'is-invalid': submitted && f.matrimonial.errors }">
+                        <label for="matrimonial"
+                          >Statut matrimonial<span class="text-danger"
+                            >*</span
+                          ></label
+                        >
+                        <select
+                          id="matrimonial"
+                          class="form-control"
+                          formControlName="matrimonial"
+                          [ngClass]="{
+                            'is-invalid': submitted && f.matrimonial.errors
+                          }"
+                        >
                           <option selected="selected" value="">---</option>
                           <option [value]="MARITAL.SINGLE">Célibataire</option>
                           <option [value]="MARITAL.MARRIED">Marié</option>
                           <option [value]="MARITAL.DIVORCE">Divorcé</option>
-
                         </select>
                       </div>
-                      <div *ngIf="submitted && f.matrimonial.errors" class="invalid-feedback">
-                        <div *ngIf="f.matrimonial.errors.required">Champ requis</div>
+                      <div
+                        *ngIf="submitted && f.matrimonial.errors"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f.matrimonial.errors.required">
+                          Champ requis
+                        </div>
                       </div>
                     </div>
 
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label for="dateNaissance">Née le :<span class="text-danger">*</span></label>
-                        <input formControlName="dateNaissance" type="date" class="form-control" id="dateNaissance"
-                          [ngClass]="{ 'is-invalid': submitted && f.dateNaissance.errors }">
+                        <label for="dateNaissance"
+                          >Née le :<span class="text-danger">*</span></label
+                        >
+                        <input
+                          formControlName="dateNaissance"
+                          type="date"
+                          class="form-control"
+                          id="dateNaissance"
+                          [ngClass]="{
+                            'is-invalid': submitted && f.dateNaissance.errors
+                          }"
+                        />
                       </div>
-                      <div *ngIf="submitted && f.dateNaissance.errors" class="invalid-feedback">
-                        <div *ngIf="f.dateNaissance.errors.required">Champ requis</div>
+                      <div
+                        *ngIf="submitted && f.dateNaissance.errors"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f.dateNaissance.errors.required">
+                          Champ requis
+                        </div>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="placeBirth">à</label>
-                        <input formControlName="placeBirth" type="text" class="form-control" id="placeBirth">
+                        <input
+                          formControlName="placeBirth"
+                          type="text"
+                          class="form-control"
+                          id="placeBirth"
+                        />
                       </div>
-
                     </div>
                   </div>
 
-                  <hr>
+                  <hr />
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="phone">Téléphone</label>
-                        <input formControlName="phone" type="text" class="form-control" id="phone"
-                          placeholder="Téléphone">
+                        <input
+                          formControlName="phone"
+                          type="text"
+                          class="form-control"
+                          id="phone"
+                          placeholder="Téléphone"
+                        />
                       </div>
                     </div>
 
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="Adresse">Adresse</label>
-                        <input formControlName="address" type="text" class="form-control" id="Adresse"
-                          placeholder="Adresse">
+                        <input
+                          formControlName="address"
+                          type="text"
+                          class="form-control"
+                          id="Adresse"
+                          placeholder="Adresse"
+                        />
                       </div>
                     </div>
                   </div>
 
                   <div class="row">
                     <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="country">Pays<span class="text-danger">*</span></label>
-                            <select id="country" formControlName="country" class="form-control"
-                                [ngClass]="{ 'is-invalid': submitted && f.country.errors }">
-                                <option selected="selected" value="">---</option>
-                                <ng-container *ngIf="countries">
-                                    <option [value]="c.id" *ngFor="let c of countries">
-                                        {{c.name}}
-                                    </option>
-                                </ng-container>
-
-
-
-                            </select>
-                        </div>
-                        <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
-                            <div *ngIf="f.country.errors.required">Champ requis</div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="region">Province/Region</label>
-                            <input type="text" class="form-control" id="vregionille"
-                                placeholder="rovince/Region">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="ville">Ville</label>
-                            <input formControlName="town" type="text" class="form-control" id="ville"
-                                placeholder="Ville">
-                        </div>
-                    </div>
-
-                   
-                </div>
-                <h2>Poste</h2>
-    
-                <hr>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="department">Département<span class="text-danger">*</span></label>
-                            <select id="department" class="form-control" formControlName="departmentId"
-                                [ngClass]="{ 'is-invalid': submitted && f.departmentId.errors }">
-                                <option selected="selected" value="">---</option>
-                                <ng-container *ngIf="departemnts">
-                                    <option [value]="d.id" *ngFor="let d of departemnts">{{d.name}}</option>
-                                </ng-container>
-                            </select>
-                            <div *ngIf="submitted && f.departmentId.errors" class="invalid-feedback">
-                                <div *ngIf="f.departmentId.errors.required">Champ requis</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="name">Salaire de base<span class="text-danger">*</span></label>
-                            <input formControlName="salaire" type="text" class="form-control" id="salaire"
-                                [ngClass]="{ 'is-invalid': submitted && f.salaire.errors }"
-                                placeholder="Salaire de base">
-                        </div>
-                        <div *ngIf="submitted && f.salaire.errors" class="invalid-feedback">
-                            <div *ngIf="f.salaire.errors.required">Champ requis</div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="fonction">Fonction<span class="text-danger">*</span></label>
-                            <input formControlName="fonction" type="text" class="form-control" id="fonction"
-                                [ngClass]="{ 'is-invalid': submitted && f.fonction.errors }"
-                                placeholder="Fonction">
-                        </div>
-                        <div *ngIf="submitted && f.fonction.errors" class="invalid-feedback">
-                            <div *ngIf="f.fonction.errors.required">Champ requis</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-4">
                       <div class="form-group">
-                          <div class="form-group">
-                              <label for="contrat">Type de contrat<span
-                                      class="text-danger">*</span></label>
-                              <select id="contrat" class="form-control" formControlName="contrat"
-                                  [ngClass]="{ 'is-invalid': submitted && f.contrat.errors }">
-                                  <option  value=""  selected="selected">---</option>
-                                  <option [value]="CONTRACT.CDI">CDI</option>
-                                  <option [value]="CONTRACT.CDD">CDD</option>
-                                  <option [value]="CONTRACT.STAGEAIRE">Stageaire</option>
-                              </select>
-                              <div *ngIf="submitted && f.contrat.errors" class="invalid-feedback">
-                                  <div *ngIf="f.contrat.errors.required">Champ requis</div>
-                              </div>
+                        <label for="country"
+                          >Pays<span class="text-danger">*</span></label
+                        >
+                        <select
+                          id="country"
+                          formControlName="country"
+                          class="form-control"
+                          [ngClass]="{
+                            'is-invalid': submitted && f.country.errors
+                          }"
+                        >
+                          <option selected="selected" value="">---</option>
+                          <ng-container *ngIf="countries">
+                            <option [value]="c.id" *ngFor="let c of countries">
+                              {{ c.name }}
+                            </option>
+                          </ng-container>
+                        </select>
+                      </div>
+                      <div
+                        *ngIf="submitted && f.country.errors"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f.country.errors.required">
+                          Champ requis
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="region">Province/Region</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="vregionille"
+                          placeholder="rovince/Region"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="ville">Ville</label>
+                        <input
+                          formControlName="town"
+                          type="text"
+                          class="form-control"
+                          id="ville"
+                          placeholder="Ville"
+                        />
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12 float-right">
+                        <button
+                          (click)="openModalConfirm()"
+                          title="Supprimer"
+                          class="btn btn-sm btn-danger ml-2 float-right"
+                          type="button"
+                        >
+                          Supprimer
+                        </button>
+                        <button
+                          (click)="update()"
+                          title="Modifier"
+                          class="btn btn-sm btn-info float-right"
+                          type="button"
+                        >
+                          Modifier
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="tab-pane fade"
+                  id="custom-tabs-one-contrat"
+                  role="tabpanel"
+                  aria-labelledby="custom-tabs-one-contrat-tab"
+                >
+                  <app-contracts
+                    [contracts]="personal.appends?.contracts"
+                  ></app-contracts>
+                </div>
+                <div
+                  class="tab-pane fade"
+                  id="custom-tabs-one-paie"
+                  role="tabpanel"
+                  aria-labelledby="custom-tabs-one-paie-tab"
+                >
+                  paie
+                </div>
+                <div
+                  class="tab-pane fade"
+                  id="custom-tabs-one-conges"
+                  role="tabpanel"
+                  aria-labelledby="custom-tabs-one-conges-tab"
+                >
+                  conges
+                </div>
+
+                <div
+                  class="tab-pane fade"
+                  id="custom-tabs-one-badge"
+                  role="tabpanel"
+                  aria-labelledby="custom-tabs-one-badge-tab"
+                >
+                  <div id="card">
+                    <div id="card-title">
+                      <h1>République Gabon</h1>
+                    </div>
+                    <div id="card-id">
+                      <div id="card-number">
+                        <p class="cardtitle">Carte professionnelle :</p>
+                        <p>000000000000</p>
+                      </div>
+                      <p class="cardtitle">Développeur web</p>
+                    </div>
+                    <div id="card-information">
+                      <div id="card-photo"></div>
+                      <div id="card-text">
+                        <div id="card-name">
+                          <div class="card-box"></div>
+                          <p class="cardtitle">Nom :</p>
+                          <p>Gouchighe Ngongang</p>
+                          <div class="card-box"></div>
+                          <p class="cardtitle">Prénom :</p>
+                          <p>apscal</p>
+                        </div>
+                        <div id="card-detail">
+                          <div class="card-box">
+                            <p class="cardtitle">Sexe :</p>
+                            <p>M</p>
                           </div>
-                      </div>
-                  </div>
-
-
-
-
-                  <div class="col-md-4">
-                      <div class="form-group">
-                          <label for="dateStart">Date d'entrée<span class="text-danger">*</span></label>
-                          <input formControlName="dateStart" type="date" class="form-control" id="dateStart"
-                              [ngClass]="{ 'is-invalid': submitted && f.dateStart.errors }"
-                              placeholder="Date d'entrée" />
-                          <div *ngIf="submitted && f.dateStart.errors" class="invalid-feedback">
-                              <div *ngIf="f.dateStart.errors.required">Champ requis</div>
+                          <div class="card-box">
+                            <p class="cardtitle">Né(e) le :</p>
+                            <p>10.02.1998</p>
                           </div>
+                          <div class="card-box">
+                            <p class="cardtitle">Ville :</p>
+                            <p>HabboVille</p>
+                          </div>
+                        </div>
+                        <div id="card-sign">
+                          <p class="cardtitle">Signature du titulaire :</p>
+                          <div id="cardsign"></div>
+                        </div>
                       </div>
-                  </div>
-
-                  <div class="col-md-4">
-                      <div class="form-group">
-                          <label for="dateEnd">Date de sortie</label>
-                          <input formControlName="dateEnd" type="date" class="form-control" id="dateEnd"
-                              placeholder="Date d'entrée" />
-                      </div>
-                  </div>
-              </div>
-                <div class="row">
-                  <div class="col-12 float-right">
-                    <button (click)="openModalConfirm()" title="Supprimer" class="btn btn-sm btn-danger ml-2 float-right" type="button">Supprimer</button>
-                    <button (click)="update()" title="Modifier" class="btn  btn-info  float-right" type="button">Modifier</button>
-                   
+                    </div>
+                    <div id="card-code">
+                      <p>
+                        <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+                        <<<<<<<<<<<<<<<<<<<<<<<<
+                      </p>
+                    </div>
                   </div>
                 </div>
-                </form>
               </div>
-              <div class="tab-pane fade" id="custom-tabs-one-paie" role="tabpanel"
-                aria-labelledby="custom-tabs-one-paie-tab">
-                paie
-              </div>
-              <div class="tab-pane fade" id="custom-tabs-one-conges" role="tabpanel"
-                aria-labelledby="custom-tabs-one-conges-tab">
-                conges
-              </div>
-
             </div>
+            <!-- /.card -->
           </div>
-          <!-- /.card -->
         </div>
-
+        <!-- /.col -->
       </div>
-      <!-- /.col -->
+      <!-- /.row -->
     </div>
-    <!-- /.row -->
-  </div><!-- /.container-fluid -->
-  <app-confirm-modal (actionConfirm)="deletePersonale($event)"></app-confirm-modal>
-  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
-
-</section>
+    <!-- /.container-fluid -->
+    <app-confirm-modal
+      (actionConfirm)="deletePersonale($event)"
+    ></app-confirm-modal>
+    <ngx-loading
+      [show]="loading"
+      [config]="{ backdropBorderRadius: '3px' }"
+    ></ngx-loading>
+  </section>
+</form>

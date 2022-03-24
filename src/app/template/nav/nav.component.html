@@ -145,43 +145,56 @@
 
         <li class="nav-item">
           <a href="javascript:void(0)" class="nav-link">
-            <i class="nav-icon fas fa-copy"></i>
+            <i class="nav-icon fas fa-user-alt"></i>
             <p>
               Resource Humaines
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
+
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-circle"></i>
                 <p>
-                 Employés
+                  Employés
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a   [routerLink]="['/rh/personals']" class="nav-link">
+                  <a [routerLink]="['/rh/personals']" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Créer</p>
                   </a>
                 </li>
-               
+
                 <li class="nav-item">
-                  <a  [routerLink]="['/rh/personals/list']" class="nav-link">
+                  <a [routerLink]="['/rh/personals/list']" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Liste</p>
                   </a>
                 </li>
               </ul>
             </li>
-           
+            <li class="nav-item">
+              <a [routerLink]="['/rh/leaves']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Congés</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a [routerLink]="['/rh/presences']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Présence</p>
+              </a>
+            </li>
           </ul>
         </li>
 
         <li class="nav-item">
-          <a  href="javascript:void(0)" class="nav-link">
+          <a href="javascript:void(0)" class="nav-link">
             <i class="nav-icon fas fa-copy"></i>
             <p>
               Commercial
@@ -190,28 +203,43 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a routerLink="/commercial/clients"
-              [routerLinkActive]="['active']"
-              class="nav-link">
+              <a
+                routerLink="/commercial/clients"
+                [routerLinkActive]="['active']"
+                class="nav-link"
+              >
                 <i class="far fa-circle nav-icon"></i>
                 <p>Clients</p>
               </a>
 
-              <a routerLink="/commercial/commandes"
-              [routerLinkActive]="['active']" class="nav-link">
+              <a
+                routerLink="/commercial/commandes"
+                [routerLinkActive]="['active']"
+                class="nav-link"
+              >
                 <i class="far fa-circle nav-icon"></i>
                 <p>Commandes</p>
               </a>
 
+<<<<<<< HEAD
               <a routerLink="/commercial/factures"
               [routerLinkActive]="['active']" class="nav-link">
+=======
+              <a
+                routerLink="/commercial/commandes"
+                [routerLinkActive]="['active']"
+                class="nav-link"
+              >
+>>>>>>> pascalb
                 <i class="far fa-circle nav-icon"></i>
                 <p>Factures</p>
               </a>
 
-              <a routerLink="/commercial/produits"
-              [routerLinkActive]="['active']"
-              class="nav-link">
+              <a
+                routerLink="/commercial/produits"
+                [routerLinkActive]="['active']"
+                class="nav-link"
+              >
                 <i class="far fa-circle nav-icon"></i>
                 <p>Produits</p>
               </a>
@@ -325,13 +353,13 @@
               </a>
 
               <a
-              routerLink="/config/sessions"
-              class="nav-link"
-              [routerLinkActive]="['active']"
-            >
-              <i class="far fa-circle nav-icon"></i>
-              <p>Sessions</p>
-            </a>
+                routerLink="/config/sessions"
+                class="nav-link"
+                [routerLinkActive]="['active']"
+              >
+                <i class="far fa-circle nav-icon"></i>
+                <p>Sessions</p>
+              </a>
               <a
                 routerLink="/config/pay"
                 class="nav-link"
@@ -339,6 +367,14 @@
               >
                 <i class="far fa-circle nav-icon"></i>
                 <p>Paie</p>
+              </a>
+              <a
+                routerLink="/config/contracts"
+                class="nav-link"
+                [routerLinkActive]="['active']"
+              >
+                <i class="far fa-circle nav-icon"></i>
+                <p>Type de contrat</p>
               </a>
             </li>
           </ul>

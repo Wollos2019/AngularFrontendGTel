@@ -4,28 +4,41 @@ import { MainAppComponent } from '../template/main-app/main-app.component';
 import { PersonalProfilComponent } from './personals/personal-profil/personal-profil.component';
 import { ListPersonalComponent } from './personals/list-personal/list-personal.component';
 import { PersonalsComponent } from './personals/personals.component';
-
+import { PrintContractComponent } from './personals/print-contract/print-contract.component';
+import { LeaveRequestsComponent } from './leave-requests/leave-requests.component';
+import { PresenceComponent } from './presence/presence.component';
 
 const routes: Routes = [
- {
-  path: '',
-  component: MainAppComponent,
-  children: [{
-    path:'personals',
-    component:PersonalsComponent 
-  },
   {
-    path:'personals/list',
-    component:ListPersonalComponent
-    
+    path: '',
+    component: MainAppComponent,
+    children: [
+      {
+        path: 'personals',
+        component: PersonalsComponent,
+      },
+      {
+        path: 'leaves',
+        component: LeaveRequestsComponent,
+      },
+      {
+        path: 'presences',
+        component: PresenceComponent,
+      },
+      {
+        path: 'personals/list',
+        component: ListPersonalComponent,
+      },
+      {
+        path: 'personals/:personalId/show',
+        component: PersonalProfilComponent,
+      },
+      {
+        path: 'personals/:personalId/contract',
+        component: PrintContractComponent,
+      },
+    ],
   },
-  {
-    path:'personals/:personalId/show',
-    component:PersonalProfilComponent
-    
-  }
-]
- }
 ];
 
 @NgModule({

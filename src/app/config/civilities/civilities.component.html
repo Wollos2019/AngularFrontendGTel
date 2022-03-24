@@ -36,10 +36,16 @@
                       >
                     </td>
                     <td>
-                      <a href="javacript:void(0)" (click)="openModalConfirm(a.id)"  data-toggle="modal" title="Supprimer" type="button" class="btn btn-primary btn-light btn-sm">
+                      <a
+                        href="javacript:void(0)"
+                        (click)="openModalConfirm(a.id)"
+                        data-toggle="modal"
+                        title="Supprimer"
+                        type="button"
+                        class="btn btn-primary btn-light btn-sm"
+                      >
                         <i class="icofont-ui-delete text-danger"></i>
-                    </a>
-                  
+                      </a>
                     </td>
                   </tr>
                 </ng-container>
@@ -75,9 +81,9 @@
   </div>
   <app-confirm-modal (actionConfirm)="deleteC($event)"></app-confirm-modal>
   <ngx-loading
-  [show]="loading"
-  [config]="{ backdropBorderRadius: '3px' }"
-></ngx-loading>
+    [show]="loading"
+    [config]="{ backdropBorderRadius: '3px' }"
+  ></ngx-loading>
 </section>
 <div class="modal fade" id="modalDepartment">
   <div class="modal-dialog">
@@ -99,7 +105,7 @@
             <label for="nom" class="col-form-label">
               Nom<span class="text-danger">*</span>
             </label>
-            <div class="col-sm-10">
+            <div class="col-sm-12">
               <input
                 type="text"
                 formControlName="name"
@@ -119,22 +125,16 @@
             <label for="abbreviation" class="col-form-label">
               Abbreviation<span class="text-danger">*</span>
             </label>
-            <div class="col-sm-10">
+            <div class="col-sm-12">
               <input
                 type="text"
                 formControlName="abbreviation"
                 class="form-control"
                 id="abbreviation"
                 placeholder="Entrer l' abbreviation"
-              
               />
-
-              
             </div>
           </div>
-
-
-         
         </div>
         <div class="modal-footer">
           <button
@@ -151,7 +151,3 @@
   </div>
   <!-- /.modal-dialog -->
 </div>
-
-
-
-

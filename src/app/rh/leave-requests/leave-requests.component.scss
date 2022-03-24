@@ -1,0 +1,31 @@
+.day:hover{
+    background-color: aqua;
+    content: '&#xeea2';
+    cursor: pointer;
+}
+.day{
+    background-color: aliceblue;
+    cursor: pointer;
+}
+.day-holi{
+    background-color: rgb(253, 147, 147) !important;
+    cursor:pointer;
+}
+
+.day-holi:hover{
+    background-color: rgb(253, 147, 147) !important;
+    cursor:pointer;
+   
+}
+
+.day-not-working{
+    background-color: rgb(92, 253, 100) !important;
+    cursor:pointer;
+}
+
+.day-not-working:hover{
+    background-color: rgb(92, 253, 100) !important;
+    cursor:pointer;
+   
+}
+

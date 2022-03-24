@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { User } from '../models/user.model';
-import { AuthService } from '../services/auth/auth-service.service';
+import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {User} from '../models/user.model';
+import {AuthService} from '../services/auth/auth-service.service';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   formGroup!: FormGroup;
   loading = false;
   submitted = false;
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -35,7 +36,9 @@ export class LoginComponent implements OnInit {
     body.classList.add('login-page');
     body.classList.add('box');
   }
-  ngAfterViewInit(): void {}
+
+  ngAfterViewInit(): void {
+  }
 
   formInit() {
     this.formGroup = this.fb.group({
@@ -47,6 +50,7 @@ export class LoginComponent implements OnInit {
   get f(): any {
     return this.formGroup?.controls;
   }
+
   loginProcess() {
     console.log('1', this.formGroup.value);
     this.submitted = true;

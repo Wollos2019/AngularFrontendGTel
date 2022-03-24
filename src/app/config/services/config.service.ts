@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Absence } from '../model/absence.model';
 import { Civility } from '../model/civility.model';
+import { Contract } from '../model/contract.model';
 import { Country } from '../model/countries.model';
 import { Department } from '../model/department.model';
 import { Fonction } from '../model/fonctions.model';
@@ -16,7 +17,7 @@ import { WorkingDay } from '../model/working_days.model';
 })
 export class ConfigService {
   URL_CONFIG = environment.URL_CONFIG;
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
   /**
    * GESTION DES FONCTIONS
    */
@@ -67,15 +68,16 @@ export class ConfigService {
     return this.httpClient.get<Department[]>(`${this.URL_CONFIG}departments`);
   }
 
-  getAllEmployeesDepartment(id:number,params = ''): Observable<Department[]> {
+  getAllEmployeesDepartment(id: number, params = ''): Observable<Department[]> {
     if (params) {
       return this.httpClient.get<Department[]>(
         `${this.URL_CONFIG}departments/${id}/employees?${params}`
       );
     }
-    return this.httpClient.get<Department[]>(`${this.URL_CONFIG}departments/${id}/employees`);
+    return this.httpClient.get<Department[]>(
+      `${this.URL_CONFIG}departments/${id}/employees`
+    );
   }
-
 
   getOneDepartment(departmentId: number): Observable<Department> {
     return this.httpClient.get<Department>(
@@ -164,11 +166,10 @@ export class ConfigService {
     );
   }
 
-
   /**
-    * GESTION DES SESSIONS
-    */
-  getAllSessions(params = ''): Observable<Session[] | null | undefined> {
+   * GESTION DES SESSIONS
+   */
+  getAllSessions(params = ''): Observable<any> {
     if (params) {
       return this.httpClient.get<Session[]>(
         `${this.URL_CONFIG}sessions?${params}`
@@ -179,21 +180,20 @@ export class ConfigService {
 
   /**
    * recuperer les jours fériés d'une année en fonction d'une date
-   * @param year 
-   * @returns 
+   * @param year
+   * @returns
    */
   getAllHoliDayByYearSession(year: number): Observable<any> {
-    return this.httpClient.get<any[]>(`${this.URL_CONFIG}sessions/${year}/year`);
+    return this.httpClient.get<any[]>(
+      `${this.URL_CONFIG}sessions/${year}/year`
+    );
   }
 
   /**
-  * GESTION DES HOLIDAYS
-  */
+   * GESTION DES HOLIDAYS
+   */
   createHoliDayBySession(holiDay: HoliDay): Observable<HoliDay> {
-    return this.httpClient.post<HoliDay>(
-      `${this.URL_CONFIG}holidays`,
-      holiDay
-    );
+    return this.httpClient.post<HoliDay>(`${this.URL_CONFIG}holidays`, holiDay);
   }
   getAllHoliDays(params = ''): Observable<HoliDay[]> {
     if (params) {
@@ -204,15 +204,11 @@ export class ConfigService {
     return this.httpClient.get<HoliDay[]>(`${this.URL_CONFIG}holidays`);
   }
 
-
   /**
- * GESTION DES TYPE ABSENCES
- */
+   * GESTION DES TYPE ABSENCES
+   */
   createAbsence(absence: Absence): Observable<Absence> {
-    return this.httpClient.post<Absence>(
-      `${this.URL_CONFIG}absences`,
-      absence
-    );
+    return this.httpClient.post<Absence>(`${this.URL_CONFIG}absences`, absence);
   }
   getAllAbsences(params = ''): Observable<Absence[]> {
     if (params) {
@@ -223,6 +219,21 @@ export class ConfigService {
     return this.httpClient.get<Absence[]>(`${this.URL_CONFIG}absences`);
   }
 
-
+  /**
+   * GESTION DES TYPE CONTRATS
+   */
+  createContract(contract: Contract): Observable<Contract> {
+    return this.httpClient.post<Contract>(
+      `${this.URL_CONFIG}contracts`,
+      contract
+    );
+  }
+  getAllContracts(params = ''): Observable<Contract[]> {
+    if (params) {
+      return this.httpClient.get<Contract[]>(
+        `${this.URL_CONFIG}contracts?${params}`
+      );
+    }
+    return this.httpClient.get<Contract[]>(`${this.URL_CONFIG}contracts`);
+  }
 }
-

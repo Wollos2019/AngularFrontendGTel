@@ -1,9 +1,9 @@
-export interface IWorkingDay{
+export interface IWorkingDay {
   id?: number;
   day?: string;
-  status?:STATUS;
-  departureTime?:any;
-  arrivingTime?:any;
+  status?: STATUS;
+  departureTime?: any;
+  arrivingTime?: any;
   created_at?: Date;
   update_at?: Date;
 }
@@ -14,13 +14,15 @@ export class WorkingDay implements IWorkingDay {
     public name?: string,
     public day?: string,
     public created_at?: Date,
-    public status?:STATUS,
+    public status?: STATUS,
     public update_at?: Date,
-    public arrivingTime?:any,
-    public departureTime?:any,
-  ) {}
+    public arrivingTime?: any,
+    public departureTime?: any,
+  ) {
+  }
 }
-export enum STATUS{
-  ENABLE='1',
-  DISABLE='0'
+
+export enum STATUS {
+  ENABLE = '1',
+  DISABLE = '0'
 }

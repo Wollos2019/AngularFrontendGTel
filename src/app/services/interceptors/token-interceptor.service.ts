@@ -1,6 +1,6 @@
-import { Injectable, Injector } from '@angular/core';
-import { catchError, map } from 'rxjs/operators';
-import { Observable, of, throwError } from 'rxjs';
+import {Injectable, Injector} from '@angular/core';
+import {catchError, map} from 'rxjs/operators';
+import {Observable, of, throwError} from 'rxjs';
 import {
   HttpRequest,
   HttpHandler,
@@ -8,14 +8,16 @@ import {
   HttpInterceptor,
   HttpResponse,
 } from '@angular/common/http';
-import { AuthService } from 'src/app/services/auth/auth-service.service';
-import { Router } from '@angular/router';
+import {AuthService} from 'src/app/services/auth/auth-service.service';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TokenInterceptorService implements HttpInterceptor {
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+  }
+
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler

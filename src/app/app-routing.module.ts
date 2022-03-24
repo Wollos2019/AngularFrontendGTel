@@ -5,7 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { MainAppComponent } from './template/main-app/main-app.component';
 import { ProductComponent } from './product/product.component';
 import { DashboardComponent } from './template/dashboard/dashboard.component';
-import { CommandesComponent } from './Commercial/commandes/commandes.component';
+import { CommercialComponent } from './commercial/commercial.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
@@ -19,32 +19,38 @@ const routes: Routes = [
   },
   {
     path: 'commercial',
-    loadChildren: () => import('./modules/commercial/clients/clients.module')
-      .then(mod => mod.ClientsModule)
+    loadChildren: () =>
+      import('./modules/commercial/clients/clients.module').then(
+        (mod) => mod.ClientsModule
+      ),
   },
   {
     path: 'commercial',
-    loadChildren: () => import('./modules/commercial/produits/produits.module')
-      .then(mod => mod.ProduitsModule)
+    loadChildren: () =>
+      import('./modules/commercial/produits/produits.module').then(
+        (mod) => mod.ProduitsModule
+      ),
   },
   {
     path: 'commercial',
-    loadChildren: () => import('./modules/commercial/commandes/commandes.module')
-      .then(mod => mod.CommandesModule)
+    loadChildren: () =>
+      import('./modules/commercial/commandes/commandes.module').then(
+        (mod) => mod.CommandesModule
+      ),
   },
   {
     path: '',
     component: MainAppComponent,
     children: [
-      //{ path: 'clients', component: ClientComponent},
-      
+      { path: 'commercial', component: CommercialComponent },
       { path: 'dashbord', component: DashboardComponent },
-      //{ path: 'commandes', component: CommandesComponent },
+      { path: 'products', component: ProductComponent },
       { path: 'products/:id', component: ProductComponent },
       { path: 'achats', component: ProductComponent },
       { path: '**', redirectTo: 'dashbord', pathMatch: 'full' },
       { path: '', redirectTo: 'dashbord', pathMatch: 'full' },
     ],
+    //{ path: 'clients', component: ClientComponent},
   },
 ];
 

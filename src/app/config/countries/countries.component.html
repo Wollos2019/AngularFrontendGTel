@@ -18,42 +18,42 @@
           <div class="card-body">
             <table class="table table-bordered">
               <thead>
-                <tr class="bg-dark text-white">
-                  <th scope="col">#</th>
-                  <th scope="col">Nom</th>
-                  <th scope="col">Code</th>
-                  <th scope="col">Abreviation 1</th>
-                  <th scope="col">Abreviation 2</th>
-                  <th scope="col">Code Téléphone</th>
-                  <th scope="col">Status</th>
-                  <th scope="col">Action</th>
-                </tr>
+              <tr class="bg-dark text-white">
+                <th scope="col">#</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Code</th>
+                <th scope="col">Abreviation 1</th>
+                <th scope="col">Abreviation 2</th>
+                <th scope="col">Code Téléphone</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+              </tr>
               </thead>
               <tbody>
-                <ng-container *ngIf="countries && countries.length">
-                  <tr *ngFor="let c of countries; let i = index">
-                    <th scope="row">{{ i + 1 }}</th>
-                    <td>{{ c.name }}</td>
-                    <td>{{ c.code }}</td>
-                    <td>{{ c.abbreviation1 }}</td>
-                    <td>{{ c.abbreviation2 }}</td>
-                    <td>{{ c.codePhone }}</td>
-                    <td>
+              <ng-container *ngIf="countries && countries.length">
+                <tr *ngFor="let c of countries; let i = index">
+                  <th scope="row">{{ i + 1 }}</th>
+                  <td>{{ c.name }}</td>
+                  <td>{{ c.code }}</td>
+                  <td>{{ c.abbreviation1 }}</td>
+                  <td>{{ c.abbreviation2 }}</td>
+                  <td>{{ c.codePhone }}</td>
+                  <td>
                       <span class="badge badge-info">{{
                         country.getStatus(c.status)
-                      }}</span>
-                    </td>
+                        }}</span>
+                  </td>
 
-                    <td>actions</td>
-                  </tr>
-                </ng-container>
-                <ng-container *ngIf="!countries?.length">
-                  <tr>
-                    <td colspan="8" class="text-center">
-                      Aucune données trouver
-                    </td>
-                  </tr>
-                </ng-container>
+                  <td>actions</td>
+                </tr>
+              </ng-container>
+              <ng-container *ngIf="!countries?.length">
+                <tr>
+                  <td colspan="8" class="text-center">
+                    Aucune données trouver
+                  </td>
+                </tr>
+              </ng-container>
               </tbody>
             </table>
           </div>

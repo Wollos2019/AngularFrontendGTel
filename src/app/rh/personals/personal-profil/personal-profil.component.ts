@@ -4,18 +4,25 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Civility } from 'src/app/config/model/civility.model';
+import { Contract } from 'src/app/config/model/contract.model';
 import { Country } from 'src/app/config/model/countries.model';
 import { Department } from 'src/app/config/model/department.model';
+import { Fonction } from 'src/app/config/model/fonctions.model';
 import { ConfigService } from 'src/app/config/services/config.service';
 import { extractErrorMessagesFromErrorResponse } from 'src/app/util/http_error_response';
 import { getImage } from 'src/app/util/images';
-import { CONTRACT, GENDER, MARITAL, Personal } from '../../models/personal.model';
+import {
+  CONTRACT,
+  GENDER,
+  MARITAL,
+  Personal,
+} from '../../models/personal.model';
 import { RhService } from '../../services/rh.service';
 declare var $: any;
 @Component({
   selector: 'app-personal-profil',
   templateUrl: './personal-profil.component.html',
-  styleUrls: ['./personal-profil.component.scss']
+  styleUrls: ['./personal-profil.component.scss'],
 })
 export class PersonalProfilComponent implements OnInit {
   personalId?: number;
@@ -41,15 +48,11 @@ export class PersonalProfilComponent implements OnInit {
     numberChild: [0],
     dateNaissance: ['', [Validators.required]],
     civilite: [{ value: '', disabled: true }, [Validators.required]],
-    departmentId: [{ value: '', disabled: true }, [Validators.required]],
-    salaire: ['', [Validators.required]],
-    fonction: ['', [Validators.required]],
-    contrat: ['', [Validators.required]],
-    dateStart: ['', [Validators.required]],
-    dateEnd: [''],
+ //   dateStart: ['', [Validators.required]],
+    //dateEnd: [''],
     password: [''],
     email1: [''],
-    placeBirth: ['']
+    placeBirth: [''],
   });
   countries!: Country[];
   civilities!: Civility[];
@@ -57,8 +60,16 @@ export class PersonalProfilComponent implements OnInit {
   GENDER = GENDER;
   CONTRACT = CONTRACT;
   imagePersonel: any;
-  constructor(private toastr: ToastrService, private activeRoute: ActivatedRoute, private rhService: RhService, private fb: FormBuilder,
-    private configService: ConfigService, private router:Router) { }
+  fonctions!: Fonction[];
+  contracts!: Fonction[];
+  constructor(
+    private toastr: ToastrService,
+    private activeRoute: ActivatedRoute,
+    private rhService: RhService,
+    private fb: FormBuilder,
+    private configService: ConfigService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.personalId = this.activeRoute.snapshot.params['personalId'];
@@ -66,42 +77,38 @@ export class PersonalProfilComponent implements OnInit {
     this.getPersonale();
     this.getCountry();
     this.getAllCivilities();
-    this.getAllDepartments();
-
+    // this.getAllDepartments();
+    // this.getAllFonctions();
+    // this.getAllContracts();
   }
   get f(): any {
-
     return this.editForm?.controls;
   }
   getPersonale(): void {
     this.rhService.getOnePersonal(Number(this.personalId)).subscribe({
       next: (personal: Personal) => {
         this.personal = personal;
+        console.log(personal);
 
         this.initForm(personal);
-
       },
       error: (error: HttpErrorResponse) => {
         console.log(error);
-
-
-      }
-    })
+      },
+    });
   }
+
   getCountry(): void {
     this.configService.getAllCountries('per_page=*').subscribe({
       next: (countries: Country[]) => {
         this.countries = countries;
         this.editForm.get('country')?.enable();
         this.editForm.updateValueAndValidity();
-     
-
       },
       error: (error: HttpErrorResponse) => {
         console.log('Error', error);
-
-      }
-    })
+      },
+    });
   }
   getAllCivilities(): void {
     this.configService.getAllCivilities('per_page=*').subscribe({
@@ -109,29 +116,11 @@ export class PersonalProfilComponent implements OnInit {
         this.civilities = civilities;
         this.editForm.get('civilite')?.enable();
         this.editForm.updateValueAndValidity();
-
-
       },
       error: (error: HttpErrorResponse) => {
         console.log('Error', error);
-
-      }
-    })
-  }
-
-  getAllDepartments(): void {
-    this.configService.getAllDepartments('per_page=*').subscribe({
-      next: (departemnts: Department[]) => {
-        this.departemnts = departemnts;
-        this.editForm.get('departmentId')?.enable();
-        this.editForm.updateValueAndValidity();
-
       },
-      error: (error: HttpErrorResponse) => {
-        console.log('Error', error);
-
-      }
-    })
+    });
   }
 
   initForm(personal: Personal): void {
@@ -151,15 +140,7 @@ export class PersonalProfilComponent implements OnInit {
     this.editForm.get('country')?.setValue(personal.country);
     this.editForm.get('town')?.setValue(personal.town);
     this.editForm.get('address')?.setValue(personal.address);
-    this.editForm.get('departmentId')?.setValue(personal.departmentId);
-    this.editForm.get('salaire')?.setValue(personal.salary);
-    this.editForm.get('fonction')?.setValue(personal.fonction);
-    this.editForm.get('contrat')?.setValue(personal.contract);
-    console.log(personal.contract);
-    
-    this.editForm.get('dateStart')?.setValue(personal.dateStart);
-    this.editForm.get('dateEnd')?.setValue(personal.dateEnd);
-    this.per.id=personal.id;
+    this.per.id = personal.id;
   }
 
   update(): void {
@@ -180,15 +161,10 @@ export class PersonalProfilComponent implements OnInit {
       sexe,
       civilite,
       password,
-      fonction,
-      contrat,
-      email1,
-      dateStart,
-      dateEnd,
-      departmentId,
-      placeBirth,
-      salaire
 
+      email1,
+      placeBirth,
+     
     } = this.editForm.value;
 
     this.per.address = address;
@@ -205,17 +181,15 @@ export class PersonalProfilComponent implements OnInit {
     this.per.lastname = lastname;
     this.per.cnps = cnps;
     this.per.civilityId = civilite;
-    this.per.contract = contrat;
-    this.per.dateEnd = dateEnd;
-    this.per.dateStart = dateStart;
+
     this.per.password = password;
-    this.per.fonction = fonction;
-    this.per.departmentId = departmentId;
+
     this.per.placeBirth = placeBirth;
-    this.per.salary = salaire;
-    this.per._method="PUT";
+    this.per._method = 'PUT';
 
     if (this.editForm.invalid) {
+      console.log(this.editForm);
+      
       return;
     }
 
@@ -227,24 +201,27 @@ export class PersonalProfilComponent implements OnInit {
         this.submitted = false;
 
         if (this.imagePersonel) {
-
           const dataImage = new FormData();
-          dataImage.append('image', this.imagePersonel, this.imagePersonel.name);
+          dataImage.append(
+            'image',
+            this.imagePersonel,
+            this.imagePersonel.name
+          );
 
-          this.rhService.uploadPhotoPersonal(personal?.id, dataImage).subscribe({
-            next: () => {
-            
-              this.toastr.success('Enregistrement effectué!!');
-            }, error: () => {
-              this.toastr.error(
-                "Une Erreur c'est produite lors  du téléchargement de photo",
-                'Error'
-              );
-            }
-          });
-
+          this.rhService
+            .uploadPhotoPersonal(personal?.id, dataImage)
+            .subscribe({
+              next: () => {
+                this.toastr.success('Enregistrement effectué!!');
+              },
+              error: () => {
+                this.toastr.error(
+                  "Une Erreur c'est produite lors  du téléchargement de photo",
+                  'Error'
+                );
+              },
+            });
         } else {
-        
           this.toastr.success('Modification effectué!!');
         }
         // this.editForm.reset();
@@ -254,20 +231,17 @@ export class PersonalProfilComponent implements OnInit {
         if (error.status === 422) {
           const messages = extractErrorMessagesFromErrorResponse(error);
           let re = '';
-          messages.forEach(element => {
+          messages.forEach((element) => {
             re = re + '\n ' + element;
           });
-          this.toastr.error(
-            re,
-            'Error'
-          );
+          this.toastr.error(re, 'Error');
         } else {
           this.toastr.error(
             "Une Erreur c'est produite lors de la création",
             'Error'
           );
         }
-      }
+      },
     });
   }
 
@@ -278,36 +252,31 @@ export class PersonalProfilComponent implements OnInit {
     dataImage.append('image', this.imagePersonel, this.imagePersonel.name);
   }
 
-  deletePersonale(ev:boolean):void{
-      console.log(ev);
-      this.loading=true;
-      if(ev){
-        this.rhService.deletePersonal(this.per.id!).subscribe(
-          {
-            next:()=>{
-              this.loading=false;
-              if(!this.loading){
-                this.router.navigate(['/rh/personals/list']).then(()=>{
-                  this.loading=false;
-                });
-              }
-            
-            },
-            error:()=>{
-              this.loading=false;
-              this.toastr.error(
-                "Une Erreur c'est produite lors de la suppression",
-                'Error'
-              );
-
-            }
+  deletePersonale(ev: boolean): void {
+    console.log(ev);
+    this.loading = true;
+    if (ev) {
+      this.rhService.deletePersonal(this.per.id!).subscribe({
+        next: () => {
+          this.loading = false;
+          if (!this.loading) {
+            this.router.navigate(['/rh/personals/list']).then(() => {
+              this.loading = false;
+            });
           }
-        )
-      }
-      
+        },
+        error: () => {
+          this.loading = false;
+          this.toastr.error(
+            "Une Erreur c'est produite lors de la suppression",
+            'Error'
+          );
+        },
+      });
+    }
   }
 
-  openModalConfirm(id?:number):void{
+  openModalConfirm(id?: number): void {
     $('#confirm').modal('show');
   }
 }

@@ -37,7 +37,8 @@
               "src/assets/plugins/fontawesome-free/css/all.min.css",
               "src/assets/plugins/icofont/icofont.min.css",
               "src/assets/dist/css/adminlte.min.css",
-              "node_modules/ngx-toastr/toastr.css"
+              "node_modules/ngx-toastr/toastr.css",
+              "src/styles.scss"
             ],
             "scripts": [
               "src/assets/plugins/jquery/jquery.min.js",
