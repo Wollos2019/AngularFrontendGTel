@@ -32,11 +32,8 @@ import { FactureDetailsComponent } from './facture/facture-details/facture-detai
     MainAppComponent,
     NavComponent,
     DashboardComponent,
-<<<<<<< HEAD
     FactureDetailsComponent
     
-=======
->>>>>>> pascalb
   ],
   imports: [
     CommonModule,
