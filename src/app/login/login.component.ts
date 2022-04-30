@@ -92,6 +92,7 @@ export class LoginComponent implements OnInit {
         } else {
           this.toastr.error(
             "Une Erreur c'est produite l'hors de l'execution du code"
+
           );
         }
       },

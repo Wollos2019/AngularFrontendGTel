@@ -5,7 +5,8 @@ import { LoginComponent } from './login/login.component';
 import { MainAppComponent } from './template/main-app/main-app.component';
 import { ProductComponent } from './product/product.component';
 import { DashboardComponent } from './template/dashboard/dashboard.component';
-import { CommercialComponent } from './commercial/commercial.component';
+import { CommercialComponent } from './Commercial/commercial.component';
+
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
@@ -24,6 +25,7 @@ const routes: Routes = [
         (mod) => mod.ClientsModule
       ),
   },
+
   {
     path: 'commercial',
     loadChildren: () =>
@@ -38,6 +40,21 @@ const routes: Routes = [
         (mod) => mod.CommandesModule
       ),
   },
+  {
+    path: 'vehicule',
+    loadChildren: () =>
+      import('./vehicule/vehicule.module').then(
+        (mod) => mod.VehiculeModule
+      ),
+  },
+  {
+    path: 'assurence',
+    loadChildren: () =>
+      import('./assurence/assurance.module').then(
+        (mod) => mod.AssuranceModule
+      ),
+  },
+
   {
     path: '',
     component: MainAppComponent,

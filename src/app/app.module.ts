@@ -22,6 +22,7 @@ import { ClientsModule } from './modules/commercial/clients/clients.module';
 import { ProduitsModule } from './modules/commercial/produits/produits.module';
 import { NgxPrintModule } from 'ngx-print';
 import { FactureDetailsComponent } from './facture/facture-details/facture-details.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -32,13 +33,15 @@ import { FactureDetailsComponent } from './facture/facture-details/facture-detai
     MainAppComponent,
     NavComponent,
     DashboardComponent,
-    FactureDetailsComponent
-    
+    FactureDetailsComponent,
+  
+
   ],
   imports: [
     CommonModule,
     AppRoutingModule,
     NgbModule,
+    ReactiveFormsModule,
     HttpClientModule,
     //RouterModule.forRoot([]),
     ModalModule.forRoot(),
@@ -53,10 +56,12 @@ import { FactureDetailsComponent } from './facture/facture-details/facture-detai
     SharedModule,
     ClientsModule,
     ProduitsModule,
+   
   ],
   providers: [
     AuthService,
     DashboardService,
+    
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
