@@ -64,6 +64,9 @@ PriseVehiculeUpdate!: PriseVehicule;
   }
 
   save(): void {
+    if (this.editForm.invalid) {
+      return;
+    }
     this.submitted = true;
     console.log(this.editForm.value);
     const { objetPriseVehicule, datePriseVehicule,heurePriseVehicule,idVehicule} = this.editForm.value;
@@ -73,9 +76,7 @@ PriseVehiculeUpdate!: PriseVehicule;
     this.priseVehicule.idVehicule = idVehicule
    
   
-    if (this.editForm.invalid) {
-      return;
-    }
+   
     this.loading = true;
     this.vehiculeService.createPriseVehicule(this.priseVehicule).subscribe({
       next: () => {
@@ -106,9 +107,11 @@ PriseVehiculeUpdate!: PriseVehicule;
     this.vehiculeService.getAllPriseVehicules(params).subscribe({
       next: (priseVehicules: any) => {
         this.loading = false;
-        console.log(priseVehicules);
+      
+        this.getListVehicule();
         this.paramsPage = new Pagination().setPagination(priseVehicules); 
-        this.priseVehicules = priseVehicules.data;
+        this.priseVehicules = priseVehicules.data; 
+         console.log(this.priseVehicules);
       },
       error: (error: any) => {
         this.loading = false;
@@ -182,7 +185,7 @@ updatePriseVehicule():void{
   
   this.PriseVehiculeUpdate._method="PUT";
   this.loading = true;
-  this.vehiculeService.updateVehicule(this.PriseVehiculeUpdate).subscribe({
+  this.vehiculeService.updatePriseVehicule (this.PriseVehiculeUpdate).subscribe({
     next: () => {
       this.loading = false;
       this.submittedUpdate = false;

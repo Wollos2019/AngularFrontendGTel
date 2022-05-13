@@ -51,7 +51,7 @@ deleteAssurance(assurance:Assurance):Observable<Assurance>{
  * @param assurance 
  * @returns 
  */
-createAssurance(assurance:Assurance):Observable<Assurance>{
+createAssurance(assurance:any):Observable<Assurance>{
   return this.httpClient.post<Assurance>(`${this.apiUrl}assurances`,assurance);
 }
 

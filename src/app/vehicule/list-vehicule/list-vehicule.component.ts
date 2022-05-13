@@ -17,9 +17,11 @@ paramsPage:any;
   vehicules!: Vehicule[];
   vehicule = new Vehicule();
   
-  showAxe: any;
+ 
   submittedUpdate!: boolean;
   VehiculeUpdate!: Vehicule;
+ 
+  showVehicule: any;
   constructor(private fb: FormBuilder,
     private toastr:ToastrService,
     private vehiculeService: VehiculeServiceService) { }
@@ -69,7 +71,11 @@ paramsPage:any;
   }
 
   save(): void {
+    if (this.editForm.invalid) {
+      return;
+    }
     this.submitted = true;
+
     console.log(this.editForm.value);
     const { libelleVehicule, numeroIdentifiant,immatriculation,carteGrise,nombrePlace, longueurVehicule,dureeVie,dateMiseCirculation,delaiAlerte} = this.editForm.value;
     this.vehicule.libelleVehicule = libelleVehicule;
@@ -82,9 +88,7 @@ paramsPage:any;
     this.vehicule.dateMiseCirculation = dateMiseCirculation;
     this.vehicule.delaiAlerte = delaiAlerte;
   
-    if (this.editForm.invalid) {
-      return;
-    }
+    
     this.loading = true;
     this.vehiculeService.createVehicule(this.vehicule).subscribe({
       next: () => {
@@ -221,6 +225,11 @@ deleteVehicule(vehiculeId: Vehicule): void {
       },
     });
   }
+}
+
+show(vehicule: Vehicule): void {
+  $('#exampleModal').modal('show');
+  this.showVehicule = vehicule;
 }
 
 getPage(data: any): void {

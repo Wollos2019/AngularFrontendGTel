@@ -16,9 +16,9 @@ export interface IPriseVehicule {
 
   interface IAppends{
     vehicule?:IVehicule
-    libelleVehicule?:string;
-    nombrePlace?:number;
-    immatriculation?:string;
+    // libelleVehicule?:string;
+    // nombrePlace?:number;
+    // immatriculation?:string;
   }
   
   export class PriseVehicule implements IPriseVehicule{

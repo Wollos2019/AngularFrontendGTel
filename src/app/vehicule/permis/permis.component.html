@@ -1,0 +1,358 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Permis</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a [routerLink]="'/'">Dashbord</a></li>
+          <li class="breadcrumb-item active">Permis</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+</section>
+
+<!-- ROW-4 -->
+<div class="row">
+  <div class="col-12 col-sm-12">
+    <div class="card">
+      <div class="card-header">
+        <button
+          type="button"
+          class="btn btn-primary btn-sm float-right"
+          (click)="openModel()"
+        >
+          Ajouter un Permis
+        </button>
+      </div>
+      <div class="card-body pt-4">
+        <div class="grid-margin">
+          <div class="">
+            <div class="panel panel-primary">
+              <div class="panel-body tabs-menu-body border-0 pt-0">
+                <div class="tab-content">
+                  <div class="tab-pane active" id="tab5">
+                    <div class="table-responsive">
+                      <table class="table table-bordered">
+                        <thead>
+                          <tr class="bg-dark text-white">
+                            <th>No:</th>
+                            <th>numero assurance</th>
+                            <th>date debut assurance</th>
+                            <th>date fin assurance</th>
+
+                            <th>scan Assurance</th>
+                            <th>Nom vehicule</th>
+                            <th>immatriculation vehicule</th>
+
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <ng-container *ngIf="permis">
+                            <tr
+                              class="border-bottom"
+                              *ngFor="let per of permis; let i = index"
+                            >
+                              <td class="text-center">
+                                {{ per.id }}
+                              </td>
+                              <td>
+                                {{ per.numeroPermis }}
+                              </td>
+                              <td>
+                                {{ per.dateAcquisition }}
+                              </td>
+                              <!-- <td>
+                                         {{per.dateFinAssurance}}
+                                        </td>
+                                        <td>
+                                            
+                                                {{per.scanAssurance}}
+                                             
+                                        </td> -->
+                              <td>
+                                {{ per.appends?.user?.firstname }}
+                              </td>
+                              <!-- <td>
+                                           
+                                            {{per.appends?.vehicule?.immatriculation}}
+                                         
+                                        </td>  -->
+
+                              <td>
+                                <div class="g-2">
+                                  <!-- <button
+                                                (click)="updateModal(per)"
+                                                title="modifier"
+                                                class="btn btn-light btn-sm mr-1"
+                                                type="button"
+                                               
+                                              >
+                                                <i class="icofont-ui-edit size-18 text-primary"></i>
+                                            </button>  -->
+                                  <button
+                                    (click)="show(per)"
+                                    class="btn btn-light btn-sm mr-1"
+                                    title="voire"
+                                  >
+                                    <span
+                                      class="icofont-ui-eye-open fs-14"
+                                    ></span>
+                                  </button>
+
+                                  <!-- <button
+                                              (click)=" delete(per)"
+                                                title="supprimer"
+                                                type="button"
+                                                class="btn btn-primary btn-light btn-sm"
+                                              >
+                                                <i class="icofont-ui-delete text-danger"></i>
+                                              </button>  -->
+                                </div>
+                              </td>
+                            </tr>
+                          </ng-container>
+
+                          <ng-container *ngIf="!permis?.length">
+                            <tr>
+                              <td colspan="4" class="text-center">
+                                Aucune données trouver
+                              </td>
+                            </tr>
+                          </ng-container>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ROW-4 END -->
+
+<!-- pagination  -->
+<div class="mb-3 mt-2" *ngIf="paramsPage && paramsPage.totalItems != 0">
+  <div class="d-inline ml-5" style="font-size: 13px">
+    Affiche {{ paramsPage.from ? paramsPage.from : 1 }} à {{ paramsPage.to }} de
+    {{ paramsPage.totalItems }} entrées
+  </div>
+  <div class="d-inline float-end">
+    <ngb-pagination
+      [pageSize]="paramsPage.itemsPerPage"
+      [collectionSize]="paramsPage.totalItems"
+      [(page)]="paramsPage.currentPage"
+      (pageChange)="getPage($event)"
+    >
+      <ng-template ngbPaginationFirst>First</ng-template>
+      <ng-template ngbPaginationLast>Last</ng-template>
+      <ng-template ngbPaginationPrevious>Prev</ng-template>
+      <ng-template ngbPaginationNext>Next</ng-template>
+    </ngb-pagination>
+  </div>
+</div>
+<!-- end pagination -->
+
+
+<!-- form for update Prisevehicule -->
+
+<!-- <div
+    class="modal fade"
+    id="updateModal"
+    tabindex="-1"
+    aria-labelledby="updateModal"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateModal">Modifier un vehicule</h5>
+        </div>
+        <div class="modal-body" *ngIf="assuranceUpdate">
+          <form class="form-row" [formGroup]="updateAssuranceForm" >
+            <div class="col-md-6">
+                <div class="form-group">
+                  <label for="numeroPoliceAssurance" class="col-form-label"
+                  >numero Police Assurance <span class="text-danger">*</span></label
+                  >
+                  <input
+                    type="text"
+                    [ngClass]="{ 'is-invalid': submittedUpdate && f1.numeroPoliceAssurance.errors }"
+                    class="form-control"
+                    id="numeroPoliceAssurance"
+                    placeholder="numero Police Assurance "
+                    formControlName="numeroPoliceAssurance"
+                  />
+                </div>
+    
+                <div *ngIf="submittedUpdate && f1.numeroPoliceAssurance.errors" class="invalid-feedback">
+                  <div *ngIf="f1.numeroPoliceAssurance.errors.required">numero Police Assurance is required</div>  -->
+<!-- <div *ngIf="f.libelleVehicule.errors.minlength">
+                    name must be at least 3 characters
+                  </div> -->
+<!-- </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="scanAssurance" class="col-form-label"
+                  >scan Assurance <span class="text-danger">*</span></label
+                  >
+                  <input
+                    type="text"
+                    [ngClass]="{ 'is-invalid': submittedUpdate && f1.scanAssurance.errors }"
+                    class="form-control"
+                    id="scanAssurance"
+                    placeholder="scan Assurance "
+                    formControlName="scanAssurance"
+                  />
+                </div>
+    
+                <div *ngIf="submittedUpdate && f1.scanAssurance.errors" class="invalid-feedback">
+                  <div *ngIf="f1.scanAssurance.errors.required">scan Assurance is required</div>  -->
+<!-- <div *ngIf="f.libelleVehicule.errors.minlength">
+                    name must be at least 3 characters
+                  </div> -->
+<!-- </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="dateFinAssurance" class="col-form-label"
+                  >date Fin Assurance  <span class="text-danger">*</span></label
+                  >
+                  <input
+                    type="date"
+                    [ngClass]="{ 'is-invalid': submittedUpdate && f1.dateFinAssurance.errors }"
+                    class="form-control"
+                    id="dateFinAssurance"
+                    placeholder="date Fin Assurance"
+                    formControlName="dateFinAssurance"
+                  />
+                </div>
+    
+                <div *ngIf="submittedUpdate && f1.dateFinAssurance.errors" class="invalid-feedback">
+                  <div *ngIf="f1.dateFinAssurance.errors.required">date Fin Assurance is required</div>  -->
+<!-- <div *ngIf="f.dateMiseCirculation.errors.minlength">
+                    name must be at least 3 characters
+                  </div> -->
+<!-- </div>
+              </div>
+
+
+
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="dateDebutAssurance" class="col-form-label"
+                  >date Debut Assurance <span class="text-danger">*</span></label
+                  >
+                  <input
+                    type="date"
+                    [ngClass]="{ 'is-invalid': submittedUpdate && f1.dateDebutAssurance.errors }"
+                    class="form-control"
+                    id="dateDebutAssurance"
+                    placeholder="date Debut Assurance"
+                    formControlName="dateDebutAssurance"
+                  />
+                </div>
+    
+                <div *ngIf="submittedUpdate && f1.dateDebutAssurance.errors" class="invalid-feedback">
+                  <div *ngIf="f1.dateDebutAssurance.errors.required">date Debut Assurance is required</div>  -->
+                <!-- <div *ngIf="f.delaiAlerte.errors.minlength">
+                    name must be at least 3 characters
+                  </div> -->
+                <!-- </div>
+              </div>
+               <div class="col-md-6">
+                <div class="form-group">
+                  <label for="idVehicule" class="col-form-label"
+                  >vehicule<span class="text-danger">*</span></label
+                  >
+                 
+    
+                  <select 
+                  [ngClass]="{ 'is-invalid': submittedUpdate && f1.idVehicule.errors }"
+                  class="form-control"
+                  id="idVehicule"
+                   formControlName="idVehicule">
+                    <option value="">selected vehicule</option>
+                    <ng-container *ngIf="vehicules">
+                    <option *ngFor="let vehicule of vehicules" [ngValue]="vehicule.id" >{{vehicule.libelleVehicule}}
+                    </option>
+                  </ng-container> 
+                 </select>
+    
+    
+                </div>
+                <div
+                  *ngIf="submittedUpdate && f1.idVehicule.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f1.idVehicule.errors.required">vehicule is required</div>
+                </div>
+              </div> 
+
+        
+            
+           </form>
+        </div>
+        
+        <div class="modal-footer">   -->
+<!-- <button type="button" class="btn btn-default" (click)="save()">
+            close
+          </button> -->
+<!-- <span></span> 
+           <button type="button" class="btn btn-success" (click)="update()">
+           Update assurance
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>    -->
+
+<!-- Modal -->
+<!-- <div
+class="modal fade"
+id="exampleModal"
+tabindex="-1"
+aria-labelledby="exampleModalLabel"
+aria-hidden="true"
+>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Detail</h5>
+      <button
+        type="button"
+        class="close"
+        data-dismiss="modal"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" *ngIf="assurances">
+      <div>{{ assurances }}</div>
+      <div>{{ assurances }}</div>
+      <div>{{ assurances }}</div>
+      <div>{{ assurances }}</div>
+      <div>{{ showAxe }}</div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+</div> -->

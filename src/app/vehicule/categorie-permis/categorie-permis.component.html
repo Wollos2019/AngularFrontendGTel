@@ -4,12 +4,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Assurances</h1>
+          <h1>categorie permis</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a [routerLink]="'/'">Dashbord</a></li>
-            <li class="breadcrumb-item active">Assurances</li>
+            <li class="breadcrumb-item active">categorie permis</li>
           </ol>
         </div>
       </div>
@@ -27,7 +27,7 @@
            
            
             <button type="button" class="btn btn-primary btn-sm float-right" (click)="openModel()">
-                Ajouter une Assurance
+                Ajouter une categorie de permis
               </button>
           </div>
           <div class="card-body pt-4">
@@ -55,33 +55,7 @@
                                 <th
                                  
                                 >
-                                numero assurance
-                                </th>
-                                <th
-                                  
-                                >
-                                date debut assurance
-                                </th>
-                                <th
-                                  
-                                >
-                                date fin assurance
-                                </th>
-                                
-                                <th
-                                  
-                                >
-                                scan Assurance
-                                </th>
-                                <th
-                                  
-                                >
-                                Nom vehicule
-                                </th>
-                                <th
-                                  
-                                >
-                                immatriculation vehicule
+                                libellé
                                 </th>
                                
                                 <th
@@ -93,77 +67,77 @@
                               </tr>
                             </thead>
                             <tbody>
-                                <ng-container *ngIf="assurances">
-                                    <tr class="border-bottom" *ngFor="let assur of assurances; let i=index">
+                                <ng-container *ngIf="categoriePermis">
+                                    <tr class="border-bottom" *ngFor="let categorieper of categoriePermis; let i=index">
                                         <td class="text-center">
                                        
-                                              {{assur.id}}
+                                              {{categorieper.id}}
                                        
                                         </td>
                                         <td>
                                         
-                                                {{assur.numeroPoliceAssurance}}
+                                                {{categorieper.libelle}}
                                        
                                         </td>
-                                        <td>
+                                        <!-- <td>
                                            
-                                                {{assur.dateDebutAssurance}}
+                                                {{categorieper.dateAcquisition}}
                                              
-                                        </td>
-                                        <td>
-                                         {{assur.dateFinAssurance}}
+                                        </td> -->
+                                        <!-- <td>
+                                         {{per.dateFinAssurance}}
                                         </td>
                                         <td>
                                             
-                                                {{assur.scanAssurance}}
+                                                {{per.scanAssurance}}
                                              
-                                        </td>
-                                           <td>
+                                        </td> -->
+                                           <!-- <td>
                                            
-                                              {{assur.appends?.vehicule?.libelleVehicule}}
+                                              {{per.appends?.user?.firstname}}
                                            
-                                          </td> 
-                                          <td>
+                                          </td>  -->
+                                          <!-- <td>
                                            
-                                            {{assur.appends?.vehicule?.immatriculation}}
+                                            {{per.appends?.vehicule?.immatriculation}}
                                          
-                                        </td> 
+                                        </td>  -->
                                          
                                         <td>
                                             <div class="g-2">
-                                                 <button
-                                                (click)="updateModal(assur)"
+                                                  <button
+                                                (click)="updateModal(categorieper)"
                                                 title="modifier"
                                                 class="btn btn-light btn-sm mr-1"
                                                 type="button"
                                                
                                               >
                                                 <i class="icofont-ui-edit size-18 text-primary"></i>
-                                            </button> 
-                                            <button (click)="show(assur)"
+                                            </button>  
+                                            <button (click)="show(categorieper)"
                                             class="btn btn-light btn-sm mr-1"
                                           
                                             title="voire"
                                             ><span
-                                              class="icofont-ui-eye fs-14"
+                                              class="icofont-eye-open fs-14"
                                             ></span
                                           ></button>
                         
-                                               <button
-                                              (click)=" delete(assur)"
+                                                <button
+                                              (click)="delete(categorieper)"
                                                 title="supprimer"
                                                 type="button"
                                                 class="btn btn-primary btn-light btn-sm"
                                               >
                                                 <i class="icofont-ui-delete text-danger"></i>
-                                              </button> 
+                                              </button>  
                                                
                                               </div>
                                         </td>
                                       </tr>
                                     </ng-container>
                             
-                                    <ng-container *ngIf="!assurances?.length">
+                                    <ng-container *ngIf="!categoriePermis?.length">
                                         <tr>
                                           <td colspan="4" class="text-center">
                                             Aucune données trouver
@@ -219,34 +193,34 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="createModal">Ajouter une assurance</h5>
+            <h5 class="modal-title" id="createModal">Ajouter une categorie permis</h5>
           </div>
           <div class="modal-body">
             <form class="form-row" [formGroup]="editForm" >
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="numeroPoliceAssurance" class="col-form-label"
-                  >numero Police Assurance <span class="text-danger">*</span></label
+                  <label for="libelle" class="col-form-label"
+                  >libelle categorie Permis <span class="text-danger">*</span></label
                   >
                   <input
                     type="text"
-                    [ngClass]="{ 'is-invalid': submitted && f.numeroPoliceAssurance.errors }"
+                    [ngClass]="{ 'is-invalid': submitted && f.libelle.errors }"
                     class="form-control"
-                    id="numeroPoliceAssurance"
-                    placeholder="numero Police Assurance "
-                    formControlName="numeroPoliceAssurance"
+                    id="libelle"
+                    placeholder="libelle permis "
+                    formControlName="libelle"
                   />
                 </div>
     
-                <div *ngIf="submitted && f.numeroPoliceAssurance.errors" class="invalid-feedback">
-                  <div *ngIf="f.numeroPoliceAssurance.errors.required">numero Assurance is required</div>
+                <div *ngIf="submitted && f.libelle.errors" class="invalid-feedback">
+                  <div *ngIf="f.libelle.errors.required">libelle is required</div>
                   <!-- <div *ngIf="f.libelleVehicule.errors.minlength">
                     name must be at least 3 characters
                   </div> -->
                 </div>
               </div>
 
-              <div class="col-md-6">
+              <!-- <div class="col-md-6">
                 <div class="form-group">
                   <label for="scanAssurance" class="form-label mt-0"
                   >selection du Fichier <span class="text-danger">*</span></label
@@ -258,48 +232,48 @@
                     id="scanAssurance"
                     formControlName="scanAssurance"
                     (change)="getFile($event)"
-                  /> 
+                  />  -->
 
                   <!-- <div class="form-group">
                     <label for="formFile" class="form-label mt-0">Single File input Upload</label>
                     <input class="form-control" type="file">
                 </div> -->
-                </div>
+                <!-- </div> -->
     
-                <div *ngIf="submitted && f.scanAssurance.errors" class="invalid-feedback">
-                  <div *ngIf="f.scanAssurance.errors.required">scan Assurance is required</div>
+                <!-- <div *ngIf="submitted && f.scanAssurance.errors" class="invalid-feedback">
+                  <div *ngIf="f.scanAssurance.errors.required">scan Assurance is required</div> -->
                   <!-- <div *ngIf="f.libelleVehicule.errors.minlength">
                     name must be at least 3 characters
                   </div> -->
-                </div>
-              </div>
+                <!-- </div>
+              </div> -->
 
 
-              <div class="col-md-6">
+              <!-- <div class="col-md-6">
                 <div class="form-group">
-                  <label for="dateDebutAssurance" class="col-form-label"
-                  >date Debut Assurance <span class="text-danger">*</span></label
+                  <label for="dateAcquisition" class="col-form-label"
+                  >date D'acquisition <span class="text-danger">*</span></label
                   >
                   <input
                     type="date"
-                    [ngClass]="{ 'is-invalid': submitted && f.dateDebutAssurance.errors }"
+                    [ngClass]="{ 'is-invalid': submitted && f.dateAcquisition.errors }"
                     class="form-control"
-                    id="dateDebutAssurance"
-                    placeholder="date Debut Assurance"
-                    formControlName="dateDebutAssurance"
+                    id="dateAcquisition"
+                    placeholder="date D'acquisition"
+                    formControlName="dateAcquisition"
                   />
                 </div>
     
-                <div *ngIf="submitted && f.dateDebutAssurance.errors" class="invalid-feedback">
-                  <div *ngIf="f.dateDebutAssurance.errors.required">date Debut Assurance is required</div>
+                <div *ngIf="submitted && f.dateAcquisition.errors" class="invalid-feedback">
+                  <div *ngIf="f.dateAcquisition.errors.required">date D'acquisition required</div> -->
                   <!-- <div *ngIf="f.delaiAlerte.errors.minlength">
                     name must be at least 3 characters
                   </div> -->
-                </div>
-              </div>
+                <!-- </div>
+              </div> -->
 
           
-              <div class="col-md-6">
+              <!-- <div class="col-md-6">
                 <div class="form-group">
                   <label for="dateFinAssurance" class="col-form-label"
                   >date Fin Assurance  <span class="text-danger">*</span></label
@@ -315,21 +289,21 @@
                 </div>
     
                 <div *ngIf="submitted && f.dateFinAssurance.errors" class="invalid-feedback">
-                  <div *ngIf="f.dateFinAssurance.errors.required">date Fin Assurance is required</div>
+                  <div *ngIf="f.dateFinAssurance.errors.required">date Fin Assurance is required</div> -->
                   <!-- <div *ngIf="f.dateMiseCirculation.errors.minlength">
                     name must be at least 3 characters
                   </div> -->
-                </div>
-              </div>
+                <!-- </div>
+              </div> -->
 
 
 
 
              
-               <div class="col-md-6">
+               <!-- <div class="col-md-6">
                 <div class="form-group">
                   <label for="idVehicule" class="col-form-label"
-                  >vehicule<span class="text-danger">*</span></label
+                  >Vehicule<span class="text-danger">*</span></label
                   >
                  
     
@@ -340,7 +314,7 @@
                    formControlName="idVehicule">
                     <option value="">selected vehicule</option>
                     <ng-container *ngIf="vehicules">
-                    <option *ngFor="let vehicule of vehicules" [ngValue]="vehicule.id" >{{vehicule.libelleVehicule}}
+                    <option *ngFor="let perso of vehicules" [ngValue]="perso.id" >{{perso.libelleVehicule}}
                     </option>
                   </ng-container> 
                  </select>
@@ -353,36 +327,36 @@
                 >
                   <div *ngIf="f.idVehicule.errors.required">vehicule is required</div>
                 </div>
-              </div> 
+              </div>  -->
     
-              <!-- <div class="col-md-6">
+               <!-- <div class="col-md-6">
                 <div class="form-group">
-                  <label for="owner" class="col-form-label"
-                    >incident Owner</label
+                  <label for="categorie_permis_id" class="col-form-label"
+                    >type categorie </label
                   >
                   
     
                   <select 
-                  [ngClass]="{ 'is-invalid': submitted && f.Owner.errors }"
+                  [ngClass]="{ 'is-invalid': submitted && f.categorie_permis_id.errors }"
                   class="form-control"
-                  id="owner"
-                   formControlName="owner">
-                    <option value="">QUALITY  MANAGER</option>
-                    <ng-container *ngIf="priorities">
-                    <option *ngFor="let city of priorities" [ngValue]="city" >{{city}}
+                  id="categorie_permis_id"
+                   formControlName="categorie_permis_id">
+                    <option value="">categorie </option>
+                    <ng-container *ngIf="permis">
+                    <option *ngFor="let city of permis" [ngValue]="city" >{{city}}
                     </option>
                   </ng-container> 
                  </select>
     
                 </div>
                 <div
-                  *ngIf="submitted && f.Owner.errors"
+                  *ngIf="submitted && f.categorie_permis_id.errors"
                   class="invalid-feedback"
                 >
-                  <div *ngIf="f.Owner.errors.required">Owner is required</div>
+                  <div *ngIf="f.categorie_permis_id.errors.required">Owner is required</div>
                 </div>
-              </div> -->
-    
+              </div> 
+     -->
     
               <!-- <div class="col-md-6">
                 <div class="form-group">
@@ -444,8 +418,8 @@
               close
             </button> -->
             <span></span>
-            <button type="button" class="btn btn-success" (click)="save()">
-              Create assurance
+            <button type="button" class="btn btn-success" (click)="savecategoriepermis()">
+              Create une categorie permis
             </button>
           </div>
         </div>
@@ -454,7 +428,7 @@
 
     <!-- form for update Prisevehicule -->
  
-     <div
+      <div
     class="modal fade"
     id="updateModal"
     tabindex="-1"
@@ -464,34 +438,34 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="updateModal">Modifier un vehicule</h5>
+          <h5 class="modal-title" id="updateModal">Modifier une categorie permis</h5>
         </div>
-        <div class="modal-body" *ngIf="assuranceUpdate">
-          <form class="form-row" [formGroup]="updateAssuranceForm" >
+        <div class="modal-body" *ngIf="CategoriePermisUpdate">
+          <form class="form-row" [formGroup]="updateCategoriePermisForm" >
             <div class="col-md-6">
                 <div class="form-group">
-                  <label for="numeroPoliceAssurance" class="col-form-label"
-                  >numero Police Assurance <span class="text-danger">*</span></label
+                  <label for="libelle" class="col-form-label"
+                  >libelle <span class="text-danger">*</span></label
                   >
                   <input
                     type="text"
-                    [ngClass]="{ 'is-invalid': submittedUpdate && f1.numeroPoliceAssurance.errors }"
+                    [ngClass]="{ 'is-invalid': submittedUpdate && f1.libelle.errors }"
                     class="form-control"
-                    id="numeroPoliceAssurance"
-                    placeholder="numero Police Assurance "
-                    formControlName="numeroPoliceAssurance"
+                    id="libelle"
+                    placeholder="libelle "
+                    formControlName="libelle"
                   />
                 </div>
     
-                <div *ngIf="submittedUpdate && f1.numeroPoliceAssurance.errors" class="invalid-feedback">
-                  <div *ngIf="f1.numeroPoliceAssurance.errors.required">numero Police Assurance is required</div> 
+                <div *ngIf="submittedUpdate && f1.libelle.errors" class="invalid-feedback">
+                  <div *ngIf="f1.libelle.errors.required">libelle is required</div>  -->
                   <!-- <div *ngIf="f.libelleVehicule.errors.minlength">
                     name must be at least 3 characters
                   </div> -->
-                 </div>
+                  </div>
               </div>
 
-              <div class="col-md-6">
+              <!--<div class="col-md-6">
                 <div class="form-group">
                   <label for="scanAssurance" class="col-form-label"
                   >scan Assurance <span class="text-danger">*</span></label
@@ -507,11 +481,11 @@
                 </div>
     
                 <div *ngIf="submittedUpdate && f1.scanAssurance.errors" class="invalid-feedback">
-                  <div *ngIf="f1.scanAssurance.errors.required">scan Assurance is required</div> 
+                  <div *ngIf="f1.scanAssurance.errors.required">scan Assurance is required</div>  -->
                   <!-- <div *ngIf="f.libelleVehicule.errors.minlength">
                     name must be at least 3 characters
                   </div> -->
-                 </div>
+                 <!-- </div>
               </div>
 
               <div class="col-md-6">
@@ -530,11 +504,11 @@
                 </div>
     
                 <div *ngIf="submittedUpdate && f1.dateFinAssurance.errors" class="invalid-feedback">
-                  <div *ngIf="f1.dateFinAssurance.errors.required">date Fin Assurance is required</div> 
+                  <div *ngIf="f1.dateFinAssurance.errors.required">date Fin Assurance is required</div>  -->
                   <!-- <div *ngIf="f.dateMiseCirculation.errors.minlength">
                     name must be at least 3 characters
                   </div> -->
-                 </div>
+                 <!-- </div>
               </div>
 
 
@@ -556,13 +530,13 @@
                 </div>
     
                 <div *ngIf="submittedUpdate && f1.dateDebutAssurance.errors" class="invalid-feedback">
-                  <div *ngIf="f1.dateDebutAssurance.errors.required">date Debut Assurance is required</div> 
+                  <div *ngIf="f1.dateDebutAssurance.errors.required">date Debut Assurance is required</div>  -->
                   <!-- <div *ngIf="f.delaiAlerte.errors.minlength">
                     name must be at least 3 characters
                   </div> -->
-                 </div>
-              </div>
-               <div class="col-md-6">
+                  <!-- </div>
+              </div> -->
+               <!-- <div class="col-md-6">
                 <div class="form-group">
                   <label for="idVehicule" class="col-form-label"
                   >vehicule<span class="text-danger">*</span></label
@@ -589,28 +563,28 @@
                 >
                   <div *ngIf="f1.idVehicule.errors.required">vehicule is required</div>
                 </div>
-              </div> 
+              </div>  -->
 
         
             
            </form>
         </div>
         
-        <div class="modal-footer">  
+        <div class="modal-footer">   
           <!-- <button type="button" class="btn btn-default" (click)="save()">
             close
           </button> -->
-           <span></span> 
+            <span></span> 
            <button type="button" class="btn btn-success" (click)="update()">
-           Update assurance
+           Update categorie permis
           </button>
         </div>
       </div>
     </div>
-  </div>   
+  </div>    
 
   <!-- Modal -->
-<div
+ <div
 class="modal fade"
 id="exampleModal"
 tabindex="-1"
@@ -630,13 +604,10 @@ aria-hidden="true"
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <div class="modal-body" *ngIf="assurances">
-      <div>{{ assurances }}</div>
-      <div>{{ assurances }}</div>
-      <div>{{ assurances }}</div>
-      <div>{{ assurances }}</div>
-      <div>{{ showAxe }}</div>
+    <div class="modal-body" *ngIf="categoriePermis">
+      <div>{{ showCategoriePermis }}</div>
     </div>
+
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-dismiss="modal">
         Close
@@ -644,7 +615,9 @@ aria-hidden="true"
     </div>
   </div>
 </div>
-</div>
+</div> 
     
+
+
 
 

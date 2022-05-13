@@ -19,6 +19,8 @@ export class ListAssuranceComponent implements OnInit {
   assurance= new Assurance();
   vehicules?:Vehicule[];
   vehicule= new Vehicule();
+  files:any;
+  showAxe:any;
 
   submitted=false;
   loading=false;
@@ -47,12 +49,11 @@ export class ListAssuranceComponent implements OnInit {
     idVehicule:['', [Validators.required]],
     dateDebutAssurance:['', [Validators.required]]
 
-  });
-
-
+  })
   ngOnInit(): void {
     this.getListAssurances();
     this.getListVehicule();
+    
   }
 
   openModel(): void {
@@ -65,20 +66,33 @@ export class ListAssuranceComponent implements OnInit {
 
   save(): void {
     this.submitted = true;
-    console.log(this.editForm.value);
-    const { numeroPoliceAssurance, dateFinAssurance,scanAssurance,dateDebutAssurance,idVehicule} = this.editForm.value;
-    this.assurance.numeroPoliceAssurance = numeroPoliceAssurance;
-    this.assurance.dateFinAssurance = dateFinAssurance;
-    this.assurance.scanAssurance = scanAssurance;
-    this.assurance.dateDebutAssurance = dateDebutAssurance;
-    this.assurance.idVehicule = idVehicule
-   
-  
+    
     if (this.editForm.invalid) {
       return;
     }
+    ;
+
+    console.log(this.editForm.value);
+    const { numeroPoliceAssurance, dateFinAssurance,dateDebutAssurance,idVehicule} = this.editForm.value;
+    
+   
+  
+  const assurance = new FormData();
+  assurance.append('numeroPoliceAssurance',numeroPoliceAssurance);
+  assurance.append('dateFinAssurance',dateFinAssurance);
+  assurance.append('dateDebutAssurance',dateDebutAssurance);
+  assurance.append('idVehicule',idVehicule);
+  assurance.append('files',this.files[0],this.files[0].name);
+
+  if(dateDebutAssurance>dateFinAssurance){
+    this.toastr.error(
+      "Une erreur au niveau des dates ",
+      'Error'
+    );
+  }
+  else{
     this.loading = true;
-    this.assuranceService.createAssurance(this.assurance).subscribe({
+    this.assuranceService.createAssurance(assurance).subscribe({
       next: () => {
         this.loading = false;
         this.toastr.success('Enregistrement effectuée !!');
@@ -95,6 +109,8 @@ export class ListAssuranceComponent implements OnInit {
         );
       },
     });
+  }
+    
   }
 
 
@@ -159,7 +175,7 @@ updateModal(up:Assurance):void {
   this.updateAssuranceForm.get('scanAssurance')?.setValue(up.scanAssurance);
   this.updateAssuranceForm.get('dateDebutAssurance')?.setValue(up.dateDebutAssurance);
   this.updateAssuranceForm.get('idVehicule')?.setValue(up.idVehicule);
-  //this.updatePriseVehiculeForm.get('nombrePlace')?.setValue(up.nombrePlace);
+ 
  
  
 }
@@ -180,27 +196,37 @@ update():void{
   this.assuranceUpdate.idVehicule= idVehicule;
   
   this.assuranceUpdate._method="PUT";
-  this.loading = true;
-  this.assuranceService.updateAssurance (this.assuranceUpdate).subscribe({
-    next: () => {
-      this.loading = false;
-      this.submittedUpdate = false;
-      this.toastr.success('Modification effectué!!');
-      this.getListAssurances();
-      $('#updateModal').modal('hide');
-     
-      this.submittedUpdate = false;
-     
-    },
-    error: (error: any) => {
-      console.error('Error', error);
-      this.loading = false;
-      this.toastr.error(
-        "Une Erreur c'est produite l'hors de la modification",
-        'Error'
-      );
-    },
-  });
+  if(dateDebutAssurance>dateFinAssurance)
+  {
+    this.toastr.error(
+      "Une erreur au niveau des dates ",
+      'Error'
+    );
+  }else{
+    this.loading = true;
+    this.assuranceService.updateAssurance (this.assuranceUpdate).subscribe({
+      next: () => {
+        this.loading = false;
+        this.submittedUpdate = false;
+        this.toastr.success('Modification effectué!!');
+        this.getListAssurances();
+        
+        $('#updateModal').modal('hide');
+       
+        this.submittedUpdate = false;
+       
+      },
+      error: (error: any) => {
+        console.error('Error', error);
+        this.loading = false;
+        this.toastr.error(
+          "Une Erreur c'est produite l'hors de la modification",
+          'Error'
+        );
+      },
+    });
+  }
+ 
 }
 
 
@@ -230,6 +256,11 @@ delete(assuranceId: Vehicule): void {
   }
 }
 
+show(axe: Assurance): void {
+  $('#exampleModal').modal('show');
+  this.showAxe = axe;
+}
+
   /**
  * 
  * @param data 
@@ -239,5 +270,47 @@ delete(assuranceId: Vehicule): void {
     console.log(data);
     this.getListAssurances(`page=${data}`);
   }
+
+  /**
+   * 
+   * @param event 
+   */
+  getFile(event:any):void{
+    if(event.target.files && event.target.files.length){
+      this.files = event.target.files;
+    }
+    console.log(this.files);
+  }
+
+  // calculateDiff()
+  // {
+   
+  //   let dateStart = new Date(this['dateDebutAssurance']);
+  //   let dateEnd = new Date(this['dateFinAssurance']);
+  //   if( dateEnd.getDate()-dateStart.getDate()<0)
+  //   {
+  //     alert('la date de fin doit etre superieur a celle du debut')
+  //     return
+     
+  //   }else{
+  //     return null;
+  //   }
+    
+    
+  // }
+  // calculateDiff(){
+  //  var dateStart = new Date(this['dateDebutAssurance']);
+  //   var dateEnd = new Date(this['dateFinAssurance']);
+
+   
+  //   var resul= Math.floor((Date.UTC(dateEnd.getFullYear(),
+  //   dateEnd.getMonth(),dateEnd.getDate()),- Date.UTC(dateStart.getFullYear(),dateStart.getMonth(),dateStart.getDate()))/(1000*60*24));
+  //   console.log(resul);
+  //   console.log("**************************************************************");
+  //   console.log(dateEnd);
+    
+    
+  //   return resul;
+  // }
 
 }
