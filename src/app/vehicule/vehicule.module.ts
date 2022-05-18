@@ -12,6 +12,7 @@ import { CategoriePermisComponent } from './categorie-permis/categorie-permis.co
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CreatePermisComponent } from './permis/create-permis/create-permis.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 @NgModule({
@@ -26,7 +27,9 @@ import { CreatePermisComponent } from './permis/create-permis/create-permis.comp
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     CommonModule,
-    VehiculeRoutingModule,FormsModule,ReactiveFormsModule,NgbPaginationModule,NgSelectModule
+    VehiculeRoutingModule,FormsModule,ReactiveFormsModule,NgbPaginationModule,NgSelectModule,
+    NgMultiSelectDropDownModule.forRoot(),
+
   ],
   providers: [VehiculeServiceService],
 })

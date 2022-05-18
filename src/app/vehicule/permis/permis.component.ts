@@ -45,11 +45,6 @@ export class PermisComponent implements OnInit {
  
  
 
-// AddtoArray(catperm:any){
-//     this.array.push(catperm.id);
-//     console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"+catperm.id);
-    
-// }
   ngOnInit(): void {
     this.getAllPersonals();
     this.getListPermi();

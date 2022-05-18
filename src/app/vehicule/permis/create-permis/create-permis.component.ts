@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { SELECTION_MODEL_FACTORY } from '@ng-select/ng-select';
 import { ToastrService } from 'ngx-toastr';
+import { first } from 'rxjs';
 import { Personal } from 'src/app/rh/models/personal.model';
 import { RhService } from 'src/app/rh/services/rh.service';
 import { CategoriePermis } from '../../models/categoriePermis.model';
@@ -15,15 +17,17 @@ import { VehiculeServiceService } from '../../vehicule-service.service';
 })
 export class CreatePermisComponent implements OnInit {
 
-  categoriePermis?:CategoriePermis[];
+  categoriePermis:CategoriePermis[] =[];
   categoriepermis = new CategoriePermis();
-  permis?:Permis[];
+  permis:Permis[]=[];
   permie = new Permis();
   paramsPage: any;
-  personals?:Personal[];
+  personals:Personal[]=[];
   personal=new Personal();
   loading=false;
   submitted = false;
+  selected!:any [];
+  
   constructor(
     private fb:FormBuilder,
     private toastr : ToastrService,
@@ -33,24 +37,72 @@ export class CreatePermisComponent implements OnInit {
 
   editForm=this.fb.group({
     numeroPermis:['', [Validators.required]],
+    category:['',[Validators.required]],
     dateAcquisition:['', [Validators.required]],
     userId:['', [Validators.required]],
-    numeroDossierPermis:['', [Validators.required]],
-    typeCategoriePermis:['', [Validators.required]],
-    dateDebutPermis:['', [Validators.required]],
-    dateFinPermis:['', [Validators.required]],
-    categorie_permis_id:['', [Validators.required]],
-    permis_id:['', [Validators.required]],
+    permiscategories:this.fb.array([]),
     
 
   });
 
+ 
 
   ngOnInit(): void {
+   
     this.getAllPersonals();
     this.getListPermi();
     this.getListCategoriePermis();
+
+    this.editForm.get("category")?.valueChanges.subscribe((data:CategoriePermis[])=>{
+      if(data.length){
+       ( (this.editForm.controls as any).permiscategories as FormArray).clear();
+       
+        console.log(data);
+        data.forEach((cp : CategoriePermis) => {
+          this.addPermiscategorie(cp);
+        });
+        
+        // const selectedPC=(this.editForm.controls as any).permiscategories as FormArray
+
+        // this.editForm.value.permiscategories.forEach((pc:any) => {
+        //   const isExist=this.editForm.value.category.find(
+        //     (c:any)=>c.id===pc.category.id
+        //   )
+        //   if(!isExist){
+        //     const index=selectedPC.controls.findIndex((x)=>x.value.id===pc.id);
+        //     selectedPC.removeAt(index)
+        //   }
+        // });
+        
+        console.log(this.editForm.value.category.permiscategories);
+        
+      }
+    })
   }
+
+ addPermiscategorie(category:CategoriePermis) {
+
+  const permiscategorieForm = this.fb.group({
+    categorie_permis_id:[category.id],
+    numeroDossierPermis:['', [Validators.required]],
+    typeCategoriePermis:['', [Validators.required]],
+    dateDebutPermis:['', [Validators.required]],
+    dateFinPermis:['', [Validators.required]],
+   
+   
+  });
+/**
+ * function pour recuper et afficher l'input
+ * push(control) : ajoute un nouveau contrôle à la fin du tableau
+ */
+  this.permiscategories.push(permiscategorieForm);
+
+}
+
+// ngOnDestroy() {
+//   this.categoriePermis.forEach(cagetory => cagetory.unsubscribe());
+//   this.categoriePermis = [];
+// }
 
   getAllPersonals(params=''):void{
     this.loading = true;
@@ -108,19 +160,14 @@ export class CreatePermisComponent implements OnInit {
       numeroPermis,
       dateAcquisition,
       userId,
-      numeroDossierPermis,
-      typeCategoriePermis,
-      dateDebutPermis,
-      categorie_permis_id,
-      dateFinPermis} = this.editForm.value;
+      permiscategories
+      } = this.editForm.value;
     this.permie.numeroPermis = numeroPermis;
     this.permie.dateAcquisition = dateAcquisition;
     this.permie.userId = userId;
-    // this.permie.pivot!.numeroDossierPermis = numeroDossierPermis;
-    // this.permie.pivot!.typeCategoriePermis = typeCategoriePermis;
-    // this.permie.pivot!.dateDebutPermis = dateDebutPermis;
-    // this.permie.pivot!.dateFinPermis = dateFinPermis;
-    this.permie.categorie_permis_id = categorie_permis_id;
+    this.permie.categories=permiscategories;
+  
+
    
     if (this.editForm.invalid) {
       return;
@@ -170,6 +217,40 @@ export class CreatePermisComponent implements OnInit {
       },
     });
   }
+/////////////////////////////////
+/**
+ * pour obtenir les donnes du tableau dynamic
+ */
+ get permiscategories() {
+  return this.editForm.controls["permiscategories"] as FormArray;
+}
 
+
+
+/**
+ * function pour supprimer dynamiquement l'input
+ * removeAt
+ */
+
+
+
+
+getValues() {
+  console.log(this.selected);
+}
+addOrMove(event:any):void{console.log(event);
+
+}
+onRemove(event:any):void{
+// if(this.categoriePermis.some((condition)=>condition == event.value.id)){
+//   console.log("retourrrrrrr en arriere");
+//   this.permiscategories.push(event.value);
+  //this.permiscategories = [...this.permiscategories];
+  // this.deletePermiscategorie(event);
+  
+// }
+
+
+}
 
 }
