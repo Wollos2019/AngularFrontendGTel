@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder,Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { CategoriePermis } from '../models/categoriePermis.model';
 import { Pagination } from '../models/pagination.model';
 import {  IVehicule, Vehicule } from '../models/vehicule.model';
 import { VehiculeServiceService } from '../vehicule-service.service';
@@ -16,12 +17,13 @@ export class ListVehiculeComponent implements OnInit {
 paramsPage:any;
   vehicules!: Vehicule[];
   vehicule = new Vehicule();
-  
+  categoryPermit:CategoriePermis[]=[];
+  categorypermit= new CategoriePermis();
  
   submittedUpdate!: boolean;
   VehiculeUpdate!: Vehicule;
  
-  showVehicule: any;
+  showVehicule!: Vehicule;
   constructor(private fb: FormBuilder,
     private toastr:ToastrService,
     private vehiculeService: VehiculeServiceService) { }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
 import { Pagination } from 'src/app/vehicule/models/pagination.model';
 import { Vehicule } from 'src/app/vehicule/models/vehicule.model';
@@ -20,7 +21,7 @@ export class ListAssuranceComponent implements OnInit {
   vehicules?:Vehicule[];
   vehicule= new Vehicule();
   files:any;
-  showAxe:any;
+  showAssurance!:Assurance;
 
   submitted=false;
   loading=false;
@@ -31,8 +32,10 @@ export class ListAssuranceComponent implements OnInit {
     private fb:FormBuilder,
     private toastr:ToastrService,
     private assuranceService:AssuranceService,
-    private vehiculeService:VehiculeServiceService
-  ) { }
+    private vehiculeService:VehiculeServiceService,
+    private sanitizer: DomSanitizer
+  ) {}
+  
   editForm=this.fb.group({
     numeroPoliceAssurance:['', [Validators.required]],
     dateFinAssurance:['', [Validators.required]],
@@ -256,9 +259,9 @@ delete(assuranceId: Vehicule): void {
   }
 }
 
-show(axe: Assurance): void {
+show(assurance: Assurance): void {
   $('#exampleModal').modal('show');
-  this.showAxe = axe;
+  this.showAssurance = assurance;
 }
 
   /**
@@ -312,5 +315,9 @@ show(axe: Assurance): void {
     
   //   return resul;
   // }
+
+  sanitizeImageUrl(imageUrl: string): SafeUrl {
+    return this.sanitizer.bypassSecurityTrustUrl(imageUrl);
+}
 
 }

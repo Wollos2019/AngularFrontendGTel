@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CategoriePermis } from './models/categoriePermis.model';
+import { Panne } from './models/panne.model';
 import { Permis } from './models/permis.model';
 
 import { PriseVehicule } from './models/priseVehicule.model';
@@ -13,6 +14,7 @@ import { Vehicule } from './models/vehicule.model';
 })
 export class VehiculeServiceService {
   apiUrl=environment.apiUrl;
+
   constructor(private httpClient:HttpClient) { }
 
   //GESTION DES VEHICULES
@@ -133,6 +135,37 @@ deleteCategoriePermi(Catpermi:CategoriePermis):Observable<CategoriePermis>{
 createCategoriePermi(Catpermi:CategoriePermis):Observable<CategoriePermis>{
   return this.httpClient.post<CategoriePermis>(`${this.apiUrl}category_permits`,Catpermi);
 }
+
+
+
+   //GESTION DES PANNE
+/**
+ * 
+ * @param params 
+ * @returns 
+ */
+
+
+ getAllPannes(params=''):Observable<Panne[]>{
+  return this.httpClient.get<Panne[]>(`${this.apiUrl}pannes/${params}`);
+}
+
+getOnePanne(panne:Panne):Observable<Panne>{
+  return this.httpClient.get<CategoriePermis>(`${this.apiUrl}pannes/${panne.id}`);
+}
+
+updatePanne(panne:Panne):Observable<Panne>{
+  return this.httpClient.post<Panne>(`${this.apiUrl}pannes/${panne.id}`,panne);
+}
+
+deletePanne(id:number):Observable<Panne>{
+  return this.httpClient.delete<Panne>(`${this.apiUrl}pannes/${id}`);
+}
+
+createPanne(panne:Panne):Observable<Panne>{
+  return this.httpClient.post<Panne>(`${this.apiUrl}pannes`,panne);
+}
+
 
 
 }

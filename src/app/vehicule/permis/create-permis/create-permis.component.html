@@ -1,3 +1,4 @@
+
 <div class="container-fluid">
   <h5>Ajouter un permis</h5>
   <div class="card">
@@ -108,12 +109,13 @@
           <ng-container formArrayName="permiscategories">
             <ng-container
               *ngFor="
-                let c of editForm.value.category;
+                let c of permiscategories.controls;
                 let i = index
               "
             >
-              <div [formGroupName]="i">
-                <h4>categorie :{{c.libelle }} </h4>
+            <h4>categorie :{{c.value?.category?.libelle }} </h4>
+              <div [formGroup]="c">
+              
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
@@ -122,7 +124,7 @@
                         <span class="text-danger">*</span></label
                       >
                       <input
-                        type="text"
+                        type=""
                         
                         class="form-control"
                         id="numeroDossierPermis"
@@ -232,3 +234,9 @@
     Create permis
   </button>
 </div>
+
+
+<ngx-loading
+  [show]="loading"
+  [config]="{ backdropBorderRadius: '3px' }"
+></ngx-loading>

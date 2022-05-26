@@ -6,7 +6,7 @@ export interface IPermis{
     numeroPermis?:string;
     dateAcquisition?:Date;
     userId?:string;
-    categorie_permis_id?:string;
+    category_permit_id?:string;
     numeroDossierPermis?:string;
     typeCategoriePermis?:string;
     dateDebutPermis?:Date;
@@ -33,7 +33,7 @@ export class Permis implements IPermis{
         public numeroPermis?:string,
         public dateAcquisition?:Date,
         public userId?:string,
-        public categorie_permis_id?:string,
+        public category_permit_id?:string,
         public  appends?:IAppends,
         public numeroDossierPermis?:string,
         public typeCategoriePermis?:string,

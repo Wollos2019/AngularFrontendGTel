@@ -13,6 +13,8 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CreatePermisComponent } from './permis/create-permis/create-permis.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { CreerPanneComponent } from './panne-vehicule/creer-panne/creer-panne.component';
+
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     PriseVehiculeComponent,
     PermisComponent,
     CreatePermisComponent,
-    CategoriePermisComponent
+    CategoriePermisComponent,
+    CreerPanneComponent,
+   
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [

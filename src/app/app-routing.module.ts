@@ -54,6 +54,15 @@ const routes: Routes = [
         (mod) => mod.AssuranceModule
       ),
   },
+  {
+    path: 'fournisseur',
+    loadChildren: () =>
+      import('./Fournisseur/fournisseur/fournisseur.module').then(
+        (mod) => mod.FournisseurModule
+      ),
+  },
+ 
+  
 
   {
     path: '',

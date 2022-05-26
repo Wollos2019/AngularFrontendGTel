@@ -157,21 +157,21 @@
                                         <td>
                                             <div class="g-2">
                                               <button (click)="show(v)"
-                                            class="btn btn-light btn-sm mr-1"
+                                            class="btn btn-success btn-sm mr-1"
                                           
                                             title="voire"
                                             ><span
-                                              class="icofont-eye-open fs-14"
+                                              class="icofont-eye-open size-18 "
                                             ></span
                                           ></button>
                                                 <button
                                                 (click)="updateModal(v)"
                                                 title="modifier"
-                                                class="btn btn-light btn-sm mr-1"
+                                                class="btn btn-primary btn-sm mr-1"
                                                 type="button"
                                                
                                               >
-                                                <i class="icofont-ui-edit size-18 text-primary"></i>
+                                                <i class="icofont-ui-edit size-18 "></i>
                                             </button>
                                               
                         
@@ -179,9 +179,9 @@
                                               (click)="deleteVehicule(v)"
                                                 title="supprimer"
                                                 type="button"
-                                                class="btn btn-primary btn-light btn-sm"
+                                                class="btn btn-danger  btn-sm"
                                               >
-                                                <i class="icofont-ui-delete text-danger"></i>
+                                                <i class="icofont-ui-delete size-18 "></i>
                                               </button>
                                                
                                               </div>
@@ -992,16 +992,16 @@
          <span aria-hidden="true">&times;</span>
        </button>
      </div>
-     <div class="modal-body" *ngIf="vehicules">
-      <div>{{vehicule.libelleVehicule }}</div>
-      <div>{{vehicule.immatriculation }}</div>
-      <div>{{vehicule.longueurVehicule }}</div>
-      <div>{{vehicule.nombrePlace }}</div>
-      <div>{{vehicule.numeroIdentifiant }}</div>
-      <div>{{vehicule.dateMiseCirculation }}</div>
-      <div>{{vehicule.delaiAlerte }}</div>
-      <div>{{vehicule.dureeVie }}</div>
-      <div>{{vehicule.carteGrise }}</div>
+     <div class="modal-body" *ngIf="showVehicule">
+      <div><p>Nom du vehicule: <strong>{{showVehicule.libelleVehicule }}</strong></p></div>
+      <div><p>Immatriculation du vehicule: <strong>{{showVehicule.immatriculation }}</strong></p></div>
+      <div><p>Longueur du vehicule: <strong>{{showVehicule.longueurVehicule }}</strong></p></div>
+      <div><p> Nombre du vehicule: <strong>{{showVehicule.nombrePlace }}</strong></p></div>
+      <div><p>Numero d'identifiant vehicule: <strong>{{showVehicule.numeroIdentifiant }}</strong></p></div>
+      <div><p>Date de mise en circulation du vehicule: <strong>{{showVehicule.dateMiseCirculation }}</strong></p></div>
+      <div><p>delais d'alerte du vehicule: <strong>{{showVehicule.delaiAlerte }}</strong></p></div>
+      <div><p> duree de vie du vehicule: <strong>{{showVehicule.dureeVie }}</strong></p></div>
+      <div><p>carte grise du vehicule: <strong>{{showVehicule.carteGrise }}</strong></p></div>
      
      </div>
  
@@ -1013,4 +1013,9 @@
    </div>
  </div>
  </div> 
+
+ <ngx-loading
+  [show]="loading"
+  [config]="{ backdropBorderRadius: '3px' }"
+></ngx-loading>
     

@@ -177,7 +177,7 @@
         Affiche {{ paramsPage.from ? paramsPage.from : 1 }} à {{ paramsPage.to }} de
         {{ paramsPage.totalItems }} entrées
       </div>
-      <div class="d-inline float-end">
+      <div class="d-inline float-end ml-5">
         <ngb-pagination
           [pageSize]="paramsPage.itemsPerPage"
           [collectionSize]="paramsPage.totalItems"
@@ -540,4 +540,9 @@
     </div>
   </div>  
     
+
+  <ngx-loading
+  [show]="loading"
+  [config]="{ backdropBorderRadius: '3px' }"
+></ngx-loading>
 

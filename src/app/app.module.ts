@@ -23,7 +23,6 @@ import { ProduitsModule } from './modules/commercial/produits/produits.module';
 import { NgxPrintModule } from 'ngx-print';
 import { FactureDetailsComponent } from './facture/facture-details/facture-details.component';
 import {ReactiveFormsModule} from "@angular/forms";
-import { CreatePermisComponent } from './vehicule/permis/create-permis/create-permis.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -35,7 +34,7 @@ import { CreatePermisComponent } from './vehicule/permis/create-permis/create-pe
     NavComponent,
     DashboardComponent,
     FactureDetailsComponent,
-    
+   
   
 
   ],

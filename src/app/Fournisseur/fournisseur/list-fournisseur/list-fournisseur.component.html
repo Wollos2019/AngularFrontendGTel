@@ -1,0 +1,570 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Fournisseurs</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a [routerLink]="'/'">Dashbord</a></li>
+          <li class="breadcrumb-item active">Fournisseurs</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+</section>
+
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-body">
+      <form class="form-row" [formGroup]="editForm">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="libelleFournisseur" class="col-form-label"
+              >Nom du fournisseur<span class="text-danger">*</span></label
+            >
+            <input
+              type="text"
+              [ngClass]="{
+                'is-invalid': submitted && f.libelleFournisseur.errors
+              }"
+              class="form-control"
+              id="libelleFournisseur"
+              placeholder="Nom fournisseur "
+              formControlName="libelleFournisseur"
+            />
+          </div>
+
+          <div
+            *ngIf="submitted && f.libelleFournisseur.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f.libelleFournisseur.errors.required">
+              numero permis is required
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="addressFournisseur" class="col-form-label"
+              >address Fournisseur <span class="text-danger">*</span></label
+            >
+            <input
+              type="text"
+              [ngClass]="{
+                'is-invalid': submitted && f.addressFournisseur.errors
+              }"
+              class="form-control"
+              id="addressFournisseur"
+              placeholder="address Fournisseur"
+              formControlName="addressFournisseur"
+            />
+          </div>
+
+          <div
+            *ngIf="submitted && f.addressFournisseur.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f.addressFournisseur.errors.required">
+              address Fournisseur required
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="telephone1" class="col-form-label"
+              >numero telephone 1 <span class="text-danger">*</span></label
+            >
+            <input
+              type="tel"
+              [ngClass]="{ 'is-invalid': submitted && f.telephone1.errors }"
+              class="form-control"
+              id="telephone1"
+              placeholder="numero telephone 1 "
+              formControlName="telephone1"
+            />
+          </div>
+
+          <div
+            *ngIf="submitted && f.telephone1.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f.telephone1.errors.required">
+              numero telephone1 is required
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="telephone2" class="col-form-label"
+              >numero telephone 2 <span class="text-danger">*</span></label
+            >
+            <input
+              type="tel"
+              [ngClass]="{
+                'is-invalid': submitted && f.telephone2.errors
+              }"
+              class="form-control"
+              id="telephone2"
+              placeholder="numero telephone 2"
+              formControlName="telephone2"
+            />
+          </div>
+
+          <div
+            *ngIf="submitted && f.telephone2.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f.telephone2.errors.required">
+              numero telephone2 required
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="col-md-6">
+            <div class="form-group">
+              <label for="category" class="col-form-label"
+                >type categorie
+              </label>
+  
+              <ng-select
+                [multiple]="true"
+                placeholder="Select  type of categorie permis"
+                [bindLabel]="'libelle'"
+                formControlName="category"
+                
+                [items]="categoriePermis"
+              > -->
+        <!-- <ng-option
+                  [ngValue]="catperm.id"
+                  *ngFor="let catperm of categoriePermis"
+                >
+                  <div>{{ catperm.libelle }}</div>
+                </ng-option> -->
+        <!-- </ng-select>
+            </div>
+          </div> -->
+
+        <!-- <div class="col-12">
+            <ng-container formArrayName="permiscategories">
+              <ng-container
+                *ngFor="
+                  let c of permiscategories.controls;
+                  let i = index
+                "
+              >
+              <h4>categorie :{{c.value?.category?.libelle }} </h4>
+                <div [formGroup]="c">
+                
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="numeroDossierPermis" class="col-form-label"
+                          >numero Dossier Permis
+                          <span class="text-danger">*</span></label
+                        >
+                        <input
+                          type=""
+                          
+                          class="form-control"
+                          id="numeroDossierPermis"
+                          placeholder="numero Dossier Permis"
+                          formControlName="numeroDossierPermis"
+                        />
+                      </div> -->
+        <!-- <div
+                        *ngIf="submitted && f.numeroDossierPermis.errors"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f.numeroDossierPermis.errors.required">
+                          numero Dossier Permis is required
+                        </div>
+                      </div> -->
+        <!-- </div>
+  
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="typeCategoriePermis" class="col-form-label"
+                          >type Categorie Permis
+                          <span class="text-danger">*</span></label
+                        >
+                        <input
+                          type="text"
+                        
+                          class="form-control"
+                          id="typeCategoriePermis"
+                          placeholder="type Categorie Permis"
+                          formControlName="typeCategoriePermis"
+                        /> -->
+        <!-- <div
+                          *ngIf="submitted && f.typeCategoriePermis.errors"
+                          class="invalid-feedback"
+                        >
+                          <div *ngIf="f.typeCategoriePermis.errors.required">
+                            type Categorie Permis is required
+                          </div>
+                        </div> -->
+        <!-- </div>
+                    </div>
+                  </div>
+  
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="dateDebutPermis" class="col-form-label"
+                          >date Debut Permis
+                          <span class="text-danger">*</span></label
+                        >
+                        <input
+                          type="date"
+                         
+                          class="form-control"
+                          id="dateDebutPermis"
+                          placeholder="date Debut Permis"
+                          formControlName="dateDebutPermis"
+                        /> -->
+        <!-- <div
+                          *ngIf="submitted && f.dateDebutPermis.errors"
+                          class="invalid-feedback"
+                        >
+                          <div *ngIf="f.dateDebutPermis.errors.required">
+                            date Debut Permis is required
+                          </div>
+                        </div> -->
+        <!-- </div>
+                    </div>
+  
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="dateFinPermis" class="col-form-label"
+                          >date Fin Permis
+                          <span class="text-danger">*</span></label
+                        >
+                        <input
+                          type="date"
+                         
+                          class="form-control"
+                          id="dateFinPermis"
+                          placeholder="date Fin Permis"
+                          formControlName="dateFinPermis"
+                        /> -->
+        <!-- <div
+                          *ngIf="submitted && f.dateFinPermis.errors"
+                          class="invalid-feedback"
+                        >
+                          <div *ngIf="f.dateFinPermis.errors.required">
+                            date Fin Permis is required
+                          </div>
+                        </div> -->
+        <!-- </div>
+                    </div>
+                  </div>
+  
+      
+                </div>
+                <hr>
+              </ng-container>
+            </ng-container>
+          </div> -->
+      </form>
+    </div>
+    <div class="center mb-2">
+      <button
+        type="button"
+        class="btn btn-primary float-right mr-2"
+        (click)="savefournisseur()"
+      >
+        Create fournisseur
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<div class="container-fluid">
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Liste des Fournisseurs</h3>
+      </div>
+      <div class="card-body">
+        <!-- <button id="table2-new-row-button" class="btn btn-primary mb-4"> Add New Row</button> -->
+        <div class="table-responsive">
+          <table
+            class="table table-bordered border text-nowrap mb-0"
+            id="new-edit"
+          >
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nom fournisseur</th>
+                <th>Address </th>
+                <th>Numero telephone 1</th>
+                <th>Numero telephone 2</th>
+                <!-- <th>E-mail</th> -->
+                <th name="bstable-actions">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngIf="fournisseurs">
+                <tr *ngFor="let fourni of fournisseurs, let i=index">
+                  <td>{{i+1}}</td>
+                  <td>{{fourni.libelleFournisseur}}</td>
+                  <td>{{fourni.addressFournisseur}}</td>
+                  <td>{{fourni.telephone1}}</td>
+                  <td>{{fourni.telephone2}}</td>
+                  <!-- <td>b.Chloe@datatables.net</td> -->
+                  <td name="bstable-actions">
+                    <div class="btn-list">
+                      <button
+                     (click)="show(fourni)"
+                        id="bEdit"
+                        title="voire"
+                        type="button"
+                        class="btn btn-sm btn-success mr-1"
+                      >
+                        <span class="icofont-eye-open mr-1"> </span>
+                      </button>
+                      <button
+                        id="bDel"
+                        title="supprimer"
+                        type="button"
+                        class="btn btn-sm btn-danger mr-1"
+                        (click)="delete(fourni)"
+                      >
+                        <span class="icofont-ui-delete"> </span>
+                      </button>
+                      <button
+                      (click)="updateModal(fourni)"
+                        id="bAcep"
+                        title="modifier"
+                        type="button"
+                        class="btn btn-sm btn-primary mr-1"
+                        
+                      >
+                        <span class="icofont-ui-edit "> </span>
+                      </button>
+                    
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
+              <ng-container *ngIf="!fournisseurs?.length">
+                <tr>
+                  <td colspan="4" class="text-center">
+                    Aucune données trouver
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- pagination  -->
+<div class="mb-3 mt-2" *ngIf="paramsPage && paramsPage.totalItems != 0">
+    <div class="d-inline ml-5" style="font-size: 13px" >
+      Affiche {{ paramsPage.from ? paramsPage.from : 1 }} à {{ paramsPage.to }} de
+      {{ paramsPage.totalItems }} entrées
+    </div>
+    <div class="d-inline float-end ml-5">
+      <ngb-pagination
+        [pageSize]="paramsPage.itemsPerPage"
+        [collectionSize]="paramsPage.totalItems"
+        [(page)]="paramsPage.currentPage"
+        (pageChange)="getPage($event)"
+      >
+        <ng-template ngbPaginationFirst>First</ng-template>
+        <ng-template ngbPaginationLast>Last</ng-template>
+        <ng-template ngbPaginationPrevious>Prev</ng-template>
+        <ng-template ngbPaginationNext>Next</ng-template>
+      </ngb-pagination>
+    </div>
+  </div>
+  <!-- end pagination -->
+</div>
+
+
+<div
+class="modal fade"
+id="updateModal"
+tabindex="-1"
+aria-labelledby="updateModal"
+aria-hidden="true"
+>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="updateModal">Modifier une prise vehicule</h5>
+    </div>
+    <div class="modal-body" *ngIf="FournisseurUpdate">
+      <form class="form-row" [formGroup]="updateFournisseurForm" >
+        <div class="col-md-6">
+            <div class="form-group">
+              <label for="libelleFournisseur" class="col-form-label"
+              >Nom Fournisseur <span class="text-danger">*</span></label
+              >
+              <input
+                type="text"
+                [ngClass]="{ 'is-invalid': submittedUpdate && f1.libelleFournisseur.errors }"
+                class="form-control"
+                id="libelleFournisseur"
+                placeholder="Nom Fournisseur  "
+                formControlName="libelleFournisseur"
+              />
+            </div>
+
+            <div *ngIf="submittedUpdate && f1.libelleFournisseur.errors" class="invalid-feedback">
+              <div *ngIf="f1.libelleFournisseur.errors.required">name is required</div>
+              <!-- <div *ngIf="f.libelleVehicule.errors.minlength">
+                name must be at least 3 characters
+              </div> -->
+            </div>
+          </div>
+
+      
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="addressFournisseur" class="col-form-label"
+              >address Fournisseur  <span class="text-danger">*</span></label
+              >
+              <input
+                type="text"
+                [ngClass]="{ 'is-invalid': submittedUpdate && f1.addressFournisseur.errors }"
+                class="form-control"
+                id="addressFournisseur"
+                placeholder="address Fournisseur"
+                formControlName="addressFournisseur"
+              />
+            </div>
+
+            <div *ngIf="submittedUpdate && f1.addressFournisseur.errors" class="invalid-feedback">
+              <div *ngIf="f1.addressFournisseur.errors.required">address Fournisseur is required</div>
+              <!-- <div *ngIf="f.dateMiseCirculation.errors.minlength">
+                name must be at least 3 characters
+              </div> -->
+            </div>
+          </div>
+
+
+
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="telephone1" class="col-form-label"
+              >Numero de telephone 1 <span class="text-danger">*</span></label
+              >
+              <input
+                type="tel"
+                [ngClass]="{ 'is-invalid': submittedUpdate && f1.telephone1.errors }"
+                class="form-control"
+                id="telephone1"
+                placeholder="telephone1"
+                formControlName="telephone1"
+              />
+            </div>
+
+            <div *ngIf="submittedUpdate && f1.telephone1.errors" class="invalid-feedback">
+              <div *ngIf="f1.telephone1.errors.required">telephone1 is required</div>
+              <!-- <div *ngIf="f.delaiAlerte.errors.minlength">
+                name must be at least 3 characters
+              </div> -->
+            </div>
+          </div>
+
+          
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="telephone2" class="col-form-label"
+              >Numero de telephone 2 <span class="text-danger">*</span></label
+              >
+              <input
+                type="tel"
+                [ngClass]="{ 'is-invalid': submittedUpdate && f1.telephone2.errors }"
+                class="form-control"
+                id="telephone2"
+                placeholder="telephone2"
+                formControlName="telephone2"
+              />
+            </div>
+
+            <div *ngIf="submittedUpdate && f1.telephone2.errors" class="invalid-feedback">
+              <div *ngIf="f1.telephone2.errors.required">telephone2 is required</div>
+              <!-- <div *ngIf="f.delaiAlerte.errors.minlength">
+                name must be at least 3 characters
+              </div> -->
+            </div>
+          </div>
+          
+
+    
+        
+       </form>
+    </div>
+    
+    <div class="modal-footer"> 
+      <!-- <button type="button" class="btn btn-default" (click)="save()">
+        close
+      </button> -->
+       <span></span> 
+       <button type="button" class="btn btn-success" (click)="updateFournisseur()">
+       Update fourniseur
+      </button>
+    </div>
+  </div>
+</div>
+</div>  
+ 
+
+
+   <!-- Modal -->
+   <div
+   class="modal fade"
+   id="exampleModal"
+   tabindex="-1"
+   aria-labelledby="exampleModalLabel"
+   aria-hidden="true"
+   >
+   <div class="modal-dialog">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title" id="exampleModalLabel">Detail sur le fournisseur</h5>
+         <button
+           type="button"
+           class="close"
+           data-dismiss="modal"
+           aria-label="Close"
+         >
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+       <div class="modal-body" *ngIf="showFournisseur">
+          
+        <div><p>nom du fornisseur : <strong>{{showFournisseur.libelleFournisseur }}</strong></p></div>
+        <div><p>address du fornisseur : <strong>{{showFournisseur.addressFournisseur }}</strong></p></div>
+        <div><p>telephone du fornisseur : <strong>{{showFournisseur.telephone1 }}</strong></p></div>
+        <div><p>fix du fornisseur : <strong>{{showFournisseur.telephone2 }}</strong></p></div>
+        <div><p>date d'enregistrement du fornisseur : <strong>{{showFournisseur.created_at | date}}</strong></p></div>
+        
+       
+       </div>
+   
+       <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-dismiss="modal">
+           Close
+         </button>
+       </div>
+     </div>
+   </div>
+   </div> 
+   <ngx-loading
+  [show]="loading"
+  [config]="{ backdropBorderRadius: '3px' }"
+></ngx-loading>

@@ -1,3 +1,4 @@
+import { Panne } from "./panne.model";
 
 export interface IVehicule {
   id?:string;
@@ -10,10 +11,14 @@ export interface IVehicule {
   dureeVie?:number;
   dateMiseCirculation?:Date;
   delaiAlerte?:number;
+  append?:IAppends;
   created_at?: Date;
   update_at?: Date;
   _method?:string;
 
+}
+interface IAppends{
+  panne?:Panne
 }
 
 export class Vehicule implements IVehicule{
@@ -28,6 +33,7 @@ export class Vehicule implements IVehicule{
   public dureeVie?:number,
   public dateMiseCirculation?:Date,
   public delaiAlerte?:number,
+  public append?:IAppends,
   public created_at?: Date,
   public update_at?: Date,
   public _method?: string,

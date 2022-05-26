@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
-import { SELECTION_MODEL_FACTORY } from '@ng-select/ng-select';
 import { ToastrService } from 'ngx-toastr';
-import { first } from 'rxjs';
 import { Personal } from 'src/app/rh/models/personal.model';
 import { RhService } from 'src/app/rh/services/rh.service';
 import { CategoriePermis } from '../../models/categoriePermis.model';
@@ -54,7 +52,7 @@ export class CreatePermisComponent implements OnInit {
     this.getListCategoriePermis();
 
     this.editForm.get("category")?.valueChanges.subscribe((data:CategoriePermis[])=>{
-      if(data.length){
+      if(data){
        ( (this.editForm.controls as any).permiscategories as FormArray).clear();
        
         console.log(data);
@@ -83,11 +81,12 @@ export class CreatePermisComponent implements OnInit {
  addPermiscategorie(category:CategoriePermis) {
 
   const permiscategorieForm = this.fb.group({
-    categorie_permis_id:[category.id],
+    category_permit_id:[category.id],
     numeroDossierPermis:['', [Validators.required]],
     typeCategoriePermis:['', [Validators.required]],
     dateDebutPermis:['', [Validators.required]],
     dateFinPermis:['', [Validators.required]],
+    category:[category],
    
    
   });
@@ -221,7 +220,7 @@ export class CreatePermisComponent implements OnInit {
 /**
  * pour obtenir les donnes du tableau dynamic
  */
- get permiscategories() {
+ get permiscategories():any {
   return this.editForm.controls["permiscategories"] as FormArray;
 }
 
@@ -241,16 +240,9 @@ getValues() {
 addOrMove(event:any):void{console.log(event);
 
 }
-onRemove(event:any):void{
-// if(this.categoriePermis.some((condition)=>condition == event.value.id)){
-//   console.log("retourrrrrrr en arriere");
-//   this.permiscategories.push(event.value);
-  //this.permiscategories = [...this.permiscategories];
-  // this.deletePermiscategorie(event);
-  
-// }
 
 
-}
+
+
 
 }

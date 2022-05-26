@@ -1,0 +1,252 @@
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Creer Pannes</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a [routerLink]="'/'">Dashbord</a></li>
+            <li class="breadcrumb-item active">Creer Pannes</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+
+  <div class="container-fluid">
+    <h5>Ajouter un panne</h5>
+    <div class="card">
+      <div class="card-body">
+        <form class="form-row" [formGroup]="editForm">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="libellePanne" class="col-form-label"
+                >libellePanne <span class="text-danger">*</span></label
+              >
+              <input
+                type="text"
+                [ngClass]="{ 'is-invalid': submitted && f.libellePanne.errors }"
+                class="form-control"
+                id="libellePanne"
+                placeholder="libelle Panne"
+                formControlName="libellePanne"
+              />
+            </div>
+  
+            <div
+              *ngIf="submitted && f.libellePanne.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.libellePanne.errors.required">
+                libelle Panne is required
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="dateAcquisition" class="col-form-label"
+                >date D'acquisition <span class="text-danger">*</span></label
+              >
+              <input
+                type="date"
+                [ngClass]="{
+                  'is-invalid': submitted && f.dateAcquisition.errors
+                }"
+                class="form-control"
+                id="dateAcquisition"
+                placeholder="date D'acquisition"
+                formControlName="dateAcquisition"
+              />
+            </div>
+  
+            <div
+              *ngIf="submitted && f.dateAcquisition.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.dateAcquisition.errors.required">
+                date D'acquisition required
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="vehiculeId" class="col-form-label"
+                >vehicules<span class="text-danger">*</span></label
+              >
+  
+              <select
+                [ngClass]="{ 'is-invalid': submitted && f.vehiculeId.errors }"
+                class="form-control"
+                id="vehiculeId"
+                formControlName="vehiculeId"
+              >
+                <option value="">selected vehicules</option>
+                <ng-container *ngIf="vehicules">
+                  <option *ngFor="let vehicu of vehicules" [ngValue]="vehicu.id">
+                    {{ vehicu.libelleVehicule }} 
+                  </option>
+                </ng-container>
+              </select>
+            </div>
+            <div *ngIf="submitted && f.vehiculeId.errors" class="invalid-feedback">
+              <div *ngIf="f.vehiculeId.errors.required">personnal is required</div>
+            </div>
+          </div>
+  
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="category" class="col-form-label"
+                >type categorie
+              </label>
+  
+              <!-- <ng-select
+                [multiple]="true"
+                placeholder="Select  type of categorie permis"
+                [bindLabel]="'libelle'"
+                formControlName="category"
+                
+                [items]="categoriePermis"
+              > -->
+                <!-- <ng-option
+                  [ngValue]="catperm.id"
+                  *ngFor="let catperm of categoriePermis"
+                >
+                  <div>{{ catperm.libelle }}</div>
+                </ng-option> -->
+              <!-- </ng-select> -->
+            </div>
+          </div>
+  
+          <!-- <div class="col-12">
+            <ng-container formArrayName="permiscategories">
+              <ng-container
+                *ngFor="
+                  let c of permiscategories.controls;
+                  let i = index
+                "
+              >
+              <h4>categorie :{{c.value?.category?.libelle }} </h4>
+                <div [formGroup]="c">
+                
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="numeroDossierPermis" class="col-form-label"
+                          >numero Dossier Permis
+                          <span class="text-danger">*</span></label
+                        >
+                        <input
+                          type=""
+                          
+                          class="form-control"
+                          id="numeroDossierPermis"
+                          placeholder="numero Dossier Permis"
+                          formControlName="numeroDossierPermis"
+                        />
+                      </div> -->
+                      <!-- <div
+                        *ngIf="submitted && f.numeroDossierPermis.errors"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f.numeroDossierPermis.errors.required">
+                          numero Dossier Permis is required
+                        </div>
+                      </div> -->
+                    <!-- </div>
+  
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="typeCategoriePermis" class="col-form-label"
+                          >type Categorie Permis
+                          <span class="text-danger">*</span></label
+                        >
+                        <input
+                          type="text"
+                        
+                          class="form-control"
+                          id="typeCategoriePermis"
+                          placeholder="type Categorie Permis"
+                          formControlName="typeCategoriePermis"
+                        /> -->
+                        <!-- <div
+                          *ngIf="submitted && f.typeCategoriePermis.errors"
+                          class="invalid-feedback"
+                        >
+                          <div *ngIf="f.typeCategoriePermis.errors.required">
+                            type Categorie Permis is required
+                          </div>
+                        </div> -->
+                      <!-- </div>
+                    </div>
+                  </div>
+  
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="dateDebutPermis" class="col-form-label"
+                          >date Debut Permis
+                          <span class="text-danger">*</span></label
+                        >
+                        <input
+                          type="date"
+                         
+                          class="form-control"
+                          id="dateDebutPermis"
+                          placeholder="date Debut Permis"
+                          formControlName="dateDebutPermis"
+                        /> -->
+                        <!-- <div
+                          *ngIf="submitted && f.dateDebutPermis.errors"
+                          class="invalid-feedback"
+                        >
+                          <div *ngIf="f.dateDebutPermis.errors.required">
+                            date Debut Permis is required
+                          </div>
+                        </div> -->
+                      <!-- </div>
+                    </div>
+  
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="dateFinPermis" class="col-form-label"
+                          >date Fin Permis
+                          <span class="text-danger">*</span></label
+                        >
+                        <input
+                          type="date"
+                         
+                          class="form-control"
+                          id="dateFinPermis"
+                          placeholder="date Fin Permis"
+                          formControlName="dateFinPermis"
+                        /> -->
+                        <!-- <div
+                          *ngIf="submitted && f.dateFinPermis.errors"
+                          class="invalid-feedback"
+                        >
+                          <div *ngIf="f.dateFinPermis.errors.required">
+                            date Fin Permis is required
+                          </div>
+                        </div> -->
+                      <!-- </div>
+                    </div>
+                  </div>
+  
+      
+                </div>
+                <hr>
+              </ng-container>
+            </ng-container>
+          </div> -->
+        </form>
+      </div>
+    </div>
+  
+    <button type="button" class="btn btn-success" (click)="savepannes()">
+      Create panne
+    </button>
+  </div>

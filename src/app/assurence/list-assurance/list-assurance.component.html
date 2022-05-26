@@ -114,8 +114,8 @@
                                          {{assur.dateFinAssurance}}
                                         </td>
                                         <td>
-                                            
-                                                {{assur.scanAssurance}}
+                                            <img [src]="sanitizeImageUrl(assur.scanAssurance!)"> 
+                                              
                                              
                                         </td>
                                            <td>
@@ -134,28 +134,26 @@
                                                  <button
                                                 (click)="updateModal(assur)"
                                                 title="modifier"
-                                                class="btn btn-light btn-sm mr-1"
+                                                class="btn btn-primary btn-sm mr-1"
                                                 type="button"
                                                
                                               >
-                                                <i class="icofont-ui-edit size-18 text-primary"></i>
+                                                <i class="icofont-ui-edit size-18 "></i>
                                             </button> 
                                             <button (click)="show(assur)"
-                                            class="btn btn-light btn-sm mr-1"
-                                          
+                                            c id="bEdit"
                                             title="voire"
-                                            ><span
-                                              class="icofont-ui-eye fs-14"
-                                            ></span
-                                          ></button>
+                                            type="button"
+                                            class="btn btn-sm btn-success mr-1"
+                                            >  <span class="icofont-eye-open mr-1 size-18 "> </span></button>
                         
                                                <button
                                               (click)=" delete(assur)"
                                                 title="supprimer"
                                                 type="button"
-                                                class="btn btn-primary btn-light btn-sm"
+                                                class="btn btn-danger  btn-sm"
                                               >
-                                                <i class="icofont-ui-delete text-danger"></i>
+                                                <i class="icofont-ui-delete size-18  "></i>
                                               </button> 
                                                
                                               </div>
@@ -252,7 +250,7 @@
                   >selection du Fichier <span class="text-danger">*</span></label
                   >
                   <input
-                    type="file"
+                    type="file" accept="file_type|image/*|media_type"
                     [ngClass]="{ 'is-invalid': submitted && f.scanAssurance.errors }"
                     class="form-control"
                     id="scanAssurance"
@@ -630,12 +628,9 @@ aria-hidden="true"
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <div class="modal-body" *ngIf="assurances">
-      <div>{{ assurances }}</div>
-      <div>{{ assurances }}</div>
-      <div>{{ assurances }}</div>
-      <div>{{ assurances }}</div>
-      <div>{{ showAxe }}</div>
+    <div class="modal-body" *ngIf="showAssurance">
+      
+      <div>{{ showAssurance.created_at }}</div>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-dismiss="modal">
@@ -645,6 +640,11 @@ aria-hidden="true"
   </div>
 </div>
 </div>
+
+<ngx-loading
+  [show]="loading"
+  [config]="{ backdropBorderRadius: '3px' }"
+></ngx-loading>
     
 
 
