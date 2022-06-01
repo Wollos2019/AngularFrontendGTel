@@ -1,0 +1,39 @@
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Gestion des programmes</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a [routerLink]="'/'">Dashbord</a></li>
+            <li class="breadcrumb-item active">Gestion des programmes</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+</section>
+
+<div class="row my-3" *ngIf="nombreDay && nombreDay.length">
+    <div class="col-12">
+        <table class="table table-bordered">
+            <thead>
+                <th></th>
+                <th *ngFor="let d of nombreDay; let i = index">
+                    {{d.name}}
+                    <!-- {{ nombreDay[i].name }} -->
+                </th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let t of trancheHoraires">
+                    <td>{{t.designation}}</td>
+                    <!-- <td>{{t.name}}</td> -->
+                    <ng-container *ngFor="let c of t.contenu; let i = index">
+                        <td>{{c.x}}</td>
+                    </ng-container>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
