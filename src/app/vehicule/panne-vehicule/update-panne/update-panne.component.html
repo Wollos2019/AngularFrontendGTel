@@ -1,0 +1,324 @@
+
+<div class="container-fluid">
+  <h5>Mettre àjour un panne</h5>
+  <div class="card">
+    <div class="card-body">
+      <form class="form-row" [formGroup]="editForm">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="libellePanne" class="col-form-label"
+              >libellePanne <span class="text-danger">*</span></label
+            >
+            <input
+              type="text"
+             
+              class="form-control"
+              id="libellePanne"
+              placeholder="libelle Panne"
+              formControlName="libellePanne"
+            />
+          </div>
+
+          <!-- <div
+            *ngIf="submitted && f.libellePanne.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f.libellePanne.errors.required">
+              libelle Panne is required
+            </div>
+          </div> -->
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="descriptionPanne" class="col-form-label"
+              >description de la Panne <span class="text-danger">*</span></label
+            >
+            <input
+              type="text"
+             
+              class="form-control"
+              id="descriptionPanne"
+              placeholder="descriptionPanne"
+              formControlName="descriptionPanne"
+            />
+          </div>
+
+          <!-- <div
+            *ngIf="submitted && f.descriptionPanne.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f.descriptionPanne.errors.required">
+              description Panne required
+            </div>
+          </div> -->
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="dateDebutPanne" class="col-form-label"
+              >date Debut Panne <span class="text-danger">*</span></label
+            >
+            <input
+              type="date"
+             
+              class="form-control"
+              id="dateDebutPanne"
+              placeholder="date Debut Panne"
+              formControlName="dateDebutPanne"
+            />
+          </div>
+
+          <!-- <div
+            *ngIf="submitted && f.dateDebutPanne.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f.dateDebutPanne.errors.required">
+              date Debut Panne required
+            </div>
+          </div> -->
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="dateFinPanne" class="col-form-label"
+              >date Fin Panne <span class="text-danger">*</span></label
+            >
+            <input
+              type="date"
+              
+              class="form-control"
+              id="dateFinPanne"
+              placeholder="date Fin Panne"
+              formControlName="dateFinPanne"
+            />
+          </div>
+
+          <!-- <div
+            *ngIf="submitted && f.dateFinPanne.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f.dateFinPanne.errors.required">
+              date Fin Panne required
+            </div>
+          </div> -->
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="coutMainOeuvre" class="col-form-label"
+              >cout Main Oeuvre <span class="text-danger">*</span></label
+            >
+            <input
+              type="text"
+              
+              class="form-control"
+              id="coutMainOeuvre"
+              placeholder="cout Main Oeuvre"
+              formControlName="coutMainOeuvre"
+            />
+          </div>
+
+          <!-- <div
+            *ngIf="submitted && f.coutMainOeuvre.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f.coutMainOeuvre.errors.required">
+              cout Main Oeuvre required
+            </div>
+          </div> -->
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="factureMainOeuvre" class="col-form-label"
+              >cfacture Main Oeuvre <span class="text-danger">*</span></label
+            >
+            <input
+              type="text"
+             
+              class="form-control"
+              id="factureMainOeuvre"
+              placeholder="facture Main Oeuvre"
+              formControlName="factureMainOeuvre"
+            />
+          </div>
+
+          <!-- <div
+            *ngIf="submitted && f.factureMainOeuvre.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f.factureMainOeuvre.errors.required">
+              cout Main Oeuvre required
+            </div>
+          </div> -->
+        </div>
+
+                    
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="vehiculeId" class="col-form-label"
+              >vehicules<span class="text-danger">*</span></label
+            >
+
+            <select
+             
+              class="form-control"
+              id="vehiculeId"
+              formControlName="vehiculeId"
+            >
+              <option value="">selected vehicules</option>
+              <ng-container *ngIf="vehicules">
+                <option *ngFor="let vehicu of vehicules" [ngValue]="vehicu.id">
+                  {{ vehicu.libelleVehicule }} 
+                </option>
+              </ng-container>
+            </select>
+          </div>
+          <!-- <div *ngIf="submitted && f.vehiculeId.errors" class="invalid-feedback">
+            <div *ngIf="f.vehiculeId.errors.required">personnal is required</div>
+          </div> -->
+        </div>
+
+
+        <!-- <div class="col-md-6">
+          <div class="form-group">
+            <label for="category" class="col-form-label"
+              >type categorie
+            </label>
+
+            <ng-select
+              [multiple]="true"
+              placeholder="Select  type of categorie permis"
+              [bindLabel]="'libelle'"
+              formControlName="category"
+              
+              [items]="categoriePermis"
+            > 
+               <ng-option
+                [ngValue]="catperm.id"
+                *ngFor="let catperm of categoriePermis"
+              >
+                <div>{{ catperm.libelle }}</div>
+              </ng-option> 
+             </ng-select> 
+          </div>
+        </div> -->
+
+         <div class="col-12">
+         
+          <button class="btn btn-primary float-sm-right" (click)="addFournisseurpanne()"> <i class="icofont-plus size-18 "></i>Ajouter la facture</button>
+          <br>
+          <br>
+          <ng-container formArrayName="fournisseurpanne">
+            <ng-container
+              *ngFor="
+                let c of fournisseurpanne.controls;
+                let i = index
+              "
+            >
+            <!-- <h4>categorie :{{c.value?.category?.libelle }} </h4> -->
+              <div [formGroup]="c">
+              
+    
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="fournisseurId" class="col-form-label"
+              >Fournisseurs<span class="text-danger">*</span></label
+            >
+
+            <select
+              
+              class="form-control"
+              id="fournisseurId"
+              formControlName="fournisseurId"
+            >
+              <option value="">selected fournisseur</option>
+              <ng-container *ngIf="fournisseurs">
+                <option *ngFor="let fourn of fournisseurs" [ngValue]="fourn.id">
+                  {{ fourn.libelleFournisseur }} 
+                </option>
+              </ng-container>
+            </select>
+          </div>
+          <!-- <div *ngIf="submitted && f.fournisseurId.errors" class="invalid-feedback">
+            <div *ngIf="f.fournisseurId.errors.required">personnal is required</div>
+          </div> -->
+        </div>
+                <div class="row">
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label for="facture" class="col-form-label"
+                        >facture
+                        <span class="text-danger">*</span></label
+                      >
+                      <input
+                        type=""
+                        
+                        class="form-control"
+                        id="facture"
+                        placeholder="facture"
+                        formControlName="facture"
+                        required=""
+                      />
+                    </div> 
+                     <!-- <div
+                      *ngIf="submitted && f.facture.errors"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f.facture.errors.required">
+                        facture is required
+                      </div>
+                    </div>  -->
+                   </div>
+
+                  <div class="col-4">
+                    <div class="form-group">
+                      <label for="coutPiece" class="col-form-label"
+                        >coût Piece
+                        <span class="text-danger">*</span></label
+                      >
+                      <input
+                        type="text"
+                      
+                        class="form-control"
+                        id="coutPiece"
+                        placeholder="coût Piece"
+                        formControlName="coutPiece"
+                        required=""
+                      /> 
+                       <!-- <div
+                        *ngIf="submitted && f.coutPiece.errors"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f.coutPiece.errors.required">
+                          coutPiece is required
+                        </div>
+                      </div>  -->
+                     </div>
+                  </div>
+                  &ensp;
+                  &ensp;
+                  <div class="col-2">
+                    <button class="btn btn-danger " (click)="removePanne(i)">X</button>
+                  </div>
+                </div>
+              </div>
+              <hr>
+            </ng-container>
+          </ng-container>
+        </div> 
+      </form>
+    </div>
+  </div>
+
+  <button type="button" class="btn btn-success" (click)="savepanne()">
+    update panne
+  </button>
+</div>
+  
+  <ngx-loading
+    [show]="loading"
+    [config]="{ backdropBorderRadius: '3px' }"
+  ></ngx-loading>

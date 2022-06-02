@@ -22,7 +22,7 @@ export class CategoriePermisComponent implements OnInit {
   vehicule = new Vehicule;
   vehicules?:Vehicule[];
   paramsPage: any;
-  showCategoriePermis: any;
+  showCategoriePermis!: CategoriePermis;
   submittedUpdate!: boolean;
   CategoriePermisUpdate!: CategoriePermis;
 
@@ -195,7 +195,7 @@ update():void{
   
   show(categoriepermis: CategoriePermis): void {
     $('#exampleModal').modal('show');
-    this.showCategoriePermis = categoriepermis.libelle;
+    this.showCategoriePermis = categoriepermis;
   }
 
 

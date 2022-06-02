@@ -132,14 +132,14 @@
                         formControlName="numeroDossierPermis"
                       />
                     </div>
-                    <!-- <div
+                     <!-- <div
                       *ngIf="submitted && f.numeroDossierPermis.errors"
                       class="invalid-feedback"
-                    >
-                      <div *ngIf="f.numeroDossierPermis.errors.required">
+                    > -->
+                      <div *ngIf="permiscategories.controls[i].get('numeroDossierPermis').hasError('required') && permiscategories.controls[i].get('numeroDossierPermis').touched">
                         numero Dossier Permis is required
                       </div>
-                    </div> -->
+                    <!-- </div>  -->
                   </div>
 
                   <div class="col-md-6">
@@ -156,14 +156,9 @@
                         placeholder="type Categorie Permis"
                         formControlName="typeCategoriePermis"
                       />
-                      <!-- <div
-                        *ngIf="submitted && f.typeCategoriePermis.errors"
-                        class="invalid-feedback"
-                      >
-                        <div *ngIf="f.typeCategoriePermis.errors.required">
-                          type Categorie Permis is required
-                        </div>
-                      </div> -->
+                      <div *ngIf="permiscategories.controls[i].get('typeCategoriePermis').hasError('required') && permiscategories.controls[i].get('typeCategoriePermis').touched">
+                        type Categorie Permis is required
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -183,14 +178,9 @@
                         placeholder="date Debut Permis"
                         formControlName="dateDebutPermis"
                       />
-                      <!-- <div
-                        *ngIf="submitted && f.dateDebutPermis.errors"
-                        class="invalid-feedback"
-                      >
-                        <div *ngIf="f.dateDebutPermis.errors.required">
-                          date Debut Permis is required
-                        </div>
-                      </div> -->
+                      <div *ngIf="permiscategories.controls[i].get('dateDebutPermis').hasError('required') && permiscategories.controls[i].get('dateDebutPermis').touched">
+                        date Debut Permis is required
+                      </div>
                     </div>
                   </div>
 
@@ -208,14 +198,9 @@
                         placeholder="date Fin Permis"
                         formControlName="dateFinPermis"
                       />
-                      <!-- <div
-                        *ngIf="submitted && f.dateFinPermis.errors"
-                        class="invalid-feedback"
-                      >
-                        <div *ngIf="f.dateFinPermis.errors.required">
-                          date Fin Permis is required
-                        </div>
-                      </div> -->
+                      <div *ngIf="permiscategories.controls[i].get('dateFinPermis').hasError('required') && permiscategories.controls[i].get('dateFinPermis').touched">
+                        date Fin Permis is required
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -230,7 +215,7 @@
     </div>
   </div>
 
-  <button type="button" class="btn btn-success" (click)="savepermis()">
+  <button type="button" class="btn btn-success" (click)="savepermis()" [disabled]="editForm.invalid">
     Create permis
   </button>
 </div>

@@ -56,6 +56,9 @@ FournisseurUpdate!: Fournisseur;
 
     this.submitted = true;
     
+    if (this.editForm.invalid) {
+      return;
+    }
    // this.submitted = false;
     console.log(this.editForm.value);
     const {
@@ -74,9 +77,7 @@ FournisseurUpdate!: Fournisseur;
   
 
    
-    if (this.editForm.invalid) {
-      return;
-    }
+   
   
     
     this.loading = true;
@@ -88,6 +89,7 @@ FournisseurUpdate!: Fournisseur;
       
         this.editForm.reset();
        // $('#createModal').modal('hide');
+       this.submitted=false
       },
       error: (error: any) => {
         console.error('Error', error);

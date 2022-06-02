@@ -6,6 +6,7 @@ import { ListAssuranceComponent } from './list-assurance/list-assurance.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AssuranceService } from './assurance.service';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -16,7 +17,7 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     CommonModule,
     AssurenceRoutingModule,
-    FormsModule,ReactiveFormsModule,NgbPaginationModule
+    FormsModule,ReactiveFormsModule,NgbPaginationModule, SharedModule
   ],
   providers: [AssuranceService],
 })

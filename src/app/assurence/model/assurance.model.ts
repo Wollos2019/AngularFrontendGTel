@@ -19,6 +19,8 @@ interface IAppends{
     vehicule?:IVehicule
     libelleVehicule?:string;
     immatriculation?:string;
+    url?:string;
+    compareDate?:string;
   }
 
 export class Assurance implements IAssurance{

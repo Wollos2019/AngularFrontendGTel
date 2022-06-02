@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 
 import { ToastrService } from 'ngx-toastr';
 
-import { Personal } from 'src/app/rh/models/personal.model';
+import { IPersonal, Personal } from 'src/app/rh/models/personal.model';
 import { RhService } from 'src/app/rh/services/rh.service';
-import { CategoriePermis } from '../models/categoriePermis.model';
+import { CategoriePermis, ICategoriePermis } from '../models/categoriePermis.model';
 import { Pagination } from '../models/pagination.model';
-import { Permis } from '../models/permis.model';
+import { IPermis, Permis } from '../models/permis.model';
 import { VehiculeServiceService } from '../vehicule-service.service';
 
 declare var $:any;
@@ -20,17 +20,19 @@ declare var $:any;
 })
 export class PermisComponent implements OnInit {
 
-  categoriePermis?:CategoriePermis[];
+  categoriePermis?:ICategoriePermis[];
   categoriepermis = new CategoriePermis();
-  permis?:Permis[];
-  permie = new Permis();
+  permis?:IPermis[];
+  //permie = new Permis();
   paramsPage: any;
-  personals?:Personal[];
+  personals?:IPersonal[];
   personal=new Personal();
   loading=false;
   submitted = false;
-  showPermis: any;
+  showPermis!: Permis;
   array:any[]=[];
+  permisUpdate!:boolean;
+  submittedUpdate=false
   constructor(
     private fb:FormBuilder,
     private toastr : ToastrService,
@@ -41,8 +43,26 @@ export class PermisComponent implements OnInit {
     
   ) { }
 
+  editForm=this.fb.group({
+    numeroPermis:['', [Validators.required]],
+    category:['',[Validators.required]],
+    dateAcquisition:['', [Validators.required]],
+    userId:['', [Validators.required]],
+    permiscategories:this.fb.array([]),
+    
 
- 
+  });
+
+
+  updatePermisForm=this.fb.group({
+    numeroPermis:['', [Validators.required]],
+    category:['',[Validators.required]],
+    dateAcquisition:['', [Validators.required]],
+    userId:['', [Validators.required]],
+    permiscategories:this.fb.array([]),
+    
+
+  });
  
 
   ngOnInit(): void {
@@ -55,7 +75,7 @@ export class PermisComponent implements OnInit {
     this.rhService.getAllPersonals(params).subscribe({
       next: (personals: any) => {
         this.loading = false;
-        console.log(personals);
+       
         this.personals = personals.data;
       },
       error: (error: any) => {
@@ -75,6 +95,11 @@ export class PermisComponent implements OnInit {
     this.router.navigate(['vehicule/create-permis']);
     
   }
+  updateModel(permis:Permis): void {
+    //$('#createModal').modal('show');
+    this.router.navigate(['/vehicule',permis.id,'update-permis']);
+    
+  }
 
 
   getListCategoriePermis():void{
@@ -82,8 +107,8 @@ export class PermisComponent implements OnInit {
     this.vehiculeService.getAllCategoriePermis().subscribe({
       next:(categoriePermis:any)=>{
         this.loading = false;
-        console.log(categoriePermis);
         this.categoriePermis = categoriePermis.data;
+        console.log(this.categoriePermis);
       },
       error:(error:any)=>{
         this.loading = false;
@@ -104,9 +129,10 @@ export class PermisComponent implements OnInit {
     this.vehiculeService.getAllPermis (params).subscribe({
       next: (permis: any) => {
         this.loading = false;
-        console.log(permis);
+       
         this.paramsPage = new Pagination().setPagination(permis); 
         this.permis = permis.data;
+        console.log(this.permis);
       },
       error: (error: any) => {
         this.loading = false;
@@ -121,11 +147,11 @@ export class PermisComponent implements OnInit {
   }
 
 
-  deletePerm(id: number): void {
+  deletePerm(permis: IPermis): void {
     this.loading = true;
     var confir = confirm('Voulez vous supprimer cet element?');
     if (confir) {
-      this.vehiculeService.deletePermi(id).subscribe({
+      this.vehiculeService.deletePermi(permis).subscribe({
         next: () => {
           this.loading = false;
           this.toastr.success('Suppression effectuée');
@@ -145,10 +171,21 @@ export class PermisComponent implements OnInit {
     }
   }
 
-  show(permis: Permis): void {
+
+ 
+
+  show(permie: Permis): void {
     $('#exampleModal').modal('show');
-    this.showPermis = permis;
+    this.showPermis = permie;
+    console.log(this.showPermis);
   }
+  // show(fournisseur: Fournisseur): void {
+  //   $('#exampleModal').modal('show');
+   
+    
+  //   this.showFournisseur = fournisseur;
+  //   console.log(this.showFournisseur);
+  // }
   
 
   /**  
@@ -156,7 +193,11 @@ export class PermisComponent implements OnInit {
    * @param data 
    */
   getPage(data: any): void {
-    console.log(data);
+   
     this.getListPermi(`page=${data}`);
+  }
+
+  asArra(ar:ICategoriePermis[] | undefined):ICategoriePermis[]{
+    return (ar as ICategoriePermis[])
   }
 }

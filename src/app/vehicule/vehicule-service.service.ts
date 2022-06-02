@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CategoriePermis } from './models/categoriePermis.model';
 import { Panne } from './models/panne.model';
-import { Permis } from './models/permis.model';
+import { IPermis, Permis } from './models/permis.model';
 
 import { PriseVehicule } from './models/priseVehicule.model';
 import { Vehicule } from './models/vehicule.model';
@@ -96,8 +96,8 @@ updatePermi(permi:Permis):Observable<Permis>{
   return this.httpClient.post<Permis>(`${this.apiUrl}permits/${permi.id}`,permi);
 }
 
-deletePermi(id:number):Observable<Permis>{
-  return this.httpClient.delete<Permis>(`${this.apiUrl}permits/${id}`);
+deletePermi(permis:IPermis):Observable<Permis>{
+  return this.httpClient.delete<Permis>(`${this.apiUrl}permits/${permis.id}`);
 }
 
 createPermi(permi:Permis):Observable<Permis>{
@@ -150,16 +150,16 @@ createCategoriePermi(Catpermi:CategoriePermis):Observable<CategoriePermis>{
   return this.httpClient.get<Panne[]>(`${this.apiUrl}pannes/${params}`);
 }
 
-getOnePanne(panne:Panne):Observable<Panne>{
-  return this.httpClient.get<CategoriePermis>(`${this.apiUrl}pannes/${panne.id}`);
+getOnePanne(id:number):Observable<Panne>{
+  return this.httpClient.get<Panne>(`${this.apiUrl}pannes/${id}`);
 }
 
 updatePanne(panne:Panne):Observable<Panne>{
   return this.httpClient.post<Panne>(`${this.apiUrl}pannes/${panne.id}`,panne);
 }
 
-deletePanne(id:number):Observable<Panne>{
-  return this.httpClient.delete<Panne>(`${this.apiUrl}pannes/${id}`);
+deletePanne(panne:Panne):Observable<Panne>{
+  return this.httpClient.delete<Panne>(`${this.apiUrl}pannes/${panne.id}`);
 }
 
 createPanne(panne:Panne):Observable<Panne>{

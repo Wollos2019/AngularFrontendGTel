@@ -6,6 +6,7 @@ import { ListFournisseurComponent } from './list-fournisseur/list-fournisseur.co
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { FournisseurService } from '../fournisseur.service';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -16,7 +17,7 @@ import { FournisseurService } from '../fournisseur.service';
   imports: [
     CommonModule,
     FournisseurRoutingModule,
-    FormsModule,ReactiveFormsModule,NgbPaginationModule
+    FormsModule,ReactiveFormsModule,NgbPaginationModule, SharedModule
   ],
   providers:[FournisseurService]
 })

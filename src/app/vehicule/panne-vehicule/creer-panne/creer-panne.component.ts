@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FournisseurService } from 'src/app/Fournisseur/fournisseur.service';
 import { Fournisseur } from 'src/app/Fournisseur/model/fournisseur.model';
@@ -26,7 +27,8 @@ export class CreerPanneComponent implements OnInit {
   constructor(private fb:FormBuilder,
     private vehiculeService:VehiculeServiceService,
     private toastr:ToastrService,
-    private fournisseurService:FournisseurService) { }
+    private fournisseurService:FournisseurService,
+    private router:Router) { }
 
 
     editForm=this.fb.group({
@@ -37,11 +39,46 @@ export class CreerPanneComponent implements OnInit {
       coutMainOeuvre:['', [Validators.required]],
       factureMainOeuvre:['', [Validators.required]],
       vehiculeId:['', [Validators.required]],
-      fournisseurId:['', [Validators.required]],
-      permiscategories:this.fb.array([]),
+      fournisseurpanne:this.fb.array([]),
       
   
     });
+
+    addFournisseurpanne() {
+      // addFournisseurpanne(category?:CategoriePermis) 
+       const fourniseurpanneForm = this.fb.group({
+        // category_permit_id:[category?category.id:''],
+         //numeroDossierPermis:[category?category.pivot?.numeroDossierPermis:'', [Validators.required]],
+         //typeCategoriePermis:[category?category.pivot?.typeCategoriePermis:'', [Validators.required]],
+         //dateDebutPermis:[category?category.pivot?.dateDebutPermis:'', [Validators.required]],
+         //dateFinPermis:[category?category.pivot?.dateFinPermis:'', [Validators.required]],
+        // category:[category],
+   
+        
+      fournisseurId:['', [Validators.required]],
+        facture:['',[Validators.required]],
+        coutPiece:['',[Validators.required]]
+        
+        
+       });
+     /**
+      * function pour recuper et afficher l'input
+      * push(control) : ajoute un nouveau contrôle à la fin du tableau
+      */
+       this.fournisseurpanne.push(fourniseurpanneForm);
+     
+     }
+
+      /////////////////////////////////
+/**
+ * pour obtenir les donnes du tableau dynamic
+ */
+ get fournisseurpanne():any {
+  return this.editForm.controls["fournisseurpanne"] as FormArray;
+}
+removePanne(i:number):void{
+ this.fournisseurpanne.removeAt(i);
+}
 
   ngOnInit(): void {
     this.getAllFournisseurs();
@@ -59,7 +96,9 @@ export class CreerPanneComponent implements OnInit {
 
     this.submitted = true;
     
-    this.submitted = false;
+    if (this.editForm.invalid) {
+      return;
+    }
     console.log(this.editForm.value);
     const {
       libellePanne,
@@ -68,9 +107,9 @@ export class CreerPanneComponent implements OnInit {
       dateFinPanne,
       coutMainOeuvre,
       factureMainOeuvre,
-      vehiculeId,
-      fournisseurId,
-      permiscategories
+       vehiculeId,
+      // fournisseurId,
+      fournisseurpanne,
       } = this.editForm.value;
       this.panne.libellePanne = libellePanne;
       this.panne.descriptionPanne = descriptionPanne;
@@ -78,37 +117,49 @@ export class CreerPanneComponent implements OnInit {
       this.panne.dateFinPanne = dateFinPanne;
       this.panne.coutMainOeuvre = coutMainOeuvre;
       this.panne.factureMainOeuvre = factureMainOeuvre;
-      this.panne.fournisseurId = fournisseurId;
-    this.panne.vehiculeId = vehiculeId;
-    //this.panne.categories=permiscategories;
+    //   this.panne.fournisseurId = fournisseurId;
+     this.panne.vehiculeId = vehiculeId;
+    this.panne.factures=fournisseurpanne;
   
 
    
-    if (this.editForm.invalid) {
-      return;
+    if(dateDebutPanne>dateFinPanne){
+      this.toastr.error(
+        "Une erreur au niveau des dates ",
+        'Error'
+      );
+    }else{
+      this.loading = true;
+      this.vehiculeService.createPanne(this.panne).subscribe({
+        next: () => {
+          this.loading = false;
+          this.toastr.success('Enregistrement effectuée !!');
+          this.getAllFournisseurs();
+          this.getAllVehicules();
+          this.getListPanne();
+          this.editForm.reset();
+         // this.submitted=false; 
+         this.submitted=false
+           if (!this.loading) {
+            this.router.navigate(['/vehicule/panne-vehicule']).then(() => {
+              this.loading = false;
+            });
+          }
+          
+         // $('#createModal').modal('hide');
+        },
+        error: (error: any) => {
+          console.error('Error', error);
+          this.loading = false;
+          this.toastr.error(
+            "Une erreur s'est produite lors de la creation ",
+            'Error'
+          );
+        },
+      });
     }
-  
     
-    this.loading = true;
-    this.vehiculeService.createPanne(this.panne).subscribe({
-      next: () => {
-        this.loading = false;
-        this.toastr.success('Enregistrement effectuée !!');
-        this.getAllFournisseurs();
-        this.getAllVehicules();
-        this.getListPanne();
-        this.editForm.reset();
-       // $('#createModal').modal('hide');
-      },
-      error: (error: any) => {
-        console.error('Error', error);
-        this.loading = false;
-        this.toastr.error(
-          "Une erreur s'est produite lors de la creation ",
-          'Error'
-        );
-      },
-    });
+   
   }
 
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FournisseurService } from 'src/app/Fournisseur/fournisseur.service';
 import { Fournisseur } from 'src/app/Fournisseur/model/fournisseur.model';
@@ -7,6 +8,8 @@ import { Panne } from '../models/panne.model';
 import { Vehicule } from '../models/vehicule.model';
 import { VehiculeServiceService } from '../vehicule-service.service';
 
+
+declare var $:any;
 @Component({
   selector: 'app-panne-vehicule',
   templateUrl: './panne-vehicule.component.html',
@@ -22,9 +25,12 @@ panne=new Panne()
 loading=false;
 submitted = false;
 paramsPage: any;
+  showPannes!: Panne;
 
   constructor(private vehiculeService:VehiculeServiceService,
               private toastr:ToastrService,
+              private activedRoute:ActivatedRoute,
+              private router:Router,
               private fournisseurService:FournisseurService) { }
 
   ngOnInit(): void {
@@ -98,11 +104,11 @@ paramsPage: any;
   }
 
 
-  deletePanne(id: number): void {
+  deletePanne(panne: Panne): void {
     this.loading = true;
     var confir = confirm('Voulez vous supprimer cet element?');
     if (confir) {
-      this.vehiculeService.deletePanne(id).subscribe({
+      this.vehiculeService.deletePanne(panne).subscribe({
         next: () => {
           this.loading = false;
           this.toastr.success('Suppression effectuée');
@@ -120,6 +126,23 @@ paramsPage: any;
         },
       });
     }
+  }
+
+  openModel(): void {
+    //$('#createModal').modal('show');
+    this.router.navigate(['vehicule/creer-panne']);
+    
+  }
+  updateModel(pannes:Panne): void {
+    //$('#createModal').modal('show');
+    this.router.navigate(['/vehicule',pannes.id,'update-panne']);
+    
+  }
+
+
+  show(pannes: Panne): void {
+    $('#exampleModal').modal('show');
+    this.showPannes = pannes;
   }
   
   /**  

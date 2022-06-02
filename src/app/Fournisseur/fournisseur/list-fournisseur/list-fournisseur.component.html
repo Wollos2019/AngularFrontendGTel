@@ -356,7 +356,7 @@
               </ng-container>
               <ng-container *ngIf="!fournisseurs?.length">
                 <tr>
-                  <td colspan="4" class="text-center">
+                  <td colspan="6" class="text-center">
                     Aucune données trouver
                   </td>
                 </tr>
@@ -365,30 +365,31 @@
           </table>
         </div>
       </div>
+      <div class="card-footer">
+        <div class="mb-3 mt-2" *ngIf="paramsPage && paramsPage.totalItems != 0">
+          <div class="d-inline ml-5" style="font-size: 13px" >
+            Affiche {{ paramsPage.from ? paramsPage.from : 1 }} à {{ paramsPage.to }} de
+            {{ paramsPage.totalItems }} entrées
+          </div>
+          <div class="d-inline float-right">
+            <ngb-pagination
+              [pageSize]="paramsPage.itemsPerPage"
+              [collectionSize]="paramsPage.totalItems"
+              [(page)]="paramsPage.currentPage"
+              (pageChange)="getPage($event)"
+            >
+              <ng-template ngbPaginationFirst>First</ng-template>
+              <ng-template ngbPaginationLast>Last</ng-template>
+              <ng-template ngbPaginationPrevious>Prev</ng-template>
+              <ng-template ngbPaginationNext>Next</ng-template>
+            </ngb-pagination>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-<!-- pagination  -->
-<div class="mb-3 mt-2" *ngIf="paramsPage && paramsPage.totalItems != 0">
-    <div class="d-inline ml-5" style="font-size: 13px" >
-      Affiche {{ paramsPage.from ? paramsPage.from : 1 }} à {{ paramsPage.to }} de
-      {{ paramsPage.totalItems }} entrées
-    </div>
-    <div class="d-inline float-end ml-5">
-      <ngb-pagination
-        [pageSize]="paramsPage.itemsPerPage"
-        [collectionSize]="paramsPage.totalItems"
-        [(page)]="paramsPage.currentPage"
-        (pageChange)="getPage($event)"
-      >
-        <ng-template ngbPaginationFirst>First</ng-template>
-        <ng-template ngbPaginationLast>Last</ng-template>
-        <ng-template ngbPaginationPrevious>Prev</ng-template>
-        <ng-template ngbPaginationNext>Next</ng-template>
-      </ngb-pagination>
-    </div>
-  </div>
-  <!-- end pagination -->
+
 </div>
 
 
@@ -402,7 +403,7 @@ aria-hidden="true"
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title" id="updateModal">Modifier une prise vehicule</h5>
+      <h5 class="modal-title" id="updateModal">Modifier les details du fournisseur</h5>
     </div>
     <div class="modal-body" *ngIf="FournisseurUpdate">
       <form class="form-row" [formGroup]="updateFournisseurForm" >

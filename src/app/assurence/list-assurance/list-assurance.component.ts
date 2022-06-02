@@ -6,7 +6,7 @@ import { Pagination } from 'src/app/vehicule/models/pagination.model';
 import { Vehicule } from 'src/app/vehicule/models/vehicule.model';
 import { VehiculeServiceService } from 'src/app/vehicule/vehicule-service.service';
 import { AssuranceService } from '../assurance.service';
-import { Assurance } from '../model/assurance.model';
+import { Assurance, IAssurance } from '../model/assurance.model';
 
 declare var $:any
 @Component({
@@ -16,7 +16,7 @@ declare var $:any
 })
 export class ListAssuranceComponent implements OnInit {
   [x: string]: any;
-  assurances?: Assurance[];
+  assurances?: IAssurance[];
   assurance= new Assurance();
   vehicules?:Vehicule[];
   vehicule= new Vehicule();
@@ -126,9 +126,10 @@ export class ListAssuranceComponent implements OnInit {
     this.assuranceService.getAllAssurances(params).subscribe({
       next: (assurances: any) => {
         this.loading = false;
-        console.log(assurances);
+        
         this.paramsPage = new Pagination().setPagination(assurances); 
         this.assurances = assurances.data;
+        console.log(this.assurances);
       },
       error: (error: any) => {
         this.loading = false;

@@ -17,52 +17,7 @@
   </section>
 
 
-  <div class="row">
-    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
-        <div class="card">
-            <div class="card-body text-center">
-                <i class="fas fa-angle-left  text-primary fa-3x"></i>
-                <h6 class="mt-4 mb-2">Total Visit</h6>
-                <h2 class="mb-2 number-font">834</h2>
-                <p class="text-muted">Sed ut perspiciatis unde omnis accusantium doloremque</p>
-            </div>
-        </div>
-    </div>
-    <!-- COL END -->
-    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
-        <div class="card">
-            <div class="card-body text-center">
-                <i class="fas fa-angle text-secondary fa-3x"></i>
-                <h6 class="mt-4 mb-2">Cost per Click</h6>
-                <h2 class="mb-2  number-font">$34,516</h2>
-                <p class="text-muted">Sed ut perspiciatis unde omnis accusantium doloremque</p>
-            </div>
-        </div>
-    </div>
-    <!-- COL END -->
-    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
-        <div class="card">
-            <div class="card-body text-center">
-                <i class="fa fa-comment-o text-success fa-3x"></i>
-                <h6 class="mt-4 mb-2">Investment</h6>
-                <h2 class="mb-2 number-font">80%</h2>
-                <p class="text-muted">Sed ut perspiciatis unde omnis accusantium doloremque</p>
-            </div>
-        </div>
-    </div>
-    <!-- COL END -->
-    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
-        <div class="card">
-            <div class="card-body text-center">
-                <i class="fa fa-pie-chart text-info fa-3x"></i>
-                <h6 class="mt-4 mb-2">Revenue</h6>
-                <h2 class="mb-2  number-font">70k</h2>
-                <p class="text-muted">Sed ut perspiciatis unde omnis accusantium doloremque</p>
-            </div>
-        </div>
-    </div>
-    <!-- COL END -->
-</div>
+
 
 
 <!-- <div class="row">
@@ -126,1971 +81,147 @@
 
 
 
- 
-
-
+<!-- ROW-4 -->
 <div class="row">
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Add New Row with Edit Table</h3>
-            </div>
-            <div class="card-body">
-                <button id="table2-new-row-button" class="btn btn-primary mb-4"> Add New Row</button>
-                <div class="table-responsive">
-                    <table class="table table-bordered border text-nowrap mb-0" id="new-edit">
+  <div class="col-12 col-sm-12">
+    <div class="card">
+      <div class="card-header">
+        <button
+          type="button"
+          class="btn btn-primary btn-sm float-right"
+          (click)="openModel()"
+        >
+          Ajouter une panne
+        </button>
+      </div>
+      <div class="card-body pt-4">
+        <div class="grid-margin">
+          <div class="">
+            <div class="panel panel-primary">
+              <div class="panel-body tabs-menu-body border-0 pt-0">
+                <div class="tab-content">
+                  <div class="tab-pane active" id="tab5">
+                    <div class="table-responsive">
+                      <table class="table table-bordered">
                         <thead>
-                            <tr>
-                                <th>First name</th>
-                                <th>Last name</th>
-                                <th>Position</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
-                                <th>E-mail</th>
-                            <th name="bstable-actions">Actions</th></tr>
+                          <tr class="bg-dark text-white">
+                            <th>#</th>
+                            <th>libelle Panne</th>
+                            <th>description Panne</th>
+                            <th>date Debut Panne</th>
+                            <th>date Fin Panne</th>
+                            <th>cout Main Oeuvre</th>
+                            <th>facture Main Oeuvre</th>
+                            <!-- <th>status du permis</th> -->
+                            
+
+                            <th>Action</th>
+                          </tr>
                         </thead>
                         <tbody>
+                          <ng-container *ngIf="pannes">
+                            <tr
+                              class="border-bottom"
+                              *ngFor="let per of pannes; let i = index"
+                            >
+                              <td class="text-center">
+                                {{ per.id }}
+                              </td>
+                              <td>
+                                {{ per.libellePanne }}
+                              </td>
+                              <!-- <td>
+                                <ng-container *ngIf="per?.appends?.categoriePermit?.length">
+                                  <ng-container *ngFor="let p of  per?.appends?.categoriePermit">
+                                    <span class="badge badge-primary mx-1">
+                                      {{p.libelle}}
+                                    </span>
+
+                                  </ng-container> -->
+                                  <!-- {{ per?.appends.categoriePermit[0]?.pivot?.numeroDossierPermis}} -->
+                                <!-- </ng-container>
+                              
+                              </td> -->
+                             
+                              <td>
+                                {{ per.descriptionPanne}}
+                              </td>
+                              <!-- <td>
+                                         {{per.dateFinAssurance}}
+                                        </td>
+                                        <td>
+                                            
+                                                {{per.scanAssurance}}
+                                             
+                                        </td> -->
+                              <td>
+                                {{ per.dateDebutPanne | date}}
+                              </td>
+                              <td>
+                                {{ per.dateFinPanne | date}}
+                              </td>
+                              <td>
+                                {{ per.coutMainOeuvre  | currency:'XAF':'CFA'}}  
+                              </td>
+                              <td>
+                                {{ per.factureMainOeuvre | currency:'XAF':'CFA'}}
+                              </td>
+                              
+                             
+                              <!-- <td>
+                                <ng-container *ngIf="per.appends?.compareDate==='encore valide'; else templstat">
+                                  <h4><span class="badge badge-info badge  "> {{per.appends?.compareDate}}</span></h4>
+                                 </ng-container >
+                                 <ng-template #templstat>
+                                 <h4> <span class="badge badge-danger badge  "> {{per.appends?.compareDate}}</span></h4>
+
+                                 </ng-template>
+                              </td> -->
+                              
+
+                              <td>
+                                <div class="g-2">
+                                   <button
+                                               (click)="updateModel(per)"
+                                                title="modifier"
+                                                class="btn btn-primary btn-sm mr-1"
+                                                type="button"
+                                               
+                                              >
+                                                <i class="icofont-ui-edit size-18 "></i>
+                                            </button>  
+                                 <button
+                                    (click)="show(per)"
+                                    class="btn btn-success btn-sm mr-1"
+                                          
+                                            title="voire"
+                                            ><span
+                                              class="icofont-eye-open size-18 "
+                                            ></span>
+                                  </button>
+
+                                  <button
+                                              (click)="deletePanne(per)"
+                                                title="supprimer"
+                                                type="button"
+                                                class="btn btn-danger  btn-sm"
+                                              >
+                                                <i class="icofont-ui-delete "></i>
+                                              </button>  
+                                </div>
+                              </td>
+                            </tr>
+                          </ng-container>
+
+                          <ng-container *ngIf="!pannes?.length">
                             <tr>
-                                <td>Bella</td>
-                                <td>Chloe</td>
-                                <td>System Developer</td>
-                                <td>2018/03/12</td>
-                                <td>$654,765</td>
-                                <td>b.Chloe@datatables.net</td>
-                            <td name="bstable-actions"><div class="btn-list">
-<button id="bEdit" type="button" class="btn btn-sm btn-primary">
-<span class="fe fe-edit"> </span>
-</button>
-<button id="bDel" type="button" class="btn  btn-sm btn-danger">
-<span class="fe fe-trash-2"> </span>
-</button>
-<button id="bAcep" type="button" class="btn  btn-sm btn-primary" style="display:none;">
-<span class="fe fe-check-circle"> </span>
-</button>
-<button id="bCanc" type="button" class="btn  btn-sm btn-danger" style="display:none;">
-<span class="fe fe-x-circle"> </span>
-</button>
-</div></td></tr>
-                            <tr>
-                                <td>Donna</td>
-                                <td>Bond</td>
-                                <td>Account Manager</td>
-                                <td>2012/02/21</td>
-                                <td>$543,654</td>
-                                <td>d.bond@datatables.net</td>
-                            <td name="bstable-actions"><div class="btn-list">
-<button id="bEdit" type="button" class="btn btn-sm btn-primary">
-<span class="fe fe-edit"> </span>
-</button>
-<button id="bDel" type="button" class="btn  btn-sm btn-danger">
-<span class="fe fe-trash-2"> </span>
-</button>
-<button id="bAcep" type="button" class="btn  btn-sm btn-primary" style="display:none;">
-<span class="fe fe-check-circle"> </span>
-</button>
-<button id="bCanc" type="button" class="btn  btn-sm btn-danger" style="display:none;">
-<span class="fe fe-x-circle"> </span>
-</button>
-</div></td></tr>
-                            <tr>
-                                <td>Harry</td>
-                                <td>Carr</td>
-                                <td>Technical Manager</td>
-                                <td>20011/02/87</td>
-                                <td>$86,000</td>
-                                <td>h.carr@datatables.net</td>
-                            <td name="bstable-actions"><div class="btn-list">
-<button id="bEdit" type="button" class="btn btn-sm btn-primary">
-<span class="fe fe-edit"> </span>
-</button>
-<button id="bDel" type="button" class="btn  btn-sm btn-danger">
-<span class="fe fe-trash-2"> </span>
-</button>
-<button id="bAcep" type="button" class="btn  btn-sm btn-primary" style="display:none;">
-<span class="fe fe-check-circle"> </span>
-</button>
-<button id="bCanc" type="button" class="btn  btn-sm btn-danger" style="display:none;">
-<span class="fe fe-x-circle"> </span>
-</button>
-</div></td></tr>
-                            <tr>
-                                <td>Lucas</td>
-                                <td>Dyer</td>
-                                <td>Javascript Developer</td>
-                                <td>2014/08/23</td>
-                                <td>$456,123</td>
-                                <td>l.dyer@datatables.net</td>
-                            <td name="bstable-actions"><div class="btn-list">
-<button id="bEdit" type="button" class="btn btn-sm btn-primary">
-<span class="fe fe-edit"> </span>
-</button>
-<button id="bDel" type="button" class="btn  btn-sm btn-danger">
-<span class="fe fe-trash-2"> </span>
-</button>
-<button id="bAcep" type="button" class="btn  btn-sm btn-primary" style="display:none;">
-<span class="fe fe-check-circle"> </span>
-</button>
-<button id="bCanc" type="button" class="btn  btn-sm btn-danger" style="display:none;">
-<span class="fe fe-x-circle"> </span>
-</button>
-</div></td></tr>
-                            <tr>
-                                <td>Karen</td>
-                                <td>Hill</td>
-                                <td>Sales Manager</td>
-                                <td>2010/7/14</td>
-                                <td>$432,230</td>
-                                <td>k.hill@datatables.net</td>
-                            <td name="bstable-actions"><div class="btn-list">
-<button id="bEdit" type="button" class="btn btn-sm btn-primary">
-<span class="fe fe-edit"> </span>
-</button>
-<button id="bDel" type="button" class="btn  btn-sm btn-danger">
-<span class="fe fe-trash-2"> </span>
-</button>
-<button id="bAcep" type="button" class="btn  btn-sm btn-primary" style="display:none;">
-<span class="fe fe-check-circle"> </span>
-</button>
-<button id="bCanc" type="button" class="btn  btn-sm btn-danger" style="display:none;">
-<span class="fe fe-x-circle"> </span>
-</button>
-</div></td></tr>
-                            <tr>
-                                <td>Dominic</td>
-                                <td>Hudson</td>
-                                <td>Sales Assistant</td>
-                                <td>2015/10/16</td>
-                                <td>$654,300</td>
-                                <td>d.hudson@datatables.net</td>
-                            <td name="bstable-actions"><div class="btn-list">
-<button id="bEdit" type="button" class="btn btn-sm btn-primary">
-<span class="fe fe-edit"> </span>
-</button>
-<button id="bDel" type="button" class="btn  btn-sm btn-danger">
-<span class="fe fe-trash-2"> </span>
-</button>
-<button id="bAcep" type="button" class="btn  btn-sm btn-primary" style="display:none;">
-<span class="fe fe-check-circle"> </span>
-</button>
-<button id="bCanc" type="button" class="btn  btn-sm btn-danger" style="display:none;">
-<span class="fe fe-x-circle"> </span>
-</button>
-</div></td></tr>
+                              <td colspan="8" class="text-center">
+                                Aucune données trouver
+                              </td>
+                            </tr>
+                          </ng-container>
                         </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-<div class="row">
-    <div class="col-12 col-sm-12">
-      <div class="card">
-        <div class="card-header">
-          <h3 class="card-title mb-0">Product Sales</h3>
-        </div>
-        <div class="card-body pt-4">
-          <div class="grid-margin">
-            <div class="">
-              <div class="panel panel-primary">
-                <div class="tab-menu-heading border-0 p-0">
-                  <div class="tabs-menu1">
-                    <!-- Tabs -->
-                    <ul class="nav panel-tabs product-sale">
-                      <li>
-                        <a href="#tab5" class="active" data-bs-toggle="tab">All products</a>
-                      </li>
-                      <li>
-                        <a href="#tab6" data-bs-toggle="tab" class="text-dark">Shipped</a>
-                      </li>
-                      <li>
-                        <a href="#tab7" data-bs-toggle="tab" class="text-dark">Pending</a>
-                      </li>
-                      <li>
-                        <a href="#tab8" data-bs-toggle="tab" class="text-dark">Cancelled</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="panel-body tabs-menu-body border-0 pt-0">
-                  <div class="tab-content">
-                    <div class="tab-pane active" id="tab5">
-                      <div class="table-responsive">
-                        <div id="data-table_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer"><div class="row"><div class="col-sm-12 col-md-6"><div class="dataTables_length" id="data-table_length"><label>Show <select name="data-table_length" aria-controls="data-table" class="form-select form-select-sm select2 select2-hidden-accessible" tabindex="-1" aria-hidden="true"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: 59.9826px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-data-table_length-99-container"><span class="select2-selection__rendered" id="select2-data-table_length-99-container" title="10">10</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span> entries</label></div></div><div class="col-sm-12 col-md-6"><div id="data-table_filter" class="dataTables_filter"><label><input type="search" class="form-control form-control" placeholder="Search..." aria-controls="data-table"></label></div></div></div><div class="row"><div class="col-sm-12"><table id="data-table" class="table table-bordered text-nowrap mb-0 dataTable no-footer" role="grid" aria-describedby="data-table_info">
-                          <thead class="border-top">
-                            <tr role="row"><th class="bg-transparent border-bottom-0 sorting_disabled" style="width: 90.2431px;" rowspan="1" colspan="1" aria-label="
-                                Tracking Id
-                              ">
-                                Tracking Id
-                              </th><th class="bg-transparent border-bottom-0 sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1" aria-label="
-                                Product
-                              : activate to sort column ascending" style="width: 153.958px;">
-                                Product
-                              </th><th class="bg-transparent border-bottom-0 sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1" aria-label="
-                                Customer
-                              : activate to sort column ascending" style="width: 117.344px;">
-                                Customer
-                              </th><th class="bg-transparent border-bottom-0 sorting" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1" aria-label="
-                                Date
-                              : activate to sort column ascending" style="width: 84.1146px;">
-                                Date
-                              </th><th class="bg-transparent border-bottom-0 sorting_disabled" rowspan="1" colspan="1" aria-label="
-                                Amount
-                              " style="width: 91.0243px;">
-                                Amount
-                              </th><th class="bg-transparent border-bottom-0 sorting_disabled" rowspan="1" colspan="1" aria-label="
-                                Payment Mode
-                              " style="width: 141.389px;">
-                                Payment Mode
-                              </th><th class="bg-transparent border-bottom-0 sorting" style="width: 65.5903px;" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1" aria-label="
-                                Status
-                              : activate to sort column ascending">
-                                Status
-                              </th><th class="bg-transparent border-bottom-0 sorting" style="width: 52.8993px;" tabindex="0" aria-controls="data-table" rowspan="1" colspan="1" aria-label="
-                                Action
-                              : activate to sort column ascending">
-                                Action
-                              </th></tr>
-                          </thead>
-                          <tbody>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                          <tr class="border-bottom odd">
-                              <td class="text-center">
-                                <div class="mt-0 mt-sm-2 d-block">
-                                  <h6 class="mb-0 fs-14 fw-semibold">
-                                    #98765490
-                                  </h6>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <span class="avatar bradius" style="
-                                      background-image: url(../assets/images/orders/10.jpg);
-                                    "></span>
-                                  <div class="ms-3 mt-0 mt-sm-2 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Headsets
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Cherry Blossom
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span class="mt-sm-2 d-block">30 Aug 2021</span>
-                              </td>
-                              <td>
-                                <span class="fw-semibold mt-sm-2 d-block">$6.721.5</span>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Online Payment
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="mt-sm-1 d-block">
-                                  <span class="badge bg-success-transparent rounded-pill text-success p-2 px-3">Shipped</span>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="g-2">
-                                  <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="fe fe-edit fs-14"></span></a>
-                                  <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Delete"><span class="fe fe-trash-2 fs-14"></span></a>
-                                </div>
-                              </td>
-                            </tr><tr class="border-bottom even">
-                              <td class="text-center">
-                                <div class="mt-0 mt-sm-2 d-block">
-                                  <h6 class="mb-0 fs-14 fw-semibold">
-                                    #76348798
-                                  </h6>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <span class="avatar bradius" style="
-                                      background-image: url(../assets/images/orders/12.jpg);
-                                    "></span>
-                                  <div class="ms-3 mt-0 mt-sm-2 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Flower Pot
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Simon Sais
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span class="mt-sm-2 d-block">15 Nov 2021</span>
-                              </td>
-                              <td>
-                                <span class="fw-semibold mt-sm-2 d-block">$35,7863</span>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Online Payment
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="mt-sm-1 d-block">
-                                  <span class="badge bg-danger-transparent rounded-pill text-danger p-2 px-3">Cancelled</span>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="g-2">
-                                  <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="fe fe-edit fs-14"></span></a>
-                                  <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Delete"><span class="fe fe-trash-2 fs-14"></span></a>
-                                </div>
-                              </td>
-                            </tr><tr class="border-bottom odd">
-                              <td class="text-center">
-                                <div class="mt-0 mt-sm-2 d-block">
-                                  <h6 class="mb-0 fs-14 fw-semibold">
-                                    #23986456
-                                  </h6>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <span class="avatar bradius" style="
-                                      background-image: url(../assets/images/orders/4.jpg);
-                                    "></span>
-                                  <div class="ms-3 mt-0 mt-sm-2 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Pen Drive
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Manny Jah
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span class="mt-sm-2 d-block">27 Jan 2021</span>
-                              </td>
-                              <td>
-                                <span class="fw-semibold mt-sm-2 d-block">$5,89,6437</span>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Cash on Delivery
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="mt-sm-1 d-block">
-                                  <span class="badge bg-warning-transparent rounded-pill text-warning p-2 px-3">Pending</span>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="g-2">
-                                  <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="fe fe-edit fs-14"></span></a>
-                                  <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Delete"><span class="fe fe-trash-2 fs-14"></span></a>
-                                </div>
-                              </td>
-                            </tr><tr class="border-bottom even">
-                              <td class="text-center">
-                                <div class="mt-0 mt-sm-2 d-block">
-                                  <h6 class="mb-0 fs-14 fw-semibold">
-                                    #87456325
-                                  </h6>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <span class="avatar bradius" style="
-                                      background-image: url(../assets/images/orders/8.jpg);
-                                    "></span>
-                                  <div class="ms-3 mt-0 mt-sm-2 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      New Bowl
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Florinda Carasco
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span class="mt-sm-2 d-block">19 Sep 2021</span>
-                              </td>
-                              <td>
-                                <span class="fw-semibold mt-sm-2 d-block">$17.98</span>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Online Payment
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="mt-sm-1 d-block">
-                                  <span class="badge bg-success-transparent rounded-pill text-success p-2 px-3">Shipped</span>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="g-2">
-                                  <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="fe fe-edit fs-14"></span></a>
-                                  <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Delete"><span class="fe fe-trash-2 fs-14"></span></a>
-                                </div>
-                              </td>
-                            </tr><tr class="border-bottom odd">
-                              <td class="text-center">
-                                <div class="mt-0 mt-sm-2 d-block">
-                                  <h6 class="mb-0 fs-14 fw-semibold">
-                                    #65783926
-                                  </h6>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <span class="avatar bradius" style="
-                                      background-image: url(../assets/images/orders/6.jpg);
-                                    "></span>
-                                  <div class="ms-3 mt-0 mt-sm-2 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Leather Watch
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Ivan Notheridiya
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span class="mt-sm-2 d-block">06 Oct 2021</span>
-                              </td>
-                              <td>
-                                <span class="fw-semibold mt-sm-2 d-block">$8.654.4</span>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Cash on Delivery
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="mt-sm-1 d-block">
-                                  <span class="badge bg-danger-transparent rounded-pill text-danger p-2 px-3">Cancelled</span>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="g-2">
-                                  <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="fe fe-edit fs-14"></span></a>
-                                  <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Delete"><span class="fe fe-trash-2 fs-14"></span></a>
-                                </div>
-                              </td>
-                            </tr><tr class="border-bottom even">
-                              <td class="text-center">
-                                <div class="mt-0 mt-sm-2 d-block">
-                                  <h6 class="mb-0 fs-14 fw-semibold">
-                                    #34654895
-                                  </h6>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <span class="avatar bradius" style="
-                                      background-image: url(../assets/images/orders/1.jpg);
-                                    "></span>
-                                  <div class="ms-3 mt-0 mt-sm-2 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Digital Camera
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Willie Findit
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span class="mt-sm-2 d-block">10 Jul 2021</span>
-                              </td>
-                              <td>
-                                <span class="fw-semibold mt-sm-2 d-block">$8.654.4</span>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Cash on Delivery
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="mt-sm-1 d-block">
-                                  <span class="badge bg-warning-transparent rounded-pill text-warning p-2 px-3">Pending</span>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="g-2">
-                                  <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="fe fe-edit fs-14"></span></a>
-                                  <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Delete"><span class="fe fe-trash-2 fs-14"></span></a>
-                                </div>
-                              </td>
-                            </tr><tr class="border-bottom odd">
-                              <td class="text-center">
-                                <div class="mt-0 mt-sm-2 d-block">
-                                  <h6 class="mb-0 fs-14 fw-semibold">
-                                    #98765345
-                                  </h6>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <span class="avatar bradius" style="
-                                      background-image: url(../assets/images/orders/11.jpg);
-                                    "></span>
-                                  <div class="ms-3 mt-0 mt-sm-2 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Earphones
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Addie Minstra
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span class="mt-sm-2 d-block">25 Jun 2021</span>
-                              </td>
-                              <td>
-                                <span class="fw-semibold mt-sm-2 d-block">$7,34,9768</span>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Online Payment
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="mt-sm-1 d-block">
-                                  <span class="badge bg-success-transparent rounded-pill text-success p-2 px-3">Shipped</span>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="g-2">
-                                  <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="fe fe-edit fs-14"></span></a>
-                                  <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Delete"><span class="fe fe-trash-2 fs-14"></span></a>
-                                </div>
-                              </td>
-                            </tr><tr class="border-bottom even">
-                              <td class="text-center">
-                                <div class="mt-0 mt-sm-2 d-block">
-                                  <h6 class="mb-0 fs-14 fw-semibold">
-                                    #67546577
-                                  </h6>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <span class="avatar bradius" style="
-                                      background-image: url(../assets/images/orders/2.jpg);
-                                    "></span>
-                                  <div class="ms-3 mt-0 mt-sm-2 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Shoes
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Laura Biding
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span class="mt-sm-2 d-block">22 Feb 2021</span>
-                              </td>
-                              <td>
-                                <span class="fw-semibold mt-sm-2 d-block">$7.76.654</span>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Cash on Delivery
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="mt-sm-1 d-block">
-                                  <span class="badge bg-warning-transparent rounded-pill text-warning p-2 px-3">Pending</span>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="g-2">
-                                  <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="fe fe-edit fs-14"></span></a>
-                                  <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Delete"><span class="fe fe-trash-2 fs-14"></span></a>
-                                </div>
-                              </td>
-                            </tr></tbody>
-                        </table></div></div><div class="row"><div class="col-sm-12 col-md-12"><div class="dataTables_info" id="data-table_info" role="status" aria-live="polite">Showing 1 to 8 of 8 entries</div></div><div class="col-sm-12 col-md-12"><div class="dataTables_paginate paging_simple_numbers" id="data-table_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="data-table_previous"><a href="#" aria-controls="data-table" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="data-table" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item next disabled" id="data-table_next"><a href="#" aria-controls="data-table" data-dt-idx="2" tabindex="0" class="page-link">Next</a></li></ul></div></div></div></div>
-                      </div>
-                    </div>
-                    <div class="tab-pane" id="tab6">
-                      <div class="table-responsive">
-                        <table class="table table-bordered text-nowrap mb-0">
-                          <thead class="border-top">
-                            <tr>
-                              <th class="bg-transparent border-bottom-0" style="width: 5%">
-                                Tracking Id
-                              </th>
-                              <th class="bg-transparent border-bottom-0">
-                                Product
-                              </th>
-                              <th class="bg-transparent border-bottom-0">
-                                Customer
-                              </th>
-                              <th class="bg-transparent border-bottom-0">
-                                Date
-                              </th>
-                              <th class="bg-transparent border-bottom-0">
-                                Amount
-                              </th>
-                              <th class="bg-transparent border-bottom-0">
-                                Payment Mode
-                              </th>
-                              <th class="bg-transparent border-bottom-0" style="width: 10%">
-                                Status
-                              </th>
-                              <th class="bg-transparent border-bottom-0" style="width: 5%">
-                                Action
-                              </th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr class="border-bottom">
-                              <td class="text-center">
-                                <div class="mt-0 mt-sm-2 d-block">
-                                  <h6 class="mb-0 fs-14 fw-semibold">
-                                    #98765490
-                                  </h6>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <span class="avatar bradius" style="
-                                      background-image: url(../assets/images/orders/10.jpg);
-                                    "></span>
-                                  <div class="ms-3 mt-0 mt-sm-2 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Headsets
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Cherry Blossom
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span class="mt-sm-2 d-block">30 Aug 2021</span>
-                              </td>
-                              <td>
-                                <span class="fw-semibold mt-sm-2 d-block">$6.721.5</span>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Online Payment
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="mt-sm-1 d-block">
-                                  <span class="badge bg-success-transparent rounded-pill text-success p-2 px-3">Shipped</span>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="g-2">
-                                  <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="fe fe-edit fs-14"></span></a>
-                                  <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Delete"><span class="fe fe-trash-2 fs-14"></span></a>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr class="border-bottom">
-                              <td class="text-center">
-                                <div class="mt-0 mt-sm-2 d-block">
-                                  <h6 class="mb-0 fs-14 fw-semibold">
-                                    #76348798
-                                  </h6>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <span class="avatar bradius" style="
-                                      background-image: url(../assets/images/orders/12.jpg);
-                                    "></span>
-                                  <div class="ms-3 mt-0 mt-sm-2 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Flower Pot
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Simon Sais
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span class="mt-sm-2 d-block">15 Nov 2021</span>
-                              </td>
-                              <td>
-                                <span class="fw-semibold mt-sm-2 d-block">$35,7863</span>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Online Payment
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="mt-sm-1 d-block">
-                                  <span class="badge bg-success-transparent rounded-pill text-success p-2 px-3">Shipped</span>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="g-2">
-                                  <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="fe fe-edit fs-14"></span></a>
-                                  <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Delete"><span class="fe fe-trash-2 fs-14"></span></a>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr class="border-bottom">
-                              <td class="text-center">
-                                <div class="mt-0 mt-sm-2 d-block">
-                                  <h6 class="mb-0 fs-14 fw-semibold">
-                                    #23986456
-                                  </h6>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <span class="avatar bradius" style="
-                                      background-image: url(../assets/images/orders/4.jpg);
-                                    "></span>
-                                  <div class="ms-3 mt-0 mt-sm-2 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Pen Drive
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Manny Jah
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span class="mt-sm-2 d-block">27 Jan 2021</span>
-                              </td>
-                              <td>
-                                <span class="fw-semibold mt-sm-2 d-block">$5,89,6437</span>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Cash on Delivery
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="mt-sm-1 d-block">
-                                  <span class="badge bg-success-transparent rounded-pill text-success p-2 px-3">Shipped</span>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="g-2">
-                                  <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="fe fe-edit fs-14"></span></a>
-                                  <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Delete"><span class="fe fe-trash-2 fs-14"></span></a>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr class="border-bottom">
-                              <td class="text-center">
-                                <div class="mt-0 mt-sm-2 d-block">
-                                  <h6 class="mb-0 fs-14 fw-semibold">
-                                    #87456325
-                                  </h6>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <span class="avatar bradius" style="
-                                      background-image: url(../assets/images/orders/8.jpg);
-                                    "></span>
-                                  <div class="ms-3 mt-0 mt-sm-2 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      New Bowl
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Florinda Carasco
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span class="mt-sm-2 d-block">19 Sep 2021</span>
-                              </td>
-                              <td>
-                                <span class="fw-semibold mt-sm-2 d-block">$17.98</span>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Online Payment
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="mt-sm-1 d-block">
-                                  <span class="badge bg-success-transparent rounded-pill text-success p-2 px-3">Shipped</span>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="g-2">
-                                  <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="fe fe-edit fs-14"></span></a>
-                                  <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Delete"><span class="fe fe-trash-2 fs-14"></span></a>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr class="border-bottom">
-                              <td class="text-center">
-                                <div class="mt-0 mt-sm-2 d-block">
-                                  <h6 class="mb-0 fs-14 fw-semibold">
-                                    #65783926
-                                  </h6>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <span class="avatar bradius" style="
-                                      background-image: url(../assets/images/orders/6.jpg);
-                                    "></span>
-                                  <div class="ms-3 mt-0 mt-sm-2 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Leather Watch
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Ivan Notheridiya
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span class="mt-sm-2 d-block">06 Oct 2021</span>
-                              </td>
-                              <td>
-                                <span class="fw-semibold mt-sm-2 d-block">$8.654.4</span>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Cash on Delivery
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="mt-sm-1 d-block">
-                                  <span class="badge bg-success-transparent rounded-pill text-success p-2 px-3">Shipped</span>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="g-2">
-                                  <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="fe fe-edit fs-14"></span></a>
-                                  <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Delete"><span class="fe fe-trash-2 fs-14"></span></a>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr class="border-bottom">
-                              <td class="text-center">
-                                <div class="mt-0 mt-sm-2 d-block">
-                                  <h6 class="mb-0 fs-14 fw-semibold">
-                                    #34654895
-                                  </h6>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <span class="avatar bradius" style="
-                                      background-image: url(../assets/images/orders/1.jpg);
-                                    "></span>
-                                  <div class="ms-3 mt-0 mt-sm-2 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Digital Camera
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Willie Findit
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span class="mt-sm-2 d-block">10 Jul 2021</span>
-                              </td>
-                              <td>
-                                <span class="fw-semibold mt-sm-2 d-block">$8.654.4</span>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Cash on Delivery
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="mt-sm-1 d-block">
-                                  <span class="badge bg-success-transparent rounded-pill text-success p-2 px-3">Shipped</span>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="g-2">
-                                  <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="fe fe-edit fs-14"></span></a>
-                                  <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Delete"><span class="fe fe-trash-2 fs-14"></span></a>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr class="border-bottom">
-                              <td class="text-center">
-                                <div class="mt-0 mt-sm-2 d-block">
-                                  <h6 class="mb-0 fs-14 fw-semibold">
-                                    #98765345
-                                  </h6>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <span class="avatar bradius" style="
-                                      background-image: url(../assets/images/orders/11.jpg);
-                                    "></span>
-                                  <div class="ms-3 mt-0 mt-sm-2 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Earphones
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Addie Minstra
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span class="mt-sm-2 d-block">25 Jun 2021</span>
-                              </td>
-                              <td>
-                                <span class="fw-semibold mt-sm-2 d-block">$7,34,9768</span>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Online Payment
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="mt-sm-1 d-block">
-                                  <span class="badge bg-success-transparent rounded-pill text-success p-2 px-3">Shipped</span>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="g-2">
-                                  <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="fe fe-edit fs-14"></span></a>
-                                  <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Delete"><span class="fe fe-trash-2 fs-14"></span></a>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr class="border-bottom">
-                              <td class="text-center">
-                                <div class="mt-0 mt-sm-2 d-block">
-                                  <h6 class="mb-0 fs-14 fw-semibold">
-                                    #67546577
-                                  </h6>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <span class="avatar bradius" style="
-                                      background-image: url(../assets/images/orders/2.jpg);
-                                    "></span>
-                                  <div class="ms-3 mt-0 mt-sm-2 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Shoes
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Laura Biding
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span class="mt-sm-2 d-block">22 Feb 2021</span>
-                              </td>
-                              <td>
-                                <span class="fw-semibold mt-sm-2 d-block">$7.76.654</span>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Cash on Delivery
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="mt-sm-1 d-block">
-                                  <span class="badge bg-success-transparent rounded-pill text-success p-2 px-3">Shipped</span>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="g-2">
-                                  <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="fe fe-edit fs-14"></span></a>
-                                  <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Delete"><span class="fe fe-trash-2 fs-14"></span></a>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                    <div class="tab-pane" id="tab7">
-                      <div class="table-responsive">
-                        <table class="table table-bordered text-nowrap mb-0">
-                          <thead class="border-top">
-                            <tr>
-                              <th class="bg-transparent border-bottom-0" style="width: 5%">
-                                Tracking Id
-                              </th>
-                              <th class="bg-transparent border-bottom-0">
-                                Product
-                              </th>
-                              <th class="bg-transparent border-bottom-0">
-                                Customer
-                              </th>
-                              <th class="bg-transparent border-bottom-0">
-                                Date
-                              </th>
-                              <th class="bg-transparent border-bottom-0">
-                                Amount
-                              </th>
-                              <th class="bg-transparent border-bottom-0">
-                                Payment Mode
-                              </th>
-                              <th class="bg-transparent border-bottom-0" style="width: 10%">
-                                Status
-                              </th>
-                              <th class="bg-transparent border-bottom-0" style="width: 5%">
-                                Action
-                              </th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr class="border-bottom">
-                              <td class="text-center">
-                                <div class="mt-0 mt-sm-2 d-block">
-                                  <h6 class="mb-0 fs-14 fw-semibold">
-                                    #98765490
-                                  </h6>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <span class="avatar bradius" style="
-                                      background-image: url(../assets/images/orders/10.jpg);
-                                    "></span>
-                                  <div class="ms-3 mt-0 mt-sm-2 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Headsets
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Cherry Blossom
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span class="mt-sm-2 d-block">30 Aug 2021</span>
-                              </td>
-                              <td>
-                                <span class="fw-semibold mt-sm-2 d-block">$6.721.5</span>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Online Payment
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="mt-sm-1 d-block">
-                                  <span class="badge bg-warning-transparent rounded-pill text-warning p-2 px-3">Pending</span>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="g-2">
-                                  <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="fe fe-edit fs-14"></span></a>
-                                  <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Delete"><span class="fe fe-trash-2 fs-14"></span></a>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr class="border-bottom">
-                              <td class="text-center">
-                                <div class="mt-0 mt-sm-2 d-block">
-                                  <h6 class="mb-0 fs-14 fw-semibold">
-                                    #23986456
-                                  </h6>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <span class="avatar bradius" style="
-                                      background-image: url(../assets/images/orders/4.jpg);
-                                    "></span>
-                                  <div class="ms-3 mt-0 mt-sm-2 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Pen Drive
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Manny Jah
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span class="mt-sm-2 d-block">27 Jan 2021</span>
-                              </td>
-                              <td>
-                                <span class="fw-semibold mt-sm-2 d-block">$5,89,6437</span>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Cash on Delivery
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="mt-sm-1 d-block">
-                                  <span class="badge bg-warning-transparent rounded-pill text-warning p-2 px-3">Pending</span>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="g-2">
-                                  <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="fe fe-edit fs-14"></span></a>
-                                  <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Delete"><span class="fe fe-trash-2 fs-14"></span></a>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr class="border-bottom">
-                              <td class="text-center">
-                                <div class="mt-0 mt-sm-2 d-block">
-                                  <h6 class="mb-0 fs-14 fw-semibold">
-                                    #87456325
-                                  </h6>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <span class="avatar bradius" style="
-                                      background-image: url(../assets/images/orders/8.jpg);
-                                    "></span>
-                                  <div class="ms-3 mt-0 mt-sm-2 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      New Bowl
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Florinda Carasco
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span class="mt-sm-2 d-block">19 Sep 2021</span>
-                              </td>
-                              <td>
-                                <span class="fw-semibold mt-sm-2 d-block">$17.98</span>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Online Payment
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="mt-sm-1 d-block">
-                                  <span class="badge bg-warning-transparent rounded-pill text-warning p-2 px-3">Pending</span>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="g-2">
-                                  <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="fe fe-edit fs-14"></span></a>
-                                  <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Delete"><span class="fe fe-trash-2 fs-14"></span></a>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr class="border-bottom">
-                              <td class="text-center">
-                                <div class="mt-0 mt-sm-2 d-block">
-                                  <h6 class="mb-0 fs-14 fw-semibold">
-                                    #65783926
-                                  </h6>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <span class="avatar bradius" style="
-                                      background-image: url(../assets/images/orders/6.jpg);
-                                    "></span>
-                                  <div class="ms-3 mt-0 mt-sm-2 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Leather Watch
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Ivan Notheridiya
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span class="mt-sm-2 d-block">06 Oct 2021</span>
-                              </td>
-                              <td>
-                                <span class="fw-semibold mt-sm-2 d-block">$8.654.4</span>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Cash on Delivery
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="mt-sm-1 d-block">
-                                  <span class="badge bg-warning-transparent rounded-pill text-warning p-2 px-3">Pending</span>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="g-2">
-                                  <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="fe fe-edit fs-14"></span></a>
-                                  <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Delete"><span class="fe fe-trash-2 fs-14"></span></a>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr class="border-bottom">
-                              <td class="text-center">
-                                <div class="mt-0 mt-sm-2 d-block">
-                                  <h6 class="mb-0 fs-14 fw-semibold">
-                                    #34654895
-                                  </h6>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <span class="avatar bradius" style="
-                                      background-image: url(../assets/images/orders/1.jpg);
-                                    "></span>
-                                  <div class="ms-3 mt-0 mt-sm-2 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Digital Camera
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Willie Findit
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span class="mt-sm-2 d-block">10 Jul 2021</span>
-                              </td>
-                              <td>
-                                <span class="fw-semibold mt-sm-2 d-block">$8.654.4</span>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Cash on Delivery
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="mt-sm-1 d-block">
-                                  <span class="badge bg-warning-transparent rounded-pill text-warning p-2 px-3">Pending</span>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="g-2">
-                                  <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="fe fe-edit fs-14"></span></a>
-                                  <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Delete"><span class="fe fe-trash-2 fs-14"></span></a>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr class="border-bottom">
-                              <td class="text-center">
-                                <div class="mt-0 mt-sm-2 d-block">
-                                  <h6 class="mb-0 fs-14 fw-semibold">
-                                    #98765345
-                                  </h6>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <span class="avatar bradius" style="
-                                      background-image: url(../assets/images/orders/11.jpg);
-                                    "></span>
-                                  <div class="ms-3 mt-0 mt-sm-2 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Earphones
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Addie Minstra
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span class="mt-sm-2 d-block">25 Jun 2021</span>
-                              </td>
-                              <td>
-                                <span class="fw-semibold mt-sm-2 d-block">$7,34,9768</span>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Online Payment
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="mt-sm-1 d-block">
-                                  <span class="badge bg-warning-transparent rounded-pill text-warning p-2 px-3">Pending</span>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="g-2">
-                                  <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="fe fe-edit fs-14"></span></a>
-                                  <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Delete"><span class="fe fe-trash-2 fs-14"></span></a>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr class="border-bottom">
-                              <td class="text-center">
-                                <div class="mt-0 mt-sm-2 d-block">
-                                  <h6 class="mb-0 fs-14 fw-semibold">
-                                    #67546577
-                                  </h6>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <span class="avatar bradius" style="
-                                      background-image: url(../assets/images/orders/2.jpg);
-                                    "></span>
-                                  <div class="ms-3 mt-0 mt-sm-2 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Shoes
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Laura Biding
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span class="mt-sm-2 d-block">22 Feb 2021</span>
-                              </td>
-                              <td>
-                                <span class="fw-semibold mt-sm-2 d-block">$7.76.654</span>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Cash on Delivery
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="mt-sm-1 d-block">
-                                  <span class="badge bg-warning-transparent rounded-pill text-warning p-2 px-3">Pending</span>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="g-2">
-                                  <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="fe fe-edit fs-14"></span></a>
-                                  <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Delete"><span class="fe fe-trash-2 fs-14"></span></a>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                    <div class="tab-pane" id="tab8">
-                      <div class="table-responsive">
-                        <table class="table table-bordered text-nowrap mb-0">
-                          <thead class="border-top">
-                            <tr>
-                              <th class="bg-transparent border-bottom-0" style="width: 5%">
-                                Tracking Id
-                              </th>
-                              <th class="bg-transparent border-bottom-0">
-                                Product
-                              </th>
-                              <th class="bg-transparent border-bottom-0">
-                                Customer
-                              </th>
-                              <th class="bg-transparent border-bottom-0">
-                                Date
-                              </th>
-                              <th class="bg-transparent border-bottom-0">
-                                Amount
-                              </th>
-                              <th class="bg-transparent border-bottom-0">
-                                Payment Mode
-                              </th>
-                              <th class="bg-transparent border-bottom-0" style="width: 10%">
-                                Status
-                              </th>
-                              <th class="bg-transparent border-bottom-0" style="width: 5%">
-                                Action
-                              </th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr class="border-bottom">
-                              <td class="text-center">
-                                <div class="mt-0 mt-sm-2 d-block">
-                                  <h6 class="mb-0 fs-14 fw-semibold">
-                                    #98765490
-                                  </h6>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <span class="avatar bradius" style="
-                                      background-image: url(../assets/images/orders/10.jpg);
-                                    "></span>
-                                  <div class="ms-3 mt-0 mt-sm-2 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Headsets
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Cherry Blossom
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span class="mt-sm-2 d-block">30 Aug 2021</span>
-                              </td>
-                              <td>
-                                <span class="fw-semibold mt-sm-2 d-block">$6.721.5</span>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Online Payment
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="mt-sm-1 d-block">
-                                  <span class="badge bg-danger-transparent rounded-pill text-danger p-2 px-3">Cancelled</span>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="g-2">
-                                  <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="fe fe-edit fs-14"></span></a>
-                                  <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Delete"><span class="fe fe-trash-2 fs-14"></span></a>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr class="border-bottom">
-                              <td class="text-center">
-                                <div class="mt-0 mt-sm-2 d-block">
-                                  <h6 class="mb-0 fs-14 fw-semibold">
-                                    #76348798
-                                  </h6>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <span class="avatar bradius" style="
-                                      background-image: url(../assets/images/orders/12.jpg);
-                                    "></span>
-                                  <div class="ms-3 mt-0 mt-sm-2 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Flower Pot
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Simon Sais
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span class="mt-sm-2 d-block">15 Nov 2021</span>
-                              </td>
-                              <td>
-                                <span class="fw-semibold mt-sm-2 d-block">$35,7863</span>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Online Payment
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="mt-sm-1 d-block">
-                                  <span class="badge bg-danger-transparent rounded-pill text-danger p-2 px-3">Cancelled</span>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="g-2">
-                                  <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="fe fe-edit fs-14"></span></a>
-                                  <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Delete"><span class="fe fe-trash-2 fs-14"></span></a>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr class="border-bottom">
-                              <td class="text-center">
-                                <div class="mt-0 mt-sm-2 d-block">
-                                  <h6 class="mb-0 fs-14 fw-semibold">
-                                    #23986456
-                                  </h6>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <span class="avatar bradius" style="
-                                      background-image: url(../assets/images/orders/4.jpg);
-                                    "></span>
-                                  <div class="ms-3 mt-0 mt-sm-2 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Pen Drive
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Manny Jah
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span class="mt-sm-2 d-block">27 Jan 2021</span>
-                              </td>
-                              <td>
-                                <span class="fw-semibold mt-sm-2 d-block">$5,89,6437</span>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Cash on Delivery
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="mt-sm-1 d-block">
-                                  <span class="badge bg-danger-transparent rounded-pill text-danger p-2 px-3">Cancelled</span>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="g-2">
-                                  <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="fe fe-edit fs-14"></span></a>
-                                  <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Delete"><span class="fe fe-trash-2 fs-14"></span></a>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr class="border-bottom">
-                              <td class="text-center">
-                                <div class="mt-0 mt-sm-2 d-block">
-                                  <h6 class="mb-0 fs-14 fw-semibold">
-                                    #87456325
-                                  </h6>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <span class="avatar bradius" style="
-                                      background-image: url(../assets/images/orders/8.jpg);
-                                    "></span>
-                                  <div class="ms-3 mt-0 mt-sm-2 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      New Bowl
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Florinda Carasco
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span class="mt-sm-2 d-block">19 Sep 2021</span>
-                              </td>
-                              <td>
-                                <span class="fw-semibold mt-sm-2 d-block">$17.98</span>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Online Payment
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="mt-sm-1 d-block">
-                                  <span class="badge bg-danger-transparent rounded-pill text-danger p-2 px-3">Cancelled</span>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="g-2">
-                                  <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="fe fe-edit fs-14"></span></a>
-                                  <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Delete"><span class="fe fe-trash-2 fs-14"></span></a>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr class="border-bottom">
-                              <td class="text-center">
-                                <div class="mt-0 mt-sm-2 d-block">
-                                  <h6 class="mb-0 fs-14 fw-semibold">
-                                    #65783926
-                                  </h6>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <span class="avatar bradius" style="
-                                      background-image: url(../assets/images/orders/6.jpg);
-                                    "></span>
-                                  <div class="ms-3 mt-0 mt-sm-2 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Leather Watch
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Ivan Notheridiya
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span class="mt-sm-2 d-block">06 Oct 2021</span>
-                              </td>
-                              <td>
-                                <span class="fw-semibold mt-sm-2 d-block">$8.654.4</span>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Cash on Delivery
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="mt-sm-1 d-block">
-                                  <span class="badge bg-danger-transparent rounded-pill text-danger p-2 px-3">Cancelled</span>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="g-2">
-                                  <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="fe fe-edit fs-14"></span></a>
-                                  <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Delete"><span class="fe fe-trash-2 fs-14"></span></a>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr class="border-bottom">
-                              <td class="text-center">
-                                <div class="mt-0 mt-sm-2 d-block">
-                                  <h6 class="mb-0 fs-14 fw-semibold">
-                                    #34654895
-                                  </h6>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <span class="avatar bradius" style="
-                                      background-image: url(../assets/images/orders/1.jpg);
-                                    "></span>
-                                  <div class="ms-3 mt-0 mt-sm-2 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Digital Camera
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Willie Findit
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span class="mt-sm-2 d-block">10 Jul 2021</span>
-                              </td>
-                              <td>
-                                <span class="fw-semibold mt-sm-2 d-block">$8.654.4</span>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">
-                                      Cash on Delivery
-                                    </h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="mt-sm-1 d-block">
-                                  <span class="badge bg-danger-transparent rounded-pill text-danger p-2 px-3">Cancelled</span>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="g-2">
-                                  <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="fe fe-edit fs-14"></span></a>
-                                  <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Delete"><span class="fe fe-trash-2 fs-14"></span></a>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
+                      </table>
                     </div>
                   </div>
                 </div>
@@ -2099,9 +230,72 @@
           </div>
         </div>
       </div>
+      <div class="card-footer">
+        <div class="mb-3 mt-2" *ngIf="paramsPage && paramsPage.totalItems != 0">
+          <div class="d-inline ml-5" style="font-size: 13px" >
+            Affiche {{ paramsPage.from ? paramsPage.from : 1 }} à {{ paramsPage.to }} de
+            {{ paramsPage.totalItems }} entrées
+          </div>
+          <div class="d-inline float-right">
+            <ngb-pagination
+              [pageSize]="paramsPage.itemsPerPage"
+              [collectionSize]="paramsPage.totalItems"
+              [(page)]="paramsPage.currentPage"
+              (pageChange)="getPage($event)"
+            >
+              <ng-template ngbPaginationFirst>First</ng-template>
+              <ng-template ngbPaginationLast>Last</ng-template>
+              <ng-template ngbPaginationPrevious>Prev</ng-template>
+              <ng-template ngbPaginationNext>Next</ng-template>
+            </ngb-pagination>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+</div>
 
+<!-- ROW-4 END -->
+<!-- Modal -->
+<div
+class="modal fade"
+id="exampleModal"
+tabindex="-1"
+aria-labelledby="exampleModalLabel"
+aria-hidden="true"
+>
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Detail du panne</h5>
+      <button
+        type="button"
+        class="close"
+        data-dismiss="modal"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" *ngIf="showPannes">
+     
+      <div><p>Nom de la panne<strong>{{ showPannes.libellePanne }}</strong></p></div>
+      <div><p>Description de la panne : <strong>{{ showPannes.descriptionPanne }}</strong></p></div>
+      <div><p>date debut de la panne : <strong>{{ showPannes.dateDebutPanne | date}}</strong></p></div>
+      <div><p>date fin de la panne : <strong>{{ showPannes.dateFinPanne | date}}</strong></p></div>
+      <div><p>cout main oeuvre de la panne : <strong>{{ showPannes.coutMainOeuvre | currency:'XAF':'CFA'}}</strong></p></div>
+      <div><p>facture de la panne : <strong>{{ showPannes.factureMainOeuvre | currency:'XAF':'CFA'}}</strong></p></div>
+      <div><p>nom du vehicule de la panne : <strong>{{ showPannes.append?.Vehicule?.libelleVehicule }}</strong></p></div>
+      <div><p>nom fournisseur de la panne : <strong>{{ showPannes.append?.fourniseur?.libelleFournisseur }}</strong></p></div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+</div> 
   <ngx-loading
   [show]="loading"
   [config]="{ backdropBorderRadius: '3px' }"

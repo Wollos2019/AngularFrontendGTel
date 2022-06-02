@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Personal } from 'src/app/rh/models/personal.model';
+import { IPersonal, Personal } from 'src/app/rh/models/personal.model';
 import { RhService } from 'src/app/rh/services/rh.service';
-import { CategoriePermis } from '../../models/categoriePermis.model';
+import { CategoriePermis, ICategoriePermis } from '../../models/categoriePermis.model';
 import { Pagination } from '../../models/pagination.model';
-import { Permis } from '../../models/permis.model';
+import { IPermis, Permis } from '../../models/permis.model';
 import { VehiculeServiceService } from '../../vehicule-service.service';
 
 @Component({
@@ -15,22 +16,24 @@ import { VehiculeServiceService } from '../../vehicule-service.service';
 })
 export class CreatePermisComponent implements OnInit {
 
-  categoriePermis:CategoriePermis[] =[];
+  categoriePermis:ICategoriePermis[] =[];
   categoriepermis = new CategoriePermis();
-  permis:Permis[]=[];
+  permis:IPermis[]=[];
   permie = new Permis();
   paramsPage: any;
-  personals:Personal[]=[];
+  personals:IPersonal[]=[];
   personal=new Personal();
   loading=false;
   submitted = false;
   selected!:any [];
+  hideArray: Array<boolean>[]=[];
   
   constructor(
     private fb:FormBuilder,
     private toastr : ToastrService,
     private rhService: RhService,
     private vehiculeService: VehiculeServiceService,
+    private router:Router
   ) { }
 
   editForm=this.fb.group({
@@ -42,7 +45,15 @@ export class CreatePermisComponent implements OnInit {
     
 
   });
+  updatePermisForm=this.fb.group({
+    numeroPermis:['', [Validators.required]],
+    category:['',[Validators.required]],
+    dateAcquisition:['', [Validators.required]],
+    userId:['', [Validators.required]],
+    permiscategories:this.fb.array([]),
+    
 
+  });
  
 
   ngOnInit(): void {
@@ -98,10 +109,7 @@ export class CreatePermisComponent implements OnInit {
 
 }
 
-// ngOnDestroy() {
-//   this.categoriePermis.forEach(cagetory => cagetory.unsubscribe());
-//   this.categoriePermis = [];
-// }
+
 
   getAllPersonals(params=''):void{
     this.loading = true;
@@ -152,8 +160,11 @@ export class CreatePermisComponent implements OnInit {
   savepermis(): void {
 
     this.submitted = true;
+    if (this.editForm.invalid) {
+      return;
+    }
+  
     
-    this.submitted = false;
     console.log(this.editForm.value);
     const {
       numeroPermis,
@@ -166,33 +177,38 @@ export class CreatePermisComponent implements OnInit {
     this.permie.userId = userId;
     this.permie.categories=permiscategories;
   
-
-   
-    if (this.editForm.invalid) {
-      return;
+    if(permiscategories.dateDebutPermis>permiscategories.dateFinPermis){
+      this.toastr.error(
+        "Une erreur au niveau des dates ",
+        'Error'
+      );
+    }else{
+      this.loading = true;
+      this.vehiculeService.createPermi(this.permie).subscribe({
+        next: () => {
+          this.loading = false;
+          this.toastr.success('Enregistrement effectuée !!');
+          this.getAllPersonals();
+          this.getListPermi();
+         this.getListCategoriePermis();
+          this.editForm.reset();
+         // $('#createModal').modal('hide');
+         this.router.navigate(['vehicule/permis']);
+         this.submitted = false;
+        },
+        error: (error: any) => {
+          console.error('Error', error);
+          this.loading = false;
+          this.toastr.error(
+            "Une erreur s'est produite lors de la creation ",
+            'Error'
+          );
+        },
+      });
     }
-  
+   
     
-    this.loading = true;
-    this.vehiculeService.createPermi(this.permie).subscribe({
-      next: () => {
-        this.loading = false;
-        this.toastr.success('Enregistrement effectuée !!');
-        this.getAllPersonals();
-        this.getListPermi();
-       this.getListCategoriePermis();
-        this.editForm.reset();
-       // $('#createModal').modal('hide');
-      },
-      error: (error: any) => {
-        console.error('Error', error);
-        this.loading = false;
-        this.toastr.error(
-          "Une erreur s'est produite lors de la creation ",
-          'Error'
-        );
-      },
-    });
+   
   }
 
 
@@ -237,9 +253,8 @@ export class CreatePermisComponent implements OnInit {
 getValues() {
   console.log(this.selected);
 }
-addOrMove(event:any):void{console.log(event);
 
-}
+
 
 
 

@@ -14,6 +14,10 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { CreatePermisComponent } from './permis/create-permis/create-permis.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CreerPanneComponent } from './panne-vehicule/creer-panne/creer-panne.component';
+import { UpdatePermisComponent } from './permis/update-permis/update-permis.component';
+import { SharedModule } from '../shared/shared.module';
+import { UpdatePanneComponent } from './panne-vehicule/update-panne/update-panne.component';
+import { StatistiqueVehiculeComponent } from './statistique-vehicule/statistique-vehicule.component';
 
 
 
@@ -26,11 +30,14 @@ import { CreerPanneComponent } from './panne-vehicule/creer-panne/creer-panne.co
     CreatePermisComponent,
     CategoriePermisComponent,
     CreerPanneComponent,
+    UpdatePermisComponent,
+    UpdatePanneComponent,
+    StatistiqueVehiculeComponent,
    
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
-    CommonModule,
+    CommonModule, SharedModule,
     VehiculeRoutingModule,FormsModule,ReactiveFormsModule,NgbPaginationModule,NgSelectModule,
     NgMultiSelectDropDownModule.forRoot(),
 

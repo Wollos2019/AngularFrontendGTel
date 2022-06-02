@@ -83,6 +83,11 @@
                                 >
                                 immatriculation vehicule
                                 </th>
+                                <th
+                                  
+                                >
+                                status assurance
+                                </th>
                                
                                 <th
                                   
@@ -114,7 +119,13 @@
                                          {{assur.dateFinAssurance}}
                                         </td>
                                         <td>
-                                            <img [src]="sanitizeImageUrl(assur.scanAssurance!)"> 
+                                          <ng-container *ngIf="assur.scanAssurance; else templImage">
+                                            
+                                            <img [src]="assur.appends?.url"  class=" img-fluid thumbnail">  
+                                          </ng-container>
+                                           <ng-template #templImage>
+
+                                           </ng-template>
                                               
                                              
                                         </td>
@@ -128,6 +139,17 @@
                                             {{assur.appends?.vehicule?.immatriculation}}
                                          
                                         </td> 
+                                        <td>
+                                           <ng-container *ngIf="assur.appends?.compareDate==='encore valide'; else templstat">
+                                            <h4><span class="badge badge-info badge  "> {{assur.appends?.compareDate}}</span></h4>
+                                           </ng-container >
+                                           <ng-template #templstat>
+                                           <h4> <span class="badge badge-danger badge  "> {{assur.appends?.compareDate}}</span></h4>
+
+                                           </ng-template>
+                                         
+                                       
+                                      </td> 
                                          
                                         <td>
                                             <div class="g-2">
@@ -163,7 +185,7 @@
                             
                                     <ng-container *ngIf="!assurances?.length">
                                         <tr>
-                                          <td colspan="4" class="text-center">
+                                          <td colspan="9" class="text-center">
                                             Aucune données trouver
                                           </td>
                                         </tr>
@@ -179,6 +201,27 @@
                 </div>
               </div>
             </div>
+            <div class="card-footer">
+              <div class="mb-3 mt-2" *ngIf="paramsPage && paramsPage.totalItems != 0">
+                <div class="d-inline ml-5" style="font-size: 13px" >
+                  Affiche {{ paramsPage.from ? paramsPage.from : 1 }} à {{ paramsPage.to }} de
+                  {{ paramsPage.totalItems }} entrées
+                </div>
+                <div class="d-inline float-right">
+                  <ngb-pagination
+                    [pageSize]="paramsPage.itemsPerPage"
+                    [collectionSize]="paramsPage.totalItems"
+                    [(page)]="paramsPage.currentPage"
+                    (pageChange)="getPage($event)"
+                  >
+                    <ng-template ngbPaginationFirst>First</ng-template>
+                    <ng-template ngbPaginationLast>Last</ng-template>
+                    <ng-template ngbPaginationPrevious>Prev</ng-template>
+                    <ng-template ngbPaginationNext>Next</ng-template>
+                  </ngb-pagination>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -186,25 +229,7 @@
     <!-- ROW-4 END -->
     
     <!-- pagination  -->
-    <div class="mb-3 mt-2" *ngIf="paramsPage && paramsPage.totalItems != 0">
-      <div class="d-inline ml-5" style="font-size: 13px" >
-        Affiche {{ paramsPage.from ? paramsPage.from : 1 }} à {{ paramsPage.to }} de
-        {{ paramsPage.totalItems }} entrées
-      </div>
-      <div class="d-inline float-end">
-        <ngb-pagination
-          [pageSize]="paramsPage.itemsPerPage"
-          [collectionSize]="paramsPage.totalItems"
-          [(page)]="paramsPage.currentPage"
-          (pageChange)="getPage($event)"
-        >
-          <ng-template ngbPaginationFirst>First</ng-template>
-          <ng-template ngbPaginationLast>Last</ng-template>
-          <ng-template ngbPaginationPrevious>Prev</ng-template>
-          <ng-template ngbPaginationNext>Next</ng-template>
-        </ngb-pagination>
-      </div>
-    </div>
+   
     <!-- end pagination -->
     
     <div
@@ -214,7 +239,7 @@
       aria-labelledby="createModal"
       aria-hidden="true"
     >
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="createModal">Ajouter une assurance</h5>
@@ -459,7 +484,7 @@
     aria-labelledby="updateModal"
     aria-hidden="true"
   >
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="updateModal">Modifier un vehicule</h5>
@@ -615,10 +640,10 @@ tabindex="-1"
 aria-labelledby="exampleModalLabel"
 aria-hidden="true"
 >
-<div class="modal-dialog">
+<div class="modal-dialog modal-lg">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel">Detail</h5>
+      <h5 class="modal-title" id="exampleModalLabel">Detail Assurance</h5>
       <button
         type="button"
         class="close"
@@ -630,7 +655,13 @@ aria-hidden="true"
     </div>
     <div class="modal-body" *ngIf="showAssurance">
       
-      <div>{{ showAssurance.created_at }}</div>
+      <div><p> date de creation de l'assurance : <strong>{{ showAssurance.created_at | date}}</strong></p></div>
+      <div><p>numero de police de l'assurance : <strong>{{ showAssurance.numeroPoliceAssurance}}</strong></p></div>
+      <div><p>date de debut de l'assurance : <strong>{{ showAssurance.dateDebutAssurance}}</strong></p></div>
+      <div><p> date de fin de l'assurance : <strong>{{ showAssurance.dateFinAssurance}}</strong></p></div>
+      <div><p>nom ddu vehicule : <strong>{{ showAssurance.appends?.vehicule?.libelleVehicule}}</strong></p></div>
+      <div><p> immatriculation du vehicule  : <strong>{{ showAssurance.appends?.vehicule?.immatriculation}}</strong></p></div>
+     
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-dismiss="modal">

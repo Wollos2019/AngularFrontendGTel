@@ -1,4 +1,5 @@
 import { IPersonal } from "src/app/rh/models/personal.model";
+import { ICategoriePermis } from "./categoriePermis.model";
 
 
 export interface IPermis{
@@ -13,6 +14,7 @@ export interface IPermis{
     dateFinPermis?:Date;
     permis_id?:string;
     appends?:IAppends;
+    // pivot?:Pivot,
     created_at?: Date;
     update_at?: Date;
     _method?:string;
@@ -21,12 +23,20 @@ export interface IPermis{
 interface IAppends{
     
     user?:IPersonal
+    categoriePermit?:ICategoriePermis[]
+    expireCategories?:any
+    compareDate?:string;
     
   }
 
-  export interface Pivot{
-   
-  }
+//   export interface Pivot{
+  
+//     dateDebutPermis: Date;
+//     dateFinPermis: Date
+//     numeroDossierPermis:string,
+     
+//     typeCategoriePermis:string, 
+//   }
 export class Permis implements IPermis{
     constructor(
         public id?:string,

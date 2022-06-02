@@ -108,18 +108,18 @@
                                                   <button
                                                 (click)="updateModal(categorieper)"
                                                 title="modifier"
-                                                class="btn btn-light btn-sm mr-1"
+                                                class="btn btn-primary btn-sm mr-1"
                                                 type="button"
                                                
                                               >
-                                                <i class="icofont-ui-edit size-18 text-primary"></i>
+                                                <i class="icofont-ui-edit size-18 "></i>
                                             </button>  
                                             <button (click)="show(categorieper)"
-                                            class="btn btn-light btn-sm mr-1"
-                                          
+                                            class="btn btn-success btn-sm mr-1"
+                                          type="button"
                                             title="voire"
                                             ><span
-                                              class="icofont-eye-open fs-14"
+                                              class="icofont-eye-open size-18"
                                             ></span
                                           ></button>
                         
@@ -127,9 +127,9 @@
                                               (click)="delete(categorieper)"
                                                 title="supprimer"
                                                 type="button"
-                                                class="btn btn-primary btn-light btn-sm"
+                                                class="btn btn-danger  btn-sm"
                                               >
-                                                <i class="icofont-ui-delete text-danger"></i>
+                                                <i class="icofont-ui-delete size-18"></i>
                                               </button>  
                                                
                                               </div>
@@ -155,33 +155,33 @@
                 </div>
               </div>
             </div>
+            <div class="card-footer">
+              <div class="mb-3 mt-2" *ngIf="paramsPage && paramsPage.totalItems != 0">
+                <div class="d-inline ml-5" style="font-size: 13px" >
+                  Affiche {{ paramsPage.from ? paramsPage.from : 1 }} à {{ paramsPage.to }} de
+                  {{ paramsPage.totalItems }} entrées
+                </div>
+                <div class="d-inline float-right">
+                  <ngb-pagination
+                    [pageSize]="paramsPage.itemsPerPage"
+                    [collectionSize]="paramsPage.totalItems"
+                    [(page)]="paramsPage.currentPage"
+                    (pageChange)="getPage($event)"
+                  >
+                    <ng-template ngbPaginationFirst>First</ng-template>
+                    <ng-template ngbPaginationLast>Last</ng-template>
+                    <ng-template ngbPaginationPrevious>Prev</ng-template>
+                    <ng-template ngbPaginationNext>Next</ng-template>
+                  </ngb-pagination>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     
     <!-- ROW-4 END -->
     
-    <!-- pagination  -->
-    <div class="mb-3 mt-2" *ngIf="paramsPage && paramsPage.totalItems != 0">
-      <div class="d-inline ml-5" style="font-size: 13px" >
-        Affiche {{ paramsPage.from ? paramsPage.from : 1 }} à {{ paramsPage.to }} de
-        {{ paramsPage.totalItems }} entrées
-      </div>
-      <div class="d-inline float-end">
-        <ngb-pagination
-          [pageSize]="paramsPage.itemsPerPage"
-          [collectionSize]="paramsPage.totalItems"
-          [(page)]="paramsPage.currentPage"
-          (pageChange)="getPage($event)"
-        >
-          <ng-template ngbPaginationFirst>First</ng-template>
-          <ng-template ngbPaginationLast>Last</ng-template>
-          <ng-template ngbPaginationPrevious>Prev</ng-template>
-          <ng-template ngbPaginationNext>Next</ng-template>
-        </ngb-pagination>
-      </div>
-    </div>
-    <!-- end pagination -->
     
     <div
       class="modal fade"
@@ -435,8 +435,8 @@
     aria-labelledby="updateModal"
     aria-hidden="true"
   >
-    <div class="modal-dialog">
-      <div class="modal-content">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content ">
         <div class="modal-header">
           <h5 class="modal-title" id="updateModal">Modifier une categorie permis</h5>
         </div>
@@ -591,7 +591,7 @@ tabindex="-1"
 aria-labelledby="exampleModalLabel"
 aria-hidden="true"
 >
-<div class="modal-dialog">
+<div class="modal-dialog modal-lg">
   <div class="modal-content">
     <div class="modal-header">
       <h5 class="modal-title" id="exampleModalLabel">Detail</h5>
@@ -604,8 +604,9 @@ aria-hidden="true"
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <div class="modal-body" *ngIf="categoriePermis">
-      <div>{{ showCategoriePermis }}</div>
+    <div class="modal-body" *ngIf="showCategoriePermis">
+      <div><p>Nom de la categorie :<strong>{{ showCategoriePermis.libelle }}</strong><p></p></div>
+      <!-- <div><p>vehicule rattache  :<strong>{{ showCategoriePermis. }}</strong><p></p></div> -->
     </div>
 
     <div class="modal-footer">
@@ -616,6 +617,12 @@ aria-hidden="true"
   </div>
 </div>
 </div> 
+
+<ngx-loading
+  [show]="loading"
+  [config]="{ backdropBorderRadius: '3px' }"
+></ngx-loading>
+    
     
 
 
