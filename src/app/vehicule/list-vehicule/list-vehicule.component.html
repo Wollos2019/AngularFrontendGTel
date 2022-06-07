@@ -1,0 +1,1067 @@
+
+
+ <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>liste des vehicules</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a [routerLink]="'/'">Dashbord</a></li>
+            <li class="breadcrumb-item active">liste des vehicules</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+   
+  <div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="fas fa-angle-left  text-primary fa-3x"></i>
+                <h6 class="mt-4 mb-2">Total Visit</h6>
+                <h2 class="mb-2 number-font">834</h2>
+                <p class="text-muted">Sed ut perspiciatis unde omnis accusantium doloremque</p>
+            </div>
+        </div>
+    </div>
+    <!-- COL END -->
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="fas fa-angle text-secondary fa-3x"></i>
+                <h6 class="mt-4 mb-2">Cost per Click</h6>
+                <h2 class="mb-2  number-font">$34,516</h2>
+                <p class="text-muted">Sed ut perspiciatis unde omnis accusantium doloremque</p>
+            </div>
+        </div>
+    </div>
+    <!-- COL END -->
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="fa fa-comment-o text-success fa-3x"></i>
+                <h6 class="mt-4 mb-2">Investment</h6>
+                <h2 class="mb-2 number-font">80%</h2>
+                <p class="text-muted">Sed ut perspiciatis unde omnis accusantium doloremque</p>
+            </div>
+        </div>
+    </div>
+    <!-- COL END -->
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="fa fa-pie-chart text-info fa-3x"></i>
+                <h6 class="mt-4 mb-2">Revenue</h6>
+                <h2 class="mb-2  number-font">70k</h2>
+                <p class="text-muted">Sed ut perspiciatis unde omnis accusantium doloremque</p>
+            </div>
+        </div>
+    </div>
+    <!-- COL END -->
+</div>
+
+    <!-- ROW-4 -->
+    <div class="row">
+      <div class="col-12 col-sm-12">
+        <div class="card">
+          <div class="card-header">
+           
+           
+            <button type="button" class="btn btn-primary btn-sm float-right" (click)="openModel()">
+                Ajouter un vehicule
+              </button>
+          </div>
+          <div class="card-body pt-4">
+            <div class="grid-margin">
+              <div class="">
+                <div class="panel panel-primary">
+                  
+                  <div
+                    class="panel-body tabs-menu-body border-0 pt-0"
+                  >
+                    <div class="tab-content">
+                      <div class="tab-pane active" id="tab5">
+                        <div class="table-responsive">
+                          <table
+                           
+                            class="table table-bordered"
+                          >
+                            <thead >
+                              <tr class="bg-dark text-white">
+                                <th
+                                  
+                                >
+                                   Id
+                                </th>
+                                <th
+                                 
+                                >
+                                libelle Vehicule
+                                </th>
+                                <th
+                                  
+                                >
+                                numero Identifiant
+                                </th>
+                                <th
+                                  
+                                >
+                                immatriculation
+                                </th>
+                                <th
+                                 
+                                >
+                                carte Grise
+                                </th>
+                                <th
+                                 
+                                >
+                                nombre Place
+                                </th>
+                                <th
+                                  
+                                >
+                                longueur Vehicule
+                                </th>
+                                <th
+                                  
+                                >
+                                duree Vie
+                                </th>
+                                <th
+                                  
+                                >
+                                date Mise Circulation
+                                </th>
+                                <th
+                                  
+                                >
+                                delai Alerte
+                                </th>
+                                <th
+                                  
+                                >
+                                  Action
+                                </th>
+                               
+                              </tr>
+                            </thead>
+                            <tbody>
+                                <ng-container *ngIf="vehicules">
+                                    <tr class="border-bottom" *ngFor="let v of vehicules; let i=index">
+                                        <td class="text-center">
+                                       
+                                              {{v.id}}
+                                       
+                                        </td>
+                                        <td>
+                                        
+                                                {{v.libelleVehicule}}
+                                       
+                                        </td>
+                                        <td>
+                                         
+                                                {{v.numeroIdentifiant}}
+                                             
+                                        </td>
+                                        <td>
+                                         {{v.immatriculation}}
+                                        </td>
+                                        <td>
+                                         {{v.carteGrise}}
+                                        </td>
+                                        <td>
+                                          
+                                             {{v.nombrePlace}}
+                                            
+                                        </td>
+                                        <td>
+                                         
+                                            {{v.longueurVehicule}}
+                                          
+                                        </td>
+                                        <td>
+                                           
+                                              {{v.dureeVie}}
+                                            
+                                          </td>
+                                          <td>
+                                           
+                                              {{v.dateMiseCirculation}}
+                                           
+                                          </td>
+                                          <td>
+                                           
+                                              {{v.delaiAlerte}}
+                                           
+                                          </td>
+                                        <td>
+                                            <div class="g-2">
+                                              <button (click)="show(v)"
+                                            class="btn btn-success btn-sm mr-1"
+                                          
+                                            title="voire"
+                                            ><span
+                                              class="icofont-eye-open size-18 "
+                                            ></span
+                                          ></button>
+                                                <button
+                                                (click)="updateModal(v)"
+                                                title="modifier"
+                                                class="btn btn-primary btn-sm mr-1"
+                                                type="button"
+                                               
+                                              >
+                                                <i class="icofont-ui-edit size-18 "></i>
+                                            </button>
+                                              
+                        
+                                              <button
+                                              (click)="deleteVehicule(v)"
+                                                title="supprimer"
+                                                type="button"
+                                                class="btn btn-danger  btn-sm"
+                                              >
+                                                <i class="icofont-ui-delete size-18 "></i>
+                                              </button>
+                                               
+                                              </div>
+                                        </td>
+                                      </tr>
+                                    </ng-container>
+                            
+                                    <ng-container *ngIf="!vehicules?.length">
+                                        <tr>
+                                          <td colspan="4" class="text-center">
+                                            Aucune données trouver
+                                          </td>
+                                        </tr>
+                                      </ng-container>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="mb-3 mt-2" *ngIf="paramsPage && paramsPage.totalItems != 0">
+                <div class="d-inline ml-5" style="font-size: 13px" >
+                  Affiche {{ paramsPage.from ? paramsPage.from : 1 }} à {{ paramsPage.to }} de
+                  {{ paramsPage.totalItems }} entrées
+                </div>
+                <div class="d-inline float-right">
+                  <ngb-pagination
+                    [pageSize]="paramsPage.itemsPerPage"
+                    [collectionSize]="paramsPage.totalItems"
+                    [(page)]="paramsPage.currentPage"
+                    (pageChange)="getPage($event)"
+                  >
+                    <ng-template ngbPaginationFirst>First</ng-template>
+                    <ng-template ngbPaginationLast>Last</ng-template>
+                    <ng-template ngbPaginationPrevious>Prev</ng-template>
+                    <ng-template ngbPaginationNext>Next</ng-template>
+                  </ngb-pagination>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    
+    <!-- ROW-4 END -->
+    
+  
+    <div
+      class="modal fade"
+      id="createModal"
+      tabindex="-1"
+      aria-labelledby="createModal"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="createModal">Ajouter un vehicule</h5>
+          </div>
+          <div class="modal-body">
+            <form class="form-row" [formGroup]="editForm" >
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="libelleVehicule" class="col-form-label"
+                  >Nom vehicule <span class="text-danger">*</span></label
+                  >
+                  <input
+                    type="text"
+                    [ngClass]="{ 'is-invalid': submitted && f.libelleVehicule.errors }"
+                    class="form-control"
+                    id="libelleVehicule"
+                    placeholder="nom du vehicule"
+                    formControlName="libelleVehicule"
+                  />
+                </div>
+    
+                <div *ngIf="submitted && f.libelleVehicule.errors" class="invalid-feedback">
+                  <div *ngIf="f.libelleVehicule.errors.required">name is required</div>
+                  <!-- <div *ngIf="f.libelleVehicule.errors.minlength">
+                    name must be at least 3 characters
+                  </div> -->
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="numeroIdentifiant" class="col-form-label"
+                  >Numero identifiant <span class="text-danger">*</span></label
+                  >
+                  <input
+                    type="text"
+                    [ngClass]="{ 'is-invalid': submitted && f.numeroIdentifiant.errors }"
+                    class="form-control"
+                    id="numeroIdentifiant"
+                    placeholder="Numero identifiant"
+                    formControlName="numeroIdentifiant"
+                  />
+                </div>
+    
+                <div *ngIf="submitted && f.numeroIdentifiant.errors" class="invalid-feedback">
+                  <div *ngIf="f.numeroIdentifiant.errors.required">numero identifiant required</div>
+                  <!-- <div *ngIf="f.numeroIdentifiant.errors.minlength">
+                    name must be at least 3 characters
+                  </div> -->
+                </div>
+              </div>
+
+
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="immatriculation" class="col-form-label"
+                  >Immatriculation vehicule <span class="text-danger">*</span></label
+                  >
+                  <input
+                    type="text"
+                    [ngClass]="{ 'is-invalid': submitted && f.immatriculation.errors }"
+                    class="form-control"
+                    id="immatriculation"
+                    placeholder="nom du vehicule"
+                    formControlName="immatriculation"
+                  />
+                </div>
+    
+                <div *ngIf="submitted && f.immatriculation.errors" class="invalid-feedback">
+                  <div *ngIf="f.immatriculation.errors.required">immatriculation is required</div>
+                  <!-- <div *ngIf="f.immatriculation.errors.minlength">
+                    name must be at least 3 characters
+                  </div> -->
+                </div>
+              </div>
+
+
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="carteGrise" class="col-form-label"
+                  >carte Grise vehicule <span class="text-danger">*</span></label
+                  >
+                  <input
+                    type="text"
+                    [ngClass]="{ 'is-invalid': submitted && f.carteGrise.errors }"
+                    class="form-control"
+                    id="carteGrise"
+                    placeholder="carte Grise du vehicule"
+                    formControlName="carteGrise"
+                  />
+                </div>
+    
+                <div *ngIf="submitted && f.carteGrise.errors" class="invalid-feedback">
+                  <div *ngIf="f.carteGrise.errors.required">carte Grise is required</div>
+                  <!-- <div *ngIf="f.carteGrise.errors.minlength">
+                    name must be at least 3 characters
+                  </div> -->
+                </div>
+              </div>
+
+
+
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="nombrePlace" class="col-form-label"
+                  >nombre Place vehicule <span class="text-danger">*</span></label
+                  >
+                  <input
+                    type="number"
+                    [ngClass]="{ 'is-invalid': submitted && f.nombrePlace.errors }"
+                    class="form-control"
+                    id="nombrePlace"
+                    placeholder="nom du vehicule"
+                    formControlName="nombrePlace"
+                  />
+                </div>
+    
+                <div *ngIf="submitted && f.nombrePlace.errors" class="invalid-feedback">
+                  <div *ngIf="f.nombrePlace.errors.required">nombre Place is required</div>
+                  <!-- <div *ngIf="f.nombrePlace.errors.minlength">
+                    name must be at least 3 characters
+                  </div> -->
+                </div>
+              </div>
+
+
+
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="longueurVehicule" class="col-form-label"
+                  >longueur Vehicule  <span class="text-danger">*</span></label
+                  >
+                  <input
+                    type="number"
+                    [ngClass]="{ 'is-invalid': submitted && f.longueurVehicule.errors }"
+                    class="form-control"
+                    id="longueurVehicule"
+                    placeholder="longueur du vehicule"
+                    formControlName="longueurVehicule"
+                  />
+                </div>
+    
+                <div *ngIf="submitted && f.longueurVehicule.errors" class="invalid-feedback">
+                  <div *ngIf="f.longueurVehicule.errors.required">longueur Vehicule is required</div>
+                  <!-- <div *ngIf="f.longueurVehicule.errors.minlength">
+                    name must be at least 3 characters
+                  </div> -->
+                </div>
+              </div>
+
+
+
+
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="dureeVie" class="col-form-label"
+                  >duree de Vie du vehicule <span class="text-danger">*</span></label
+                  >
+                  <input
+                    type="text"
+                    [ngClass]="{ 'is-invalid': submitted && f.dureeVie.errors }"
+                    class="form-control"
+                    id="dureeVie"
+                    placeholder="duree de Vie du vehicule"
+                    formControlName="dureeVie"
+                  />
+                </div>
+    
+                <div *ngIf="submitted && f.dureeVie.errors" class="invalid-feedback">
+                  <div *ngIf="f.dureeVie.errors.required">duree de Vie is required</div>
+                  <!-- <div *ngIf="f.dureeVie.errors.minlength">
+                    name must be at least 3 characters
+                  </div> -->
+                </div>
+              </div>
+
+
+
+
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="dateMiseCirculation" class="col-form-label"
+                  >date mise en circulation  <span class="text-danger">*</span></label
+                  >
+                  <input
+                    type="date"
+                    [ngClass]="{ 'is-invalid': submitted && f.dateMiseCirculation.errors }"
+                    class="form-control"
+                    id="dateMiseCirculation"
+                    placeholder="date Mise Circulation du vehicule"
+                    formControlName="dateMiseCirculation"
+                  />
+                </div>
+    
+                <div *ngIf="submitted && f.dateMiseCirculation.errors" class="invalid-feedback">
+                  <div *ngIf="f.dateMiseCirculation.errors.required">date Mise Circulation is required</div>
+                  <!-- <div *ngIf="f.dateMiseCirculation.errors.minlength">
+                    name must be at least 3 characters
+                  </div> -->
+                </div>
+              </div>
+
+
+
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="delaiAlerte" class="col-form-label"
+                  >delais d'Alerte <span class="text-danger">*</span></label
+                  >
+                  <input
+                    type="number"
+                    [ngClass]="{ 'is-invalid': submitted && f.delaiAlerte.errors }"
+                    class="form-control"
+                    id="delaiAlerte"
+                    placeholder="delai Alerte du vehicule"
+                    formControlName="delaiAlerte"
+                  />
+                </div>
+    
+                <div *ngIf="submitted && f.delaiAlerte.errors" class="invalid-feedback">
+                  <div *ngIf="f.delaiAlerte.errors.required">delai Alerte is required</div>
+                  <!-- <div *ngIf="f.delaiAlerte.errors.minlength">
+                    name must be at least 3 characters
+                  </div> -->
+                </div>
+              </div>
+              <!-- <div class="col-md-6">
+                <div class="form-group">
+                  <label for="impact" class="col-form-label"
+                  >incident Impact<span class="text-danger">*</span></label
+                  >
+                 
+    
+                  <select 
+                  [ngClass]="{ 'is-invalid': submitted && f.impact.errors }"
+                  class="form-control"
+                  id="impact"
+                   formControlName="impact">
+                    <option value="">selected Impact</option>
+                    <ng-container *ngIf="claims">
+                    <option *ngFor="let city of claims" [ngValue]="city" >{{city}}
+                    </option>
+                  </ng-container> 
+                 </select>
+    
+    
+                </div>
+                <div
+                  *ngIf="submitted && f.impact.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f.impact.errors.required">impact is required</div>
+                </div>
+              </div> -->
+    
+              <!-- <div class="col-md-6">
+                <div class="form-group">
+                  <label for="owner" class="col-form-label"
+                    >incident Owner</label
+                  >
+                  
+    
+                  <select 
+                  [ngClass]="{ 'is-invalid': submitted && f.Owner.errors }"
+                  class="form-control"
+                  id="owner"
+                   formControlName="owner">
+                    <option value="">QUALITY  MANAGER</option>
+                    <ng-container *ngIf="priorities">
+                    <option *ngFor="let city of priorities" [ngValue]="city" >{{city}}
+                    </option>
+                  </ng-container> 
+                 </select>
+    
+                </div>
+                <div
+                  *ngIf="submitted && f.Owner.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f.Owner.errors.required">Owner is required</div>
+                </div>
+              </div> -->
+    
+    
+              <!-- <div class="col-md-6">
+                <div class="form-group">
+                  <label for="assign" class="col-form-label"
+                    >Assign to</label
+                  >
+                  <select
+                    [ngClass]="{ 'is-invalid': submitted && f.Assign.errors }"
+                    class="form-control"
+                    id="assign"
+                    formControlName="assign"
+                  >
+                    <option value="" >INCIDENT MANAGER</option>
+                    <ng-container *ngIf="incidents">
+                      <option [value]="p.name" *ngFor="let p of incidents">
+                        {{ p.name }}
+                      </option>
+                    </ng-container>
+                  </select>
+                </div>
+                <div
+                  *ngIf="submitted && f.Assign.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f.Assign.errors.required">Assign is required</div>
+                </div>
+              </div> -->
+    
+             
+              <!-- <div class="form-group col-md-12">
+                <label for="description"
+                >incident Description<span class="text-danger">*</span></label
+                >
+                <textarea
+                  [ngClass]="{ 'is-invalid': submitted && f.description.errors }"
+                  id="description"
+                  class="form-control"
+                  formControlName="description"
+                  rows="3"
+                >
+                </textarea>
+                <div
+                  *ngIf="submitted && f.description.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f.description.errors.required">
+                    description is required
+                  </div>
+                  <div *ngIf="f.description.errors.minlength">
+                    description must be at least 15 characters
+                  </div>
+                </div>
+              </div> -->
+            </form>
+          </div>
+    
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-default" (click)="save()">
+              close
+            </button> -->
+            <span></span>
+            <button type="button" class="btn btn-success" (click)="save()">
+              Create vehicule
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- form for update vehicule -->
+
+    <div
+    class="modal fade"
+    id="updateModal"
+    tabindex="-1"
+    aria-labelledby="updateModal"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateModal">Modifier un vehicule</h5>
+        </div>
+        <div class="modal-body" *ngIf="VehiculeUpdate">
+          <form class="form-row" [formGroup]="updateVehiculeForm" >
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="libelleVehicule" class="col-form-label"
+                >Nom vehicule <span class="text-danger">*</span></label
+                >
+                <input
+                  type="text"
+                  [ngClass]="{ 'is-invalid': submittedUpdate && f1.libelleVehicule.errors }"
+                  class="form-control"
+                  id="libelleVehicule"
+                  placeholder="nom du vehicule"
+                  formControlName="libelleVehicule"
+                />
+              </div>
+  
+              <div *ngIf="submittedUpdate && f1.libelleVehicule.errors" class="invalid-feedback">
+                <div *ngIf="f1.libelleVehicule.errors.required">name is required</div>
+                <!-- <div *ngIf="f.libelleVehicule.errors.minlength">
+                  name must be at least 3 characters
+                </div> -->
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="numeroIdentifiant" class="col-form-label"
+                >Numero identifiant <span class="text-danger">*</span></label
+                >
+                <input
+                  type="text"
+                  [ngClass]="{ 'is-invalid': submittedUpdate && f1.numeroIdentifiant.errors }"
+                  class="form-control"
+                  id="numeroIdentifiant"
+                  placeholder="Numero identifiant"
+                  formControlName="numeroIdentifiant"
+                />
+              </div>
+  
+              <div *ngIf="submittedUpdate && f1.numeroIdentifiant.errors" class="invalid-feedback">
+                <div *ngIf="f1.numeroIdentifiant.errors.required">numero identifiant required</div>
+                <!-- <div *ngIf="f.numeroIdentifiant.errors.minlength">
+                  name must be at least 3 characters
+                </div> -->
+              </div>
+            </div>
+
+
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="immatriculation" class="col-form-label"
+                >Immatriculation vehicule <span class="text-danger">*</span></label
+                >
+                <input
+                  type="text"
+                  [ngClass]="{ 'is-invalid': submittedUpdate && f1.immatriculation.errors }"
+                  class="form-control"
+                  id="immatriculation"
+                  placeholder="nom du vehicule"
+                  formControlName="immatriculation"
+                />
+              </div>
+  
+              <div *ngIf="submittedUpdate && f1.immatriculation.errors" class="invalid-feedback">
+                <div *ngIf="f1.immatriculation.errors.required">immatriculation is required</div>
+                <!-- <div *ngIf="f.immatriculation.errors.minlength">
+                  name must be at least 3 characters
+                </div> -->
+              </div>
+            </div>
+
+
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="carteGrise" class="col-form-label"
+                >carte Grise vehicule <span class="text-danger">*</span></label
+                >
+                <input
+                  type="text"
+                  [ngClass]="{ 'is-invalid': submittedUpdate && f1.carteGrise.errors }"
+                  class="form-control"
+                  id="carteGrise"
+                  placeholder="carte Grise du vehicule"
+                  formControlName="carteGrise"
+                />
+              </div>
+  
+              <div *ngIf="submittedUpdate && f1.carteGrise.errors" class="invalid-feedback">
+                <div *ngIf="f1.carteGrise.errors.required">carte Grise is required</div>
+                <!-- <div *ngIf="f.carteGrise.errors.minlength">
+                  name must be at least 3 characters
+                </div> -->
+              </div>
+            </div>
+
+
+
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="nombrePlace" class="col-form-label"
+                >nombre Place vehicule <span class="text-danger">*</span></label
+                >
+                <input
+                  type="number"
+                  [ngClass]="{ 'is-invalid': submittedUpdate && f1.nombrePlace.errors }"
+                  class="form-control"
+                  id="nombrePlace"
+                  placeholder="nom du vehicule"
+                  formControlName="nombrePlace"
+                />
+              </div>
+  
+              <div *ngIf="submittedUpdate && f1.nombrePlace.errors" class="invalid-feedback">
+                <div *ngIf="f1.nombrePlace.errors.required">nombre Place is required</div>
+                <!-- <div *ngIf="f.nombrePlace.errors.minlength">
+                  name must be at least 3 characters
+                </div> -->
+              </div>
+            </div>
+
+
+
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="longueurVehicule" class="col-form-label"
+                >longueur Vehicule  <span class="text-danger">*</span></label
+                >
+                <input
+                  type="number"
+                  [ngClass]="{ 'is-invalid': submittedUpdate && f1.longueurVehicule.errors }"
+                  class="form-control"
+                  id="longueurVehicule"
+                  placeholder="longueur du vehicule"
+                  formControlName="longueurVehicule"
+                />
+              </div>
+  
+              <div *ngIf="submittedUpdate && f1.longueurVehicule.errors" class="invalid-feedback">
+                <div *ngIf="f1.longueurVehicule.errors.required">longueur Vehicule is required</div>
+                <!-- <div *ngIf="f.longueurVehicule.errors.minlength">
+                  name must be at least 3 characters
+                </div> -->
+              </div>
+            </div>
+
+
+
+
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="dureeVie" class="col-form-label"
+                >duree de Vie du vehicule <span class="text-danger">*</span></label
+                >
+                <input
+                  type="text"
+                  [ngClass]="{ 'is-invalid': submittedUpdate && f1.dureeVie.errors }"
+                  class="form-control"
+                  id="dureeVie"
+                  placeholder="duree de Vie du vehicule"
+                  formControlName="dureeVie"
+                />
+              </div>
+  
+              <div *ngIf="submittedUpdate && f1.dureeVie.errors" class="invalid-feedback">
+                <div *ngIf="f1.dureeVie.errors.required">duree de Vie is required</div>
+                <!-- <div *ngIf="f.dureeVie.errors.minlength">
+                  name must be at least 3 characters
+                </div> -->
+              </div>
+            </div>
+
+
+
+
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="dateMiseCirculation" class="col-form-label"
+                >date mise en circulation  <span class="text-danger">*</span></label
+                >
+                <input
+                  type="date"
+                  [ngClass]="{ 'is-invalid': submittedUpdate && f1.dateMiseCirculation.errors }"
+                  class="form-control"
+                  id="dateMiseCirculation"
+                  placeholder="date Mise Circulation du vehicule"
+                  formControlName="dateMiseCirculation"
+                />
+              </div>
+  
+              <div *ngIf="submittedUpdate && f1.dateMiseCirculation.errors" class="invalid-feedback">
+                <div *ngIf="f1.dateMiseCirculation.errors.required">date Mise Circulation is required</div>
+                <!-- <div *ngIf="f.dateMiseCirculation.errors.minlength">
+                  name must be at least 3 characters
+                </div> -->
+              </div>
+            </div>
+
+
+
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="delaiAlerte" class="col-form-label"
+                >delais d'Alerte <span class="text-danger">*</span></label
+                >
+                <input
+                  type="number"
+                  [ngClass]="{ 'is-invalid': submittedUpdate && f1.delaiAlerte.errors }"
+                  class="form-control"
+                  id="delaiAlerte"
+                  placeholder="delai Alerte du vehicule"
+                  formControlName="delaiAlerte"
+                />
+              </div>
+  
+              <div *ngIf="submittedUpdate && f1.delaiAlerte.errors" class="invalid-feedback">
+                <div *ngIf="f1.delaiAlerte.errors.required">delai Alerte is required</div>
+                <!-- <div *ngIf="f.delaiAlerte.errors.minlength">
+                  name must be at least 3 characters
+                </div> -->
+              </div>
+            </div>
+            <!-- <div class="col-md-6">
+              <div class="form-group">
+                <label for="impact" class="col-form-label"
+                >incident Impact<span class="text-danger">*</span></label
+                >
+               
+  
+                <select 
+                [ngClass]="{ 'is-invalid': submitted && f.impact.errors }"
+                class="form-control"
+                id="impact"
+                 formControlName="impact">
+                  <option value="">selected Impact</option>
+                  <ng-container *ngIf="claims">
+                  <option *ngFor="let city of claims" [ngValue]="city" >{{city}}
+                  </option>
+                </ng-container> 
+               </select>
+  
+  
+              </div>
+              <div
+                *ngIf="submitted && f.impact.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.impact.errors.required">impact is required</div>
+              </div>
+            </div> -->
+  
+            <!-- <div class="col-md-6">
+              <div class="form-group">
+                <label for="owner" class="col-form-label"
+                  >incident Owner</label
+                >
+                
+  
+                <select 
+                [ngClass]="{ 'is-invalid': submitted && f.Owner.errors }"
+                class="form-control"
+                id="owner"
+                 formControlName="owner">
+                  <option value="">QUALITY  MANAGER</option>
+                  <ng-container *ngIf="priorities">
+                  <option *ngFor="let city of priorities" [ngValue]="city" >{{city}}
+                  </option>
+                </ng-container> 
+               </select>
+  
+              </div>
+              <div
+                *ngIf="submitted && f.Owner.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.Owner.errors.required">Owner is required</div>
+              </div>
+            </div> -->
+  
+  
+            <!-- <div class="col-md-6">
+              <div class="form-group">
+                <label for="assign" class="col-form-label"
+                  >Assign to</label
+                >
+                <select
+                  [ngClass]="{ 'is-invalid': submitted && f.Assign.errors }"
+                  class="form-control"
+                  id="assign"
+                  formControlName="assign"
+                >
+                  <option value="" >INCIDENT MANAGER</option>
+                  <ng-container *ngIf="incidents">
+                    <option [value]="p.name" *ngFor="let p of incidents">
+                      {{ p.name }}
+                    </option>
+                  </ng-container>
+                </select>
+              </div>
+              <div
+                *ngIf="submitted && f.Assign.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.Assign.errors.required">Assign is required</div>
+              </div>
+            </div> -->
+  
+           
+            <!-- <div class="form-group col-md-12">
+              <label for="description"
+              >incident Description<span class="text-danger">*</span></label
+              >
+              <textarea
+                [ngClass]="{ 'is-invalid': submitted && f.description.errors }"
+                id="description"
+                class="form-control"
+                formControlName="description"
+                rows="3"
+              >
+              </textarea>
+              <div
+                *ngIf="submitted && f.description.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.description.errors.required">
+                  description is required
+                </div>
+                <div *ngIf="f.description.errors.minlength">
+                  description must be at least 15 characters
+                </div>
+              </div>
+            </div> -->
+          </form>
+        </div>
+  
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-default" (click)="save()">
+            close
+          </button> -->
+          <span></span>
+          <button type="button" class="btn btn-success" (click)="update()">
+           Update vehicule
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <!-- Modal -->
+ <div
+ class="modal fade"
+ id="exampleModal"
+ tabindex="-1"
+ aria-labelledby="exampleModalLabel"
+ aria-hidden="true"
+ >
+ <div class="modal-dialog">
+   <div class="modal-content">
+     <div class="modal-header">
+       <h5 class="modal-title" id="exampleModalLabel">Detail</h5>
+       <button
+         type="button"
+         class="close"
+         data-dismiss="modal"
+         aria-label="Close"
+       >
+         <span aria-hidden="true">&times;</span>
+       </button>
+     </div>
+     <div class="modal-body" *ngIf="showVehicule">
+      <div><p>Nom du vehicule: <strong>{{showVehicule.libelleVehicule }}</strong></p></div>
+      <div><p>Immatriculation du vehicule: <strong>{{showVehicule.immatriculation }}</strong></p></div>
+      <div><p>Longueur du vehicule: <strong>{{showVehicule.longueurVehicule }}</strong></p></div>
+      <div><p> Nombre du vehicule: <strong>{{showVehicule.nombrePlace }}</strong></p></div>
+      <div><p>Numero d'identifiant vehicule: <strong>{{showVehicule.numeroIdentifiant }}</strong></p></div>
+      <div><p>Date de mise en circulation du vehicule: <strong>{{showVehicule.dateMiseCirculation }}</strong></p></div>
+      <div><p>delais d'alerte du vehicule: <strong>{{showVehicule.delaiAlerte }}</strong></p></div>
+      <div><p> duree de vie du vehicule: <strong>{{showVehicule.dureeVie }}</strong></p></div>
+      <div><p>carte grise du vehicule: <strong>{{showVehicule.carteGrise }}</strong></p></div>
+     
+     </div>
+ 
+     <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" data-dismiss="modal">
+         Close
+       </button>
+     </div>
+   </div>
+ </div>
+ </div> 
+
+ <ngx-loading
+  [show]="loading"
+  [config]="{ backdropBorderRadius: '3px' }"
+></ngx-loading>
+    

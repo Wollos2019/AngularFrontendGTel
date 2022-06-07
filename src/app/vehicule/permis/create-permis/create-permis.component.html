@@ -1,0 +1,227 @@
+
+<div class="container-fluid">
+  <h5>Ajouter un permis</h5>
+  <div class="card">
+    <div class="card-body">
+      <form class="form-row" [formGroup]="editForm">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="numeroPermis" class="col-form-label"
+              >numero Permis <span class="text-danger">*</span></label
+            >
+            <input
+              type="text"
+              [ngClass]="{ 'is-invalid': submitted && f.numeroPermis.errors }"
+              class="form-control"
+              id="numeroPermis"
+              placeholder="numero permis "
+              formControlName="numeroPermis"
+            />
+          </div>
+
+          <div
+            *ngIf="submitted && f.numeroPermis.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f.numeroPermis.errors.required">
+              numero permis is required
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="dateAcquisition" class="col-form-label"
+              >date D'acquisition <span class="text-danger">*</span></label
+            >
+            <input
+              type="date"
+              [ngClass]="{
+                'is-invalid': submitted && f.dateAcquisition.errors
+              }"
+              class="form-control"
+              id="dateAcquisition"
+              placeholder="date D'acquisition"
+              formControlName="dateAcquisition"
+            />
+          </div>
+
+          <div
+            *ngIf="submitted && f.dateAcquisition.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f.dateAcquisition.errors.required">
+              date D'acquisition required
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="idVehicule" class="col-form-label"
+              >Personnel<span class="text-danger">*</span></label
+            >
+
+            <select
+              [ngClass]="{ 'is-invalid': submitted && f.userId.errors }"
+              class="form-control"
+              id="userId"
+              formControlName="userId"
+            >
+              <option value="">selected Personnel</option>
+              <ng-container *ngIf="personals">
+                <option *ngFor="let perso of personals" [ngValue]="perso.id">
+                  {{ perso.appends?.name }} 
+                </option>
+              </ng-container>
+            </select>
+          </div>
+          <div *ngIf="submitted && f.userId.errors" class="invalid-feedback">
+            <div *ngIf="f.userId.errors.required">personnal is required</div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="category" class="col-form-label"
+              >type categorie
+            </label>
+
+            <ng-select
+              [multiple]="true"
+              placeholder="Select  type of categorie permis"
+              [bindLabel]="'libelle'"
+              formControlName="category"
+              
+              [items]="categoriePermis"
+            >
+              <!-- <ng-option
+                [ngValue]="catperm.id"
+                *ngFor="let catperm of categoriePermis"
+              >
+                <div>{{ catperm.libelle }}</div>
+              </ng-option> -->
+            </ng-select>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <ng-container formArrayName="permiscategories">
+            <ng-container
+              *ngFor="
+                let c of permiscategories.controls;
+                let i = index
+              "
+            >
+            <h4>categorie :{{c.value?.category?.libelle }} </h4>
+              <div [formGroup]="c">
+              
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="numeroDossierPermis" class="col-form-label"
+                        >numero Dossier Permis
+                        <span class="text-danger">*</span></label
+                      >
+                      <input
+                        type=""
+                        
+                        class="form-control"
+                        id="numeroDossierPermis"
+                        placeholder="numero Dossier Permis"
+                        formControlName="numeroDossierPermis"
+                      />
+                    </div>
+                     <!-- <div
+                      *ngIf="submitted && f.numeroDossierPermis.errors"
+                      class="invalid-feedback"
+                    > -->
+                      <div *ngIf="permiscategories.controls[i].get('numeroDossierPermis').hasError('required') && permiscategories.controls[i].get('numeroDossierPermis').touched">
+                        numero Dossier Permis is required
+                      </div>
+                    <!-- </div>  -->
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="typeCategoriePermis" class="col-form-label"
+                        >type Categorie Permis
+                        <span class="text-danger">*</span></label
+                      >
+                      <input
+                        type="text"
+                      
+                        class="form-control"
+                        id="typeCategoriePermis"
+                        placeholder="type Categorie Permis"
+                        formControlName="typeCategoriePermis"
+                      />
+                      <div *ngIf="permiscategories.controls[i].get('typeCategoriePermis').hasError('required') && permiscategories.controls[i].get('typeCategoriePermis').touched">
+                        type Categorie Permis is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="dateDebutPermis" class="col-form-label"
+                        >date Debut Permis
+                        <span class="text-danger">*</span></label
+                      >
+                      <input
+                        type="date"
+                       
+                        class="form-control"
+                        id="dateDebutPermis"
+                        placeholder="date Debut Permis"
+                        formControlName="dateDebutPermis"
+                      />
+                      <div *ngIf="permiscategories.controls[i].get('dateDebutPermis').hasError('required') && permiscategories.controls[i].get('dateDebutPermis').touched">
+                        date Debut Permis is required
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="dateFinPermis" class="col-form-label"
+                        >date Fin Permis
+                        <span class="text-danger">*</span></label
+                      >
+                      <input
+                        type="date"
+                       
+                        class="form-control"
+                        id="dateFinPermis"
+                        placeholder="date Fin Permis"
+                        formControlName="dateFinPermis"
+                      />
+                      <div *ngIf="permiscategories.controls[i].get('dateFinPermis').hasError('required') && permiscategories.controls[i].get('dateFinPermis').touched">
+                        date Fin Permis is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+    
+              </div>
+              <hr>
+            </ng-container>
+          </ng-container>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <button type="button" class="btn btn-success" (click)="savepermis()" [disabled]="editForm.invalid">
+    Create permis
+  </button>
+</div>
+
+
+<ngx-loading
+  [show]="loading"
+  [config]="{ backdropBorderRadius: '3px' }"
+></ngx-loading>

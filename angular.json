@@ -23,6 +23,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "lodash"
+            ],
             "outputPath": "dist/ang-front",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -36,6 +39,7 @@
             "styles": [
               "src/assets/plugins/fontawesome-free/css/all.min.css",
               "src/assets/plugins/icofont/icofont.min.css",
+              "src/assets/plugins/fontawesome-free/css/all.css",
               "src/assets/dist/css/adminlte.min.css",
               "node_modules/ngx-toastr/toastr.css",
               "src/styles.scss"
@@ -46,6 +50,7 @@
               "src/assets/dist/js/adminlte.js",
               "src/assets/dist/js/demo.js",
               "src/assets/dist/js/pages/dashboard3.js"
+             
             ]
           },
           "configurations": {

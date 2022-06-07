@@ -1,3 +1,4 @@
+
 {
   "name": "ang-front",
   "version": "0.0.0",
@@ -23,12 +24,15 @@
     "@angular/platform-browser-dynamic": "~13.1.0",
     "@angular/router": "~13.1.0",
     "@ng-bootstrap/ng-bootstrap": "^11.0.0",
+    "@ng-select/ng-select": "^8.1.1",
     "@schematics/angular": "^9.1.0",
-    "bootstrap": "^4.6.0",
+    "bootstrap": "^5.0.2",
+    "dompurify": "^2.3.6",
     "globby": "^13.1.1",
     "jspdf": "^2.5.1",
     "jspdf-invoice-template": "^1.4.2",
     "jspdf-invoice-template-nodejs": "^1.0.3",
+    "ng-multiselect-dropdown": "^0.3.8",
     "ngx-bootstrap": "^6.2.0",
     "ngx-loading": "^13.0.0",
     "ngx-print": "^1.2.1",
