@@ -15,9 +15,9 @@ import { ProductService } from 'src/app/services/product.service';
 import { extractErrorMessagesFromErrorResponse } from 'src/app/util/http_error_response';
 import * as $ from "jquery";
 import { IproductSelected, ProductSelected } from 'src/app/product/productSelected';
-import { Commande } from 'src/app/commercial/commandes/commandes';
-import { commandeDt, IcommandeDt } from 'src/app/commercial/commandes/commandeDetails';
-import { CommandeService } from 'src/app/commercial/commandes/services/commande.service';
+import { Commande } from 'src/app/Commercial/commandes/commandes';
+import { commandeDt, IcommandeDt } from 'src/app/Commercial/commandes/commandeDetails';
+import { CommandeService } from 'src/app/Commercial/commandes/services/commande.service';
 
 @Component({
   selector: 'app-save-client',

@@ -1,6 +1,6 @@
 import { Time } from "@angular/common";
 import { timestamp, Timestamp } from "rxjs";
-import { Commande } from "src/app/commercial/commandes/commandes";
+import { Commande } from "src/app/Commercial/commandes/commandes";
 
 export class TrancheHoraire {
     constructor(

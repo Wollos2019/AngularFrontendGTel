@@ -6,7 +6,7 @@ import { User } from '../models/user.model';
 import { jsPDF } from "jspdf";
 import html2canvas from 'html2canvas';
 import { environment } from 'src/environments/environment';
-import { CommandeDetaisService } from '../commercial/commandes/services/commande-detais.service';
+import { CommandeDetaisService } from '../Commercial/commandes/services/commande-detais.service';
 import jsPDFInvoiceTemplate, { OutputType } from 'jspdf-invoice-template';
 import { IProduct } from '../product/product';
 import { Observable } from 'rxjs';

@@ -9,8 +9,8 @@ import { ProductService } from '../services/product.service';
 
 import { Router } from '@angular/router';
 import { IproductSelected } from '../product/productSelected';
-import { Icommande } from '../commercial/commandes/commandes';
-import { CommandeService } from '../commercial/commandes/services/commande.service';
+import { Icommande } from '../Commercial/commandes/commandes';
+import { CommandeService } from '../Commercial/commandes/services/commande.service';
 
 @Component({
   selector: 'app-client',

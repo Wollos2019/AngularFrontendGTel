@@ -15,9 +15,10 @@ import { ProductService } from 'src/app/services/product.service';
 import { extractErrorMessagesFromErrorResponse } from 'src/app/util/http_error_response';
 import * as $ from "jquery";
 import { commandeDt, IcommandeDt } from '../commandeDetails';
-import { Commande } from '../commandes';
-import { CommandeService } from '../services/commande.service';
+
 import { IproductSelected, ProductSelected } from 'src/app/product/productSelected';
+import { Commande } from 'src/app/Commercial/commandes/commandes';
+import { CommandeService } from 'src/app/Commercial/commandes/services/commande.service';
 
 
 

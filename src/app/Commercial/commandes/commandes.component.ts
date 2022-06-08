@@ -8,9 +8,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { IFacture } from 'src/app/facture/ifacture';
 import { FactureService } from 'src/app/facture/services/facture.service';
-import { Commande, Icommande } from 'src/app/commercial/commandes/commandes';
-import { CommandeService } from 'src/app/commercial/commandes/services/commande.service';
-import { commandeDt } from 'src/app/commercial/commandes/commandeDetails';
+import { Commande, Icommande } from 'src/app/Commercial/commandes/commandes';
+import { CommandeService } from 'src/app/Commercial/commandes/services/commande.service';
+import { commandeDt } from 'src/app/Commercial/commandes/commandeDetails';
 
 
 @Component({

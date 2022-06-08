@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ClientComponent } from 'src/app/client/client.component';
 import { SaveClientComponent } from 'src/app/client/save-client/save-client.component';
-import { CommandesComponent } from 'src/app/commercial/commandes/commandes.component';
+import { CommandesComponent } from 'src/app/Commercial/commandes/commandes.component';
 import { MainAppComponent } from 'src/app/template/main-app/main-app.component';
 
 

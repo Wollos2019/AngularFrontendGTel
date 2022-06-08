@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CommandeDetaisService } from 'src/app/commercial/commandes/services/commande-detais.service';
+import { CommandeDetaisService } from 'src/app/Commercial/commandes/services/commande-detais.service';
 import { IFacture } from '../ifacture';
 import { FactureService } from '../services/facture.service';
 

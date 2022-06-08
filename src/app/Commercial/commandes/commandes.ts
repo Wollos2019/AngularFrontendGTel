@@ -1,5 +1,6 @@
 import { IProduct } from "src/app/product/product";
-import { commandeDt } from "./commandeDetails";
+import { commandeDt } from "src/app/Commercial/commandes/commandeDetails";
+
 
 export interface Icommande {
     id? : string;

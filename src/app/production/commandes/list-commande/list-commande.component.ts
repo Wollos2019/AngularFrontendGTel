@@ -3,10 +3,10 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { commandeDt } from 'src/app/commercial/commandes/commandeDetails';
-import { Commande, Icommande } from 'src/app/commercial/commandes/commandes';
+import { commandeDt } from 'src/app/Commercial/commandes/commandeDetails';
+import { Commande, Icommande } from 'src/app/Commercial/commandes/commandes';
 import { CommandeDetaisService } from 'src/app/Commercial/commandes/services/commande-detais.service';
-import { CommandeService } from 'src/app/commercial/commandes/services/commande.service';
+import { CommandeService } from 'src/app/Commercial/commandes/services/commande.service';
 import { TrancheHoraire } from '../../grille-programmes/tranche-horaire.model';
 import { GrilleProgrammesService } from '../../services/grille-programmes.service';
 

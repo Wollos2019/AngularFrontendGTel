@@ -4,12 +4,12 @@ import { CommonModule } from '@angular/common';
 import { CommandesRoutingModule } from './commandes-routing.module';
 
 import { SharedModule } from 'src/app/shared/shared.module';
-import { CommandeService } from 'src/app/commercial/commandes/services/commande.service';
+import { CommandeService } from 'src/app/Commercial/commandes/services/commande.service';
 import { FactureComponent } from 'src/app/facture/facture.component';
 import { NgxPrintModule } from 'ngx-print';
 import { FactureDetailsComponent } from 'src/app/facture/facture-details/facture-details.component';
-import { SaveCommandeComponent } from 'src/app/commercial/commandes/save-commande/save-commande.component';
-import { CommandesComponent } from 'src/app/commercial/commandes/commandes.component';
+import { SaveCommandeComponent } from 'src/app/Commercial/commandes/save-commande/save-commande.component';
+import { CommandesComponent } from 'src/app/Commercial/commandes/commandes.component';
 
 
 @NgModule({
