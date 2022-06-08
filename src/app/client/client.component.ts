@@ -3,13 +3,14 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { IProduct } from '../product/product';
-import { Iclient } from './client';
+import { Client, Iclient } from './client';
 import { ClientService } from './services/client.service';
 import { ProductService } from '../services/product.service';
-import { Icommande } from '../Commercial/commandes/commandes';
-import { CommandeService } from '../Commercial/commandes/services/commande.service';
+
 import { Router } from '@angular/router';
 import { IproductSelected } from '../product/productSelected';
+import { Icommande } from '../Commercial/commandes/commandes';
+import { CommandeService } from '../Commercial/commandes/services/commande.service';
 
 @Component({
   selector: 'app-client',
@@ -20,9 +21,10 @@ export class ClientComponent implements OnInit {
   listServiceFeature: any = [];
 
   public clients = [] as any;
-  public contenus = '';
+  public contenus = <string[]>{};
   public products = <IProduct[]>{};
   public selectedClient: any;
+  public client = new Client();
   public selectedProduct = <IproductSelected>{};
   public selectedProducts : any = [];
   public commande = <Icommande>{};
@@ -132,15 +134,20 @@ save(){
 
 save2(){
 
-  for (var val of this.selectedProducts){
+  for (var val of this.selectedProducts) {
     val.quantity = this.listServiceFeature[val.id];
   }
   
   for (var val of this.selectedProducts) {
-    this.contenus = " Nom du produit: "+val.productName+" Quantity: "+val.quantity+this.contenus;
+    let i:number = 0;
+    while (i < this.selectedProducts.length) {
+      this.contenus[i] = " Nom du produit: "+val.productName+" Quantity: "+val.quantity;
+      i++;
+    }
+    
   }
 
-  this.commande.contenu = this.contenus;
+  this.commande.contenu = 'this.contenus';
   this.commande.idClient = this.selectedClient.id;
   this.commande.nomClient = this.selectedClient.nom
   this.serviceC.add(this.commande)
@@ -178,7 +185,7 @@ reset () {
   checked(product: IProduct) {
     this.selectedProduct = product;
     this.selectedProduct.idProduct = product.id
-    this.selectedProduct.productName = product.productName;
+    this.selectedProduct.name = product.name;
     this.selectedProduct.checked = this.checkbox.value;
     //this.selectedProduct.quantity = this.input.value;
 
@@ -191,6 +198,14 @@ reset () {
       this.selectedProducts.push(this.selectedProduct);
     }
     console.log(this.selectedProducts);
+  }
+
+  relink(client? : Iclient) {
+    if(client) {
+      console.log(client);
+      this.router.navigate(['/commercial/saveCommande/' + client.id]);
+      console.log(client.id);
+    }
   }
 
 }

@@ -5,7 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { MainAppComponent } from './template/main-app/main-app.component';
 import { ProductComponent } from './product/product.component';
 import { DashboardComponent } from './template/dashboard/dashboard.component';
-import { CommercialComponent } from './Commercial/commercial.component';
+
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -26,6 +26,20 @@ const routes: Routes = [
       ),
   },
 
+  {
+    path: 'production',
+    loadChildren: () =>
+      import('./modules/production/commande/commande.module').then(
+        (mod) => mod.CommandeModule
+      ),
+  },
+  {
+    path: 'production',
+    loadChildren: () =>
+      import('./modules/production/grille-programmes/grille-programmes.module').then(
+        (mod) => mod.GrilleProgrammesModule
+      ),
+  },
   {
     path: 'commercial',
     loadChildren: () =>
@@ -68,7 +82,7 @@ const routes: Routes = [
     path: '',
     component: MainAppComponent,
     children: [
-      { path: 'commercial', component: CommercialComponent },
+      
       { path: 'dashbord', component: DashboardComponent },
       { path: 'products', component: ProductComponent },
       { path: 'products/:id', component: ProductComponent },

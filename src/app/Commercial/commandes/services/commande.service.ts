@@ -4,7 +4,9 @@ import { Observable } from 'rxjs';
 import { IProduct } from 'src/app/product/product';
 import { IproductSelected } from 'src/app/product/productSelected';
 import { environment } from 'src/environments/environment';
-import { Icommande } from '../commandes';
+import { commandeDt } from 'src/app/Commercial/commandes/commandeDetails';
+import { Icommande } from 'src/app/Commercial/commandes/commandes';
+
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +26,13 @@ export class CommandeService {
 
   addProduct(product:IproductSelected) : Observable<IproductSelected> {
     return this.http.post<IproductSelected>(`${this.URL_COMMER}commandeDetails`, product);
+  }
+
+  searchDet(x?:string) {
+    return this.http.get<commandeDt[]>(`${this.URL_COMMER}searchDet/`+x);
+  }
+
+  somme() {
+    return this.http.get<string>(`${this.URL_COMMER}commandeDetails/somme`);
   }
 }

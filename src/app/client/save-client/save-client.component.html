@@ -1,0 +1,163 @@
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Gestion des clients</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a [routerLink]="'/'">Dashbord</a></li>
+                    <li class="breadcrumb-item active">Nouvelle commande</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 mt-3">
+                <form [formGroup]="editForm">
+                    <div class="card card-default">
+                        <div class="card-header">
+                            <h3 class="card-title">Enregistrer un client</h3>
+
+                            <div class="card-tools">
+                                <button title="ouvrir" type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="civilite">
+                                            Titre civilité<span class="text-danger">*</span></label>
+                                        <select id="civilite" class="form-control" formControlName="civilite" [ngClass]="{
+                          'is-invalid': submitted && f.civilite.errors
+                        }">
+                                            <option selected="selected" value="">---</option>
+                                            <ng-container *ngIf="civilities">
+                                                <option [value]="c.id" *ngFor="let c of civilities">
+                                                    {{ c.name }}
+                                                </option>
+                                            </ng-container>
+                                        </select>
+                                        <div *ngIf="submitted && f.civilite.errors" class="invalid-feedback">
+                                            <div *ngIf="f.civilite.errors.required">Champ requis</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="name">Nom<span class="text-danger">*</span></label>
+                                        <input formControlName="lastname" type="text" class="form-control" id="name"
+                                            [ngClass]="{
+                          'is-invalid': submitted && f.lastname.errors
+                        }" placeholder="Nom" />
+                                    </div>
+                                    <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
+                                        <div *ngIf="f.lastname.errors.required">Champ requis</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="prenom">Prénom</label>
+                                        <input formControlName="firstname" type="text" class="form-control" id="prenom"
+                                            placeholder="Prénom" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input formControlName="email" type="email" class="form-control" id="email"
+                                            placeholder="Email" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="sexe">Genre<span class="text-danger">*</span></label>
+                                        <select id="sexe" class="form-control" formControlName="sexe"
+                                            [ngClass]="{ 'is-invalid': submitted && f.sexe.errors }">
+                                            <option selected="selected" value="">---</option>
+                                            <option [value]="GENDER.MALE">Homme</option>
+                                            <option [value]="GENDER.FEMALE">Femme</option>
+                                        </select>
+                                        <div *ngIf="submitted && f.sexe.errors" class="invalid-feedback">
+                                            <div *ngIf="f.sexe.errors.required">Champ requis</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="phone">Téléphone</label>
+                                        <input formControlName="phone" type="text" class="form-control" id="phone"
+                                            placeholder="Téléphone" />
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="Adresse">Adresse</label>
+                                        <input formControlName="address" type="text" class="form-control" id="Adresse"
+                                            placeholder="Adresse" />
+                                    </div>
+                                </div>
+                            
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="country">Pays<span class="text-danger">*</span></label>
+                                        <select id="country" formControlName="country" class="form-control" [ngClass]="{
+                          'is-invalid': submitted && f.country.errors
+                        }">
+                                            <option selected="selected" value="">---</option>
+                                            <ng-container *ngIf="countries">
+                                                <option [value]="c.id" *ngFor="let c of countries">
+                                                    {{ c.name }}
+                                                </option>
+                                            </ng-container>
+                                        </select>
+                                    </div>
+                                    <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
+                                        <div *ngIf="f.country.errors.required">Champ requis</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="ville">Ville</label>
+                                        <input formControlName="town" type="text" class="form-control" id="ville"
+                                            placeholder="Ville" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr />
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-info float-right" type="button" (click)="save()">
+                                Enregistrer
+                            </button>
+                        </div>
+
+                        <!-- /.card-body -->
+                        <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</section>

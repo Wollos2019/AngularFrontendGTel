@@ -4,7 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ProductDetailsComponent } from './product/product-details/product-details.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
@@ -23,24 +22,28 @@ import { ProduitsModule } from './modules/commercial/produits/produits.module';
 import { NgxPrintModule } from 'ngx-print';
 import { FactureDetailsComponent } from './facture/facture-details/facture-details.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import { SelectDropDownModule } from 'ngx-select-dropdown';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     AppComponent,
-    ProductDetailsComponent,
+    
     LoginComponent,
     MainAppComponent,
     NavComponent,
-    DashboardComponent,
-    FactureDetailsComponent,
-   
-  
-
+    DashboardComponent
+    
+    
+    
+    
+    
+    
   ],
   imports: [
     CommonModule,
     AppRoutingModule,
+    SelectDropDownModule,
     NgbModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -57,7 +60,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     SharedModule,
     ClientsModule,
     ProduitsModule,
-   
+    
+    
   ],
   providers: [
     AuthService,

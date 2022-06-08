@@ -1,0 +1,102 @@
+<section class="content" >
+    <div class="container-fluid">
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+        <div *ngFor="let cd of listCom" class="col-lg-3 col-6">
+          <!-- small box -->
+          
+            <div *ngIf="cd.evaluated === 'true' "  [ngClass]="{
+              'small-box bg-info': cd.evaluated
+            }">
+              <div class="inner" (click)="openModal2(template2)">
+                <h3>{{cd.id}}</h3>          
+                <!-- <p>Commande non-evaluée</p>
+                <p>Commande non-facturée</p> -->
+                <p>{{cd.nomClient}}</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
+              </div>
+              <a (click)="openModal(template,cd)" class="small-box-footer">plus<i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          
+            <ng-template #template>
+              <div class="card card-default">
+                <div class="card-header">
+                    <h3 class="card-title">Details de la commande</h3>
+                </div>
+                <div class="card-body">
+                        <ul class="list-unstyled" *ngFor="let el of cd.appends?.commandesDetail">
+                          
+                          <li>Nom du produit: {{el.productName}}
+                            <ul>
+                              <li>Durée : {{el.duree}} minutes</li>
+                              <li>Diffusion : Avant le journal</li>
+                            </ul>
+                          </li>
+                          <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Entrer le montant</span>
+                              </div>
+                              <input type="text" class="form-control" placeholder="Montant en Fcfa" 
+                              aria-describedby="basic-addon1" [formControl]="productPrice" (keyup)="onInputValue($event, el)">
+                              <div class="input-group-append">
+                                <button class="btn btn-info" type="button" (click)="valider(el)" id="button-addon2">Valider</button>
+                              </div>
+                          </div>
+                          
+                        </ul>
+                        <button class="btn btn-info float-right" type="button" (click)="enregistrer()">
+                          Enregistrer
+                      </button>
+                </div>
+              </div>
+            </ng-template>
+
+            <ng-template #template2>
+              <div class="card card-default">
+                <div class="card-header">
+                  <h3 for="timeSegment">Programmer une commande</h3>
+                </div>
+                <div class="card-body">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="timeSegment">Selectionner une tranche horaire</label>
+                      <select id="timeSegment" class="form-control" formControlName="selectTime">
+                          <option selected="selected" value="">---</option>
+                          <ng-container *ngIf="trancheHoraires">
+                              <option [value]="c.id" *ngFor="let c of trancheHoraires">
+                                  {{ c.designation }}
+                              </option>
+                          </ng-container>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="timeSegment">Selectionner un jour</label>
+                      <select id="timeSegment" class="form-control" formControlName="selectTime">
+                          <option selected="selected" value="">---</option>
+                          <ng-container *ngIf="listDay">
+                              <option [value]="c" *ngFor="let c of listDay">
+                                  {{ c }}
+                              </option>
+                          </ng-container>
+                      </select>
+                    </div>
+                  </div>
+
+                  <button class="btn btn-info float-right" type="button" (click)="enregistrer2()">
+                    Enregistrer
+                  </button>
+                </div>
+              </div>
+            </ng-template>
+        </div>
+        
+      </div>
+      
+    </div>
+  </section>
+  
