@@ -37,7 +37,7 @@ export class ProductComponent implements OnInit {
       this.modalTitle = 'Edit Product';
       this.btnTitle = 'Update';
       this.selectedProduct = product;
-      this.name.setValue(product.productName);
+      this.name.setValue(product.name);
       this.description.setValue(product.description);
       this.price.setValue(product.price);
       
@@ -80,7 +80,7 @@ export class ProductComponent implements OnInit {
       return;
     }
 
-    this.selectedProduct.productName = this.name.value;
+    this.selectedProduct.name = this.name.value;
     this.selectedProduct.description = this.description.value;
     this.selectedProduct.price = this.price.value;
     

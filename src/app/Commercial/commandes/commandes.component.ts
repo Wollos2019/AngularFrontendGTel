@@ -3,11 +3,15 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 import { FormControl, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { CommandeService } from './services/commande.service';
-import { Icommande } from './commandes';
+
+
 import { Router } from '@angular/router';
 import { IFacture } from 'src/app/facture/ifacture';
 import { FactureService } from 'src/app/facture/services/facture.service';
+import { Commande, Icommande } from 'src/app/commercial/commandes/commandes';
+import { CommandeService } from 'src/app/commercial/commandes/services/commande.service';
+import { commandeDt } from 'src/app/commercial/commandes/commandeDetails';
+
 
 @Component({
   selector: 'app-commandes',
@@ -17,7 +21,11 @@ import { FactureService } from 'src/app/facture/services/facture.service';
 export class CommandesComponent implements OnInit {
 
   public contenus : any;
+  public monString = '';
+  public orders2 : Commande[] = [];
   public orders = [] as any;
+  public cdl = [] as any;
+  public detCom : commandeDt[] = [];
   public invoice = <IFacture>{};
   public selectedOrder = <Icommande>{};
   public modalTitle = '';
@@ -55,13 +63,24 @@ export class CommandesComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
+  openModal2(template: TemplateRef<any>, order?: Icommande) {
+    this.modalRef = this.modalService.show(template);
+    this.onclick(order!);
+  }
+
   ngOnInit(): void {
     this.getList();
+    
   }
 
   getList() {
-    this.service.list().subscribe(response=> this.orders = response);
-    
+    this.service.list().subscribe(response => {
+      this.orders = response;
+      for (var val of this.orders) {
+        this.cdl = val.appends.products;
+      }
+      console.log(this.orders);
+    });
   }
 
   saveOrder(order:Icommande) {
@@ -76,6 +95,24 @@ export class CommandesComponent implements OnInit {
 
   checked(order:Icommande) {
     order.tvaAccountable = true;
+  }
+
+  onclick(order:Commande) {
+    // this.service.searchDet(order.id).subscribe({
+    //   next: (details: commandeDt[]) => {
+    //     this.detCom = details
+    //     console.log(this.detCom);
+    //   }
+    //   });
+  }
+
+  sommeAbruf() {
+    this.service.somme().subscribe({
+      next: (details: string) => {
+        this.monString = details;
+        console.log(this.monString);
+      }
+    })
   }
 
   // insertProduct() {
