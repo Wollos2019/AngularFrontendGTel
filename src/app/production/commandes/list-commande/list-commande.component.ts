@@ -7,6 +7,7 @@ import { commandeDt } from 'src/app/Commercial/commandes/commandeDetails';
 import { Commande, Icommande } from 'src/app/Commercial/commandes/commandes';
 import { CommandeDetaisService } from 'src/app/Commercial/commandes/services/commande-detais.service';
 import { CommandeService } from 'src/app/Commercial/commandes/services/commande.service';
+import { ListcommandeService } from '../../commande/services/listcommande.service';
 import { TrancheHoraire } from '../../grille-programmes/tranche-horaire.model';
 import { GrilleProgrammesService } from '../../services/grille-programmes.service';
 
@@ -42,24 +43,13 @@ export class ListCommandeComponent implements OnInit {
     private serviceCom : CommandeService,
     private serComDet : CommandeDetaisService,
     private servTranHor : GrilleProgrammesService,
+    private servListCom : ListcommandeService,
     private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
-    this.listOrder();
     this.getTranchHorai();
-  }
-
-  listOrder() {
-    this.serviceCom.list().subscribe({
-      next: (commamdes : Commande[]) => {
-        this.listCom = commamdes;
-        console.log(this.listCom);
-      },
-      error: (error : HttpErrorResponse) => {
-        console.log('Error', error);
-      },
-    });
+    this.listEval();
   }
 
   openModal(template: TemplateRef<any>, cd:Commande){
@@ -121,6 +111,18 @@ export class ListCommandeComponent implements OnInit {
           x.contenu = JSON.parse(x.contenu)
         }
         console.log(this.trancheHoraires);
+      },
+      error: (error : HttpErrorResponse) => {
+        console.log('Error', error);
+      },
+    });
+  }
+
+  listEval() {
+    this.servListCom.list().subscribe({
+      next: (evalCom : Commande[]) => {
+        this.listCom = evalCom;
+        console.log(this.listCom);
       },
       error: (error : HttpErrorResponse) => {
         console.log('Error', error);
