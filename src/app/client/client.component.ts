@@ -185,7 +185,7 @@ reset () {
   checked(product: IProduct) {
     this.selectedProduct = product;
     this.selectedProduct.idProduct = product.id
-    this.selectedProduct.name = product.name;
+    this.selectedProduct.productName = product.name;
     this.selectedProduct.checked = this.checkbox.value;
     //this.selectedProduct.quantity = this.input.value;
 

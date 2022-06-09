@@ -39,10 +39,10 @@
                                     <div class="form-group">
                                         <label for="produit">
                                             Produit<span class="text-danger">*</span></label>
-                                        <select id="produit" class="form-control" formControlName="produitId" >
+                                        <select id="produit" class="form-control" formControlName="produitName" >
                                             <option selected="selected" value="">---</option>
                                             <ng-container *ngIf="products">
-                                                <option [value]="[c.id]" *ngFor="let c of products">
+                                                <option [value]="[c.name]" *ngFor="let c of products" >
                                                     {{ c.name }}
                                                 </option>
                                             </ng-container>
@@ -112,7 +112,7 @@
                                   <tbody>
                                     <tr *ngFor="let slp of selectedProducts;">
                                 
-                                      <td>{{slp.idProduct}}</td>
+                                      <td>{{slp.productName}}</td>
                                       <td>{{slp.quantity}}</td>
                                       <td>{{slp.heure_debut}}</td>
                                       <td>{{slp.heure_fin}}</td>

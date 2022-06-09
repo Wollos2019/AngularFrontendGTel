@@ -28,7 +28,7 @@ import { CommandeService } from 'src/app/Commercial/commandes/services/commande.
   styleUrls: ['./save-commande.component.scss']
 })
 export class SaveCommandeComponent implements OnInit {
-  selectedProduct = <IproductSelected>{};
+  selectedProduct : any;
   selectedProducts : any[] = [];
   commandeContenus = [] as any;
   client = new Client();
@@ -276,29 +276,37 @@ export class SaveCommandeComponent implements OnInit {
       descriptif
     } = this.editForm2.value;
 
-    this.selectedProduct.idProduct = produitId;
-    this.selectedProduct.productName = produitName;
-    this.selectedProduct.quantity = quantite;
-    this.selectedProduct.heure_debut = heure_debut;
-    this.selectedProduct.heure_fin = heure_fin;
-    this.selectedProduct.description = descriptif
+    //this.selectedProduct.idProduct = produitId;
+    // this.selectedProduct.productName = produitName;
+    // this.selectedProduct.quantity = quantite;
+    // this.selectedProduct.heure_debut = heure_debut;
+    // this.selectedProduct.heure_fin = heure_fin;
+    // this.selectedProduct.description = descriptif
+
+    this.selectedProduct = new ProductSelected(produitName, descriptif,"",true,
+      quantite,
+      "",
+      "",
+      heure_debut,
+      heure_fin);
 
     // if (this.editForm2.invalid) {
     //   return;
     // }
     //this.loading = true;
     
-    // if (this.selectedProducts.includes(this.selectedProduct)) {
-    //   var key = this.selectedProducts.indexOf(this.selectedProduct, 0);
-    //   if (key > -1) {
-    //     this.selectedProducts.splice(key, 1);
-    //   }
-    // } else {
-    //   this.selectedProducts.push(this.selectedProduct);
-    // }
-    //this.selectedProducts.push(this.selectedProduct);
-    this.selectedProducts[this.i] = this.selectedProduct;
-    this.i++;
+    if (this.selectedProducts.includes(this.selectedProduct)) {
+      var key = this.selectedProducts.indexOf(this.selectedProduct, 0);
+      if (key > -1) {
+        this.selectedProducts.splice(key, 1);
+      }
+    } else {
+      this.selectedProducts.push(this.selectedProduct);
+    }
+    
+    this.selectedProduct = null; 
+    // this.selectedProducts[this.i] = this.selectedProduct;
+    // this.i++;
     
     console.log(this.selectedProducts);
   }

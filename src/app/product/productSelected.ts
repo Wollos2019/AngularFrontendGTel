@@ -1,6 +1,6 @@
 import { IProduct } from "./product";
 
-export interface IproductSelected extends IProduct {
+export interface IproductSelected  {
     productName ? : string,
     checked ? : boolean,
     quantity ?: number,
@@ -13,13 +13,15 @@ export interface IproductSelected extends IProduct {
 
 export class ProductSelected implements IproductSelected {
     constructor(
-    public id : string,
-    public name : string,
+    //public id : string,
+    public productName : string,
     public description  : string,
-    public price : string,
+    public price ? : string,
     public checked ? : boolean,
     public quantity ?: number,
     public idCommande ? : string,
-    public idProduct ? : string
+    public idProduct ? : string,
+    public heure_debut ? : string,
+    public heure_fin ? : string
     ) {}
 }
