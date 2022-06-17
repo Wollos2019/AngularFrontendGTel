@@ -195,6 +195,43 @@
 
         <li class="nav-item">
           <a href="javascript:void(0)" class="nav-link">
+            <i class="nav-icon fas fa-user-alt"></i>
+            <p>
+              Service Production
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a
+                routerLink="/production/Commande"
+                [routerLinkActive]="['active']"
+                class="nav-link"
+              >
+                <i class="far fa-circle nav-icon"></i>
+                <p>Commandes</p>
+              </a>
+
+              <a routerLink="/production/grille-programmes"
+              [routerLinkActive]="['active']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Grille-programmes</p>
+              </a>
+
+              <a
+                routerLink="/commercial/produits"
+                [routerLinkActive]="['active']"
+                class="nav-link"
+              >
+                <i class="far fa-circle nav-icon"></i>
+                <p>Produits</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a href="javascript:void(0)" class="nav-link">
             <i class="nav-icon fas fa-copy"></i>
             <p>
               Commercial

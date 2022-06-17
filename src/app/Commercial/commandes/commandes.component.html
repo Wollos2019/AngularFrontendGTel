@@ -8,16 +8,21 @@
         <thead class="thead-light">
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Contenu</th>
             <th scope="col">Nom du client</th>
+            
+            <th scope="col">Détails</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let order of orders; index as i">
             <th scope="row">{{i+1}}</th>
-            <td>{{order.contenu}}</td>
             <td>{{order.nomClient}}</td>
+            
+            
+            <td>
+              <button type="button" class="btn btn-primary mr-1" (click)="openModal2(template2,order)">Details</button>
+            </td>
             <td>
               <!-- <button type="button" class="btn btn-info mr-1" (click)="openModal(template, order)">Modifier</button> -->
               <button type="button" class="btn btn-info mr-1" (click)="openModal(template,order)">Facturer</button>
@@ -45,6 +50,34 @@
                     <input type="number" class="form-control" placeholder="Pourcentage de la réduction" [formControl]="reduction">
                   </div>
                 <button type="button" class="btn btn-primary mb-2" (click)="saveOrder(order)" >Valider</button>
+              </div>
+            </ng-template>
+
+            <ng-template #template2>
+              <div class="card card-default">
+                <div class="card-header">
+                    <h3 class="card-title">Details de la commande</h3>
+                </div>
+                <div class="card-body">
+                  <table class="table table-head-fixed text-nowrap">
+                    <thead>
+                      <tr>
+                        <th>Nom</th>
+                        <th>Quantité</th>
+                        <th>Prix</th>
+                        
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let cd of order.appends?.commandesDetail">
+                  
+                        <td>{{cd.productName}}</td>
+                        <td>{{cd.quantity}}</td>
+                        <td>{{cd.prix}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </ng-template>
 
