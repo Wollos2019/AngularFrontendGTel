@@ -28,7 +28,7 @@ export class FournisseurService {
  * @returns
  */
 getOneFournisseur(vendors:Fournisseur):Observable<Fournisseur>{
-  return this.httpClient.get<Fournisseur>(`${this.apiUrl}vendors?${vendors.id}`);
+  return this.httpClient.get<Fournisseur>(`${this.apiUrl}vendors/${vendors.id}`);
 }
 /**
  * fonction pour mettre a jour une Fournisseur
@@ -36,7 +36,7 @@ getOneFournisseur(vendors:Fournisseur):Observable<Fournisseur>{
  * @returns
  */
 updateFournisseur(vendors:Fournisseur):Observable<Fournisseur>{
-  return this.httpClient.post<Fournisseur>(`${this.apiUrl}vendors?${vendors.id}`,vendors);
+  return this.httpClient.post<Fournisseur>(`${this.apiUrl}vendors/${vendors.id}`,vendors);
 }
 /**
  * fonction pour supprimer une Fournisseur
@@ -44,7 +44,7 @@ updateFournisseur(vendors:Fournisseur):Observable<Fournisseur>{
  * @returns
  */
 deleteFournisseur(vendors:Fournisseur):Observable<Fournisseur>{
-  return this.httpClient.delete<Fournisseur>(`${this.apiUrl}vendors?${vendors.id}`);
+  return this.httpClient.delete<Fournisseur>(`${this.apiUrl}vendors/${vendors.id}`);
 }
 
 /**

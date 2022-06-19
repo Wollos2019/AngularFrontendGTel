@@ -27,7 +27,7 @@ export class AssuranceService {
  * @returns
  */
 getOneAssurance(assurance:Assurance):Observable<Assurance>{
-  return this.httpClient.get<Assurance>(`${this.apiUrl}assurances?${assurance.id}`);
+  return this.httpClient.get<Assurance>(`${this.apiUrl}assurances/${assurance.id}`);
 }
 /**
  * fonction pour mettre a jour une assurance
@@ -35,7 +35,7 @@ getOneAssurance(assurance:Assurance):Observable<Assurance>{
  * @returns
  */
 updateAssurance(assurance:Assurance):Observable<Assurance>{
-  return this.httpClient.post<Assurance>(`${this.apiUrl}assurances?${assurance.id}`,assurance);
+  return this.httpClient.post<Assurance>(`${this.apiUrl}assurances/${assurance.id}`,assurance);
 }
 /**
  * fonction pour supprimer une assurance
@@ -43,7 +43,7 @@ updateAssurance(assurance:Assurance):Observable<Assurance>{
  * @returns
  */
 deleteAssurance(assurance:Assurance):Observable<Assurance>{
-  return this.httpClient.delete<Assurance>(`${this.apiUrl}assurances?${assurance.id}`);
+  return this.httpClient.delete<Assurance>(`${this.apiUrl}assurances/${assurance.id}`);
 }
 
 /**
