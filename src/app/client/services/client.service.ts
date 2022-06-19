@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Client, Iclient } from '../client';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientService {
-  private _url = 'http://localhost:8000/api/commercial/clients';
+  private _url =`${environment.apiUrl}commercial/clients`;
 
   constructor(private http:HttpClient) { }
   
@@ -31,7 +32,7 @@ export class ClientService {
   search(x:string) : Observable<Iclient> {
     console.log('ici');
     console.log(x);
-    return this.http.get<Iclient>('http://localhost:8000/api/products/search/'+x);
+    return this.http.get<Iclient>(`${environment.apiUrl}products/search/${x}`);
   }
 
 }
