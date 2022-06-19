@@ -37,6 +37,7 @@
               "src/assets"
             ],
             "styles": [
+              
               "src/assets/plugins/fontawesome-free/css/all.min.css",
               "src/assets/plugins/icofont/icofont.min.css",
               "src/assets/plugins/fontawesome-free/css/all.css",
