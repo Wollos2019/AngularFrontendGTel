@@ -8,7 +8,8 @@ import { Commande, Icommande } from 'src/app/Commercial/commandes/commandes';
 import { CommandeDetaisService } from 'src/app/Commercial/commandes/services/commande-detais.service';
 import { CommandeService } from 'src/app/Commercial/commandes/services/commande.service';
 import { ListcommandeService } from '../../commande/services/listcommande.service';
-import { TrancheHoraire } from '../../grille-programmes/tranche-horaire.model';
+import { ITrancheHoraire, TrancheHoraire } from '../../grille-programmes/trancheHoraire';
+
 import { GrilleProgrammesService } from '../../services/grille-programmes.service';
 
 @Component({
@@ -24,12 +25,16 @@ export class ListCommandeComponent implements OnInit {
   public list = ['1','2'];
   public showError = false;
   trancheHoraires : TrancheHoraire[] = [];
+  public trancheHorai = <ITrancheHoraire>{};
   public selectedComDet = new commandeDt();
+  public selectedCom = new Commande();
+  public idCom : any;
   modalRef?: BsModalRef;
   public listDay = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
 
   myGroup = new FormGroup({
-    selectTime: new FormControl()
+    selectTime : new FormControl(),
+    selectDay : new FormControl()
   });
 
   editForm = this.fb.group({
@@ -61,12 +66,12 @@ export class ListCommandeComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  openModal2(template: TemplateRef<any>){
+  openModal2(template: TemplateRef<any>, cd:Commande){
     const {
       selectTime
     } = this.editForm.value;
 
-
+    this.selectedCom  = cd;
     this.modalRef = this.modalService.show(template);
   }
 
@@ -129,5 +134,52 @@ export class ListCommandeComponent implements OnInit {
       },
     });
   }
+
+  inputChangeValue() {
+    const {
+      selectTime, selectDay
+    } = this.myGroup.value;
+
+    this.myGroup = this.fb.group({
+      selectTime: ['', [Validators.required]],
+      selectDay: ['', [Validators.required]]
+    });
+
+    this.servTranHor.list().subscribe({
+      next: (tranches : TrancheHoraire[]) => {
+        this.trancheHoraires = tranches;
+        console.log(this.trancheHoraires);
+        console.log(selectTime);
+        for(let x of this.trancheHoraires) {
+          if (x.id == selectTime) {
+            console.log(x.contenu);
+            x.contenu = JSON.parse(x.contenu);
+            console.log(x.contenu);
+            for (let y of x.contenu) {
+              if (y.y == selectDay) {
+                if (this.selectedCom.contenu)
+                {y.x  = this.selectedCom.contenu;}
+              }
+            }
+             
+            x.contenu = JSON.stringify(x.contenu);
+            console.log(x.contenu);
+            this.servTranHor.update(x).subscribe((response) => {
+              console.log(response);
+              this.showError = false;
+              this.modalRef?.hide();
+            });
+          }          
+        }
+
+        console.log(this.trancheHoraires);
+      },
+      error: (error : HttpErrorResponse) => {
+        console.log('Error', error);
+      },
+    });
+  }
+
+  
 
 }

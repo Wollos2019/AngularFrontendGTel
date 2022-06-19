@@ -264,9 +264,9 @@ export class SaveClientComponent implements OnInit {
     } = this.editForm2.value;
 
     this.selectedProduct.idProduct = produitId;
-    this.selectedProduct.quantity = quantite;
+    this.selectedProduct.duree = quantite;
     this.selectedProduct.heure_debut = heure_debut;
-    this.selectedProduct.heure_fin = heure_fin;
+    this.selectedProduct.frequence = heure_fin;
     this.selectedProduct.description = descriptif
 
     // if (this.editForm2.invalid) {

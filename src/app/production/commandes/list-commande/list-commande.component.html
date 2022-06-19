@@ -8,7 +8,7 @@
             <div *ngIf="cd.evaluated === 'true' "  [ngClass]="{
               'small-box bg-info': cd.evaluated
             }">
-              <div class="inner" (click)="openModal2(template2)">
+              <div class="inner" (click)="openModal2(template2, cd)">
                 <h3>{{cd.id}}</h3>          
                 <!-- <p>Commande non-evaluée</p>
                 <p>Commande non-facturée</p> -->
@@ -54,44 +54,46 @@
             </ng-template>
 
             <ng-template #template2>
-              <div class="card card-default">
-                <div class="card-header">
-                  <h3 for="timeSegment">Programmer une commande</h3>
-                </div>
-                <div class="card-body">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="timeSegment">Selectionner une tranche horaire</label>
-                      <select id="timeSegment" class="form-control" formControlName="selectTime">
-                          <option selected="selected" value="">---</option>
-                          <ng-container *ngIf="trancheHoraires">
-                              <option [value]="c.id" *ngFor="let c of trancheHoraires">
-                                  {{ c.designation }}
-                              </option>
-                          </ng-container>
-                      </select>
-                    </div>
+              <form [formGroup]="myGroup">
+                <div class="card card-default">
+                  <div class="card-header">
+                    <h3 for="timeSegment">Programmer une commande</h3>
                   </div>
-
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="timeSegment">Selectionner un jour</label>
-                      <select id="timeSegment" class="form-control" formControlName="selectTime">
-                          <option selected="selected" value="">---</option>
-                          <ng-container *ngIf="listDay">
-                              <option [value]="c" *ngFor="let c of listDay">
-                                  {{ c }}
-                              </option>
-                          </ng-container>
-                      </select>
+                  <div class="card-body">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="timeSegment">Selectionner une tranche horaire</label>
+                        <select id="timeSegment" class="form-control" formControlName="selectTime">
+                            <option selected="selected" value="">---</option>
+                            <ng-container *ngIf="trancheHoraires">
+                                <option [value]="c.id" *ngFor="let c of trancheHoraires">
+                                    {{ c.designation }}
+                                </option>
+                            </ng-container>
+                        </select>
+                      </div>
                     </div>
-                  </div>
 
-                  <button class="btn btn-info float-right" type="button" (click)="enregistrer2()">
-                    Enregistrer
-                  </button>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="timeSegment">Selectionner un jour</label>
+                        <select id="timeSegment" class="form-control" formControlName="selectDay">
+                            <option selected="selected" value="">---</option>
+                            <ng-container *ngIf="listDay">
+                                <option [value]="c" *ngFor="let c of listDay">
+                                    {{ c }}
+                                </option>
+                            </ng-container>
+                        </select>
+                      </div>
+                    </div>
+
+                    <button class="btn btn-info float-right" type="button" (click)="inputChangeValue()">
+                      Enregistrer
+                    </button>
+                  </div>
                 </div>
-              </div>
+              </form>
             </ng-template>
         </div>
         

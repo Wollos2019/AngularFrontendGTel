@@ -50,20 +50,7 @@
                                         
                                     </div>
                                 </div>
-                                
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="exampleInputFile">Quantité<span class="text-danger">*</span></label>
-                                        <div class="input-group">
-                                          
-                                            <input type="text" class="form-control" id="qte" formControlName="quantite"
-                                             placeholder="Quantité"/>
-                                            
-                                        </div>
-                                    </div>
-                                                  
-                                </div>
-                                
+
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="exampleInputFile">Heure de début<span class="text-danger">*</span></label>
@@ -75,23 +62,40 @@
                                         </div>
                                     </div>                                  
                                 </div>
+                                
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="exampleInputFile">Durée<span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                          
+                                            <input type="text" class="form-control" id="qte" formControlName="duree"
+                                             placeholder="Quantité"/>
+                                            
+                                        </div>
+                                    </div>                                                  
+                                </div>
 
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1">Description</label>
                                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="descriptif">
-
                                         </textarea>
                                     </div>
                                 </div>
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="exampleInputFile">Heure de fin<span class="text-danger">*</span></label>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" id="hdf" formControlName="heure_fin" 
-                                            placeholder="Heure de fin"/>
-                                        </div>
+                                        <label for="exampleInputFile">Fréquence<span class="text-danger">*</span></label>
+                                        <select id="freq" class="form-control" formControlName="frequence">
+                                            <option selected="selected" value="">-- Choisir une option --</option>
+                                            <option value="Lundi">Lundi</option>
+                                            <option value="Mardi">Mardi</option>
+                                            <option value="Mercredi">Mercredi</option>
+                                            <option value="Jeudi">Jeudi</option>
+                                            <option value="Vendredi">Vendredi</option>
+                                            <option value="Samedi">Samedi</option>
+                                            <option value="Dimanche">Dimanche</option>
+                                        </select>
                                         
                                     </div>
                                     <button class="btn btn-info float-right" type="button" (click)="checked()">Ajouter</button>                                  
@@ -104,18 +108,18 @@
                                   <thead>
                                     <tr>
                                       <th>Nom</th>
-                                      <th>Quantité</th>
+                                      <th>Durée en s</th>
                                       <th>Heure de début</th>
-                                      <th>Heure de fin</th>
+                                      <th>Fréquence</th>
                                     </tr>
                                   </thead>
                                   <tbody>
                                     <tr *ngFor="let slp of selectedProducts;">
                                 
                                       <td>{{slp.productName}}</td>
-                                      <td>{{slp.quantity}}</td>
+                                      <td>{{slp.duree}}</td>
                                       <td>{{slp.heure_debut}}</td>
-                                      <td>{{slp.heure_fin}}</td>
+                                      <td>{{slp.frequence}}</td>
                                       <td>
                                           <button type="button" class="btn btn-info mr-1" (click)="openModal(template, slp)">Modifier</button>
                                           <button type="button" class="btn btn-primary" (click)="deleteCom(slp)">Supprimer</button>

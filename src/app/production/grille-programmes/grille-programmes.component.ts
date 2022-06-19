@@ -47,8 +47,8 @@ key = [{time:'06H00-06H15', contenu:'occupied'}, {time:'06H15-06H30', contenu:'l
         this.trancheHoraires = tranches;
         console.log(this.trancheHoraires);
         for(let x of this.trancheHoraires) {
-          x.contenu = JSON.parse(x.contenu)
-        }
+          x.contenu = JSON.parse(x.contenu);
+        }    
         console.log(this.trancheHoraires);
       },
       error: (error : HttpErrorResponse) => {

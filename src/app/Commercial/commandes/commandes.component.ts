@@ -20,6 +20,7 @@ import { commandeDt } from 'src/app/Commercial/commandes/commandeDetails';
 })
 export class CommandesComponent implements OnInit {
 
+  loading = false;
   public contenus : any;
   public monString = '';
   public orders2 : Commande[] = [];
@@ -33,7 +34,6 @@ export class CommandesComponent implements OnInit {
   public name = new FormControl('', Validators.required);
   public checkbox = new FormControl('', Validators.required);
   public reduction = new FormControl('', Validators.required);
-  
   public description = new FormControl('', Validators.required);
   public price = new FormControl('', Validators.required);
   public slug = new FormControl('', Validators.required);

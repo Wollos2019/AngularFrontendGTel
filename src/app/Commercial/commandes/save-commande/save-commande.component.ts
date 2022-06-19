@@ -44,19 +44,19 @@ export class SaveCommandeComponent implements OnInit {
   products: IProduct[] = [];
 
   editForm2 = this.fb.group({
-    quantite: ['', [Validators.required]],
+    duree: ['', [Validators.required]],
     produitId: [ [Validators.required]],
     produitName: ['', [Validators.required]],
     heure_debut: ['', [Validators.required]],
-    heure_fin: ['', [Validators.required]],
+    frequence: ['', [Validators.required]],
     descriptif: ['', [Validators.required]] 
   });
 
-  quantite = ['', [Validators.required]];
+  duree = ['', [Validators.required]];
   produitId = [ [Validators.required]];
   produitName = ['', [Validators.required]];
   heure_debut = ['', [Validators.required]];
-  heure_fin = ['', [Validators.required]];
+  frequence = ['', [Validators.required]];
   descriptif = ['', [Validators.required]];
 
   editForm = this.fb.group({
@@ -270,25 +270,25 @@ export class SaveCommandeComponent implements OnInit {
     const {
       produitId,
       produitName,
-      quantite,
+      duree,
       heure_debut,
-      heure_fin,
+      frequence,
       descriptif
     } = this.editForm2.value;
 
     //this.selectedProduct.idProduct = produitId;
     // this.selectedProduct.productName = produitName;
-    // this.selectedProduct.quantity = quantite;
+    // this.selectedProduct.quantity = duree;
     // this.selectedProduct.heure_debut = heure_debut;
-    // this.selectedProduct.heure_fin = heure_fin;
+    // this.selectedProduct.heure_fin = frequence;
     // this.selectedProduct.description = descriptif
 
     this.selectedProduct = new ProductSelected(produitName, descriptif,"",true,
-      quantite,
+      duree,
       "",
       "",
       heure_debut,
-      heure_fin);
+      frequence);
 
     // if (this.editForm2.invalid) {
     //   return;

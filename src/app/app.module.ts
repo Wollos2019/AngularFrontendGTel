@@ -23,6 +23,8 @@ import { NgxPrintModule } from 'ngx-print';
 import { FactureDetailsComponent } from './facture/facture-details/facture-details.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { SelectDropDownModule } from 'ngx-select-dropdown';
+import { ConducteurComponent } from './production/conducteur/conducteur.component';
+import { ConducteurDetailsComponent } from './production/conducteur/conducteur-details/conducteur-details/conducteur-details.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -32,7 +34,9 @@ import { SelectDropDownModule } from 'ngx-select-dropdown';
     LoginComponent,
     MainAppComponent,
     NavComponent,
-    DashboardComponent
+    DashboardComponent,
+    ConducteurComponent,
+    ConducteurDetailsComponent
     
     
     

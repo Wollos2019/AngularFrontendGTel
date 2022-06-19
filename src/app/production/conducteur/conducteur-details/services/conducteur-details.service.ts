@@ -2,21 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { TrancheHoraire } from '../grille-programmes/trancheHoraire';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GrilleProgrammesService {
+export class ConducteurDetailsService {
 
   URL_PRODUC = environment.URL_PRODUC;
   constructor(private http:HttpClient) { }
 
   list () : Observable<any> {
-    return this.http.get<any>(`${this.URL_PRODUC}trancheHoraires`);
+    return this.http.get<any>(`${this.URL_PRODUC}conducteurs`);
   }
 
-  update (trancheH:TrancheHoraire) : Observable<TrancheHoraire> {
-    return this.http.put<TrancheHoraire>(`${this.URL_PRODUC}trancheHoraires/${trancheH.id}`,trancheH);
-  }
 }

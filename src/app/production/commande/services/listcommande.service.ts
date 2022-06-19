@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Commande } from 'src/app/Commercial/commandes/commandes';
 import { environment } from 'src/environments/environment';
+import { TrancheHoraire } from '../../grille-programmes/trancheHoraire';
 
 
 @Injectable({
@@ -16,4 +17,5 @@ export class ListcommandeService {
   list () : Observable<Commande[]> {
     return this.http.get<Commande[]>(`${this.URL_PRODUC}evaluatedC`);
   }
+
 }
