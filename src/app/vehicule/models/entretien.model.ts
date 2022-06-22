@@ -10,7 +10,11 @@ export interface IEntretien{
     vehiculeId?:number;
     fournisseurId?:number;
     typeEntretienId?:number;
+    unitMesureId?:number;
 
+}
+export interface IAppend{
+    
 }
 
 export class Entretien implements IEntretien {
@@ -25,6 +29,8 @@ export class Entretien implements IEntretien {
         public vehiculeId?:number,
         public fournisseurId?:number,
         public typeEntretienId?:number,
+        public unitMesureId?:number,
+
     
         
     ){}

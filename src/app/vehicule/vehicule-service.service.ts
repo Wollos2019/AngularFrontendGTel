@@ -7,6 +7,7 @@ import { Panne } from './models/panne.model';
 import { IPermis, Permis } from './models/permis.model';
 
 import { PriseVehicule } from './models/priseVehicule.model';
+import { ITypeEntretien, TypeEntretien } from './models/typeEntretien.model';
 import { UnitMesure } from './models/unitMesure.model';
 import { Vehicule } from './models/vehicule.model';
 
@@ -190,6 +191,27 @@ createUniteMesure(unitemesure:UnitMesure):Observable<UnitMesure>{
   return this.httpClient.post<UnitMesure>(`${this.apiUrl}unit_mesures`,unitemesure);
 }
 
+
+
+ //GESTION DES TYPES ENTRETIENS
+/**
+ * 
+ * @param params 
+ * @returns 
+ */
+
+
+ getAllTypeEntretiens(params=''):Observable<TypeEntretien[]>{
+  return this.httpClient.get<TypeEntretien[]>(`${this.apiUrl}type_maintenances?${params}`);
+}
+
+deleteTypeEntretien(typeEntretien:TypeEntretien):Observable<TypeEntretien>{
+  return this.httpClient.delete<ITypeEntretien>(`${this.apiUrl}type_maintenances/${typeEntretien.id}`);
+}
+
+createTypeEntretien(typeEntretien:TypeEntretien):Observable<TypeEntretien>{
+  return this.httpClient.post<TypeEntretien>(`${this.apiUrl}type_maintenances`,typeEntretien);
+}
 
 
 

@@ -2,7 +2,7 @@ export interface ITypeEntretien{
     id?:string,
     libelleTypeEntretien?:string,
     descriptionTypeEntretien?:string,
-    unitMesureId?:number,
+    //unitMesureId?:number,
 
 }
 
@@ -11,7 +11,7 @@ export class TypeEntretien implements ITypeEntretien {
     public id?:string,
     public libelleTypeEntretien?:string,
     public descriptionTypeEntretien?:string,
-    public unitMesureId?:number
+    //public unitMesureId?:number
 
         
     ){}

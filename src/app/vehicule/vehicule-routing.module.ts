@@ -5,6 +5,7 @@ import { CarburantComponent } from './carburant/carburant.component';
 import { CategoriePermisComponent } from './categorie-permis/categorie-permis.component';
 import { ListVehiculeComponent } from './list-vehicule/list-vehicule.component';
 import { EntretienComponent } from './maintenance/entretien/entretien.component';
+import { TypeEntretienComponent } from './maintenance/type-entretien/type-entretien.component';
 import { UnityMesureComponent } from './maintenance/unity-mesure/unity-mesure.component';
 import { CreerPanneComponent } from './panne-vehicule/creer-panne/creer-panne.component';
 import { PanneVehiculeComponent } from './panne-vehicule/panne-vehicule.component';
@@ -68,6 +69,10 @@ const routes: Routes = [
       {
         path: 'unity-mesure',
         component: UnityMesureComponent,
+      },
+      {
+        path: 'type-entretien',
+        component: TypeEntretienComponent,
       },
     ],
   },
