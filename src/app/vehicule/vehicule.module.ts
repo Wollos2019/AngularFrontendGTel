@@ -18,6 +18,12 @@ import { UpdatePermisComponent } from './permis/update-permis/update-permis.comp
 import { SharedModule } from '../shared/shared.module';
 import { UpdatePanneComponent } from './panne-vehicule/update-panne/update-panne.component';
 import { StatistiqueVehiculeComponent } from './statistique-vehicule/statistique-vehicule.component';
+import { TypeEntretienComponent } from './maintenance/type-entretien/type-entretien.component';
+import { EntretienComponent } from './maintenance/entretien/entretien.component';
+import { UnityMesureComponent } from './maintenance/unity-mesure/unity-mesure.component';
+import { CarburantComponent } from './carburant/carburant.component';
+import { TypeVehiculeComponent } from './type-vehicule/type-vehicule.component';
+import { TypeCarburantComponent } from './carburant/type-carburant/type-carburant.component';
 
 
 
@@ -33,6 +39,12 @@ import { StatistiqueVehiculeComponent } from './statistique-vehicule/statistique
     UpdatePermisComponent,
     UpdatePanneComponent,
     StatistiqueVehiculeComponent,
+    TypeEntretienComponent,
+    EntretienComponent,
+    UnityMesureComponent,
+    CarburantComponent,
+    TypeVehiculeComponent,
+    TypeCarburantComponent,
    
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

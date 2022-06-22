@@ -7,6 +7,7 @@ import { Panne } from './models/panne.model';
 import { IPermis, Permis } from './models/permis.model';
 
 import { PriseVehicule } from './models/priseVehicule.model';
+import { UnitMesure } from './models/unitMesure.model';
 import { Vehicule } from './models/vehicule.model';
 
 @Injectable({
@@ -24,7 +25,7 @@ export class VehiculeServiceService {
  * @returns 
  */
   getAllVehicules(params=''):Observable<Vehicule[]>{
-    return this.httpClient.get<Vehicule[]>(`${this.apiUrl}vehicules/${params}`);
+    return this.httpClient.get<Vehicule[]>(`${this.apiUrl}vehicules?${params}`);
   }
 
   getOneVehicule(vehicule:Vehicule):Observable<Vehicule>{
@@ -54,7 +55,7 @@ export class VehiculeServiceService {
 
 
  getAllPriseVehicules(params=''):Observable<PriseVehicule[]>{
-  return this.httpClient.get<PriseVehicule[]>(`${this.apiUrl}prise_vehicules/${params}`);
+  return this.httpClient.get<PriseVehicule[]>(`${this.apiUrl}prise_vehicules?${params}`);
 }
 
 getOnePriseVehicule(prisevehicule:PriseVehicule):Observable<PriseVehicule>{
@@ -85,7 +86,7 @@ createPriseVehicule(prisevehicule:Vehicule):Observable<PriseVehicule>{
 
 
  getAllPermis(params=''):Observable<Permis[]>{
-  return this.httpClient.get<Permis[]>(`${this.apiUrl}permits/${params}`);
+  return this.httpClient.get<Permis[]>(`${this.apiUrl}permits?${params}`);
 }
 
 getOnePermi(id:number):Observable<Permis>{
@@ -117,7 +118,7 @@ createPermi(permi:Permis):Observable<Permis>{
 
 
  getAllCategoriePermis(params=''):Observable<CategoriePermis[]>{
-  return this.httpClient.get<CategoriePermis[]>(`${this.apiUrl}category_permits/${params}`);
+  return this.httpClient.get<CategoriePermis[]>(`${this.apiUrl}category_permits?${params}`);
 }
 
 getOneCategoriePermi(Catpermi:CategoriePermis):Observable<CategoriePermis>{
@@ -147,7 +148,7 @@ createCategoriePermi(Catpermi:CategoriePermis):Observable<CategoriePermis>{
 
 
  getAllPannes(params=''):Observable<Panne[]>{
-  return this.httpClient.get<Panne[]>(`${this.apiUrl}pannes/${params}`);
+  return this.httpClient.get<Panne[]>(`${this.apiUrl}pannes?${params}`);
 }
 
 getOnePanne(id:number):Observable<Panne>{
@@ -165,6 +166,30 @@ deletePanne(panne:Panne):Observable<Panne>{
 createPanne(panne:Panne):Observable<Panne>{
   return this.httpClient.post<Panne>(`${this.apiUrl}pannes`,panne);
 }
+
+
+
+   //GESTION DES UNITY DE MESURES
+/**
+ * 
+ * @param params 
+ * @returns 
+ */
+
+
+ getAllUniteMesures(params=''):Observable<UnitMesure[]>{
+  return this.httpClient.get<UnitMesure[]>(`${this.apiUrl}unit_mesures?${params}`);
+}
+
+
+deleteUniteMesure(unitemesure:UnitMesure):Observable<UnitMesure>{
+  return this.httpClient.delete<UnitMesure>(`${this.apiUrl}unit_mesures/${unitemesure.id}`);
+}
+
+createUniteMesure(unitemesure:UnitMesure):Observable<UnitMesure>{
+  return this.httpClient.post<UnitMesure>(`${this.apiUrl}unit_mesures`,unitemesure);
+}
+
 
 
 
