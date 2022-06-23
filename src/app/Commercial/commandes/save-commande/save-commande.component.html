@@ -39,10 +39,10 @@
                                     <div class="form-group">
                                         <label for="produit">
                                             Produit<span class="text-danger">*</span></label>
-                                        <select id="produit" class="form-control" formControlName="produitName" >
+                                        <select id="produit" class="form-control" formControlName="produit" >
                                             <option selected="selected" value="">---</option>
                                             <ng-container *ngIf="products">
-                                                <option [value]="[c.name]" *ngFor="let c of products" >
+                                                <option [ngValue]="c" *ngFor="let c of products" >
                                                     {{ c.name }}
                                                 </option>
                                             </ng-container>
@@ -84,49 +84,47 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    <div class="form-group">
+                                    <div [formGroup]="myGroup">
                                         <label for="exampleInputFile">Fréquence<span class="text-danger">*</span></label>
-                                        <select id="freq" class="form-control" formControlName="frequence">
-                                            <option selected="selected" value="">-- Choisir une option --</option>
-                                            <option value="Lundi">Lundi</option>
-                                            <option value="Mardi">Mardi</option>
-                                            <option value="Mercredi">Mercredi</option>
-                                            <option value="Jeudi">Jeudi</option>
-                                            <option value="Vendredi">Vendredi</option>
-                                            <option value="Samedi">Samedi</option>
-                                            <option value="Dimanche">Dimanche</option>
-                                        </select>
-                                        
+                                        <ng-multiselect-dropdown [placeholder]="'Jours de diffusion'" [settings]="dropdownSettings" [data]="dropdownList"
+                                             (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)" 
+                                            formControlName="days">
+                                        </ng-multiselect-dropdown>
                                     </div>
-                                    <button class="btn btn-info float-right" type="button" (click)="checked()">Ajouter</button>                                  
+                                    <button class="btn btn-info float-right mt-2 mb-2" type="button" (click)="checked()">Ajouter</button>                                  
                                 </div>
+
+                                <!-- <div class="col-md-4 text-center mt-2">
+                                    <button class="btn btn-info mt-4" type="button" (click)="checked()">Ajouter</button>
+                                </div> -->
                             </div>
                             
-
-                            <div class="card-body table-responsive p-0" style="height: 300px;">
-                                <table class="table table-head-fixed text-nowrap">
-                                  <thead>
-                                    <tr>
-                                      <th>Nom</th>
-                                      <th>Durée en s</th>
-                                      <th>Heure de début</th>
-                                      <th>Fréquence</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr *ngFor="let slp of selectedProducts;">
-                                
-                                      <td>{{slp.productName}}</td>
-                                      <td>{{slp.duree}}</td>
-                                      <td>{{slp.heure_debut}}</td>
-                                      <td>{{slp.frequence}}</td>
-                                      <td>
-                                          <button type="button" class="btn btn-info mr-1" (click)="openModal(template, slp)">Modifier</button>
-                                          <button type="button" class="btn btn-primary" (click)="deleteCom(slp)">Supprimer</button>
-                                      </td>
-                                    </tr>
-                                  </tbody>
-                                </table>
+                            <div class="card">
+                                <div class="card-body table-responsive p-0" style="height: 300px;">
+                                    <table class="table table-head-fixed text-nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th>Nom</th>
+                                                <th>Durée en s</th>
+                                                <th>Heure de début</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let slp of selectedProducts;">
+                            
+                                                <td>{{slp.productName}}</td>
+                                                <td>{{slp.duree}}</td>
+                                                <td>{{slp.heure_debut}}</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-info mr-1"
+                                                        (click)="openModal(template, slp)">Modifier</button>
+                                                    <button type="button" class="btn btn-primary" (click)="deleteCom(slp)">Supprimer</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
 
                         </div>

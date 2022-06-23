@@ -21,9 +21,10 @@ import { commandeDt } from 'src/app/Commercial/commandes/commandeDetails';
 export class CommandesComponent implements OnInit {
 
   loading = false;
+  finalFrequence = '';
   public contenus : any;
   public monString = '';
-  public orders2 : Commande[] = [];
+  public orders2 = [] as any;
   public orders = [] as any;
   public cdl = [] as any;
   public detCom : commandeDt[] = [];
@@ -76,10 +77,19 @@ export class CommandesComponent implements OnInit {
   getList() {
     this.service.list().subscribe(response => {
       this.orders = response;
-      for (var val of this.orders) {
-        this.cdl = val.appends.products;
-      }
       console.log(this.orders);
+      for (var val of this.orders) {
+        
+        val.commandes_detail[0].frequence = JSON.parse(val.commandes_detail[0].frequence);
+        console.log(val.commandes_detail[0].frequence);
+        for(var vl of val.commandes_detail[0].frequence) {
+          this.finalFrequence = this.finalFrequence +  vl.item_text + '\n'; 
+        }
+        console.log(this.finalFrequence);
+        val.commandes_detail[0].frequence = this.finalFrequence;
+        this.finalFrequence = '';
+      }
+      this.orders2 = this.orders;
     });
   }
 

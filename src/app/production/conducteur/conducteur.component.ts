@@ -33,7 +33,8 @@ export class ConducteurComponent implements OnInit {
   }
 
   getDetails(conducteur:Conducteur) {
-    this.router.navigate(['/production/programme/'+ conducteur.id]);
+    //this.router.navigate(['/production/programme/'+ conducteur.date + '/id/' + conducteur.id ]);
+    this.router.navigate(['/production/programme/'], {queryParams: {id:conducteur.id}});
   }
 
 }

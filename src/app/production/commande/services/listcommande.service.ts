@@ -12,10 +12,15 @@ import { TrancheHoraire } from '../../grille-programmes/trancheHoraire';
 export class ListcommandeService {
 
   URL_PRODUC = environment.URL_PRODUC;
+  URL_COMMER = environment.URL_COMMER;
   constructor(private http: HttpClient) { }
 
   list () : Observable<Commande[]> {
     return this.http.get<Commande[]>(`${this.URL_PRODUC}evaluatedC`);
+  }
+
+  update(commande:Commande) : Observable<Commande> {
+    return this.http.put<Commande>(`${this.URL_COMMER}commandes/${commande.id}`,commande);
   }
 
 }

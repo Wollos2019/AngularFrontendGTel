@@ -11,6 +11,8 @@ export interface Icommande {
     nomClient? : string;
     tvaAccountable? : boolean;
     evaluated? : string;
+    invoiced? :string;
+    selected? : string;
 }
 
 export class Commande implements Icommande {
@@ -22,7 +24,9 @@ export class Commande implements Icommande {
         public idClient? : string,
         public nomClient? : string,
         public tvaAccountable? : boolean,
-        public evaluated? : string
+        public evaluated? : string,
+        public invoiced? :string,
+        public selected? : string
     ) {}
 }
 

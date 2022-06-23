@@ -203,8 +203,8 @@ reset () {
   relink(client? : Iclient) {
     if(client) {
       console.log(client);
-      this.router.navigate(['/commercial/saveCommande/' + client.id]);
-      console.log(client.id);
+      this.router.navigate(['/commercial/saveCommande/'], {queryParams: {id:client.id, name:client.nom}});
+      
     }
   }
 

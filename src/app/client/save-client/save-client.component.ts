@@ -139,7 +139,8 @@ export class SaveClientComponent implements OnInit {
 
         this.editForm.reset();
         this.toastr.success('Enregistrement effectué!!');
-        this.router.navigate(['/commercial/saveCommande/' + this.clientRes.id]);
+        this.router.navigate(['/commercial/saveCommande/'], 
+        {queryParams: {id:this.clientRes.id, name:this.clientRes.nom}});
 
       },
       error: (error: HttpErrorResponse) => {

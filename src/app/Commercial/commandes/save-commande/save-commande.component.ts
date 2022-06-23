@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Client } from 'src/app/client/client';
@@ -8,17 +8,18 @@ import { ClientService } from 'src/app/client/services/client.service';
 import { Civility } from 'src/app/config/model/civility.model';
 import { Country } from 'src/app/config/model/countries.model';
 import { ConfigService } from 'src/app/config/services/config.service';
-import { IProduct } from 'src/app/product/product';
+import { IProduct, Product } from 'src/app/product/product';
 import { CONTRACT, GENDER, MARITAL, Personal } from 'src/app/rh/models/personal.model';
 import { RhService } from 'src/app/rh/services/rh.service';
 import { ProductService } from 'src/app/services/product.service';
 import { extractErrorMessagesFromErrorResponse } from 'src/app/util/http_error_response';
-import * as $ from "jquery";
+
 import { commandeDt, IcommandeDt } from '../commandeDetails';
 
 import { IproductSelected, ProductSelected } from 'src/app/product/productSelected';
 import { Commande } from 'src/app/Commercial/commandes/commandes';
 import { CommandeService } from 'src/app/Commercial/commandes/services/commande.service';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 
 
@@ -46,46 +47,35 @@ export class SaveCommandeComponent implements OnInit {
   editForm2 = this.fb.group({
     duree: ['', [Validators.required]],
     produitId: [ [Validators.required]],
-    produitName: ['', [Validators.required]],
+    produit: [null, [Validators.required]],
     heure_debut: ['', [Validators.required]],
     frequence: ['', [Validators.required]],
     descriptif: ['', [Validators.required]] 
   });
 
-  duree = ['', [Validators.required]];
-  produitId = [ [Validators.required]];
-  produitName = ['', [Validators.required]];
-  heure_debut = ['', [Validators.required]];
-  frequence = ['', [Validators.required]];
-  descriptif = ['', [Validators.required]];
-
-  editForm = this.fb.group({
-    lastname: ['', [Validators.required]],
-    firstname: [''],
-    email: [''],
-    sexe: [GENDER.MALE, [Validators.required]],
-    
-
-
-    town: [''],
-    country: [{ value: '', disabled: true }, [Validators.required]],
-    address: [''],
-    phone: [''],
-
-    civilite: [{ value: '', disabled: true }, [Validators.required]],
-
-  });
+  choiced : any;
   options = [];
   searchedOptions: IProduct[] = [];
   comdetails : IcommandeDt[] = [];
   idCli : string = ''
   i : number = 0;
 
+  dropdownList = [] as any;
+  selectedItems = [] as any;
+  dropdownSettings = <IDropdownSettings>{};
+  disabled = false;
+  ShowFilter = false;
+  limitSelection = false;
+  cities : any = [];
+
+  myGroup = this.fb.group({
+    days : ['', [Validators.required]]
+  });
+
   constructor(
     private toastr: ToastrService,
     private fb: FormBuilder,
-    private cliService: ClientService,
-    private configService: ConfigService,
+    
     private prodService : ProductService,
     private comService : CommandeService,
     public router: Router,
@@ -93,121 +83,40 @@ export class SaveCommandeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getCountry();
-    this.getAllCivilities();
     this.getAllProducts();
-    const id: number = +this.route.snapshot.paramMap.get('id')!;
+    
+    const id: number = +this.route.snapshot.queryParamMap.get('id')!;
     console.log('id:', id);
     this.idCli = <string><any>id;
+    
+
+    this.dropdownList = this.getData();
+    
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'item_id',
+      textField: 'item_text',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
   }
 
-  get f(): any {
-    console.log(this.editForm?.controls);
-
-    return this.editForm?.controls;
+  onItemSelect(item: any) {
+    console.log(item);
+    
   }
-
-  save(): void {
-    this.submitted = true;
-    const {
-      firstname,
-      lastname,
-      address,
-      country,
-      town,
-      phone,
-      email,
-      sexe,
-      civilite,
-
-    } = this.editForm.value;
-
-    this.client.adresse = address;
-
-    this.client.country = country;
-
-    this.client.email = email;
-    this.client.gender = sexe;
-    this.client.telephone = phone;
-
-    this.client.town = town;
-    this.client.nom = firstname;
-    this.client.prenom = lastname;
-
-    this.client.civilityId = civilite;
-
-    if (this.editForm.invalid) {
-      return;
-    }
-    this.loading = true;
-
-    this.cliService.add(this.client).subscribe({
-      next: (client: Client) => {
-        this.clientRes = client;
-        this.loading = false;
-        this.submitted = false;
-
-
-        this.editForm.reset();
-        this.toastr.success('Enregistrement effectué!!');
-        // this.router.navigate(['/commercial/commandes']);
-
-      },
-      error: (error: HttpErrorResponse) => {
-        this.loading = false;
-        if (error.status === 422) {
-          const messages = extractErrorMessagesFromErrorResponse(error);
-          let re = '';
-          console.error('Error', messages);
-          messages.forEach((element) => {
-            re = re + '\n ' + element;
-          });
-          this.toastr.error(re, 'Error');
-        } else {
-          this.toastr.error(
-            "Une Erreur c'est produite lors de la création",
-            'Error'
-          );
-        }
-      },
-    });
-  }
-
-  getCountry(): void {
-    this.configService.getAllCountries('per_page=*').subscribe({
-      next: (countries: Country[]) => {
-        this.countries = countries;
-        this.editForm.get('country')?.enable();
-        this.editForm.updateValueAndValidity();
-        console.log(countries);
-      },
-      error: (error: HttpErrorResponse) => {
-        console.log('Error', error);
-      },
-    });
-  }
-  getAllCivilities(): void {
-    this.configService.getAllCivilities('per_page=*').subscribe({
-      next: (civilities: Civility[]) => {
-        this.civilities = civilities;
-        this.editForm.get('civilite')?.enable();
-        this.editForm.updateValueAndValidity();
-
-        console.log(civilities);
-      },
-      error: (error: HttpErrorResponse) => {
-        console.log('Error', error);
-      },
-    });
+  onSelectAll(items: any) {
+    console.log(items);
+    if (items)
+    {this.choiced = items;}
   }
 
   getAllProducts(): void {
     this.prodService.list().subscribe({
       next: (products: IProduct[]) => {
         this.products = products;
-        this.editForm.get('produit')?.enable();
-        this.editForm.updateValueAndValidity();
-
         console.log(products);
       },
       error: (error: HttpErrorResponse) => {
@@ -220,10 +129,9 @@ export class SaveCommandeComponent implements OnInit {
   openModal(template: TemplateRef<any>, comdet?: IproductSelected) {}
 
   saveCom() {
-    var alphas:string[]; 
-    alphas = ["1","2","3","4"];
-    this.commande.idClient = this.idCli;  
-    this.commande.contenu = 'bonjour';
+    const name: string = this.route.snapshot.queryParamMap.get('name')!;
+    this.commande.idClient = this.idCli;
+    this.commande.nomClient = name;  
     
     console.log(this.commande);
     
@@ -267,34 +175,22 @@ export class SaveCommandeComponent implements OnInit {
 
   checked() {
     this.submitted = true;
-    const {
-      produitId,
-      produitName,
+    const {   
+      produit,
       duree,
-      heure_debut,
-      frequence,
+      heure_debut,   
       descriptif
     } = this.editForm2.value;
 
-    //this.selectedProduct.idProduct = produitId;
-    // this.selectedProduct.productName = produitName;
-    // this.selectedProduct.quantity = duree;
-    // this.selectedProduct.heure_debut = heure_debut;
-    // this.selectedProduct.heure_fin = frequence;
-    // this.selectedProduct.description = descriptif
+    this.choiced = this.getObjectList(this.myGroup.value.days.map((item: { item_id: any; }) => item.item_id));
+    console.log(produit);
 
-    this.selectedProduct = new ProductSelected(produitName, descriptif,"",true,
+    this.selectedProduct = new ProductSelected(produit.name, descriptif,"",true,
       duree,
       "",
-      "",
+      produit.id,
       heure_debut,
-      frequence);
-
-    // if (this.editForm2.invalid) {
-    //   return;
-    // }
-    //this.loading = true;
-    
+      JSON.stringify(this.choiced));  
     if (this.selectedProducts.includes(this.selectedProduct)) {
       var key = this.selectedProducts.indexOf(this.selectedProduct, 0);
       if (key > -1) {
@@ -305,10 +201,24 @@ export class SaveCommandeComponent implements OnInit {
     }
     
     this.selectedProduct = null; 
-    // this.selectedProducts[this.i] = this.selectedProduct;
-    // this.i++;
     
     console.log(this.selectedProducts);
+  }
+
+  getObjectList(ids: string | any[]) {
+    return this.getData().filter(item => ids.includes(item.item_id));
+  }
+
+  getData() : Array<any> {
+    return  [
+      {item_id : 1, item_text: 'Lundi', group :'F'},
+      {item_id : 2, item_text: 'Mardi', group :'F'},
+      {item_id : 3, item_text: 'Mercredi', group :'F'},
+      {item_id : 4, item_text: 'Jeudi', group :'F'},
+      {item_id : 5, item_text: 'Vendredi', group :'F'},
+      {item_id : 6, item_text: 'Samedi', group :'F'},
+      {item_id : 7, item_text: 'Dimanchew', group :'F'}
+    ]
   }
 
 }

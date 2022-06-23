@@ -5,8 +5,8 @@
         <div *ngFor="let cd of listCom" class="col-lg-3 col-6">
           <!-- small box -->
           
-            <div *ngIf="cd.evaluated === 'true' "  [ngClass]="{
-              'small-box bg-info': cd.evaluated
+            <div class="small-box" [ngClass]="{
+              'bg-info': cd.invoiced, 'bg-dark': cd.invoiced == 'false'
             }">
               <div class="inner" (click)="openModal2(template2, cd)">
                 <h3>{{cd.id}}</h3>          
@@ -31,7 +31,7 @@
                           <li>Nom du produit: {{el.productName}}
                             <ul>
                               <li>Durée : {{el.duree}} minutes</li>
-                              <li>Diffusion : Avant le journal</li>
+                              
                             </ul>
                           </li>
                           <div class="input-group">
@@ -46,7 +46,7 @@
                           </div>
                           
                         </ul>
-                        <button class="btn btn-info float-right" type="button" (click)="enregistrer()">
+                        <button class="btn btn-info float-right" type="button" (click)="enregistrer(cd.appends?.commandesDetail, cd)">
                           Enregistrer
                       </button>
                 </div>
@@ -61,36 +61,17 @@
                   </div>
                   <div class="card-body">
                     <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="timeSegment">Selectionner une tranche horaire</label>
-                        <select id="timeSegment" class="form-control" formControlName="selectTime">
-                            <option selected="selected" value="">---</option>
-                            <ng-container *ngIf="trancheHoraires">
-                                <option [value]="c.id" *ngFor="let c of trancheHoraires">
-                                    {{ c.designation }}
-                                </option>
-                            </ng-container>
-                        </select>
-                      </div>
+                      
+                        <label for="timeSegment">Voulez-vous programmer cette commande ?</label>
+                        <button class="btn btn-danger text-center mr-1" type="button" (click)="inputChangeValue()">
+                          Oui
+                        </button>
+                        <button class="btn btn-info text-center ml-1" type="button" (click)="inputChangeValue()">
+                          Non
+                        </button>
                     </div>
 
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="timeSegment">Selectionner un jour</label>
-                        <select id="timeSegment" class="form-control" formControlName="selectDay">
-                            <option selected="selected" value="">---</option>
-                            <ng-container *ngIf="listDay">
-                                <option [value]="c" *ngFor="let c of listDay">
-                                    {{ c }}
-                                </option>
-                            </ng-container>
-                        </select>
-                      </div>
-                    </div>
-
-                    <button class="btn btn-info float-right" type="button" (click)="inputChangeValue()">
-                      Enregistrer
-                    </button>
+                    
                   </div>
                 </div>
               </form>

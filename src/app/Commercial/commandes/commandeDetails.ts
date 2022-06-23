@@ -3,7 +3,7 @@ import { IProduct } from "src/app/product/product";
 export interface IcommandeDt {
     id? : string;
     productName? : string;
-    quantity? : number;
+    frequence? : any;
     idProduct? : string;
     idCommande? : string;
     prix? : number;
@@ -14,7 +14,7 @@ export class commandeDt implements IcommandeDt {
     constructor(
       public id? : string,
       public productName?: string,
-      public quantity?: number,
+      public frequence?: any,
       public idProduct?: string,
       public idCommande?: string,
       public prix?: number,

@@ -5,7 +5,7 @@ import { IProduct } from 'src/app/product/product';
 import { IproductSelected } from 'src/app/product/productSelected';
 import { environment } from 'src/environments/environment';
 import { commandeDt } from 'src/app/Commercial/commandes/commandeDetails';
-import { Icommande } from 'src/app/Commercial/commandes/commandes';
+import { Commande, Icommande } from 'src/app/Commercial/commandes/commandes';
 
 
 @Injectable({
@@ -20,8 +20,8 @@ export class CommandeService {
     return this.http.get<any>(`${this.URL_COMMER}commandes`);
   }
 
-  add(commande:Icommande) : Observable<Icommande> {
-    return this.http.post<Icommande>(`${this.URL_COMMER}commandes`, commande);
+  add(commande:Commande) : Observable<Commande> {
+    return this.http.post<Commande>(`${this.URL_COMMER}commandes`, commande);
   }
 
   addProduct(product:IproductSelected) : Observable<IproductSelected> {

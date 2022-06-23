@@ -7,7 +7,7 @@ export interface IproductSelected  {
     idCommande ? : string,
     idProduct ? : string,
     heure_debut ? : string,
-    frequence ? : string,
+    frequence ? : any,
     description  : string
 }
 
@@ -22,6 +22,6 @@ export class ProductSelected implements IproductSelected {
     public idCommande ? : string,
     public idProduct ? : string,
     public heure_debut ? : string,
-    public frequence ? : string
+    public frequence ? : any
     ) {}
 }

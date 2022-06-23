@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>liste des commandes</h1>
+        <h1>Liste des commandes</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
@@ -39,8 +39,8 @@
                 </tr>
               </thead>
               <tbody>
-                <ng-container *ngIf="orders && orders.length">
-                  <tr *ngFor="let order of orders; let i = index">
+                <ng-container *ngIf="orders2 && orders2.length">
+                  <tr *ngFor="let order of orders2; let i = index">
                     <th scope="row">{{ i + 1 }}</th>               
                     <td>{{order.nomClient}}</td>
                     <td>
@@ -87,7 +87,7 @@
                             <thead>
                               <tr>
                                 <th>Nom</th>
-                                <th>Quantité</th>
+                                <th>Diffusion</th>
                                 <th>Prix</th>
                 
                               </tr>
@@ -96,7 +96,7 @@
                               <tr *ngFor="let cd of order.appends?.commandesDetail">
                 
                                 <td>{{cd.productName}}</td>
-                                <td>{{cd.quantity}}</td>
+                                                                 
                                 <td>{{cd.prix}}</td>
                               </tr>
                             </tbody>

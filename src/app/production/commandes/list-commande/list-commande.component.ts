@@ -82,12 +82,18 @@ export class ListCommandeComponent implements OnInit {
     console.log(el);
   }
 
-  enregistrer(){
+  enregistrer(x : commandeDt[], y : Commande){
+    for(var val of x) {
+      this.valider(val);
+    }
     if(!this.productPrice) {
       this.showError = true;
       return;
     }
-    
+    y.invoiced = 'true';
+    y.nomClient = 'jean';
+    console.log(y);
+    this.servListCom.update(y).subscribe();
 
     this.modalRef?.hide();
     this.router.navigate(['/commercial/commandes']);
