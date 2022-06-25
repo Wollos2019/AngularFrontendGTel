@@ -15,4 +15,13 @@ export class ConducteurService {
   list () : Observable<Conducteur[]> {
     return this.http.get<Conducteur[]>(`${this.URL_PRODUC}conducteurs`);
   }
+
+  checkCommande (date:Date) : Observable<any> {
+    console.log(`${date}`);
+    return this.http.get<any>(`${this.URL_PRODUC}checkConducteur/`+`"${date}"`);
+  }
+
+  add(conducteur:Conducteur) : Observable<Conducteur> {
+    return this.http.post<Conducteur>(`${this.URL_PRODUC}conducteurs`, conducteur);
+  } 
 }

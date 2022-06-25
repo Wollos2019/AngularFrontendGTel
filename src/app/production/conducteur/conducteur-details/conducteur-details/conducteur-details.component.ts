@@ -43,8 +43,7 @@ export class ConducteurDetailsComponent implements OnInit {
   }
 
   getAllProgrammes() {
-    const id: number = +this.route.snapshot.paramMap.get('id')!;
-    //const id: number = +this.route.snapshot.queryParamMap.get('id')!;
+    const id: number = +this.route.snapshot.queryParamMap.get('id')!;
     //console.log(this.route.snapshot.queryParamMap);
     console.log('id:', id);
     this.servProgr.list().subscribe({

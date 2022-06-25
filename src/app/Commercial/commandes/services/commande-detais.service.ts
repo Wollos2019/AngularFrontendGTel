@@ -21,4 +21,8 @@ export class CommandeDetaisService {
     return this.http.put<commandeDt>(`${this._url}/${comDet.id}`,comDet)
   }
 
+  add(comDet:commandeDt) : Observable<commandeDt> {
+    return this.http.post<commandeDt>(`${this.URL_COMMER}commandeDetails`, comDet);
+  }
+
 }

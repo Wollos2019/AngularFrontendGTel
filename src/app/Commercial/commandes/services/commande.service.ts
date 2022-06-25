@@ -35,4 +35,5 @@ export class CommandeService {
   somme() {
     return this.http.get<string>(`${this.URL_COMMER}commandeDetails/somme`);
   }
+
 }

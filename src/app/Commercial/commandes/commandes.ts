@@ -13,6 +13,7 @@ export interface Icommande {
     evaluated? : string;
     invoiced? :string;
     selected? : string;
+    commandes_detail? : commandeDt[]
 }
 
 export class Commande implements Icommande {
@@ -26,7 +27,8 @@ export class Commande implements Icommande {
         public tvaAccountable? : boolean,
         public evaluated? : string,
         public invoiced? :string,
-        public selected? : string
+        public selected? : string,
+        public commandes_detail? : commandeDt[]
     ) {}
 }
 
