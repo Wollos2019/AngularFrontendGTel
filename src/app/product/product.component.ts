@@ -6,6 +6,7 @@ import {BsModalService, BsModalRef} from 'ngx-bootstrap/modal';
 import {FormControl, Validators} from '@angular/forms';
 import {User} from '../models/user.model';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product',
@@ -14,6 +15,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 })
 export class ProductComponent implements OnInit {
   currentUser!: User;
+  public loading = true;
+  public submitted = false;
   public products = [] as any;
   public selectedProduct = <IProduct>{};
   public modalTitle = '';
@@ -28,13 +31,13 @@ export class ProductComponent implements OnInit {
   constructor(
     private service: ProductService,
     private modalService: BsModalService,
-    private http: HttpClient
+    private toastr: ToastrService
   ) {
   }
 
   openModal(template: TemplateRef<any>, product?: IProduct) {
     if (product) {
-      this.modalTitle = 'Edit Product';
+      this.modalTitle = 'Editer un produit';
       this.btnTitle = 'Update';
       this.selectedProduct = product;
       this.name.setValue(product.name);
@@ -42,7 +45,7 @@ export class ProductComponent implements OnInit {
       this.price.setValue(product.price);
       
     } else {
-      this.modalTitle = 'Add Product';
+      this.modalTitle = 'Ajouter un produit';
       this.btnTitle = 'Save';
       this.reset();
     }
@@ -79,14 +82,18 @@ export class ProductComponent implements OnInit {
       this.showError = true;
       return;
     }
-
+    this.submitted = true;
     this.selectedProduct.name = this.name.value;
     this.selectedProduct.description = this.description.value;
     this.selectedProduct.price = this.price.value;
     
 
     if (this.btnTitle == 'Update') {
+      this.loading = true;
       this.service.update(this.selectedProduct).subscribe((response) => {
+        this.loading = false;
+        this.submitted = false;
+        this.toastr.success('Modification effectuée!!');
         this.getList();
         this.reset();
         this.showError = false;
@@ -94,7 +101,11 @@ export class ProductComponent implements OnInit {
       });
     } else {
       console.log(this.selectedProduct);
+      this.loading = true;
       this.service.add(this.selectedProduct).subscribe((response) => {
+        this.loading = false;
+        this.submitted = false;
+        this.toastr.success('Enregistrement effectué!!');
         this.getList();
         this.reset();
         this.showError = false;

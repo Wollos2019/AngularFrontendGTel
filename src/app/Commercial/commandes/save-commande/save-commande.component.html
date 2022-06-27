@@ -56,7 +56,7 @@
                                         <label for="exampleInputFile">Heure de début<span class="text-danger">*</span></label>
                                         <div class="input-group">
                                           
-                                            <input type="text" class="form-control" id="hdd" formControlName="heure_debut"
+                                            <input type="time" class="form-control" id="hdd" formControlName="heure_debut"
                                              placeholder="Heure de début"/>
                                             
                                         </div>
@@ -69,7 +69,7 @@
                                         <div class="input-group">
                                           
                                             <input type="text" class="form-control" id="qte" formControlName="duree"
-                                             placeholder="Quantité"/>
+                                             placeholder="Durée de l'émission"/>
                                             
                                         </div>
                                     </div>                                                  
@@ -94,6 +94,18 @@
                                     <button class="btn btn-info float-right mt-2 mb-2" type="button" (click)="checked()">Ajouter</button>                                  
                                 </div>
 
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="exampleInputFile">Date de début<span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                          
+                                            <input type="date" class="form-control" id="qte" formControlName="date_debut"
+                                             placeholder="Date de début"/>
+                                            
+                                        </div>
+                                    </div>                                                  
+                                </div>
+
                                 <!-- <div class="col-md-4 text-center mt-2">
                                     <button class="btn btn-info mt-4" type="button" (click)="checked()">Ajouter</button>
                                 </div> -->
@@ -104,7 +116,8 @@
                                     <table class="table table-head-fixed text-nowrap">
                                         <thead>
                                             <tr>
-                                                <th>Nom</th>
+                                                <th>Dénomination</th>
+                                                <th>Date de début</th>
                                                 <th>Durée en s</th>
                                                 <th>Heure de début</th>
                                                 <th>Actions</th>
@@ -112,8 +125,8 @@
                                         </thead>
                                         <tbody>
                                             <tr *ngFor="let slp of selectedProducts;">
-                            
                                                 <td>{{slp.productName}}</td>
+                                                <td>{{slp.date_debut}}</td>
                                                 <td>{{slp.duree}}</td>
                                                 <td>{{slp.heure_debut}}</td>
                                                 <td>

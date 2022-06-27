@@ -1,3 +1,19 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Liste des commandes à traiter</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a [routerLink]="'/'">Dashbord</a></li>
+          <li class="breadcrumb-item active">Commandes à traiter</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+</section>
 <section class="content" >
     <div class="container-fluid">
       <!-- Small boxes (Stat box) -->
@@ -10,8 +26,10 @@
             }">
               <div class="inner" (click)="openModal2(template2, cd)">
                 <h3>{{cd.id}}</h3>          
-                <!-- <p>Commande non-evaluée</p>
-                <p>Commande non-facturée</p> -->
+                <p *ngIf="cd.evaluated=='false'">Commande non-evaluée</p>
+                <p *ngIf="cd.invoiced=='false'">Commande non-facturée</p>
+                <p *ngIf="cd.invoiced=='true'">Commande facturée</p>
+                <p *ngIf="cd.evaluated=='true'">Commande evaluée</p>
                 <p>{{cd.nomClient}}</p>
               </div>
               <div class="icon">
@@ -40,9 +58,6 @@
                               </div>
                               <input type="text" class="form-control" placeholder="Montant en Fcfa" 
                               aria-describedby="basic-addon1" [formControl]="productPrice" (keyup)="onInputValue($event, el)">
-                              <div class="input-group-append">
-                                <button class="btn btn-info" type="button" (click)="valider(el)" id="button-addon2">Valider</button>
-                              </div>
                           </div>
                           
                         </ul>

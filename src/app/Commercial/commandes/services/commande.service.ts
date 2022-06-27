@@ -36,4 +36,8 @@ export class CommandeService {
     return this.http.get<string>(`${this.URL_COMMER}commandeDetails/somme`);
   }
 
+  update(commande:Commande) : Observable<Commande> {
+    return this.http.put<Commande>(`${this.URL_COMMER}${commande.id}`,commande);
+  }
+
 }

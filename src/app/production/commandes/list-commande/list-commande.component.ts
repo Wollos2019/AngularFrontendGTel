@@ -16,6 +16,7 @@ import {DatePipe} from '@angular/common';
 import { Conducteur } from '../../conducteur/conducteur';
 import { response } from 'express';
 import { ConducteurDetailsService } from '../../conducteur/conducteur-details/services/conducteur-details.service';
+import { CommandeService } from 'src/app/Commercial/commandes/services/commande.service';
 
 @Component({
   selector: 'app-list-commande',
@@ -59,7 +60,8 @@ export class ListCommandeComponent implements OnInit {
     private servListCom : ListcommandeService,
     private servProgr : ConducteurDetailsService,
     private fb: FormBuilder,
-    public datepipe: DatePipe
+    public datepipe: DatePipe,
+    public servCom : CommandeService
   ) {}
 
   ngOnInit(): void {
@@ -104,7 +106,7 @@ export class ListCommandeComponent implements OnInit {
     y.nomClient = 'jean';
     console.log(y);
     this.servListCom.update(y).subscribe();
-
+    y.evaluated = 'true';
     this.modalRef?.hide();
     this.router.navigate(['/commercial/commandes']);
   }
@@ -200,10 +202,12 @@ export class ListCommandeComponent implements OnInit {
     for(var val of commande.commandes_detail!){
       console.log(val.date_debut);
       this.servConduc.checkCommande(val.date_debut!).subscribe({
-        next: (exist : any) => {
+        next: (exist : Conducteur) => {
           this.checkConduc = exist;
           console.log(this.checkConduc);
-          if (this.checkConduc == null) {
+          
+          if (this.checkConduc && this.checkConduc==null) {
+            console.log('il entre');
             this.conducteur.date = val.date_debut;
             this.servConduc.add(this.conducteur).subscribe({
               next: (response: Conducteur) => {
@@ -214,39 +218,52 @@ export class ListCommandeComponent implements OnInit {
             this.programme.date = val.date_debut;
             this.programme.heure_debut = val.heure_debut;
             this.programme.duree = val.duree;
-            this.programme.denomination = "Blabla";
-            this.programme.description = "Blabla";
+            this.programme.denomination = val.productName;
+            this.programme.description = val.description;
             this.programme.idCommande = val.idCommande;
             this.programme.idProduit = val.idProduct;
             this.servProgr.add(this.programme).subscribe({
               next: (response: Programme) => {
                 this.programme = response;
                 console.log(this.programme);
+                
               }
             });
-          } else {
-            this.programme.conducteur_id = this.checkConduc[1].id;
-            this.programme.date = val.date_debut;
-            this.programme.heure_debut = val.heure_debut;
-            this.programme.duree = val.duree;
-            this.programme.denomination = "Blabla";
-            this.programme.description = "Blabla";
-            this.programme.idCommande = val.idCommande;
-            this.programme.idProduit = val.idProduct;
-            this.servProgr.add(this.programme).subscribe({
-              next: (response: Programme) => {
-                this.programme = response;
-                console.log(this.programme);
-              }
-            });
-          }
+          } 
+            if (this.checkConduc && this.checkConduc != null) {
+              console.log(this.checkConduc);
+              this.programme.conducteur_id = this.checkConduc[0].id;
+              console.log(this.programme.conducteur_id);
+              this.programme.date = val.date_debut;
+              this.programme.heure_debut = val.heure_debut;
+              this.programme.duree = val.duree;
+              this.programme.denomination = val.productName;
+              this.programme.description = val.description;
+              this.programme.idCommande = val.idCommande;
+              this.programme.idProduit = val.idProduct;
+              this.servProgr.add(this.programme).subscribe({
+                next: (response: Programme) => {
+                  this.programme = response;
+                  console.log(this.programme);
+                  
+                },
+                error: (error: HttpErrorResponse) => {
+                  console.log('Error', error);
+                }
+              });
+            }
+          
         },
         error: (error : HttpErrorResponse) => {
           console.log('Error', error);
         }
       });
     }
-    
+    commande.selected = 'true';
+    this.servCom.update(commande).subscribe();
+    console.log(commande);
+    this.modalRef?.hide();
+    this.router.navigate(['/production/conducteurs/']); 
   }
 
   close() {}

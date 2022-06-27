@@ -1,6 +1,7 @@
 import { IProduct } from "./product";
 
 export interface IproductSelected  {
+    date_debut ? : string,
     productName ? : string,
     checked ? : boolean,
     duree ?: number,
@@ -14,6 +15,7 @@ export interface IproductSelected  {
 export class ProductSelected implements IproductSelected {
     constructor(
     //public id : string,
+    public date_debut : string,
     public productName : string,
     public description  : string,
     public price ? : string,

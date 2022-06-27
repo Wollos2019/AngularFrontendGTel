@@ -96,7 +96,7 @@
                               <tr *ngFor="let cd of order.appends?.commandesDetail">
                 
                                 <td>{{cd.productName}}</td>
-                                                                 
+                                 <td>{{cd.date_debut | date:'dd/MM/yyyy'}}</td>                                
                                 <td>{{cd.prix}}</td>
                               </tr>
                             </tbody>

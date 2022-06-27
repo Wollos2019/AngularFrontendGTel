@@ -18,7 +18,8 @@ export class ConducteurService {
 
   checkCommande (date:Date) : Observable<any> {
     console.log(`${date}`);
-    return this.http.get<any>(`${this.URL_PRODUC}checkConducteur/`+`"${date}"`);
+    console.log(`${this.URL_PRODUC}checkConducteur/`+ `${date}`);
+    return this.http.get<any>(`${this.URL_PRODUC}checkConducteur/`+ `${date}`);
   }
 
   add(conducteur:Conducteur) : Observable<Conducteur> {

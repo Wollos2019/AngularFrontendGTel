@@ -12,6 +12,7 @@ export interface IcommandeDt {
     idCommande? : string;
     prix? : number;
     appends? : IAppends;
+    description? : string;
 }
 
 export class commandeDt implements IcommandeDt {
@@ -25,7 +26,8 @@ export class commandeDt implements IcommandeDt {
       public idProduct?: string,
       public idCommande?: string,
       public prix?: number,
-      public appends?:IAppends
+      public appends?: IAppends,
+      public description?: string
     ) {
     }
 }

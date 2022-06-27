@@ -45,6 +45,7 @@ export class SaveCommandeComponent implements OnInit {
   products: IProduct[] = [];
 
   editForm2 = this.fb.group({
+    date_debut: ['', [Validators.required]],
     duree: ['', [Validators.required]],
     produitId: [ [Validators.required]],
     produit: [null, [Validators.required]],
@@ -132,7 +133,9 @@ export class SaveCommandeComponent implements OnInit {
     const name: string = this.route.snapshot.queryParamMap.get('name')!;
     this.commande.idClient = this.idCli;
     this.commande.nomClient = name;  
-    
+    this.commande.evaluated = 'false';
+    this.commande.invoiced = 'false';
+    this.commande.selected = 'false';
     console.log(this.commande);
     
     this.comService.add(this.commande).subscribe({
@@ -177,6 +180,7 @@ export class SaveCommandeComponent implements OnInit {
     this.submitted = true;
     const {   
       produit,
+      date_debut,
       duree,
       heure_debut,   
       descriptif
@@ -185,7 +189,7 @@ export class SaveCommandeComponent implements OnInit {
     this.choiced = this.getObjectList(this.myGroup.value.days.map((item: { item_id: any; }) => item.item_id));
     console.log(produit);
 
-    this.selectedProduct = new ProductSelected(produit.name, descriptif,"",true,
+    this.selectedProduct = new ProductSelected(date_debut, produit.name, descriptif,"",true,
       duree,
       "",
       produit.id,
