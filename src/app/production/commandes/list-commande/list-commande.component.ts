@@ -204,9 +204,10 @@ export class ListCommandeComponent implements OnInit {
       this.servConduc.checkCommande(val.date_debut!).subscribe({
         next: (exist : Conducteur) => {
           this.checkConduc = exist;
+          console.log('Debut');
           console.log(this.checkConduc);
           
-          if (this.checkConduc && this.checkConduc==null) {
+          if (this.checkConduc==null) {
             console.log('il entre');
             this.conducteur.date = val.date_debut;
             this.servConduc.add(this.conducteur).subscribe({
@@ -231,6 +232,7 @@ export class ListCommandeComponent implements OnInit {
             });
           } 
             if (this.checkConduc && this.checkConduc != null) {
+              console.log('il vient ici');
               console.log(this.checkConduc);
               this.programme.conducteur_id = this.checkConduc[0].id;
               console.log(this.programme.conducteur_id);

@@ -78,7 +78,7 @@ export class ProductComponent implements OnInit {
   }
 
   save() {
-    if (!this.name.value || !this.description.value || !this.price.value) {
+    if (!this.name.value || !this.description.value) {
       this.showError = true;
       return;
     }
@@ -86,7 +86,7 @@ export class ProductComponent implements OnInit {
     this.selectedProduct.name = this.name.value;
     this.selectedProduct.description = this.description.value;
     this.selectedProduct.price = this.price.value;
-    
+    console.log(this.selectedProduct);
 
     if (this.btnTitle == 'Update') {
       this.loading = true;
