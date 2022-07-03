@@ -124,6 +124,7 @@ export class SaveClientComponent implements OnInit {
     this.client.prenom = lastname;
 
     this.client.civilityId = civilite;
+    console.log(this.client);
 
     if (this.editForm.invalid) {
       return;
@@ -139,8 +140,10 @@ export class SaveClientComponent implements OnInit {
 
         this.editForm.reset();
         this.toastr.success('Enregistrement effectué!!');
-        this.router.navigate(['/commercial/saveCommande/'], 
-        {queryParams: {id:this.clientRes.id, name:this.clientRes.nom}});
+        if(this.clientRes.id != '0')
+        console.log(this.clientRes);
+        {this.router.navigate(['/commercial/saveCommande/'], 
+        {queryParams: {id:this.clientRes.id, name:this.clientRes.nom}});}
 
       },
       error: (error: HttpErrorResponse) => {

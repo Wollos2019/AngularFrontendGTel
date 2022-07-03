@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { IproductSelected } from '../product/productSelected';
 import { Icommande } from '../Commercial/commandes/commandes';
 import { CommandeService } from '../Commercial/commandes/services/commande.service';
+import { response } from 'express';
 
 @Component({
   selector: 'app-client',
@@ -96,7 +97,8 @@ ngOnInit(): void {
 }
 
 getList () {
-  this.service.list().subscribe(response => {this.clients = response['data']});
+  //this.service.list().subscribe(response => {this.clients = response['data']});
+  this.service.list().subscribe(response => this.clients = response);
   this.serviceP.list().subscribe(response => this.products = response);
       
 }

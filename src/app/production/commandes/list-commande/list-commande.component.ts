@@ -65,7 +65,7 @@ export class ListCommandeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getTranchHorai();
+    
     this.listEval();
   }
 
@@ -103,7 +103,7 @@ export class ListCommandeComponent implements OnInit {
       return;
     }
     y.invoiced = 'true';
-    y.nomClient = 'jean';
+    
     console.log(y);
     this.servListCom.update(y).subscribe();
     y.evaluated = 'true';

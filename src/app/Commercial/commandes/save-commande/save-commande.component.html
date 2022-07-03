@@ -126,7 +126,7 @@
                                         <tbody>
                                             <tr *ngFor="let slp of selectedProducts;">
                                                 <td>{{slp.productName}}</td>
-                                                <td>{{slp.date_debut}}</td>
+                                                <td>{{slp.date_debut | date:'dd-MM-yyyy'}}</td>
                                                 <td>{{slp.duree}}</td>
                                                 <td>{{slp.heure_debut}}</td>
                                                 <td>

@@ -66,6 +66,34 @@
                 </table>
               </div>
             </div>
+
+            <div class="row my-3">
+              <div class="col-12">
+                <table class="table table-bordered">
+                  <thead>
+                    <th *ngFor="let c of conducteurs;">
+                      {{c.date |  date:'dd-MM-yyyy'}}
+                    </th> 
+                  </thead>
+                  <tbody>                   
+                      <td *ngFor="let c of conducteurs;"><ol *ngFor="let p of c.programs;">
+                        <li>{{p.denomination}}</li>
+                      </ol></td>
+                      <td><ol>
+                        <li>Coffee</li>
+                        <li>Tea</li>
+                        <li>Milk</li>
+                      </ol></td>
+                      <!-- <td>{{t.name}}</td> -->
+                      <!-- <ng-container *ngFor="let c of c.; let i = index">
+                        <td>{{c.x}}</td>
+                      </ng-container> -->
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
