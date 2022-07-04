@@ -13,13 +13,12 @@ import { TrancheHoraire } from './tranche-horaire.model';
   styleUrls: ['./grille-programmes.component.scss']
 })
 export class GrilleProgrammesComponent implements OnInit {
-  myGroup1 = new FormGroup({
-    datePicker1 : new FormControl() 
-  });
-  myGroup2 = new FormGroup({
-    datePicker2 : new FormControl()  
-  });
 
+  myGroup = this.fb.group({
+    datePicker1: ['', [Validators.required]],
+    datePicker2: ['', [Validators.required]]
+  });
+  
   conducteurs : Conducteur[] = [];
   currentYear = 2022;
   trancheHoraires : TrancheHoraire[] = [];
@@ -35,7 +34,7 @@ export class GrilleProgrammesComponent implements OnInit {
               { name: 'Vendredi', key: 5}, { name: 'Samedi', key: 6},
               { name: 'Dimanche', key: 7}];
 
-key = [{time:'06H00-06H15', contenu:'occupied'}, {time:'06H15-06H30', contenu:'libre'}]
+key = [{time:'06H00-06H15', contenu:'occupied'}, {time:'06H15-06H30', contenu:'libre'}];
 
   constructor(private servTranHor : GrilleProgrammesService,
     private servGrille: GrilleProgrammesService, private fb : FormBuilder) { }
@@ -50,7 +49,7 @@ key = [{time:'06H00-06H15', contenu:'occupied'}, {time:'06H15-06H30', contenu:'l
     //   this.nombreDay.push({ name: day, key: index + 1 });
     // }
 
-    this.getTranchHorai();
+    //this.getTranchHorai();
   }
 
   getTranchHorai() {
@@ -70,19 +69,10 @@ key = [{time:'06H00-06H15', contenu:'occupied'}, {time:'06H15-06H30', contenu:'l
   }
   
   valider() {
-    this.myGroup1 = this.fb.group({
-      datePicker1: ['', [Validators.required]]
-    });
-    this.myGroup2 = this.fb.group({
-      datePicker1: ['', [Validators.required]]
-    });
-
+    
     const {
-      datePicker1
-    } = this.myGroup1.value;
-    const {
-      datePicker2
-    } = this.myGroup2.value;
+      datePicker1, datePicker2
+    } = this.myGroup.value;
 
     console.log(datePicker1, datePicker2);
     this.servGrille.searchConduc(datePicker1, datePicker2).subscribe({

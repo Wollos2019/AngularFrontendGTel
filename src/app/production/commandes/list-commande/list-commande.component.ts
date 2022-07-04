@@ -213,9 +213,8 @@ export class ListCommandeComponent implements OnInit {
             this.servConduc.add(this.conducteur).subscribe({
               next: (response: Conducteur) => {
                 this.conducteur = response;
-              }
-            });
-            this.programme.conducteur_id = this.conducteur.id;
+                if(this.conducteur)
+            {this.programme.conducteur_id = this.conducteur.id;
             this.programme.date = val.date_debut;
             this.programme.heure_debut = val.heure_debut;
             this.programme.duree = val.duree;
@@ -229,8 +228,11 @@ export class ListCommandeComponent implements OnInit {
                 console.log(this.programme);
                 
               }
+            });}
+              }
             });
-          } 
+            
+          } else 
             if (this.checkConduc && this.checkConduc != null) {
               console.log('il vient ici');
               console.log(this.checkConduc);

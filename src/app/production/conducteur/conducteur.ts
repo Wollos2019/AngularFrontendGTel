@@ -5,7 +5,7 @@ export interface IConducteur {
     id ? : number;
     date ? : Date;
     appends? : IAppends;
-    programs? : Programme[];    
+    programme? : Programme[];    
 }
 
 export class Conducteur implements IConducteur {
@@ -13,7 +13,7 @@ export class Conducteur implements IConducteur {
         public id ? : number,
         public date ? : Date,
         public appends? : IAppends,
-        public programs? : Programme[]    
+        public programme? : Programme[]    
     ) {}
 }
 

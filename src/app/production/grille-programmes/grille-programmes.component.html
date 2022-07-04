@@ -22,24 +22,25 @@
         <div class="card">
           <div class="card-header">
             <div class="form-row">
-              
-              <div class="col-md-3">
-                <div [formGroup]="myGroup1">
-                  <label for="datePicker" class="col-form-label">Date de début<span class="text-danger">*</span></label>
-                  <input type="date" class="form-control" placeholder="Date de début" formControlName="datePicker1" />
+              <div [formGroup]="myGroup">
+                <div class="row">
+                  <div class="col">
+                    <label for="datePicker" class="col-form-label">Date de début<span class="text-danger">*</span></label>
+                    <input type="date" class="form-control" placeholder="Date de début" formControlName="datePicker1" />
+                  </div>
+                  <div class="col">
+                    <label for="datePicker" class="col-form-label">Date de fin<span class="text-danger">*</span></label>
+                    <input type="date" class="form-control" placeholder="Date de fin" formControlName="datePicker2" />
+                  </div>
                 </div>
               </div>
               <div class="col-md-3">
-                <div [formGroup]="myGroup2">
-                  <label for="datePicker" class="col-form-label">Date de fin<span class="text-danger">*</span></label>
-                  <input type="date" class="form-control" placeholder="Date de fin" formControlName="datePicker2" />                
-                </div>  
-              </div>
-              <div class="col-md-3">
                 <br>
-                  <button type="submit" class="btn btn-primary mt-2" (click)="valider()">Valider</button>                 
-              </div>  
-            </div>     
+                <button type="submit" [disabled]="!myGroup.valid" class="btn btn-primary mt-2" (click)="valider()">Valider</button>
+              </div>
+          
+            </div>
+          
           </div>
           <!-- /.card-header -->
 
@@ -48,47 +49,16 @@
               <div class="col-12">
                 <table class="table table-bordered">
                   <thead>
-                    <th></th>
-                    <th *ngFor="let c of conducteurs; let i = index">
-                      {{c.date |  date:'dd-MM-yyyy'}}
-                      <!-- {{ nombreDay[i].name }} -->
-                    </th>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let c of conducteurs; let i = index">
-                      <td>{{i + 1}}</td>
-                      <!-- <td>{{t.name}}</td> -->
-                      <!-- <ng-container *ngFor="let c of c.; let i = index">
-                        <td>{{c.x}}</td>
-                      </ng-container> -->
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <div class="row my-3">
-              <div class="col-12">
-                <table class="table table-bordered">
-                  <thead>
                     <th *ngFor="let c of conducteurs;">
-                      {{c.date |  date:'dd-MM-yyyy'}}
+                      {{c.date |  date:'dd-MM-yyyy'}} 
                     </th> 
                   </thead>
-                  <tbody>                   
-                      <td *ngFor="let c of conducteurs;"><ol *ngFor="let p of c.programs;">
-                        <li>{{p.denomination}}</li>
-                      </ol></td>
-                      <td><ol>
-                        <li>Coffee</li>
-                        <li>Tea</li>
-                        <li>Milk</li>
-                      </ol></td>
-                      <!-- <td>{{t.name}}</td> -->
-                      <!-- <ng-container *ngFor="let c of c.; let i = index">
-                        <td>{{c.x}}</td>
-                      </ng-container> -->
-                    
+                  <tbody>                                   
+                      <th *ngFor="let c of conducteurs;">
+                        <tr *ngFor="let p of c.programme; let i=index">
+                          {{i }}{{p.denomination}}
+                        </tr>
+                      </th>                  
                   </tbody>
                 </table>
               </div>
