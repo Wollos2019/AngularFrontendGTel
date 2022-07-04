@@ -36,7 +36,7 @@
               </div>
               <div class="col-md-3">
                 <br>
-                <button type="submit" [disabled]="!myGroup.valid" class="btn btn-primary mt-2" (click)="valider()">Valider</button>
+                <button type="submit" [disabled]="!myGroup.valid" class="btn btn-primary mt-2 ml-2" (click)="valider()">Valider</button>
               </div>
           
             </div>
@@ -55,8 +55,9 @@
                   </thead>
                   <tbody>                                   
                       <th *ngFor="let c of conducteurs;">
-                        <tr *ngFor="let p of c.programme; let i=index">
-                          {{i }}{{p.denomination}}
+                        <tr *ngFor="let p of c.programme; let i=index" width="auto">
+                          <td>{{p.denomination}}</td>
+                          <td>{{p.denomination}}</td>
                         </tr>
                       </th>                  
                   </tbody>

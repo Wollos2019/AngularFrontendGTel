@@ -17,6 +17,7 @@
 <section class="content" >
     <div class="container-fluid">
       <!-- Small boxes (Stat box) -->
+      <ng-container *ngIf="listCom && listCom.length">
       <div class="row">
         <div *ngFor="let cd of listCom" class="col-lg-3 col-6">
           <!-- small box -->
@@ -35,7 +36,7 @@
               <div class="icon">
                 <i class="ion ion-bag"></i>
               </div>
-              <a (click)="openModal(template,cd)" class="small-box-footer">plus<i class="fas fa-arrow-circle-right"></i></a>
+              <a (click)="openModal(template,cd)" class="small-box-footer">Evaluer cette commande<i class="fas fa-arrow-circle-right"></i></a>
             </div>
           
             <ng-template #template>
@@ -94,7 +95,14 @@
         </div>
         
       </div>
-      
+    </ng-container>
+    <ng-container *ngIf="!listCom?.length">
+      <tr>
+        <td colspan="10" class="text-center">
+          <h1>Aucune commande à evaluer !</h1>
+        </td>
+      </tr>
+    </ng-container>
     </div>
   </section>
   
