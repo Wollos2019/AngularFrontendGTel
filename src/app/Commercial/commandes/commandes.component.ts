@@ -11,6 +11,7 @@ import { FactureService } from 'src/app/facture/services/facture.service';
 import { Commande, Icommande } from 'src/app/Commercial/commandes/commandes';
 import { CommandeService } from 'src/app/Commercial/commandes/services/commande.service';
 import { commandeDt } from 'src/app/Commercial/commandes/commandeDetails';
+import { Pagination } from 'src/app/vehicule/models/pagination.model';
 
 
 @Component({
@@ -21,6 +22,7 @@ import { commandeDt } from 'src/app/Commercial/commandes/commandeDetails';
 export class CommandesComponent implements OnInit {
 
   loading = false;
+  paramsPage:any;
   finalFrequence = '';
   public contenus : any;
   public monString = '';
@@ -74,9 +76,13 @@ export class CommandesComponent implements OnInit {
     
   }
 
-  getList() {
-    this.service.list().subscribe(response => {
-      this.orders = response;
+  getList(params='') {
+    this.loading = true;
+    this.service.list(params).subscribe(response => {
+      
+      this.loading = false;
+      this.paramsPage = new Pagination().setPagination(response);
+      this.orders = response.data;
       console.log(this.orders);
       for (var val of this.orders) {
         
@@ -169,5 +175,10 @@ export class CommandesComponent implements OnInit {
     this.description.reset();
     this.price.reset();
     this.slug.reset();
+  }
+
+  getPage(data: any): void {
+    console.log(data);
+    this.getList(`page=${data}`);
   }
 }

@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CommandesRoutingModule } from './commandes-routing.module';
-
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CommandeService } from 'src/app/Commercial/commandes/services/commande.service';
 import { FactureComponent } from 'src/app/facture/facture.component';
@@ -22,6 +22,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     SharedModule,
     NgxPrintModule,
+    NgbPaginationModule,
     CommandesRoutingModule,
     ReactiveFormsModule,
     NgMultiSelectDropDownModule.forRoot()

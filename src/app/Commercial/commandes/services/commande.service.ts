@@ -16,8 +16,8 @@ export class CommandeService {
   URL_COMMER = environment.URL_COMMER;
   constructor(private http:HttpClient) { }
 
-  list () : Observable<any> {
-    return this.http.get<any>(`${this.URL_COMMER}commandes`);
+  list (params='') : Observable<any> {
+    return this.http.get<any>(`${this.URL_COMMER}commandes?${params}`);
   }
 
   add(commande:Commande) : Observable<Commande> {
