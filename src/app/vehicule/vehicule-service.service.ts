@@ -1,13 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CategoriePermis } from './models/categoriePermis.model';
+import { Entretien, IEntretien } from './models/entretien.model';
 import { Panne } from './models/panne.model';
 import { IPermis, Permis } from './models/permis.model';
 
 import { PriseVehicule } from './models/priseVehicule.model';
-import { Vehicule } from './models/vehicule.model';
+import { ITypeEntretien, TypeEntretien } from './models/typeEntretien.model';
+import { UnitMesure } from './models/unitMesure.model';
+import { IVehicule, Vehicule } from './models/vehicule.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,8 +31,8 @@ export class VehiculeServiceService {
     return this.httpClient.get<Vehicule[]>(`${this.apiUrl}vehicules?${params}`);
   }
 
-  getOneVehicule(vehicule:Vehicule):Observable<Vehicule>{
-    return this.httpClient.get<Vehicule>(`${this.apiUrl}vehicules/${vehicule.id}`);
+  getOneVehicule(vehiculeId:number):Observable<Vehicule>{
+    return this.httpClient.get<Vehicule>(`${this.apiUrl}vehicules/${vehiculeId}`);
   }
 
   updateVehicule(vehicule:Vehicule):Observable<Vehicule>{
@@ -164,6 +168,79 @@ deletePanne(panne:Panne):Observable<Panne>{
 
 createPanne(panne:Panne):Observable<Panne>{
   return this.httpClient.post<Panne>(`${this.apiUrl}pannes`,panne);
+}
+
+
+
+   //GESTION DES UNITY DE MESURES
+/**
+ * 
+ * @param params 
+ * @returns 
+ */
+
+
+ getAllUniteMesures(params=''):Observable<UnitMesure[]>{
+  return this.httpClient.get<UnitMesure[]>(`${this.apiUrl}unit_mesures?${params}`);
+}
+
+
+deleteUniteMesure(unitemesure:UnitMesure):Observable<UnitMesure>{
+  return this.httpClient.delete<UnitMesure>(`${this.apiUrl}unit_mesures/${unitemesure.id}`);
+}
+
+createUniteMesure(unitemesure:UnitMesure):Observable<UnitMesure>{
+  return this.httpClient.post<UnitMesure>(`${this.apiUrl}unit_mesures`,unitemesure);
+}
+
+
+
+ //GESTION DES TYPES ENTRETIENS
+/**
+ * 
+ * @param params 
+ * @returns 
+ */
+
+
+ getAllTypeEntretiens(params=''):Observable<TypeEntretien[]>{
+  return this.httpClient.get<TypeEntretien[]>(`${this.apiUrl}type_maintenances?${params}`);
+}
+
+deleteTypeEntretien(typeEntretien:TypeEntretien):Observable<TypeEntretien>{
+  return this.httpClient.delete<ITypeEntretien>(`${this.apiUrl}type_maintenances/${typeEntretien.id}`);
+}
+
+createTypeEntretien(typeEntretien:TypeEntretien):Observable<TypeEntretien>{
+  return this.httpClient.post<TypeEntretien>(`${this.apiUrl}type_maintenances`,typeEntretien);
+}
+
+//GESTION DES ENTRETIENS
+/**
+ * 
+ * @param params 
+ * @returns 
+ */
+
+
+ getAllEntretiens(params=''):Observable<IEntretien[]>{
+  return this.httpClient.get<IEntretien[]>(`${this.apiUrl}maintenance_vehicules?${params}`);
+}
+
+getOneEntretien(id:number):Observable<IEntretien>{
+  return this.httpClient.get<IEntretien>(`${this.apiUrl}maintenance_vehicules/${id}`);
+}
+
+updateEntretien(entretien:Entretien):Observable<Entretien>{
+  return this.httpClient.post<Entretien>(`${this.apiUrl}maintenance_vehicules/${entretien.id}`,entretien);
+}
+
+deleteEntretien(id:Number):Observable<Entretien>{
+  return this.httpClient.delete<Entretien>(`${this.apiUrl}maintenance_vehicules/${id}`);
+}
+
+createEntretien(entretien:IEntretien):Observable<IEntretien>{
+  return this.httpClient.post<IEntretien>(`${this.apiUrl}maintenance_vehicules`,entretien);
 }
 
 

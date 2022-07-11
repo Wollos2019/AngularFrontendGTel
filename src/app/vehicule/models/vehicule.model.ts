@@ -1,4 +1,8 @@
+import { Assurance } from "src/app/assurence/model/assurance.model";
+import { CategoriePermis } from "./categoriePermis.model";
+import { Entretien } from "./entretien.model";
 import { Panne } from "./panne.model";
+import { PriseVehicule } from "./priseVehicule.model";
 
 export interface IVehicule {
   id?:string;
@@ -18,7 +22,13 @@ export interface IVehicule {
 
 }
 interface IAppends{
-  panne?:Panne
+  panneVehicule?:Panne
+  CategoryPermit?:CategoriePermis
+  assurances?:Assurance
+  priseVehicules?:PriseVehicule
+  //url?:string;
+  maintenanceVehicule?:Entretien
+
 }
 
 export class Vehicule implements IVehicule{
