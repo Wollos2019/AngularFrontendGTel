@@ -254,6 +254,8 @@ export class PersonalProfilComponent implements OnInit {
 
   deletePersonale(ev: boolean): void {
     console.log(ev);
+    
+
     this.loading = true;
     if (ev) {
       this.rhService.deletePersonal(this.per.id!).subscribe({

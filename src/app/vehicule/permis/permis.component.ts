@@ -147,6 +147,29 @@ export class PermisComponent implements OnInit {
   }
 
 
+  // deletePerm(permis: IPermis): void {
+  //   this.loading = true;
+  //   var confir = confirm('Voulez vous supprimer cet element?');
+  //   if (confir) {
+  //     this.vehiculeService.deletePermi(permis).subscribe({
+  //       next: () => {
+  //         this.loading = false;
+  //         this.toastr.success('Suppression effectuée');
+  //         this.getListPermi();
+  //       },
+  //       error: (error: any) => {
+  //         this.loading = false;
+  
+  //         console.error('Error', error);
+  
+  //         this.toastr.error(
+  //           "Une Erreur c'est produite l'hors de la suppression",
+  //           'Error'
+  //         );
+  //       },
+  //     });
+  //   }
+  // }
   deletePerm(permis: IPermis): void {
     this.loading = true;
     var confir = confirm('Voulez vous supprimer cet element?');
@@ -170,7 +193,6 @@ export class PermisComponent implements OnInit {
       });
     }
   }
-
 
  
 

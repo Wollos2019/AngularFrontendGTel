@@ -28,8 +28,8 @@ FournisseurUpdate!: Fournisseur;
 
               editForm=this.fb.group({
                 libelleFournisseur:['', [Validators.required]],
-                telephone1:['',[Validators.required]],
-                telephone2:['', [Validators.required]],
+                telephone1:['',[Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
+                telephone2:['', [Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
                 addressFournisseur:['', [Validators.required]],
                 
               });
@@ -37,8 +37,8 @@ FournisseurUpdate!: Fournisseur;
 
               updateFournisseurForm=this.fb.group({
                 libelleFournisseur:['', [Validators.required]],
-                telephone1:['',[Validators.required]],
-                telephone2:['', [Validators.required]],
+                telephone1:['',[Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
+                telephone2:['', [Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
                 addressFournisseur:['', [Validators.required]],
                 
               });
@@ -218,9 +218,9 @@ show(fournisseur: Fournisseur): void {
    * 
    * @param data 
    */
-   getPage(data: any): void {
-    console.log(data);
-    this.getAllFournisseurs(`page=${data}`);
+   getPage(params: any): void {
+    console.log(params);
+    this.getAllFournisseurs(`page=${params}`);
   }
 
 }

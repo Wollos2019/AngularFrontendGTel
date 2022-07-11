@@ -1,1 +1,701 @@
-<p>entretien works!</p>
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Entretiens</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a [routerLink]="'/'">Dashbord</a></li>
+            <li class="breadcrumb-item active">Entretiens</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-body">
+        <form class="form-row" [formGroup]="editForm">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="dateEntretien" class="col-form-label"
+                >date entretien<span class="text-danger">*</span></label
+              >
+              <input
+                type="date"
+                [ngClass]="{
+                  'is-invalid': submitted && f.dateEntretien.errors
+                }"
+                class="form-control"
+                id="dateEntretien"
+                placeholder="dd/mm/yy "
+                formControlName="dateEntretien"
+              />
+            </div>
+  
+            <div
+              *ngIf="submitted && f.dateEntretien.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.dateEntretien.errors.required">
+                date is required
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="nextDateEntretien" class="col-form-label"
+                >date prochain entretien <span class="text-danger">*</span></label
+              >
+              <input
+                type="date"
+                [ngClass]="{
+                  'is-invalid': submitted && f.nextDateEntretien.errors
+                }"
+                class="form-control"
+                id="nextDateEntretien"
+                placeholder="dd/mm/yy"
+                formControlName="nextDateEntretien"
+              />
+            </div>
+  
+            <div
+              *ngIf="submitted && f.nextDateEntretien.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.nextDateEntretien.errors.required">
+                date  required
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="kilometrageEntretien" class="col-form-label"
+                >kilometrage <span class="text-danger">*</span></label
+              >
+              <input
+                type="number"
+                [ngClass]="{ 'is-invalid': submitted && f.kilometrageEntretien.errors }"
+                class="form-control"
+                id="kilometrageEntretien"
+                placeholder="kilometrage initiale"
+                formControlName="kilometrageEntretien"
+              />
+            </div>
+  
+            <div
+              *ngIf="submitted && f.kilometrageEntretien.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.kilometrageEntretien.errors.required">
+                kilometre is required
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="kilometrageNextEntretien" class="col-form-label"
+                >prochain entretien/KM <span class="text-danger">*</span></label
+              >
+              <input
+                type="number"
+                [ngClass]="{
+                  'is-invalid': submitted && f.kilometrageNextEntretien.errors
+                }"
+                class="form-control"
+                id="kilometrageNextEntretien"
+                placeholder=" "
+                formControlName="kilometrageNextEntretien"
+              />
+            </div>
+  
+            <div
+              *ngIf="submitted && f.kilometrageNextEntretien.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.kilometrageNextEntretien.errors.required">
+                kilometrage Next required
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="cout" class="col-form-label"
+                >prix<span class="text-danger">*</span></label
+              >
+              <input
+                type="number"
+                [ngClass]="{
+                  'is-invalid': submitted && f.cout.errors
+                }"
+                class="form-control"
+                id="cout"
+                placeholder="cout"
+                formControlName="cout"
+              />
+            </div>
+  
+            <div
+              *ngIf="submitted && f.cout.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.cout.errors.required">
+               cout required
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="typeEntretienId" class="col-form-label"
+              >type d'entretien<span class="text-danger">*</span></label
+              >
+             
+
+              <select 
+              [ngClass]="{ 'is-invalid': submitted && f.typeEntretienId.errors }"
+              class="form-control"
+              id="typeEntretienId"
+               formControlName="typeEntretienId">
+                <option value="">selected type entretien</option>
+                <ng-container *ngIf="typeEntretiens">
+                <option *ngFor="let typeEN of typeEntretiens" [ngValue]="typeEN.id" >{{typeEN.libelleTypeEntretien}}
+                </option>
+              </ng-container> 
+             </select>
+
+
+            </div>
+            <div
+              *ngIf="submitted && f.typeEntretienId.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.typeEntretienId.errors.required">type entretien is required</div>
+            </div>
+          </div> 
+  
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="quantiteTypeEntretien" class="col-form-label"
+                >quantite <span class="text-danger">*</span></label
+              >
+              <input
+                type="number"
+                [ngClass]="{
+                  'is-invalid': submitted && f.quantiteTypeEntretien.errors
+                }"
+                class="form-control"
+                id="quantiteTypeEntretien"
+                placeholder=" quantite"
+                formControlName="quantiteTypeEntretien"
+              />
+            </div>
+  
+            <div
+              *ngIf="submitted && f.quantiteTypeEntretien.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.quantiteTypeEntretien.errors.required">
+              quantite required
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="vehiculeId" class="col-form-label"
+              >vehicule<span class="text-danger">*</span></label
+              >
+             
+
+              <select 
+              [ngClass]="{ 'is-invalid': submitted && f.vehiculeId.errors }"
+              class="form-control"
+              id="vehiculeId"
+               formControlName="vehiculeId">
+                <option value="">selected vehicule</option>
+                <ng-container *ngIf="vehicules">
+                <option *ngFor="let vehicule of vehicules" [ngValue]="vehicule.id" >{{vehicule.libelleVehicule}}
+                </option>
+              </ng-container> 
+             </select>
+
+
+            </div>
+            <div
+              *ngIf="submitted && f.vehiculeId.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.vehiculeId.errors.required">vehicule is required</div>
+            </div>
+          </div> 
+  
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="fournisseurId" class="col-form-label"
+              >fournisseur<span class="text-danger">*</span></label
+              >
+             
+
+              <select 
+              [ngClass]="{ 'is-invalid': submitted && f.fournisseurId.errors }"
+              class="form-control"
+              id="fournisseurId"
+               formControlName="fournisseurId">
+                <option value="">selected fournisseur</option>
+                <ng-container *ngIf="vehicules">
+                <option *ngFor="let fourniseur of fournisseurs" [ngValue]="fourniseur.id" >{{fourniseur.libelleFournisseur}}
+                </option>
+              </ng-container> 
+             </select>
+
+
+            </div>
+            <div
+              *ngIf="submitted && f.fournisseurId.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.fournisseurId.errors.required">fournisseur is required</div>
+            </div>
+          </div> 
+
+          
+        </form>
+      </div>
+      <div class="center mb-2">
+        <button
+          type="button"
+          class="btn btn-primary float-right mr-2"
+          [disabled]="!editForm.valid"
+          (click)="save()"
+        >
+          enregistrer
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  
+  <div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Liste des Entretiens</h3>
+        </div>
+        <div class="card-body">
+          <!-- <button id="table2-new-row-button" class="btn btn-primary mb-4"> Add New Row</button> -->
+          <div class="table-responsive">
+            <table
+              class="table table-bordered border text-nowrap mb-0"
+              id="new-edit"
+            >
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>date entretien </th>
+                  <th>Coût </th>
+                  <th>date prochain entretien</th>
+                  <th>nombre km</th>
+                  <th>prochain entretien/km</th>
+                   <th>quantite</th> 
+                  <th>Nom du vehicule</th>
+                  <th>Nom du fournisseur</th>
+                  <th>Type entretien</th>
+
+
+                    
+                  <th name="bstable-actions">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngIf="entretiens">
+                  <tr *ngFor="let entretie of entretiens, let i=index">
+                    <td>{{i+1}}</td>
+                    <td>{{entretie.dateEntretien |date}}</td>
+                    <td>{{entretie.cout | currency:'XAF':'CFA'}}</td>
+                    <td>{{entretie.nextDateEntretien | date}}</td>
+                    <td>{{entretie.kilometrageEntretien}}</td>
+                    <td>{{entretie.kilometrageNextEntretien}}</td>
+                    <td>{{entretie.quantiteTypeEntretien}}</td>
+                    <td>
+                        <ng-container >
+
+                        </ng-container>
+                        {{entretie.appends?.vehicules?.libelleVehicule}}
+                    </td>
+                    <td>{{entretie.appends?.fournisseur?.libelleFournisseur}}</td>
+                    <td>{{entretie.appends?.typeMaintenancevehicule?.libelleTypeEntretien}}</td>
+                   <!-- : <td>{{entretie.unitMesureId}}</td> -->
+                   
+                    <td name="bstable-actions">
+                      <div class="btn-list">
+                        <!-- <button
+                       (click)="show(fourni)"
+                          id="bEdit"
+                          title="voire"
+                          type="button"
+                          class="btn btn-sm btn-success mr-1"
+                        >  (click)="delete(entretie) " 
+                          <span class="icofont-eye-open mr-1"> </span>
+                        </button> -->
+                        <button
+                          id="bDel"
+                          title="supprimer"
+                          type="button"
+                          class="btn btn-sm btn-danger mr-1"
+                          
+                          (click)="openModalConfirm(entretie.id) "
+                        >
+                          <span class="icofont-ui-delete"> </span>
+                        </button>
+                        <button
+                        (click)="updateModal(entretie)"
+                          id="bAcep"
+                          title="modifier"
+                          type="button"
+                          class="btn btn-sm btn-primary mr-1"
+                          
+                        >
+                          <span class="icofont-ui-edit "> </span>
+                        </button>
+                      
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+                <ng-container *ngIf="!entretiens">
+                  <tr>
+                    <td colspan="11" class="text-center">
+                      Aucune données trouver
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="mb-3 mt-2" *ngIf="paramsPage && paramsPage.totalItems != 0">
+            <div class="d-inline ml-5" style="font-size: 13px" >
+              Affiche {{ paramsPage.from ? paramsPage.from : 1 }} à {{ paramsPage.to }} de
+              {{ paramsPage.totalItems }} entrées
+            </div>
+            <div class="d-inline float-right">
+              <ngb-pagination
+                [pageSize]="paramsPage.itemsPerPage"
+                [collectionSize]="paramsPage.totalItems"
+                [(page)]="paramsPage.currentPage"
+                (pageChange)="getPage($event)"
+              >
+                <ng-template ngbPaginationFirst>First</ng-template>
+                <ng-template ngbPaginationLast>Last</ng-template>
+                <ng-template ngbPaginationPrevious>Prev</ng-template>
+                <ng-template ngbPaginationNext>Next</ng-template>
+              </ngb-pagination>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  </div>
+  
+  
+  <div
+  class="modal fade"
+  id="updateModal"
+  tabindex="-1"
+  aria-labelledby="updateModal"
+  aria-hidden="true"
+  >
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateModal">Mise à jour entretien</h5>
+      </div>
+      <div class="modal-body" *ngIf="EntretienUpdate">
+        <form class="form-row" [formGroup]="updateEntretienForm" >
+         
+  
+        
+            <div class="col-md-6">
+                <div class="form-group">
+                  <label for="dateEntretien" class="col-form-label"
+                    >date entretien<span class="text-danger">*</span></label
+                  >
+                  <input
+                    type="date"
+                    [ngClass]="{
+                      'is-invalid': submittedUpdate && f1.dateEntretien.errors
+                    }"
+                    class="form-control"
+                    id="dateEntretien"
+                    placeholder="dd/mm/yy "
+                    formControlName="dateEntretien"
+                  />
+                </div>
+      
+                <div
+                  *ngIf="submittedUpdate && f1.dateEntretien.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f1.dateEntretien.errors.required">
+                    date is required
+                  </div>
+                </div>
+              </div>
+      
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="nextDateEntretien" class="col-form-label"
+                    >date prochain entretien <span class="text-danger">*</span></label
+                  >
+                  <input
+                    type="date"
+                    [ngClass]="{
+                      'is-invalid': submittedUpdate && f1.nextDateEntretien.errors
+                    }"
+                    class="form-control"
+                    id="nextDateEntretien"
+                    placeholder="dd/mm/yy"
+                    formControlName="nextDateEntretien"
+                  />
+                </div>
+      
+                <div
+                  *ngIf="submittedUpdate && f1.nextDateEntretien.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f1.nextDateEntretien.errors.required">
+                    date  required
+                  </div>
+                </div>
+              </div>
+      
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="kilometrageEntretien" class="col-form-label"
+                    >kilometrage <span class="text-danger">*</span></label
+                  >
+                  <input
+                    type="number"
+                    [ngClass]="{ 'is-invalid': submittedUpdate && f1.kilometrageEntretien.errors }"
+                    class="form-control"
+                    id="kilometrageEntretien"
+                    placeholder="kilometrage initiale "
+                    formControlName="kilometrageEntretien"
+                  />
+                </div>
+      
+                <div
+                  *ngIf="submittedUpdate && f1.kilometrageEntretien.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f1.kilometrageEntretien.errors.required">
+                    kilometre is required
+                  </div>
+                </div>
+              </div>
+      
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="kilometrageNextEntretien" class="col-form-label"
+                    >prochain entretien/KM <span class="text-danger">*</span></label
+                  >
+                  <input
+                    type="number"
+                    [ngClass]="{
+                      'is-invalid': submittedUpdate && f1.kilometrageNextEntretien.errors
+                    }"
+                    class="form-control"
+                    id="kilometrageNextEntretien"
+                    placeholder=" "
+                    formControlName="kilometrageNextEntretien"
+                  />
+                </div>
+      
+                <div
+                  *ngIf="submittedUpdate && f1.kilometrageNextEntretien.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f1.kilometrageNextEntretien.errors.required">
+                    kilometrage Next required
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="cout" class="col-form-label"
+                    >prix<span class="text-danger">*</span></label
+                  >
+                  <input
+                    type="number"
+                    [ngClass]="{
+                      'is-invalid': submittedUpdate && f1.cout.errors
+                    }"
+                    class="form-control"
+                    id="cout"
+                    placeholder="cout"
+                    formControlName="cout"
+                  />
+                </div>
+      
+                <div
+                  *ngIf="submittedUpdate && f1.cout.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f1.cout.errors.required">
+                   cout required
+                  </div>
+                </div>
+              </div>
+    
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="typeEntretienId" class="col-form-label"
+                  >type d'entretien<span class="text-danger">*</span></label
+                  >
+                 
+    
+                  <select 
+                  [ngClass]="{ 'is-invalid': submittedUpdate && f1.typeEntretienId.errors }"
+                  class="form-control"
+                  id="typeEntretienId"
+                   formControlName="typeEntretienId">
+                    <option value="">selected type entretien</option>
+                    <ng-container *ngIf="typeEntretiens">
+                    <option *ngFor="let typeEN of typeEntretiens" [ngValue]="typeEN.id" >{{typeEN.libelleTypeEntretien}}
+                    </option>
+                  </ng-container> 
+                 </select>
+    
+    
+                </div>
+                <div
+                  *ngIf="submittedUpdate && f1.typeEntretienId.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f1.typeEntretienId.errors.required">type entretien is required</div>
+                </div>
+              </div> 
+      
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="quantiteTypeEntretien" class="col-form-label"
+                    >quantite <span class="text-danger">*</span></label
+                  >
+                  <input
+                    type="number"
+                    [ngClass]="{
+                      'is-invalid': submittedUpdate && f1.quantiteTypeEntretien.errors
+                    }"
+                    class="form-control"
+                    id="quantiteTypeEntretien"
+                    placeholder=" quantite"
+                    formControlName="quantiteTypeEntretien"
+                  />
+                </div>
+      
+                <div
+                  *ngIf="submittedUpdate && f1.quantiteTypeEntretien.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f1.quantiteTypeEntretien.errors.required">
+                  quantite required
+                  </div>
+                </div>
+              </div>
+      
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="vehiculeId" class="col-form-label"
+                  >vehicule<span class="text-danger">*</span></label
+                  >
+                 
+    
+                  <select 
+                  [ngClass]="{ 'is-invalid': submittedUpdate && f1.vehiculeId.errors }"
+                  class="form-control"
+                  id="vehiculeId"
+                   formControlName="vehiculeId">
+                    <option value="">selected vehicule</option>
+                    <ng-container *ngIf="vehicules">
+                    <option *ngFor="let vehicule of vehicules" [ngValue]="vehicule.id" >{{vehicule.libelleVehicule}}
+                    </option>
+                  </ng-container> 
+                 </select>
+    
+    
+                </div>
+                <div
+                  *ngIf="submittedUpdate && f1.vehiculeId.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f1.vehiculeId.errors.required">vehicule is required</div>
+                </div>
+              </div> 
+      
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="fournisseurId" class="col-form-label"
+                  >fournisseur<span class="text-danger">*</span></label
+                  >
+                 
+    
+                  <select 
+                  [ngClass]="{ 'is-invalid': submittedUpdate && f1.fournisseurId.errors }"
+                  class="form-control"
+                  id="fournisseurId"
+                   formControlName="fournisseurId">
+                    <option value="">selected fournisseur</option>
+                    <ng-container *ngIf="vehicules">
+                    <option *ngFor="let fourniseur of fournisseurs" [ngValue]="fourniseur.id" >{{fourniseur.libelleFournisseur}}
+                    </option>
+                  </ng-container> 
+                 </select>
+    
+    
+                </div>
+                <div
+                  *ngIf="submittedUpdate && f1.fournisseurId.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f1.fournisseurId.errors.required">fournisseur is required</div>
+                </div>
+              </div> 
+  
+      
+          
+         </form>
+      </div>
+      
+      <div class="modal-footer"> 
+        <!-- <button type="button" class="btn btn-default" (click)="save()">
+          close
+        </button> -->
+         <span></span> 
+         <button type="button" class="btn btn-success" (click)="update()">
+         enregistrer
+        </button>
+      </div>
+    </div>
+  </div>
+  </div>  
+   
+  
+  <app-confirm-modal
+  (actionConfirm)="deleteEntretien($event)"
+></app-confirm-modal>
+   
+     <ngx-loading
+    [show]="loading"
+    [config]="{ backdropBorderRadius: '3px' }"
+  ></ngx-loading>

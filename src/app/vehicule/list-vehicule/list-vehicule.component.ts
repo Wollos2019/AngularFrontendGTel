@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder,Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CategoriePermis } from '../models/categoriePermis.model';
 import { Pagination } from '../models/pagination.model';
@@ -26,7 +27,8 @@ paramsPage:any;
   showVehicule!: Vehicule;
   constructor(private fb: FormBuilder,
     private toastr:ToastrService,
-    private vehiculeService: VehiculeServiceService) { }
+    private vehiculeService: VehiculeServiceService,
+    private router:Router) { }
 
 
     editForm=this.fb.group({
@@ -73,10 +75,11 @@ paramsPage:any;
   }
 
   save(): void {
+    this.submitted = true;
     if (this.editForm.invalid) {
       return;
     }
-    this.submitted = true;
+    
 
     console.log(this.editForm.value);
     const { libelleVehicule, numeroIdentifiant,immatriculation,carteGrise,nombrePlace, longueurVehicule,dureeVie,dateMiseCirculation,delaiAlerte} = this.editForm.value;
@@ -230,8 +233,9 @@ deleteVehicule(vehiculeId: Vehicule): void {
 }
 
 show(vehicule: Vehicule): void {
-  $('#exampleModal').modal('show');
-  this.showVehicule = vehicule;
+ // $('#exampleModal').modal('show');
+ // this.showVehicule = vehicule;
+  this.router.navigate(['/vehicule',vehicule.id,'detail-vehicule']);
 }
 
 getPage(data: any): void {

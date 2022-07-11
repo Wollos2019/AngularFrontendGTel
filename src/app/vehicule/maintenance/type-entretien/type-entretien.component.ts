@@ -6,6 +6,7 @@ import { ITypeEntretien, TypeEntretien } from '../../models/typeEntretien.model'
 import { IUnitMesure, UnitMesure } from '../../models/unitMesure.model';
 import { VehiculeServiceService } from '../../vehicule-service.service';
 
+declare var $:any
 @Component({
   selector: 'app-type-entretien',
   templateUrl: './type-entretien.component.html',
@@ -106,11 +107,12 @@ export class TypeEntretienComponent implements OnInit {
   }
 
 
-  delete(typeEntretienId: ITypeEntretien): void {
+  deleteType(ev: boolean,typeEntretiens:TypeEntretien): void {
     this.loading = true;
-    var confir = confirm('Voulez vous supprimer cet element?');
-    if (confir) {
-      this.vehiculeService.deleteTypeEntretien(typeEntretienId).subscribe({
+    console.log("ggggggggggggggg",this.typeEntretiens);
+   // var confir = confirm('Voulez vous supprimer cet element?');
+    if (ev) {
+      this.vehiculeService.deleteTypeEntretien(typeEntretiens).subscribe({
         next: () => {
           this.loading = false;
           this.toastr.success('Suppression effectuée');
@@ -139,5 +141,7 @@ export class TypeEntretienComponent implements OnInit {
     this.getAllEntretiens(`page=${params}`);
   }
 
-
+  openModalConfirm(id?: number): void {
+    $('#confirm').modal('show');
+  }
 }

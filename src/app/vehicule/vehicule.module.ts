@@ -1,11 +1,11 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+
 import { CommonModule } from '@angular/common';
 
 import { VehiculeRoutingModule } from './vehicule-routing.module';
 import { ListVehiculeComponent } from './list-vehicule/list-vehicule.component';
 import { PanneVehiculeComponent } from './panne-vehicule/panne-vehicule.component';
 import { VehiculeServiceService } from './vehicule-service.service';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { PriseVehiculeComponent } from './prise-vehicule/prise-vehicule.component';
 import { PermisComponent } from './permis/permis.component';
 import { CategoriePermisComponent } from './categorie-permis/categorie-permis.component';
@@ -24,6 +24,9 @@ import { UnityMesureComponent } from './maintenance/unity-mesure/unity-mesure.co
 import { CarburantComponent } from './carburant/carburant.component';
 import { TypeVehiculeComponent } from './type-vehicule/type-vehicule.component';
 import { TypeCarburantComponent } from './carburant/type-carburant/type-carburant.component';
+import { DetailVehiculeComponent } from './detail-vehicule/detail-vehicule.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 
 
@@ -45,6 +48,7 @@ import { TypeCarburantComponent } from './carburant/type-carburant/type-carburan
     CarburantComponent,
     TypeVehiculeComponent,
     TypeCarburantComponent,
+    DetailVehiculeComponent,
    
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

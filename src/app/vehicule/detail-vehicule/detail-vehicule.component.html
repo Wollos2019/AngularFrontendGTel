@@ -1,0 +1,520 @@
+
+
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Detail vehicules</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a [routerLink]="'/'">Dashbord</a></li>
+            <li class="breadcrumb-item active">Details vehicules</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-4">
+  
+          <!-- Profile Image -->
+          <div class="card card-primary card-outline">
+            <div class="card-body box-profile" >
+             
+                
+                  <div class="text-center">
+                    <img class=" img-fluid "
+                         src="assets/img/pajero.jpg"
+                         alt="User profile picture">
+                  </div>
+      
+                 <h3 class="profile-username text-center">{{vehicule.libelleVehicule}}</h3>
+      
+                  <p class="text-muted text-center">marque</p>
+                  <ng-container *ngIf="vehicule.append?.assurances ">
+                  <p>gghfhfhjfhkjhkhjkj / {{vehicule.append?.assurances?.numeroPoliceAssurance}}</p>
+                    
+                  </ng-container>
+              <!-- <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a> -->
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+  
+         
+        </div>
+        <!-- /.col -->
+        <div class="col-md-8">
+         
+          <div class="card card-primary card-outline">
+            <div class="card-body box-profile" >
+           
+                  <ul class="list-group list-group-unbordered mb-3">
+                    <li class="list-group-item">
+                      <b>Type carburant</b> <a class="float-right">Diesel</a>
+                    </li>
+                    <li class="list-group-item">
+                      <b>numero Identifiant</b> <a class="float-right">{{vehicule.numeroIdentifiant}}</a>
+          
+                    </li>
+                    <li class="list-group-item">
+                      <b>immatriculation</b> <a class="float-right">{{vehicule.immatriculation}}</a>
+                    </li>
+                    <li class="list-group-item">
+                      <b>date Mise Circulation</b> <a class="float-right">{{vehicule.dateMiseCirculation}}</a>
+                    </li><li class="list-group-item">
+                      <b>carte Grise</b> <a class="float-right">{{vehicule.carteGrise}}</a>
+                    </li><li class="list-group-item">
+                      <b>nombre de Places</b> <a class="float-right">{{vehicule.nombrePlace}}</a>
+                    </li>
+                  </ul>
+      
+                
+              
+            
+             
+              <!-- <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a> -->
+            </div>
+            <!-- /.card-body -->
+          </div>
+          
+          
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+  <!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      
+
+        
+
+       
+      <!-- /.col -->
+      <div class="col-md-12 col-sm-6">
+        <div class="card">
+          <div class="card-header p-2">
+            <ul class="nav nav-pills">
+              <li class="nav-item"><a class="nav-link active" href="#carburant" data-toggle="tab">Carburant</a></li>
+              <li class="nav-item"><a class="nav-link" href="#panne" data-toggle="tab">Pannes</a></li>
+              <li class="nav-item"><a class="nav-link" href="#entretiens" data-toggle="tab">Entretiens</a></li>
+              <li class="nav-item"><a class="nav-link" href="#assurances" data-toggle="tab">Assurances</a></li>
+            </ul>
+          </div><!-- /.card-header -->
+          <div class="card-body">
+            <div class="tab-content">
+              <div class="active tab-pane" id="carburant">
+               
+                <div class="card-body p-0">
+                  <table class="table table-striped projects">
+                      <thead>
+                          <tr>
+                              <th style="width: 1%">
+                                  #
+                              </th>
+                              <th style="width: 20%">
+                                  Project Name
+                              </th>
+                              <th style="width: 30%">
+                                  Team Members
+                              </th>
+                              <th>
+                                  Project Progress
+                              </th>
+                              <th style="width: 8%" class="text-center">
+                                  Status
+                              </th>
+                              <th style="width: 20%">
+                              </th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <!-- <ng-container *ngIf="vehicules"> -->
+                          <tr *ngFor="let vehicule of vehicules; let i=index">
+                            <td>
+                                {{i+1}}
+                            </td>
+                            <td>
+                              {{vehicule.append?.assurances?.numeroPoliceAssurance}}
+                                
+                            </td>
+                            <td>
+
+                              <!-- <ng-container *ngIf="vehicule.append?.assurances?.scanAssurance; else templImage">
+                                            
+                                <img [src]="vehicule.append?.assurances?.scanAssurance"  class=" img-fluid thumbnail">  
+                              </ng-container>
+                               <ng-template #templImage>
+
+                               </ng-template> -->
+                               
+                            </td>
+                            <td class="project_progress">
+                                <div class="progress progress-sm">
+                                    <div class="progress-bar bg-green" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%">
+                                    </div>
+                                </div>
+                                <small>
+                                    57% Complete
+                                </small>
+                            </td>
+                            <td class="project-state">
+                                <span class="badge badge-success">Success</span>
+                            </td>
+                            <!-- <td class="project-actions text-right">
+                                <a class="btn btn-primary btn-sm" href="#">
+                                    <i class="fas fa-folder">
+                                    </i>
+                                    View
+                                </a>
+                                <a class="btn btn-info btn-sm" href="#">
+                                    <i class="fas fa-pencil-alt">
+                                    </i>
+                                    Edit
+                                </a>
+                                <a class="btn btn-danger btn-sm" href="#">
+                                    <i class="fas fa-trash">
+                                    </i>
+                                    Delete
+                                </a>
+                            </td> -->
+                        </tr>
+                        <!-- </ng-container> -->
+                         
+                         
+                         
+                         
+                          <!-- <ng-container *ngIf="!vehicule.length">
+                            <tr>
+                              <td colspan="9" class="text-center">
+                                Aucune données trouver
+                              </td>
+                            </tr>
+                          </ng-container> -->
+                          
+                          
+                      </tbody>
+                  </table>
+                </div>
+                <!-- /.card-body -->
+                
+
+                
+              </div>
+              <!-- /.tab-pane -->
+              <div class="tab-pane" id="panne">
+                <div class="card-body p-0">
+                  <table class="table table-striped projects">
+                      <thead>
+                          <tr>
+                              <th style="width: 1%">
+                                  #
+                              </th>
+                              <th style="width: 20%">
+                                  Project Name
+                              </th>
+                              <th style="width: 30%">
+                                  Team Members
+                              </th>
+                              <th>
+                                  Project Progress
+                              </th>
+                              <th style="width: 8%" class="text-center">
+                                  Status
+                              </th>
+                              <th style="width: 20%">
+                              </th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <ng-container *ngIf="vehicules">
+                          <tr *ngFor="let vehicule of vehicules; let i=index">
+                            <td>
+                                {{i+1}}
+                            </td>
+                            <td>
+                              {{vehicule.append?.panneVehicule?.libellePanne}}
+                                
+                            </td>
+                            <td>
+
+                              <!-- <ng-container *ngIf="vehicule.append?.assurances?.scanAssurance; else templImage">
+                                            
+                                <img [src]="vehicule.append?.assurances?.scanAssurance"  class=" img-fluid thumbnail">  
+                              </ng-container>
+                               <ng-template #templImage>
+
+                               </ng-template> -->
+                               
+                            </td>
+                            <td class="project_progress">
+                                <div class="progress progress-sm">
+                                    <div class="progress-bar bg-green" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%">
+                                    </div>
+                                </div>
+                                <small>
+                                    57% Complete
+                                </small>
+                            </td>
+                            <td class="project-state">
+                                <span class="badge badge-success">Success</span>
+                            </td>
+                            <!-- <td class="project-actions text-right">
+                                <a class="btn btn-primary btn-sm" href="#">
+                                    <i class="fas fa-folder">
+                                    </i>
+                                    View
+                                </a>
+                                <a class="btn btn-info btn-sm" href="#">
+                                    <i class="fas fa-pencil-alt">
+                                    </i>
+                                    Edit
+                                </a>
+                                <a class="btn btn-danger btn-sm" href="#">
+                                    <i class="fas fa-trash">
+                                    </i>
+                                    Delete
+                                </a>
+                            </td> -->
+                        </tr>
+                         </ng-container> 
+                         
+                         
+                         
+                         
+                          <ng-container *ngIf="!vehicule.append?.panneVehicule">
+                            <tr>
+                              <td colspan="9" class="text-center">
+                                Aucune données trouver
+                              </td>
+                            </tr>
+                          </ng-container>
+                          
+                          
+                      </tbody>
+                  </table>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.tab-pane -->
+
+              <div class="tab-pane" id="entretiens">
+                <div class="card-body p-0">
+                  <table class="table table-striped projects">
+                      <thead>
+                          <tr>
+                              <th style="width: 1%">
+                                  #
+                              </th>
+                              <th style="width: 20%">
+                                  Project Name
+                              </th>
+                              <th style="width: 30%">
+                                  Team Members
+                              </th>
+                              <th>
+                                  Project Progress
+                              </th>
+                              <th style="width: 8%" class="text-center">
+                                  Status
+                              </th>
+                              <th style="width: 20%">
+                              </th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <!-- <ng-container *ngIf="vehicules"> -->
+                          <tr *ngFor="let vehicule of vehicules; let i=index">
+                            <td>
+                                {{i+1}}
+                            </td>
+                            <td>
+                              {{vehicule.append?.maintenanceVehicule?.nextDateEntretien}}
+                                
+                            </td>
+                            <td>
+
+                              <!-- <ng-container *ngIf="vehicule.append?.assurances?.scanAssurance; else templImage">
+                                            
+                                <img [src]="vehicule.append?.assurances?.scanAssurance"  class=" img-fluid thumbnail">  
+                              </ng-container>
+                               <ng-template #templImage>
+
+                               </ng-template> -->
+                               
+                            </td>
+                            <td class="project_progress">
+                                <div class="progress progress-sm">
+                                    <div class="progress-bar bg-green" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%">
+                                    </div>
+                                </div>
+                                <small>
+                                    57% Complete
+                                </small>
+                            </td>
+                            <td class="project-state">
+                                <span class="badge badge-success">Success</span>
+                            </td>
+                            <!-- <td class="project-actions text-right">
+                                <a class="btn btn-primary btn-sm" href="#">
+                                    <i class="fas fa-folder">
+                                    </i>
+                                    View
+                                </a>
+                                <a class="btn btn-info btn-sm" href="#">
+                                    <i class="fas fa-pencil-alt">
+                                    </i>
+                                    Edit
+                                </a>
+                                <a class="btn btn-danger btn-sm" href="#">
+                                    <i class="fas fa-trash">
+                                    </i>
+                                    Delete
+                                </a>
+                            </td> -->
+                        </tr>
+                        <!-- </ng-container> -->
+                         
+                        
+                         
+                         
+                          <ng-container *ngIf="!vehicule.append?.maintenanceVehicule">
+                            <tr>
+                              <td colspan="9" class="text-center">
+                                Aucune données trouver
+                              </td>
+                            </tr>
+                          </ng-container>
+                          
+                          
+                      </tbody>
+                  </table>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.tab-pane -->
+
+              <div class="tab-pane" id="assurances">
+                <div class="card-body p-0">
+                  <table class="table table-striped projects">
+                      <thead>
+                          <tr>
+                              <th style="width: 1%">
+                                  #
+                              </th>
+                              <th style="width: 20%">
+                                  Project Name
+                              </th>
+                              <th style="width: 30%">
+                                  Team Members
+                              </th>
+                              <th>
+                                  Project Progress
+                              </th>
+                              <th style="width: 8%" class="text-center">
+                                  Status
+                              </th>
+                              <th style="width: 20%">
+                              </th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <!-- <ng-container *ngIf="vehicules"> -->
+                          <tr *ngFor="let vehicule of vehicules; let i=index">
+                            <td>
+                                {{i+1}}
+                            </td>
+                            <td>
+                              <ng-container *ngIf="vehicule">
+                                {{vehicule.append?.assurances?.numeroPoliceAssurance}}
+                              </ng-container>
+                              
+                                
+                            </td>
+                            <td>
+
+                              <!-- <ng-container *ngIf="vehicule.append?.assurances?.scanAssurance; else templImage">
+                                            
+                                <img [src]="vehicule.append?.assurances?.scanAssurance"  class=" img-fluid thumbnail">  
+                              </ng-container>
+                               <ng-template #templImage>
+
+                               </ng-template> -->
+                               
+                            </td>
+                            <td class="project_progress">
+                                <div class="progress progress-sm">
+                                    <div class="progress-bar bg-green" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%">
+                                    </div>
+                                </div>
+                                <small>
+                                    57% Complete
+                                </small>
+                            </td>
+                            <td class="project-state">
+                                <span class="badge badge-success">Success</span>
+                            </td>
+                            <!-- <td class="project-actions text-right">
+                                <a class="btn btn-primary btn-sm" href="#">
+                                    <i class="fas fa-folder">
+                                    </i>
+                                    View
+                                </a>
+                                <a class="btn btn-info btn-sm" href="#">
+                                    <i class="fas fa-pencil-alt">
+                                    </i>
+                                    Edit
+                                </a>
+                                <a class="btn btn-danger btn-sm" href="#">
+                                    <i class="fas fa-trash">
+                                    </i>
+                                    Delete
+                                </a>
+                            </td> -->
+                        </tr>
+                        <!-- </ng-container> -->
+                         
+                         
+                         
+                         
+                          <ng-container *ngIf="!vehicule.append?.assurances">
+                            <tr>
+                              <td colspan="9" class="text-center">
+                                Aucune données trouver
+                              </td>
+                            </tr>
+                          </ng-container>
+                          
+                          
+                      </tbody>
+                  </table>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+          </div><!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+
+ 

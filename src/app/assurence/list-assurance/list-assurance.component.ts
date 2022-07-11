@@ -129,7 +129,7 @@ export class ListAssuranceComponent implements OnInit {
         
         this.paramsPage = new Pagination().setPagination(assurances); 
         this.assurances = assurances.data;
-        console.log(this.assurances);
+        console.log('ggggggggggggggggggg',this.assurances);
       },
       error: (error: any) => {
         this.loading = false;

@@ -137,10 +137,11 @@
                         </button> -->
                         <button
                           id="bDel"
+                          (click)="openModalConfirm()"
                           title="supprimer"
                           type="button"
                           class="btn btn-sm btn-danger mr-1"
-                          (click)="delete(entereti)"
+                         
                         >
                           <span class="icofont-ui-delete"> </span>
                         </button>
@@ -197,7 +198,9 @@
   
   </div>
   
-
+  <app-confirm-modal
+  (actionConfirm)="deleteType($event)"
+></app-confirm-modal>
   
      <ngx-loading
     [show]="loading"
