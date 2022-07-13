@@ -42,8 +42,8 @@ updateAssurance(assurance:Assurance):Observable<Assurance>{
  * @param assurance 
  * @returns 
  */
-deleteAssurance(assurance:Assurance):Observable<Assurance>{
-  return this.httpClient.delete<Assurance>(`${this.apiUrl}assurances/${assurance.id}`);
+deleteAssurance(id:Number):Observable<Assurance>{
+  return this.httpClient.delete<Assurance>(`${this.apiUrl}assurances/${id}`);
 }
 
 /**

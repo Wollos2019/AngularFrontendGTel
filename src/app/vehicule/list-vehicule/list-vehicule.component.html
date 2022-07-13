@@ -31,9 +31,9 @@
             <span class="info-box-icon bg-info"><i class="fas fa-car"></i></span>
 
             <div class="info-box-content">
-              <a href="">
+              <a  (click)="openVehicule()">
               <span class="info-box-text">VEHICULES</span>
-              <span class="info-box-number">None</span>
+              <span class="info-box-number">Créer un vehicule</span>
               </a>
             </div>
             <!-- /.info-box-content -->
@@ -50,9 +50,9 @@
             </span>
 
             <div class="info-box-content">
-              <a href="">
-              <span class="info-box-text">Shadows</span>
-              <span class="info-box-number">Small</span>
+              <a  (click)="openPanne()">
+              <span class="info-box-text">PANNES</span>
+              <span class="info-box-number">Créer une panne</span>
               </a>
             </div>
             <!-- /.info-box-content -->
@@ -68,9 +68,9 @@
             </span>
 
             <div class="info-box-content">
-              <a href="">
-              <span class="info-box-text">Shadows</span>
-              <span class="info-box-number">Regular</span>
+              <a  (click)="openEntretien()">
+              <span class="info-box-text">ENTRETIEN</span>
+              <span class="info-box-number">Créer un entretien</span>
               </a>
             </div>
             <!-- /.info-box-content -->
@@ -83,9 +83,9 @@
             <span class="info-box-icon bg-dark"><i class="far fa-star"></i></span>
 
             <div class="info-box-content">
-              <a href="">
-              <span class="info-box-text">Shadows</span>
-              <span class="info-box-number">Large</span>
+              <a  (click)="openTypeEntretien()">
+              <span class="info-box-text">TYPE ENTRETIEN</span>
+              <span class="info-box-number">Créer un entretien</span>
               </a>
             </div>
             <!-- /.info-box-content -->
@@ -146,7 +146,7 @@
             <span class="info-box-icon bg-gray"><i class="far fa-star"></i></span>
 
             <div class="info-box-content">
-              <a href="">
+              <a href="" >
               <span class="info-box-text">Shadows</span>
               <span class="info-box-number">Large</span>
               </a>
@@ -335,7 +335,7 @@
 
 
                                               <button
-                                              (click)="deleteVehicule(v)"
+                                              (click)="openModalConfirm(v?.id)"
                                                 title="supprimer"
                                                 type="button"
                                                 class="btn btn-danger  btn-sm"
@@ -1175,7 +1175,9 @@
  </div>
  </div>
 
-
+ <app-confirm-modal
+ (actionConfirm)="deleteVehicule($event)"
+></app-confirm-modal>
  
 
  <ngx-loading

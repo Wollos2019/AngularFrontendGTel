@@ -338,7 +338,7 @@
                         title="supprimer"
                         type="button"
                         class="btn btn-sm btn-danger mr-1"
-                        (click)="delete(fourni)"
+                        (click)="openModalConfirm(fourni?.id)"
                       >
                         <span class="icofont-ui-delete"> </span>
                       </button>
@@ -568,6 +568,11 @@ aria-hidden="true"
      </div>
    </div>
    </div> 
+
+   <app-confirm-modal
+  (actionConfirm)="deleteFourni($event)"
+></app-confirm-modal>
+   
    <ngx-loading
   [show]="loading"
   [config]="{ backdropBorderRadius: '3px' }"

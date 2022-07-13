@@ -39,8 +39,8 @@ export class VehiculeServiceService {
     return this.httpClient.post<Vehicule>(`${this.apiUrl}vehicules/${vehicule.id}`,vehicule);
   }
 
-  deleteVehicule(vehicule:Vehicule):Observable<Vehicule>{
-    return this.httpClient.delete<Vehicule>(`${this.apiUrl}vehicules/${vehicule.id}`);
+  deleteVehicule(id:Number):Observable<Vehicule>{
+    return this.httpClient.delete<Vehicule>(`${this.apiUrl}vehicules/${id}`);
   }
 
   createVehicule(vehicule:Vehicule):Observable<Vehicule>{
@@ -69,11 +69,11 @@ updatePriseVehicule(prisevehicule:PriseVehicule):Observable<PriseVehicule>{
   return this.httpClient.post<PriseVehicule>(`${this.apiUrl}prise_vehicules/${prisevehicule.id}`,prisevehicule);
 }
 
-deletePriseVehicule(prisevehicule:PriseVehicule):Observable<PriseVehicule>{
-  return this.httpClient.delete<PriseVehicule>(`${this.apiUrl}prise_vehicules/${prisevehicule.id}`);
+deletePriseVehicule(id:Number):Observable<PriseVehicule>{
+  return this.httpClient.delete<PriseVehicule>(`${this.apiUrl}prise_vehicules/${id}`);
 }
 
-createPriseVehicule(prisevehicule:Vehicule):Observable<PriseVehicule>{
+createPriseVehicule(prisevehicule:PriseVehicule):Observable<PriseVehicule>{
   return this.httpClient.post<PriseVehicule>(`${this.apiUrl}prise_vehicules`,prisevehicule);
 }
 
@@ -100,8 +100,8 @@ updatePermi(permi:Permis):Observable<Permis>{
   return this.httpClient.post<Permis>(`${this.apiUrl}permits/${permi.id}`,permi);
 }
 
-deletePermi(permis:IPermis):Observable<Permis>{
-  return this.httpClient.delete<Permis>(`${this.apiUrl}permits/${permis.id}`);
+deletePermi(id:Number):Observable<Permis>{
+  return this.httpClient.delete<Permis>(`${this.apiUrl}permits/${id}`);
 }
 
 createPermi(permi:Permis):Observable<Permis>{
@@ -132,8 +132,8 @@ updateCategoriePermi(Catpermi:CategoriePermis):Observable<CategoriePermis>{
   return this.httpClient.post<CategoriePermis>(`${this.apiUrl}category_permits/${Catpermi.id}`,Catpermi);
 }
 
-deleteCategoriePermi(Catpermi:CategoriePermis):Observable<CategoriePermis>{
-  return this.httpClient.delete<CategoriePermis>(`${this.apiUrl}category_permits/${Catpermi.id}`);
+deleteCategoriePermi(id:Number):Observable<CategoriePermis>{
+  return this.httpClient.delete<CategoriePermis>(`${this.apiUrl}category_permits/${id}`);
 }
 
 createCategoriePermi(Catpermi:CategoriePermis):Observable<CategoriePermis>{
@@ -162,8 +162,8 @@ updatePanne(panne:Panne):Observable<Panne>{
   return this.httpClient.post<Panne>(`${this.apiUrl}pannes/${panne.id}`,panne);
 }
 
-deletePanne(panne:Panne):Observable<Panne>{
-  return this.httpClient.delete<Panne>(`${this.apiUrl}pannes/${panne.id}`);
+deletePanne(id:Number):Observable<Panne>{
+  return this.httpClient.delete<Panne>(`${this.apiUrl}pannes/${id}`);
 }
 
 createPanne(panne:Panne):Observable<Panne>{
@@ -185,8 +185,8 @@ createPanne(panne:Panne):Observable<Panne>{
 }
 
 
-deleteUniteMesure(unitemesure:UnitMesure):Observable<UnitMesure>{
-  return this.httpClient.delete<UnitMesure>(`${this.apiUrl}unit_mesures/${unitemesure.id}`);
+deleteUniteMesure(id:Number):Observable<UnitMesure>{
+  return this.httpClient.delete<UnitMesure>(`${this.apiUrl}unit_mesures/${id}`);
 }
 
 createUniteMesure(unitemesure:UnitMesure):Observable<UnitMesure>{
@@ -207,8 +207,8 @@ createUniteMesure(unitemesure:UnitMesure):Observable<UnitMesure>{
   return this.httpClient.get<TypeEntretien[]>(`${this.apiUrl}type_maintenances?${params}`);
 }
 
-deleteTypeEntretien(typeEntretien:TypeEntretien):Observable<TypeEntretien>{
-  return this.httpClient.delete<ITypeEntretien>(`${this.apiUrl}type_maintenances/${typeEntretien.id}`);
+deleteTypeEntretien(id:Number):Observable<ITypeEntretien>{
+  return this.httpClient.delete<ITypeEntretien>(`${this.apiUrl}type_maintenances/${id}`);
 }
 
 createTypeEntretien(typeEntretien:TypeEntretien):Observable<TypeEntretien>{

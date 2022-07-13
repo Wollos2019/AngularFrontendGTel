@@ -23,7 +23,7 @@ paramsPage:any;
  
   submittedUpdate!: boolean;
   VehiculeUpdate!: Vehicule;
- 
+ currentID!:number;
   showVehicule!: Vehicule;
   constructor(private fb: FormBuilder,
     private toastr:ToastrService,
@@ -208,14 +208,15 @@ update():void{
 }
 
 
-deleteVehicule(vehiculeId: Vehicule): void {
+deleteVehicule( ev: boolean,): void {
   this.loading = true;
-  var confir = confirm('Voulez vous supprimer cet element?');
-  if (confir) {
-    this.vehiculeService.deleteVehicule(vehiculeId).subscribe({
+ 
+  if (ev) {
+    this.vehiculeService.deleteVehicule(this.currentID).subscribe({
       next: () => {
         this.loading = false;
         this.toastr.success('Suppression effectuée');
+        $('#confirm').modal('hide');
         this.getListVehicule();
       },
       error: (error: any) => {
@@ -238,8 +239,38 @@ show(vehicule: Vehicule): void {
   this.router.navigate(['/vehicule',vehicule.id,'detail-vehicule']);
 }
 
+openPanne(): void {
+  //$('#createModal').modal('show');
+  this.router.navigate(['vehicule/creer-panne']);
+  
+}
+
+openVehicule(): void {
+  //$('#createModal').modal('show');
+  this.router.navigate(['vehicule/list-vehicules']);
+  
+}
+
+openEntretien(): void {
+  //$('#createModal').modal('show');
+  this.router.navigate(['vehicule/entretien']);
+  
+}
+
+openTypeEntretien(): void {
+  //$('#createModal').modal('show');
+  this.router.navigate(['vehicule/type-entretien']);
+  
+}
+
 getPage(data: any): void {
   console.log(data);
   this.getListVehicule(`page=${data}`);
+}
+
+openModalConfirm(id?: number): void {
+  this.currentID = Number(id);
+  console.log("ggggggggggggggg",this.currentID!);
+  $('#confirm').modal('show');
 }
 }

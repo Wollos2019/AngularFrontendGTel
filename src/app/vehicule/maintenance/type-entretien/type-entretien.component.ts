@@ -3,7 +3,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Pagination } from '../../models/pagination.model';
 import { ITypeEntretien, TypeEntretien } from '../../models/typeEntretien.model';
-import { IUnitMesure, UnitMesure } from '../../models/unitMesure.model';
 import { VehiculeServiceService } from '../../vehicule-service.service';
 
 declare var $:any
@@ -13,10 +12,11 @@ declare var $:any
   styleUrls: ['./type-entretien.component.scss']
 })
 export class TypeEntretienComponent implements OnInit {
-
-  typeEntretiens:ITypeEntretien[]=[];
-  typeEntretien =new TypeEntretien();
  
+
+  typeEntretiens?:TypeEntretien[]=[];
+ tyEntre = new TypeEntretien();
+ currrentID!:number;
   submitted=false;
   loading=false;
   paramsPage: any;
@@ -58,12 +58,12 @@ export class TypeEntretienComponent implements OnInit {
      
       
       } = this.editForm.value;
-      this.typeEntretien.libelleTypeEntretien = libelleTypeEntretien;
-      this.typeEntretien.descriptionTypeEntretien = descriptionTypeEntretien;
+      this.tyEntre.libelleTypeEntretien = libelleTypeEntretien;
+      this.tyEntre.descriptionTypeEntretien = descriptionTypeEntretien;
      // this.typeEntretien.unitMesureId = unitMesureId;
     
     this.loading = true;
-    this.vehiculeService.createTypeEntretien(this.typeEntretien).subscribe({
+    this.vehiculeService.createTypeEntretien(this.tyEntre).subscribe({
       next: () => {
         this.loading = false;
         this.toastr.success('Enregistrement effectuée !!');
@@ -107,15 +107,18 @@ export class TypeEntretienComponent implements OnInit {
   }
 
 
-  deleteType(ev: boolean,typeEntretiens:TypeEntretien): void {
+  deleteType(ev: boolean,): void {
     this.loading = true;
-    console.log("ggggggggggggggg",this.typeEntretiens);
+   
    // var confir = confirm('Voulez vous supprimer cet element?');
     if (ev) {
-      this.vehiculeService.deleteTypeEntretien(typeEntretiens).subscribe({
+     
+     
+      this.vehiculeService.deleteTypeEntretien(this.currrentID).subscribe({
         next: () => {
           this.loading = false;
           this.toastr.success('Suppression effectuée');
+          $('#confirm').modal('hide');
           this.getAllEntretiens();
         },
         error: (error: any) => {
@@ -142,6 +145,12 @@ export class TypeEntretienComponent implements OnInit {
   }
 
   openModalConfirm(id?: number): void {
+    this.currrentID = Number(id);
+    console.log("ggggggggggggggg",this.currrentID!);
     $('#confirm').modal('show');
   }
+
+
+
+  
 }

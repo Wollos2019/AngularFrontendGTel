@@ -170,7 +170,7 @@
                                             >  <span class="icofont-eye-open mr-1 size-18 "> </span></button>
                         
                                                <button
-                                              (click)=" delete(assur)"
+                                              (click)=" openModalConfirm(assur?.id)"
                                                 title="supprimer"
                                                 type="button"
                                                 class="btn btn-danger  btn-sm"
@@ -671,6 +671,10 @@ aria-hidden="true"
   </div>
 </div>
 </div>
+
+<app-confirm-modal
+(actionConfirm)="deleteAssur($event)"
+></app-confirm-modal>
 
 <ngx-loading
   [show]="loading"

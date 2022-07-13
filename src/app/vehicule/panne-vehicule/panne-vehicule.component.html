@@ -201,7 +201,7 @@
                                   </button>
 
                                   <button
-                                              (click)="deletePanne(per)"
+                                              (click)="openModalConfirm(per?.id)"
                                                 title="supprimer"
                                                 type="button"
                                                 class="btn btn-danger  btn-sm"
@@ -296,6 +296,10 @@ aria-hidden="true"
   </div>
 </div>
 </div> 
+
+<app-confirm-modal
+(actionConfirm)="deletePanne($event)"
+></app-confirm-modal>
   <ngx-loading
   [show]="loading"
   [config]="{ backdropBorderRadius: '3px' }"

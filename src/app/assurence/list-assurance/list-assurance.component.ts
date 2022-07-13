@@ -15,14 +15,14 @@ declare var $:any
   styleUrls: ['./list-assurance.component.scss']
 })
 export class ListAssuranceComponent implements OnInit {
-  [x: string]: any;
+  //[x: string]: any;
   assurances?: IAssurance[];
   assurance= new Assurance();
   vehicules?:Vehicule[];
   vehicule= new Vehicule();
   files:any;
   showAssurance!:Assurance;
-
+  currentID!:Number
   submitted=false;
   loading=false;
   paramsPage:any;
@@ -236,14 +236,15 @@ update():void{
 
 
 
-delete(assuranceId: Vehicule): void {
+deleteAssur(ev:boolean): void {
   this.loading = true;
-  var confir = confirm('Voulez vous supprimer cet element?');
-  if (confir) {
-    this.assuranceService.deleteAssurance(assuranceId).subscribe({
+ 
+  if (ev) {
+    this.assuranceService.deleteAssurance(this.currentID).subscribe({
       next: () => {
         this.loading = false;
         this.toastr.success('Suppression effectuée');
+        $('#confirm').modal('hide');
         this.getListAssurances();
       },
       error: (error: any) => {
@@ -319,6 +320,11 @@ show(assurance: Assurance): void {
 
   sanitizeImageUrl(imageUrl: string): SafeUrl {
     return this.sanitizer.bypassSecurityTrustUrl(imageUrl);
+}
+openModalConfirm(id?: number): void {
+  this.currentID = Number(id);
+  console.log("ggggggggggggggg",this.currentID!);
+  $('#confirm').modal('show');
 }
 
 }

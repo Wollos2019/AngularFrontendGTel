@@ -35,6 +35,7 @@ export class EntretienComponent implements OnInit {
   paramsPage: any;
   submittedUpdate!: boolean;
 EntretienUpdate!: IEntretien;
+  currentID!: Number;
   constructor(private fb:FormBuilder,
               private toastr:ToastrService,
               private vehiculeService:VehiculeServiceService,
@@ -334,11 +335,12 @@ update():void{
     console.log("ffffffffffff",this.entretien)
     //var confir = confirm('Voulez vous supprimer cet element?');
     if (ev) {
-      this.vehiculeService.deleteEntretien(this.entretienId!).subscribe({
+      this.vehiculeService.deleteEntretien(this.currentID).subscribe({
         next: () => {
         
           this.loading = false;
           this.toastr.success('Suppression effectuée');
+          $('#confirm').modal('hide');
           this.getAllEntretien();
         },
         error: (error: any) => {
@@ -390,7 +392,10 @@ update():void{
     this.getAllEntretien(`page=${params}`);
   }
 
-  openModalConfirm(_id?: number): void {
+ 
+  openModalConfirm(id?: number): void {
+    this.currentID = Number(id);
+    console.log("ggggggggggggggg",this.currentID!);
     $('#confirm').modal('show');
   }
 }

@@ -1,5 +1,5 @@
 export interface IUnitMesure{
-    id?:string;
+    id?:number;
     symboleUniteMesure?:string;
     libelleUniteMesure?:string;
 
@@ -7,7 +7,7 @@ export interface IUnitMesure{
 
 export class UnitMesure implements IUnitMesure {
     constructor(
-        public id?:string,
+        public id?:number,
         public libelleUniteMesure?:string,
         public symboleUniteMesure?:string,
         

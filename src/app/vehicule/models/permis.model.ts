@@ -3,7 +3,7 @@ import { ICategoriePermis } from "./categoriePermis.model";
 
 
 export interface IPermis{
-    id?:string;
+    id?:number;
     numeroPermis?:string;
     dateAcquisition?:Date;
     userId?:string;
@@ -39,7 +39,7 @@ interface IAppends{
 //   }
 export class Permis implements IPermis{
     constructor(
-        public id?:string,
+        public id?:number,
         public numeroPermis?:string,
         public dateAcquisition?:Date,
         public userId?:string,

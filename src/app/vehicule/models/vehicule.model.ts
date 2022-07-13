@@ -5,7 +5,7 @@ import { Panne } from "./panne.model";
 import { PriseVehicule } from "./priseVehicule.model";
 
 export interface IVehicule {
-  id?:string;
+  id?:number;
   libelleVehicule?:string;
   numeroIdentifiant?:string;
   immatriculation?:string;
@@ -28,12 +28,13 @@ interface IAppends{
   priseVehicules?:PriseVehicule
   //url?:string;
   maintenanceVehicule?:Entretien
+  totalVehicules?:Number
 
 }
 
 export class Vehicule implements IVehicule{
     constructor(
-      public id?:string,
+      public id?:number,
   public libelleVehicule?:string,
   public numeroIdentifiant?:string,
   public immatriculation?:string,

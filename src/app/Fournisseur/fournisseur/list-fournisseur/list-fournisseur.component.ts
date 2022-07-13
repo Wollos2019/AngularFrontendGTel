@@ -22,6 +22,7 @@ export class ListFournisseurComponent implements OnInit {
   showFournisseur!: Fournisseur;
   submittedUpdate!: boolean;
 FournisseurUpdate!: Fournisseur;
+  currentID!: number;
   constructor(private fb:FormBuilder,
               private fournisseurService:FournisseurService,
               private toastr:ToastrService) { }
@@ -125,14 +126,15 @@ FournisseurUpdate!: Fournisseur;
   }
 
 
-  delete(fournisseurId: Fournisseur): void {
+  deleteFourni(ev:boolean): void {
     this.loading = true;
-    var confir = confirm('Voulez vous supprimer cet element?');
-    if (confir) {
-      this.fournisseurService.deleteFournisseur(fournisseurId).subscribe({
+   
+    if (ev) {
+      this.fournisseurService.deleteFournisseur(this.currentID).subscribe({
         next: () => {
           this.loading = false;
           this.toastr.success('Suppression effectuée');
+          $('#confirm').modal('hide');
           this.getAllFournisseurs();
         },
         error: (error: any) => {
@@ -221,6 +223,12 @@ show(fournisseur: Fournisseur): void {
    getPage(params: any): void {
     console.log(params);
     this.getAllFournisseurs(`page=${params}`);
+  }
+
+  openModalConfirm(id?: number): void {
+    this.currentID = Number(id);
+    console.log("ggggggggggggggg",this.currentID!);
+    $('#confirm').modal('show');
   }
 
 }

@@ -33,6 +33,7 @@ export class PermisComponent implements OnInit {
   array:any[]=[];
   permisUpdate!:boolean;
   submittedUpdate=false
+  currentID!: Number;
   constructor(
     private fb:FormBuilder,
     private toastr : ToastrService,
@@ -170,14 +171,15 @@ export class PermisComponent implements OnInit {
   //     });
   //   }
   // }
-  deletePerm(permis: IPermis): void {
+  deletePerm(ev: boolean): void {
     this.loading = true;
-    var confir = confirm('Voulez vous supprimer cet element?');
-    if (confir) {
-      this.vehiculeService.deletePermi(permis).subscribe({
+   
+    if (ev) {
+      this.vehiculeService.deletePermi(this.currentID).subscribe({
         next: () => {
           this.loading = false;
           this.toastr.success('Suppression effectuée');
+          $('#confirm').modal('hide');
           this.getListPermi();
         },
         error: (error: any) => {
@@ -222,4 +224,11 @@ export class PermisComponent implements OnInit {
   asArra(ar:ICategoriePermis[] | undefined):ICategoriePermis[]{
     return (ar as ICategoriePermis[])
   }
+
+  openModalConfirm(id?: number): void {
+    this.currentID = Number(id);
+    console.log("ggggggggggggggg",this.currentID!);
+    $('#confirm').modal('show');
+  }
+
 }

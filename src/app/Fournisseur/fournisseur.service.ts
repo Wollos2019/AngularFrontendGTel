@@ -43,8 +43,8 @@ updateFournisseur(vendors:Fournisseur):Observable<Fournisseur>{
  * @param vendors 
  * @returns 
  */
-deleteFournisseur(vendors:Fournisseur):Observable<Fournisseur>{
-  return this.httpClient.delete<Fournisseur>(`${this.apiUrl}vendors/${vendors.id}`);
+deleteFournisseur(id:Number):Observable<Fournisseur>{
+  return this.httpClient.delete<Fournisseur>(`${this.apiUrl}vendors/${id}`);
 }
 
 /**

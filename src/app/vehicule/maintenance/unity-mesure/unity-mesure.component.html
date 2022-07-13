@@ -142,7 +142,7 @@
                           title="supprimer"
                           type="button"
                           class="btn btn-sm btn-danger mr-1"
-                          (click)="delete(fourni)"
+                          (click)="openModalConfirm(fourni?.id)"
                         >
                           <span class="icofont-ui-delete"> </span>
                         </button>
@@ -202,7 +202,9 @@
   
   
    
-  
+  <app-confirm-modal
+  (actionConfirm)="deleteUnit($event)"
+></app-confirm-modal>
   
   
      <ngx-loading
