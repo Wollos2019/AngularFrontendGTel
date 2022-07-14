@@ -28,7 +28,7 @@ const routes: Routes = [
       component: FactureDetailsComponent
     },
     {
-      path: 'saveCommande/:id',
+      path: 'saveCommande',
       component: SaveCommandeComponent
     }
     ]

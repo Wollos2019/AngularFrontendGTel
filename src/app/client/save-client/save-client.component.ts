@@ -124,6 +124,7 @@ export class SaveClientComponent implements OnInit {
     this.client.prenom = lastname;
 
     this.client.civilityId = civilite;
+    console.log(this.client);
 
     if (this.editForm.invalid) {
       return;
@@ -139,7 +140,10 @@ export class SaveClientComponent implements OnInit {
 
         this.editForm.reset();
         this.toastr.success('Enregistrement effectué!!');
-        this.router.navigate(['/commercial/saveCommande/' + this.clientRes.id]);
+        if(this.clientRes.id != '0')
+        console.log(this.clientRes);
+        {this.router.navigate(['/commercial/saveCommande/'], 
+        {queryParams: {id:this.clientRes.id, name:this.clientRes.nom}});}
 
       },
       error: (error: HttpErrorResponse) => {
@@ -264,9 +268,9 @@ export class SaveClientComponent implements OnInit {
     } = this.editForm2.value;
 
     this.selectedProduct.idProduct = produitId;
-    this.selectedProduct.quantity = quantite;
+    this.selectedProduct.duree = quantite;
     this.selectedProduct.heure_debut = heure_debut;
-    this.selectedProduct.heure_fin = heure_fin;
+    this.selectedProduct.frequence = heure_fin;
     this.selectedProduct.description = descriptif
 
     // if (this.editForm2.invalid) {

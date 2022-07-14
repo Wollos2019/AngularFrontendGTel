@@ -1,24 +1,33 @@
+import { Time } from "@angular/common";
 import { IProduct } from "src/app/product/product";
 
 export interface IcommandeDt {
     id? : string;
     productName? : string;
-    quantity? : number;
+    date_debut ? : Date;
+    heure_debut ? : Time;
+    duree ? : number;
+    frequence? : any;
     idProduct? : string;
     idCommande? : string;
     prix? : number;
     appends? : IAppends;
+    description? : string;
 }
 
 export class commandeDt implements IcommandeDt {
     constructor(
       public id? : string,
       public productName?: string,
-      public quantity?: number,
+      public date_debut?: Date,
+      public heure_debut? : Time,
+      public duree? :number,
+      public frequence?: any,
       public idProduct?: string,
       public idCommande?: string,
       public prix?: number,
-      public appends?:IAppends
+      public appends?: IAppends,
+      public description?: string
     ) {
     }
 }

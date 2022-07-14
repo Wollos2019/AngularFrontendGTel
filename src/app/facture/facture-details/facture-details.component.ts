@@ -12,7 +12,7 @@ import { FactureService } from '../services/facture.service';
 export class FactureDetailsComponent implements OnInit {
 
   public invoices = [] as any;
-  public invoice : IFacture =<IFacture>{};
+  public invoice  = <IFacture>{};
   public totals = [] as any;
   public facDet = [] as any;
   public montantT = 0;

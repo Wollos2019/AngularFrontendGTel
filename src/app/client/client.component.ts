@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { IproductSelected } from '../product/productSelected';
 import { Icommande } from '../Commercial/commandes/commandes';
 import { CommandeService } from '../Commercial/commandes/services/commande.service';
+import { response } from 'express';
 
 @Component({
   selector: 'app-client',
@@ -96,7 +97,8 @@ ngOnInit(): void {
 }
 
 getList () {
-  this.service.list().subscribe(response => {this.clients = response['data']});
+  //this.service.list().subscribe(response => {this.clients = response['data']});
+  this.service.list().subscribe(response => this.clients = response);
   this.serviceP.list().subscribe(response => this.products = response);
       
 }
@@ -185,7 +187,7 @@ reset () {
   checked(product: IProduct) {
     this.selectedProduct = product;
     this.selectedProduct.idProduct = product.id
-    this.selectedProduct.name = product.name;
+    this.selectedProduct.productName = product.name;
     this.selectedProduct.checked = this.checkbox.value;
     //this.selectedProduct.quantity = this.input.value;
 
@@ -203,8 +205,8 @@ reset () {
   relink(client? : Iclient) {
     if(client) {
       console.log(client);
-      this.router.navigate(['/commercial/saveCommande/' + client.id]);
-      console.log(client.id);
+      this.router.navigate(['/commercial/saveCommande/'], {queryParams: {id:client.id, name:client.nom}});
+      
     }
   }
 

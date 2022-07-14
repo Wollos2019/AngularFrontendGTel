@@ -25,6 +25,8 @@ import {ReactiveFormsModule} from "@angular/forms";
 
 import { RouterModule } from '@angular/router';
 import { SelectDropDownModule } from 'ngx-select-dropdown';
+import { ConducteurComponent } from './production/conducteur/conducteur.component';
+import { ConducteurDetailsComponent } from './production/conducteur/conducteur-details/conducteur-details/conducteur-details.component';
 
 
 @NgModule({
@@ -35,7 +37,9 @@ import { SelectDropDownModule } from 'ngx-select-dropdown';
     LoginComponent,
     MainAppComponent,
     NavComponent,
-    DashboardComponent
+    DashboardComponent,
+    ConducteurComponent,
+    ConducteurDetailsComponent
     
     
     

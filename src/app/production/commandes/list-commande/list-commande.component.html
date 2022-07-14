@@ -1,23 +1,42 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Liste des commandes à traiter</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a [routerLink]="'/'">Dashbord</a></li>
+          <li class="breadcrumb-item active">Commandes à traiter</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+</section>
 <section class="content" >
     <div class="container-fluid">
       <!-- Small boxes (Stat box) -->
+      <ng-container *ngIf="listCom && listCom.length">
       <div class="row">
         <div *ngFor="let cd of listCom" class="col-lg-3 col-6">
           <!-- small box -->
           
-            <div *ngIf="cd.evaluated === 'true' "  [ngClass]="{
-              'small-box bg-info': cd.evaluated
+            <div class="small-box" [ngClass]="{
+              'bg-info': cd.invoiced, 'bg-dark': cd.invoiced == 'false'
             }">
-              <div class="inner" (click)="openModal2(template2)">
+              <div class="inner" (click)="openModal2(template2, cd)">
                 <h3>{{cd.id}}</h3>          
-                <!-- <p>Commande non-evaluée</p>
-                <p>Commande non-facturée</p> -->
+                <p *ngIf="cd.evaluated=='false'">Commande non-evaluée</p>
+                <p *ngIf="cd.invoiced=='false'">Commande non-facturée</p>
+                <p *ngIf="cd.invoiced=='true'">Commande facturée</p>
+                <p *ngIf="cd.evaluated=='true'">Commande evaluée</p>
                 <p>{{cd.nomClient}}</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
               </div>
-              <a (click)="openModal(template,cd)" class="small-box-footer">plus<i class="fas fa-arrow-circle-right"></i></a>
+              <a (click)="openModal(template,cd)" class="small-box-footer">Evaluer cette commande<i class="fas fa-arrow-circle-right"></i></a>
             </div>
           
             <ng-template #template>
@@ -31,7 +50,7 @@
                           <li>Nom du produit: {{el.productName}}
                             <ul>
                               <li>Durée : {{el.duree}} minutes</li>
-                              <li>Diffusion : Avant le journal</li>
+                              
                             </ul>
                           </li>
                           <div class="input-group">
@@ -40,13 +59,10 @@
                               </div>
                               <input type="text" class="form-control" placeholder="Montant en Fcfa" 
                               aria-describedby="basic-addon1" [formControl]="productPrice" (keyup)="onInputValue($event, el)">
-                              <div class="input-group-append">
-                                <button class="btn btn-info" type="button" (click)="valider(el)" id="button-addon2">Valider</button>
-                              </div>
                           </div>
                           
                         </ul>
-                        <button class="btn btn-info float-right" type="button" (click)="enregistrer()">
+                        <button class="btn btn-info float-right" type="button" (click)="enregistrer(cd.appends?.commandesDetail, cd)">
                           Enregistrer
                       </button>
                 </div>
@@ -54,49 +70,39 @@
             </ng-template>
 
             <ng-template #template2>
-              <div class="card card-default">
-                <div class="card-header">
-                  <h3 for="timeSegment">Programmer une commande</h3>
-                </div>
-                <div class="card-body">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="timeSegment">Selectionner une tranche horaire</label>
-                      <select id="timeSegment" class="form-control" formControlName="selectTime">
-                          <option selected="selected" value="">---</option>
-                          <ng-container *ngIf="trancheHoraires">
-                              <option [value]="c.id" *ngFor="let c of trancheHoraires">
-                                  {{ c.designation }}
-                              </option>
-                          </ng-container>
-                      </select>
-                    </div>
+              <form [formGroup]="myGroup">
+                <div class="card card-default">
+                  <div class="card-header">
+                    <h3 for="timeSegment">Programmer une commande</h3>
                   </div>
-
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="timeSegment">Selectionner un jour</label>
-                      <select id="timeSegment" class="form-control" formControlName="selectTime">
-                          <option selected="selected" value="">---</option>
-                          <ng-container *ngIf="listDay">
-                              <option [value]="c" *ngFor="let c of listDay">
-                                  {{ c }}
-                              </option>
-                          </ng-container>
-                      </select>
+                  <div class="card-body">
+                    <div class="col-md-6">
+                      
+                        <label for="timeSegment">Voulez-vous programmer cette commande ?</label>
+                        <button class="btn btn-danger text-center mr-1" type="button" (click)="inputValue(cd)">
+                          Oui
+                        </button>
+                        <button class="btn btn-info text-center ml-1" type="button" (click)="close()">
+                          Non
+                        </button>
                     </div>
-                  </div>
 
-                  <button class="btn btn-info float-right" type="button" (click)="enregistrer2()">
-                    Enregistrer
-                  </button>
+                    
+                  </div>
                 </div>
-              </div>
+              </form>
             </ng-template>
         </div>
         
       </div>
-      
+    </ng-container>
+    <ng-container *ngIf="!listCom?.length">
+      <tr>
+        <td colspan="10" class="text-center">
+          <h1>Aucune commande à evaluer !</h1>
+        </td>
+      </tr>
+    </ng-container>
     </div>
   </section>
   
