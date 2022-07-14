@@ -15,7 +15,7 @@ declare var $:any;
   styleUrls: ['./prise-vehicule.component.scss']
 })
 export class PriseVehiculeComponent implements OnInit {
-priseVehicules?:PriseVehicule[];
+priseVehicules?:PriseVehicule[]=[];
 priseVehicule= new PriseVehicule();
 vehicules?: Vehicule[];
 vehicule=new Vehicule();
@@ -25,6 +25,7 @@ paramsPage:any;
 
 submittedUpdate!: boolean;
 PriseVehiculeUpdate!: PriseVehicule;
+  currentID!: Number;
   constructor(
     private vehiculeService:VehiculeServiceService,
     private toastr: ToastrService,
@@ -213,14 +214,15 @@ updatePriseVehicule():void{
  * @param prisevehiculeId 
  */
 
-deletePriseVehicule(prisevehiculeId: Vehicule): void {
+deletePriseVehicule(ev: boolean): void {
   this.loading = true;
-  var confir = confirm('Voulez vous supprimer cet element?');
-  if (confir) {
-    this.vehiculeService.deletePriseVehicule(prisevehiculeId).subscribe({
+ 
+  if (ev) {
+    this.vehiculeService.deletePriseVehicule(this.currentID).subscribe({
       next: () => {
         this.loading = false;
         this.toastr.success('Suppression effectuée');
+        $('#confirm').modal('hide');
         this.getListPriseVehicule();
       },
       error: (error: any) => {
@@ -244,6 +246,12 @@ deletePriseVehicule(prisevehiculeId: Vehicule): void {
   getPage(data: any): void {
     console.log(data);
     this.getListPriseVehicule(`page=${data}`);
+  }
+
+  openModalConfirm(id?: number): void {
+    this.currentID = Number(id);
+    console.log("ggggggggggggggg",this.currentID!);
+    $('#confirm').modal('show');
   }
 
 }

@@ -124,7 +124,7 @@
                                   </button>
 
                                   <button
-                                    (click)="deletePerm(per)"
+                                    (click)="openModalConfirm(per?.id)"
                                     title="supprimer"
                                     type="button"
                                     class="btn btn-danger btn-sm"
@@ -233,6 +233,10 @@
     </div>
   </div>
 </div>
+
+<app-confirm-modal
+(actionConfirm)="deletePerm($event)"
+></app-confirm-modal>
 
 <ngx-loading
   [show]="loading"

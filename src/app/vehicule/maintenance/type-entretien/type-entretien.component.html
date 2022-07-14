@@ -118,10 +118,10 @@
               </thead>
               <tbody>
                 <ng-container *ngIf="typeEntretiens">
-                  <tr *ngFor="let entereti of typeEntretiens, let i=index">
+                  <tr *ngFor="let type of typeEntretiens, let i=index">
                     <td>{{i+1}}</td>
-                    <td>{{entereti.libelleTypeEntretien}}</td>
-                    <td>{{entereti.descriptionTypeEntretien}}</td>
+                    <td>{{type.libelleTypeEntretien}}</td>
+                    <td>{{type.descriptionTypeEntretien}}</td>
                     
                     <!-- <td>b.Chloe@datatables.net</td> -->
                     <td name="bstable-actions">
@@ -137,7 +137,7 @@
                         </button> -->
                         <button
                           id="bDel"
-                          (click)="openModalConfirm()"
+                          (click)="openModalConfirm(type?.id)"
                           title="supprimer"
                           type="button"
                           class="btn btn-sm btn-danger mr-1"

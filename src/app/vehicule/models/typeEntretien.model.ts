@@ -1,5 +1,5 @@
 export interface ITypeEntretien{
-    id?:string,
+    id?:number,
     libelleTypeEntretien?:string,
     descriptionTypeEntretien?:string,
     //unitMesureId?:number,
@@ -8,7 +8,7 @@ export interface ITypeEntretien{
 
 export class TypeEntretien implements ITypeEntretien {
     constructor(
-    public id?:string,
+    public id?:number,
     public libelleTypeEntretien?:string,
     public descriptionTypeEntretien?:string,
     //public unitMesureId?:number

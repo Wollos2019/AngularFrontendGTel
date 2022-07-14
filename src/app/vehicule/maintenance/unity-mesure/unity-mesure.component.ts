@@ -6,6 +6,7 @@ import { Pagination } from '../../models/pagination.model';
 import { IUnitMesure, UnitMesure } from '../../models/unitMesure.model';
 import { VehiculeServiceService } from '../../vehicule-service.service';
 
+declare var $:any
 @Component({
   selector: 'app-unity-mesure',
   templateUrl: './unity-mesure.component.html',
@@ -18,6 +19,7 @@ export class UnityMesureComponent implements OnInit {
   submitted=false;
   loading=false;
   paramsPage: any;
+  currentID: any;
   constructor(private fb:FormBuilder,
     private toastr:ToastrService,
     private vehiculeService:VehiculeServiceService) { }
@@ -109,14 +111,15 @@ export class UnityMesureComponent implements OnInit {
   }
 
 
-  delete(uniteMesureId: IUnitMesure): void {
+  deleteUnit(ev:boolean): void {
     this.loading = true;
-    var confir = confirm('Voulez vous supprimer cet element?');
-    if (confir) {
-      this.vehiculeService.deleteUniteMesure(uniteMesureId).subscribe({
+    
+    if (ev) {
+      this.vehiculeService.deleteUniteMesure(this.currentID).subscribe({
         next: () => {
           this.loading = false;
           this.toastr.success('Suppression effectuée');
+          $('#confirm').modal('hide');
           this.getAllMesures();
         },
         error: (error: any) => {
@@ -140,6 +143,12 @@ export class UnityMesureComponent implements OnInit {
    getPage(params: any): void {
     console.log(params);
     this.getAllMesures(`page=${params}`);
+  }
+
+  openModalConfirm(id?: number): void {
+    this.currentID = Number(id);
+    console.log("ggggggggggggggg",this.currentID!);
+    $('#confirm').modal('show');
   }
 
 }

@@ -16,6 +16,7 @@ import { CreatePermisComponent } from './permis/create-permis/create-permis.comp
 import { PermisComponent } from './permis/permis.component';
 import { UpdatePermisComponent } from './permis/update-permis/update-permis.component';
 import { PriseVehiculeComponent } from './prise-vehicule/prise-vehicule.component';
+import { StatistiqueVehiculeComponent } from './statistique-vehicule/statistique-vehicule.component';
 
 const routes: Routes = [
   {
@@ -79,6 +80,10 @@ const routes: Routes = [
       {
         path: 'type-entretien',
         component: TypeEntretienComponent,
+      },
+      {
+        path: 'statistique-vehicule',
+        component: StatistiqueVehiculeComponent,
       },
     ],
   },

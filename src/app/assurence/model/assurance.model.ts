@@ -2,7 +2,7 @@ import {IVehicule} from '../../vehicule/models/vehicule.model'
 
 
 export interface IAssurance {
-  id?:string;
+  id?:number;
   numeroPoliceAssurance?:string;
   dateFinAssurance?:Date;
   scanAssurance?:string;
@@ -25,7 +25,7 @@ interface IAppends{
 
 export class Assurance implements IAssurance{
     constructor(
-      public id?:string,
+      public id?:number,
   public numeroPoliceAssurance?:string,
   public dateFinAssurance?:Date,
   public scanAssurance?:string,

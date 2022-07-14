@@ -1,7 +1,7 @@
 import { IVehicule } from "./vehicule.model";
 
 export interface ICategoriePermis{
-    id?:string;
+    id?:number;
     libelle?:string;
     appends?:IAppends;
     pivot?:IPivot;
@@ -28,7 +28,7 @@ interface IAppends{
 
 export class CategoriePermis implements ICategoriePermis{
     constructor(
-        public id?:string,
+        public id?:number,
     public libelle?:string,
     public idVehicule?:string,
 

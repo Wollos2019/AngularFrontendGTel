@@ -3,7 +3,7 @@ import { NumericLiteral } from "typescript";
 import { Vehicule } from "./vehicule.model";
 
 export interface IPanne{
-    id?:string;
+    id?:number;
     libellePanne?:string;
     descriptionPanne?:string;
     dateDebutPanne?:Date;
@@ -28,7 +28,7 @@ interface IAppends{
 
 export class Panne implements IPanne{
     constructor(
-        public id?:string,
+        public id?:number,
         public libellePanne?:string,
         public descriptionPanne?:string,
         public dateDebutPanne?:Date,
