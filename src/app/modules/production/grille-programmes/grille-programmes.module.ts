@@ -5,6 +5,7 @@ import { GrilleProgrammesRoutingModule } from './grille-programmes-routing.modul
 import { GrilleProgrammesComponent } from 'src/app/production/grille-programmes/grille-programmes.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GrilleProgrammesService } from 'src/app/production/services/grille-programmes.service';
+import {DatePipe} from '@angular/common';
 
 
 @NgModule({
@@ -21,6 +22,6 @@ import { GrilleProgrammesService } from 'src/app/production/services/grille-prog
     ReactiveFormsModule,
     GrilleProgrammesRoutingModule
   ],
-  providers:[GrilleProgrammesService]
+  providers:[GrilleProgrammesService, DatePipe]
 })
 export class GrilleProgrammesModule { }

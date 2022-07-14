@@ -1,87 +1,165 @@
-<div class="page-content" id="content">
-
-    <div style="text-align: center;">
-      <h1>Liste des commandes</h1>
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Liste des commandes</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a [routerLink]="'/'">Dashbord</a></li>
+          <li class="breadcrumb-item active">liste des commandes</li>
+        </ol>
+      </div>
     </div>
+  </div>
+</section>
 
-    <table class="table">
-        <thead class="thead-light">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nom du client</th>
-            
-            <th scope="col">Détails</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let order of orders; index as i">
-            <th scope="row">{{i+1}}</th>
-            <td>{{order.nomClient}}</td>
-            
-            
-            <td>
-              <button type="button" class="btn btn-primary mr-1" (click)="openModal2(template2,order)">Details</button>
-            </td>
-            <td>
-              <!-- <button type="button" class="btn btn-info mr-1" (click)="openModal(template, order)">Modifier</button> -->
-              <button type="button" class="btn btn-info mr-1" (click)="openModal(template,order)">Facturer</button>
-              <!-- <button type="button" class="btn btn-danger" (click)="delete(order)">Supprimer</button> -->
-            </td>
-
-            <ng-template #template>
-              <div class="modal-header">
-                <h4 class="modal-title pull-left">TVA et Reduction</h4>
-                <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
-                  <span aria-hidden="true" class="visually-hidden">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">                
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">
-                        <input type="checkbox" aria-label="Checkbox for following text input" (click)="checked(order)" [formControl]="checkbox">
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <a
+              class="btn btn-info float-right"
+              type="button"
+              [routerLink]="['/commercial/saveCommande']"
+              >Nouveau</a
+            >
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <table class="table table-bordered">
+              <thead>
+                <tr class="bg-dark text-white">
+                  <th scope="col">#</th>
+                  <th scope="col">Nom du client</th>
+                  <th scope="col">Détails</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngIf="orders2 && orders2.length">
+                  <tr *ngFor="let order of orders2; let i = index">
+                    <th scope="row">{{ i + 1 }}</th>               
+                    <td>{{order.nomClient}}</td>
+                    <td>
+                      <button type="button" class="btn btn-primary mr-1" (click)="openModal2(template2,order)">Details</button>
+                    </td>
+                    <td>
+                      <!-- <button type="button" class="btn btn-info mr-1" (click)="openModal(template, order)">Modifier</button> -->
+                      <button type="button" class="btn btn-info mr-1" (click)="openModal(template,order)">Facturer</button>
+                      <!-- <button type="button" class="btn btn-danger" (click)="delete(order)">Supprimer</button> -->
+                    </td>
+                
+                    <ng-template #template>
+                      <div class="modal-header">
+                        <h4 class="modal-title pull-left">TVA et Reduction</h4>
+                        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+                          <span aria-hidden="true" class="visually-hidden">&times;</span>
+                        </button>
                       </div>
-                      <span class="input-group-text" id="basic-addon3">Inclure la TVA</span>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="Input1">Pourcentage de la réduction</label>
-                    <input type="number" class="form-control" placeholder="Pourcentage de la réduction" [formControl]="reduction">
-                  </div>
-                <button type="button" class="btn btn-primary mb-2" (click)="saveOrder(order)" >Valider</button>
-              </div>
-            </ng-template>
+                      <div class="modal-body">
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">
+                              <input type="checkbox" aria-label="Checkbox for following text input" (click)="checked(order)"
+                                [formControl]="checkbox">
+                            </div>
+                            <span class="input-group-text" id="basic-addon3">Inclure la TVA</span>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="Input1">Pourcentage de la réduction</label>
+                          <input type="number" class="form-control" placeholder="Pourcentage de la réduction" [formControl]="reduction">
+                        </div>
+                        <button type="button" class="btn btn-primary mb-2" (click)="saveOrder(order)">Valider</button>
+                      </div>
+                    </ng-template>
+                
+                    <ng-template #template2>
+                      <div class="card card-default">
+                        <div class="card-header">
+                          <h3 class="card-title">Details de la commande</h3>
+                        </div>
+                        <div class="card-body">
+                          <table class="table table-head-fixed text-nowrap">
+                            <thead>
+                              <tr>
+                                <th>Nom</th>
+                                <th>Diffusion</th>
+                                <th>Prix</th>
+                
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let cd of order.appends?.commandesDetail">
+                
+                                <td>{{cd.productName}}</td>
+                                 <td>{{cd.date_debut | date:'dd/MM/yyyy'}}</td>                                
+                                <td>{{cd.prix}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </tr>
+                </ng-container>
+                <ng-container *ngIf="!orders?.length">
+                  <tr>
+                    <td colspan="10" class="text-center">
+                      Aucunes données trouvées
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
+          <!-- <div class="card-footer clearfix">
+            <ul class="pagination pagination-sm m-0 float-right">
+              <li class="page-item">
+                <a class="page-link" href="#">&laquo;</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
 
-            <ng-template #template2>
-              <div class="card card-default">
-                <div class="card-header">
-                    <h3 class="card-title">Details de la commande</h3>
-                </div>
-                <div class="card-body">
-                  <table class="table table-head-fixed text-nowrap">
-                    <thead>
-                      <tr>
-                        <th>Nom</th>
-                        <th>Quantité</th>
-                        <th>Prix</th>
-                        
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let cd of order.appends?.commandesDetail">
-                  
-                        <td>{{cd.productName}}</td>
-                        <td>{{cd.quantity}}</td>
-                        <td>{{cd.prix}}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+              <li class="page-item">
+                <a class="page-link" href="#">&raquo;</a>
+              </li>
+            </ul>
+          </div> -->
+          <div class="card-footer">
+            <div class="mb-3 mt-2" *ngIf="paramsPage && paramsPage.totalItems != 0">
+              <div class="d-inline ml-5" style="font-size: 13px" >
+                Affiche {{ paramsPage.from ? paramsPage.from : 1 }} à {{ paramsPage.to }} de
+                {{ paramsPage.totalItems }} entrées
               </div>
-            </ng-template>
+              <div class="d-inline float-right" style="font-size: 13px">
+                <ngb-pagination
+                  [pageSize]="paramsPage.itemsPerPage"
+                  [collectionSize]="paramsPage.totalItems"
+                  [(page)]="paramsPage.currentPage"
+                  (pageChange)="getPage($event)"
+                >
+                  <ng-template ngbPaginationFirst>First</ng-template>
+                  <ng-template ngbPaginationLast>Last</ng-template>
+                  <ng-template ngbPaginationPrevious>Prev</ng-template>
+                  <ng-template ngbPaginationNext>Next</ng-template>
+                </ngb-pagination>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.card -->
 
-          </tr>
-        </tbody>
-    </table>
-</div>
+        <!-- /.card -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<ngx-loading
+  [show]="loading"
+  [config]="{ backdropBorderRadius: '3px' }"
+></ngx-loading>

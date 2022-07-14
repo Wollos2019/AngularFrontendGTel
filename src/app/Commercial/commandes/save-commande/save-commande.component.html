@@ -39,10 +39,10 @@
                                     <div class="form-group">
                                         <label for="produit">
                                             Produit<span class="text-danger">*</span></label>
-                                        <select id="produit" class="form-control" formControlName="produitId" >
+                                        <select id="produit" class="form-control" formControlName="produit" >
                                             <option selected="selected" value="">---</option>
                                             <ng-container *ngIf="products">
-                                                <option [value]="[c.id]" *ngFor="let c of products">
+                                                <option [ngValue]="c" *ngFor="let c of products" >
                                                     {{ c.name }}
                                                 </option>
                                             </ng-container>
@@ -50,79 +50,94 @@
                                         
                                     </div>
                                 </div>
-                                
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="exampleInputFile">Quantité<span class="text-danger">*</span></label>
-                                        <div class="input-group">
-                                          
-                                            <input type="text" class="form-control" id="qte" formControlName="quantite"
-                                             placeholder="Quantité"/>
-                                            
-                                        </div>
-                                    </div>
-                                                  
-                                </div>
-                                
+
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="exampleInputFile">Heure de début<span class="text-danger">*</span></label>
                                         <div class="input-group">
                                           
-                                            <input type="text" class="form-control" id="hdd" formControlName="heure_debut"
+                                            <input type="time" class="form-control" id="hdd" formControlName="heure_debut"
                                              placeholder="Heure de début"/>
                                             
                                         </div>
                                     </div>                                  
+                                </div>
+                                
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="exampleInputFile">Durée<span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                          
+                                            <input type="text" class="form-control" id="qte" formControlName="duree"
+                                             placeholder="Durée de l'émission"/>
+                                            
+                                        </div>
+                                    </div>                                                  
                                 </div>
 
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1">Description</label>
                                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="descriptif">
-
                                         </textarea>
                                     </div>
                                 </div>
 
                                 <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="exampleInputFile">Heure de fin<span class="text-danger">*</span></label>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" id="hdf" formControlName="heure_fin" 
-                                            placeholder="Heure de fin"/>
-                                        </div>
-                                        
+                                    <div [formGroup]="myGroup">
+                                        <label for="exampleInputFile">Fréquence<span class="text-danger">*</span></label>
+                                        <ng-multiselect-dropdown [placeholder]="'Jours de diffusion'" [settings]="dropdownSettings" [data]="dropdownList"
+                                             (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)" 
+                                            formControlName="days">
+                                        </ng-multiselect-dropdown>
                                     </div>
-                                    <button class="btn btn-info float-right" type="button" (click)="checked()">Ajouter</button>                                  
+                                    <button class="btn btn-info float-right mt-2 mb-2" type="button" (click)="checked()">Ajouter</button>                                  
                                 </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="exampleInputFile">Date de début<span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                          
+                                            <input type="date" class="form-control" id="qte" formControlName="date_debut"
+                                             placeholder="Date de début"/>
+                                            
+                                        </div>
+                                    </div>                                                  
+                                </div>
+
+                                <!-- <div class="col-md-4 text-center mt-2">
+                                    <button class="btn btn-info mt-4" type="button" (click)="checked()">Ajouter</button>
+                                </div> -->
                             </div>
                             
-
-                            <div class="card-body table-responsive p-0" style="height: 300px;">
-                                <table class="table table-head-fixed text-nowrap">
-                                  <thead>
-                                    <tr>
-                                      <th>Nom</th>
-                                      <th>Quantité</th>
-                                      <th>Heure de début</th>
-                                      <th>Heure de fin</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr *ngFor="let slp of selectedProducts;">
-                                
-                                      <td>{{slp.idProduct}}</td>
-                                      <td>{{slp.quantity}}</td>
-                                      <td>{{slp.heure_debut}}</td>
-                                      <td>{{slp.heure_fin}}</td>
-                                      <td>
-                                          <button type="button" class="btn btn-info mr-1" (click)="openModal(template, slp)">Modifier</button>
-                                          <button type="button" class="btn btn-primary" (click)="deleteCom(slp)">Supprimer</button>
-                                      </td>
-                                    </tr>
-                                  </tbody>
-                                </table>
+                            <div class="card">
+                                <div class="card-body table-responsive p-0" style="height: 300px;">
+                                    <table class="table table-head-fixed text-nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th>Dénomination</th>
+                                                <th>Date de début</th>
+                                                <th>Durée en s</th>
+                                                <th>Heure de début</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let slp of selectedProducts;">
+                                                <td>{{slp.productName}}</td>
+                                                <td>{{slp.date_debut | date:'dd-MM-yyyy'}}</td>
+                                                <td>{{slp.duree}}</td>
+                                                <td>{{slp.heure_debut}}</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-info mr-1"
+                                                        (click)="openModal(template, slp)">Modifier</button>
+                                                    <button type="button" class="btn btn-primary" (click)="deleteCom(slp)">Supprimer</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
 
                         </div>

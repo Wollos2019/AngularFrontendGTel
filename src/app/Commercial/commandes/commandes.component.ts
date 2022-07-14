@@ -11,6 +11,7 @@ import { FactureService } from 'src/app/facture/services/facture.service';
 import { Commande, Icommande } from 'src/app/Commercial/commandes/commandes';
 import { CommandeService } from 'src/app/Commercial/commandes/services/commande.service';
 import { commandeDt } from 'src/app/Commercial/commandes/commandeDetails';
+import { Pagination } from 'src/app/vehicule/models/pagination.model';
 
 
 @Component({
@@ -20,9 +21,12 @@ import { commandeDt } from 'src/app/Commercial/commandes/commandeDetails';
 })
 export class CommandesComponent implements OnInit {
 
+  loading = false;
+  paramsPage:any;
+  finalFrequence = '';
   public contenus : any;
   public monString = '';
-  public orders2 : Commande[] = [];
+  public orders2 = [] as any;
   public orders = [] as any;
   public cdl = [] as any;
   public detCom : commandeDt[] = [];
@@ -33,7 +37,6 @@ export class CommandesComponent implements OnInit {
   public name = new FormControl('', Validators.required);
   public checkbox = new FormControl('', Validators.required);
   public reduction = new FormControl('', Validators.required);
-  
   public description = new FormControl('', Validators.required);
   public price = new FormControl('', Validators.required);
   public slug = new FormControl('', Validators.required);
@@ -73,13 +76,26 @@ export class CommandesComponent implements OnInit {
     
   }
 
-  getList() {
-    this.service.list().subscribe(response => {
-      this.orders = response;
-      for (var val of this.orders) {
-        this.cdl = val.appends.products;
-      }
+  getList(params='') {
+    this.loading = true;
+    this.service.list(params).subscribe(response => {
+      
+      this.loading = false;
+      this.paramsPage = new Pagination().setPagination(response);
+      this.orders = response.data;
       console.log(this.orders);
+      for (var val of this.orders) {
+        
+        val.commandes_detail[0].frequence = JSON.parse(val.commandes_detail[0].frequence);
+        console.log(val.commandes_detail[0].frequence);
+        for(var vl of val.commandes_detail[0].frequence) {
+          this.finalFrequence = this.finalFrequence +  vl.item_text + '\n'; 
+        }
+        console.log(this.finalFrequence);
+        val.commandes_detail[0].frequence = this.finalFrequence;
+        this.finalFrequence = '';
+      }
+      this.orders2 = this.orders;
     });
   }
 
@@ -159,5 +175,10 @@ export class CommandesComponent implements OnInit {
     this.description.reset();
     this.price.reset();
     this.slug.reset();
+  }
+
+  getPage(data: any): void {
+    console.log(data);
+    this.getList(`page=${data}`);
   }
 }
