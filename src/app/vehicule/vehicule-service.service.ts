@@ -24,8 +24,8 @@ export class VehiculeServiceService {
   //GESTION DES VEHICULES
 /**
  * fonction pour recuper toutes les vehicules
- * @param params 
- * @returns 
+ * @param params
+ * @returns
  */
   getAllVehicules(params=''):Observable<Vehicule[]>{
     return this.httpClient.get<Vehicule[]>(`${this.apiUrl}vehicules?${params}`);
@@ -51,9 +51,9 @@ export class VehiculeServiceService {
 
    //GESTION PRISE VEHICULES
 /**
- * 
- * @param params 
- * @returns 
+ *
+ * @param params
+ * @returns
  */
 
 
@@ -80,11 +80,11 @@ createPriseVehicule(prisevehicule:PriseVehicule):Observable<PriseVehicule>{
 
 
 
-   //GESTION PERMIS 
+   //GESTION PERMIS
 /**
- * 
- * @param params 
- * @returns 
+ *
+ * @param params
+ * @returns
  */
 
 
@@ -112,11 +112,11 @@ createPermi(permi:Permis):Observable<Permis>{
 
 
 
-   //GESTION CATEGORIE-PERMIS 
+   //GESTION CATEGORIE-PERMIS
 /**
- * 
- * @param params 
- * @returns 
+ *
+ * @param params
+ * @returns
  */
 
 
@@ -144,9 +144,9 @@ createCategoriePermi(Catpermi:CategoriePermis):Observable<CategoriePermis>{
 
    //GESTION DES PANNE
 /**
- * 
- * @param params 
- * @returns 
+ *
+ * @param params
+ * @returns
  */
 
 
