@@ -5,19 +5,20 @@
         <img src="assets\image_gabonTele.jpg" alt="" class="img-fluid">
       </div>
       <div class="float-right">
-        <h3 class="mb-0">Facture #1</h3>
-        Date: 1 March,2022
+        <h3 class="mb-0">Facture #{{invoice.id}}</h3>
+        Date: {{invoice.created_at}}
       </div>
     </div>
     <div class="card-body">
       <div class="row mb-4">
         <div class="col-sm-6">
           <h5 class="mb-3">Destinataire: </h5>
-          <h3 class="text-dark mb-1">Ndoko Ndoko Pierre</h3>
-          <div>29, Mandela Street</div>
-          <div>Bonanjo, Douala, 11004</div>
-          <div>Email: ndoko@gmail.com</div>
-          <div>Phone: +237691173105</div>
+          <h3 class="text-dark mb-1">{{invoice.client.prenom 
+           + ' ' + invoice.client.nom}}</h3>
+          <div>{{invoice.client.adresse}}</div>
+          <div>{{invoice.client.town}}</div>
+          <div>{{invoice.client.email}}</div>
+          <div>{{invoice.client.telephone}}</div>
         </div>
       </div>
       <div class="table-response-sm"> 
@@ -27,13 +28,14 @@
               <th class="center">#</th>
               <th>Produit</th>
               <!-- <th>Description</th> -->
-              <th class="center">Quantité</th>
+              <th class="center">Date de diffusion</th>
+              <th class="center">Heure de diffusion</th>
               <th class="right">Prix</th>
               <th class="right">Total</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let product of products; index as i">
+            <tr *ngFor="let product of invoice.commandes_detail; index as i">
               <th scope="row">{{i+1}}</th>
               <td>{{product.productName}}</td>
               <td>{{product.quantity}}</td>

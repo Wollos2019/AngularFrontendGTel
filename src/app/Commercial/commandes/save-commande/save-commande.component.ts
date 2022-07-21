@@ -1,16 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Client } from 'src/app/client/client';
-import { ClientService } from 'src/app/client/services/client.service';
-import { Civility } from 'src/app/config/model/civility.model';
-import { Country } from 'src/app/config/model/countries.model';
-import { ConfigService } from 'src/app/config/services/config.service';
 import { IProduct, Product } from 'src/app/product/product';
-import { CONTRACT, GENDER, MARITAL, Personal } from 'src/app/rh/models/personal.model';
-import { RhService } from 'src/app/rh/services/rh.service';
 import { ProductService } from 'src/app/services/product.service';
 import { extractErrorMessagesFromErrorResponse } from 'src/app/util/http_error_response';
 
@@ -39,9 +33,6 @@ export class SaveCommandeComponent implements OnInit {
   idCommande = '';
   loading = false;
   submitted = false;
-  GENDER = GENDER;
-  countries: Country[] = [];
-  civilities: Civility[] = [];
   products: IProduct[] = [];
 
   editForm2 = this.fb.group({
@@ -52,6 +43,10 @@ export class SaveCommandeComponent implements OnInit {
     heure_debut: ['', [Validators.required]],
     frequence: ['', [Validators.required]],
     descriptif: ['', [Validators.required]] 
+  });
+
+  form = this.fb.group({
+    lessons: this.fb.array([])
   });
 
   choiced : any;
@@ -143,6 +138,7 @@ export class SaveCommandeComponent implements OnInit {
         console.log(commande);
         this.commandeContenus.push(commande);
         this.idCommande = this.commandeContenus[0].id;
+        if(this.selectedProducts.length==0){this.checked();}
         for (var val of this.selectedProducts) {
         val.idCommande = this.idCommande;
         console.log(this.selectedProducts);
@@ -215,14 +211,30 @@ export class SaveCommandeComponent implements OnInit {
 
   getData() : Array<any> {
     return  [
-      {item_id : 1, item_text: 'Lundi', group :'F'},
-      {item_id : 2, item_text: 'Mardi', group :'F'},
-      {item_id : 3, item_text: 'Mercredi', group :'F'},
-      {item_id : 4, item_text: 'Jeudi', group :'F'},
-      {item_id : 5, item_text: 'Vendredi', group :'F'},
-      {item_id : 6, item_text: 'Samedi', group :'F'},
-      {item_id : 7, item_text: 'Dimanchew', group :'F'}
+      {item_id : 0, item_text: 'Lundi'},
+      {item_id : 1, item_text: 'Mardi'},
+      {item_id : 2, item_text: 'Mercredi'},
+      {item_id : 3, item_text: 'Jeudi'},
+      {item_id : 4, item_text: 'Vendredi'},
+      {item_id : 5, item_text: 'Samedi'},
+      {item_id : 6, item_text: 'Dimanche'}
     ]
+  }
+
+  get lessons() {
+    return this.form.controls["lessons"] as FormArray;
+  }
+
+  addLesson() {
+    const lessonForm = this.fb.group({
+      title: ['', Validators.required],
+      level: ['beginner', Validators.required]
+    });
+    this.lessons.push(lessonForm);
+  }
+
+  deleteLesson(lessonIndex: number) {
+    this.lessons.removeAt(lessonIndex);
   }
 
 }

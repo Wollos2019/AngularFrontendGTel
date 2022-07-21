@@ -1,5 +1,6 @@
 import { IProduct } from "src/app/product/product";
 import { commandeDt } from "src/app/Commercial/commandes/commandeDetails";
+import { Client } from "src/app/client/client";
 
 
 export interface Icommande {
@@ -13,7 +14,9 @@ export interface Icommande {
     evaluated? : string;
     invoiced? :string;
     selected? : string;
-    commandes_detail? : commandeDt[]
+    commandes_detail? : commandeDt[];
+    client? : Client;
+    status? : STATUS;
 }
 
 export class Commande implements Icommande {
@@ -28,8 +31,28 @@ export class Commande implements Icommande {
         public evaluated? : string,
         public invoiced? :string,
         public selected? : string,
-        public commandes_detail? : commandeDt[]
+        public commandes_detail? : commandeDt[],
+        public client? : Client,
+        public status? : STATUS
     ) {}
+
+    getStatus(status?: string): any {
+        switch (status) {
+          case 'ENABLE':
+            return { value: 'Apuré', class: 'badge-success' };
+            break;
+          case 'DISABLE':
+            return { value: 'Non apuré', class: 'badge-danger' };
+            break;
+          default:
+            break;
+        }
+      }
+}
+
+export enum STATUS {
+    ENABLE = 'ENABLE',
+    DISABLE = 'DISABLE',
 }
 
 interface IAppends{

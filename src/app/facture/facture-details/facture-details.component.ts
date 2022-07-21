@@ -20,43 +20,31 @@ export class FactureDetailsComponent implements OnInit {
   public tva = 0;
   public totalN = 0;
   public products = [] as any;
-  constructor(private route: ActivatedRoute, private serviceFac : FactureService,
+
+  constructor(private route: ActivatedRoute, private servFac : FactureService,
     private serviceDet : CommandeDetaisService) { }
 
   ngOnInit(): void {
+    this.getOneInvoice();
+  }
+
+  getOneInvoice() {
     const id: number = +this.route.snapshot.paramMap.get('id')!;
+    // const id: any = this.route.snapshot.paramMap.get('id');
     console.log('id:', id);
-    this.serviceFac.list()
+    this.servFac.list()
       .subscribe(response => {
         if (response) {
           this.invoices = response;
-          
+
           for (var val of this.invoices) {
             if (val.id == id) {
               this.invoice = val;
               console.log(this.invoice);
             }
           }
-          this.serviceDet.list()
-          .subscribe(res => {
-            this.facDet = res;
-            let i = 0;
-            for (var val of this.facDet) {
-              if(val.idCommande == this.invoice.idCommande) {
-                this.products.push(val);
-                this.totals[i] = (val.quantity * val.appends.productCommande);
-                i++;
-              }
-            }
-            for (var val of this.totals) {
-              this.montantT = this.montantT + val;
-            }
-            this.rabais = (this.montantT * 20) / 100;
-            this.tva = ((this.montantT - this.rabais) * 18) / 100;
-            this.totalN = this.montantT - this.rabais + this.tva;
-          });
         }
-      });
+    });
   }
 
 }

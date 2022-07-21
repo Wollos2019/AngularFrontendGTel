@@ -99,8 +99,9 @@ export class CommandesComponent implements OnInit {
     });
   }
 
-  saveOrder(order:Icommande) {
-    this.invoice.nomClient = order.nomClient;
+  toInvoice(order:Commande) {
+    this.invoice.nomClient = order.client?.nom;
+    this.invoice.prenClient = order.client?.prenom
     this.invoice.idClient = order.idClient;
     this.invoice.idCommande = order.id;
     this.serviceFac.add(this.invoice).subscribe(()=>{
@@ -113,7 +114,7 @@ export class CommandesComponent implements OnInit {
     order.tvaAccountable = true;
   }
 
-  onclick(order:Commande) {
+  onclick(order:Icommande) {
     // this.service.searchDet(order.id).subscribe({
     //   next: (details: commandeDt[]) => {
     //     this.detCom = details
@@ -130,45 +131,6 @@ export class CommandesComponent implements OnInit {
       }
     })
   }
-
-  // insertProduct() {
-  //   this.service.add(this.products).subscribe((response) => {
-  //     this.getList();
-  //   });
-  // }
-
-  // delete(product: IProduct) {
-  //   this.service.delete(product).subscribe((response) => this.getList());
-  // }
-
-  // save() {
-  //   if (!this.name.value || !this.description.value || !this.price.value) {
-  //     this.showError = true;
-  //     return;
-  //   }
-
-  //   this.selectedProduct.name = this.name.value;
-  //   this.selectedProduct.description = this.description.value;
-  //   this.selectedProduct.price = this.price.value;
-    
-
-  //   if (this.btnTitle == 'Update') {
-  //     this.service.update(this.selectedProduct).subscribe((response) => {
-  //       this.getList();
-  //       this.reset();
-  //       this.showError = false;
-  //       this.modalRef?.hide();
-  //     });
-  //   } else {
-  //     console.log(this.selectedProduct);
-  //     this.service.add(this.selectedProduct).subscribe((response) => {
-  //       this.getList();
-  //       this.reset();
-  //       this.showError = false;
-  //       this.modalRef?.hide();
-  //     });
-  //   }
-  // }
 
   reset() {
     this.name.reset();

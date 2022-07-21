@@ -11,11 +11,13 @@ import { SaveCommandeComponent } from 'src/app/Commercial/commandes/save-command
 import { CommandesComponent } from 'src/app/Commercial/commandes/commandes.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FactureDetailsComponent } from 'src/app/facture/facture-details/facture-details.component';
 
 
 @NgModule({
   declarations: [
-    CommandesComponent, FactureComponent, SaveCommandeComponent
+    CommandesComponent, FactureComponent, SaveCommandeComponent,
+    FactureDetailsComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [

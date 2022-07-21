@@ -26,11 +26,8 @@ const routes: Routes = [
     {
       path: 'factures/:id',
       component: FactureDetailsComponent
-    },
-    {
-      path: 'saveCommande',
-      component: SaveCommandeComponent
     }
+    
     ]
   }
 ];

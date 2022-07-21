@@ -91,7 +91,7 @@
                                             formControlName="days">
                                         </ng-multiselect-dropdown>
                                     </div>
-                                    <button class="btn btn-info float-right mt-2 mb-2" type="button" (click)="checked()">Ajouter</button>                                  
+                                    <button class="btn btn-info float-right mt-2 mb-2" style="size:30%;" type="button" (click)="checked()">Ajouter au panier</button>                                  
                                 </div>
 
                                 <div class="col-md-4">
@@ -109,6 +109,26 @@
                                 <!-- <div class="col-md-4 text-center mt-2">
                                     <button class="btn btn-info mt-4" type="button" (click)="checked()">Ajouter</button>
                                 </div> -->
+                            </div>
+                            <div class="row">
+                                <h4>Préciser les heures de diffusion:</h4>
+                                <div class="form-group ml-1" [formGroup]="form">
+                                    <ng-container formArrayName="lessons">
+                                        <ng-container *ngFor="let lessonForm of lessons.controls; let i = index">
+                                            <div class="form-group" formGroupName="lessonForm">
+                                                <div class="input-group ml-1">
+                                                    <input type="time" formControlName="title" placeholder="Heure de diffusion"
+                                                    class="form-control">
+                                                    <button class="btn btn-danger ml-1" (click)="deleteLesson(i)">
+                                                        Supprimer</button>
+                                                </div>
+                                            </div>
+                                        </ng-container>
+                                    </ng-container>              
+                                    <button class="btn btn-primary ml-1" (click)="addLesson()">
+                                        Ajouter
+                                    </button>
+                                </div>
                             </div>
                             
                             <div class="card">
@@ -142,7 +162,7 @@
 
                         </div>
                         <div class="card-footer">
-                            <button class="btn btn-info float-right" type="button" (click)="saveCom()">
+                            <button class="btn btn-info float-right" style="size:30%;" type="button" (click)="saveCom()">
                                 Enregistrer
                             </button>
                         </div>

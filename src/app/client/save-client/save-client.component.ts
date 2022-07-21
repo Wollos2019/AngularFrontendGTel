@@ -39,6 +39,7 @@ export class SaveClientComponent implements OnInit {
   countries: Country[] = [];
   civilities: Civility[] = [];
   products: IProduct[] = [];
+  imagePersonel: any;
 
   editForm2 = this.fb.group({
     quantite: ['', [Validators.required]],
@@ -130,21 +131,42 @@ export class SaveClientComponent implements OnInit {
       return;
     }
     this.loading = true;
-
+    console.log('Jappelle');
     this.cliService.add(this.client).subscribe({
       next: (client: Client) => {
         this.clientRes = client;
         this.loading = false;
         this.submitted = false;
 
-
-        this.editForm.reset();
-        this.toastr.success('Enregistrement effectué!!');
+        if (this.imagePersonel) {
+          const dataImage = new FormData();
+          dataImage.append(
+            'image',
+            this.imagePersonel,
+            this.imagePersonel.name
+          );
+          console.log('Jappelle');
+          this.cliService
+          .uploadPhotoClient(client?.id, dataImage)
+          .subscribe({
+            next: () => {
+              this.editForm.reset();
+              this.toastr.success('Enregistrement effectué !');
+            },
+            error: () => {
+              this.toastr.error(
+                "Une Erreur c'est produite lors du chargement de photo",
+                'Error'
+              );
+            },
+          });
+      
+        
         if(this.clientRes.id != '0')
         console.log(this.clientRes);
         {this.router.navigate(['/commercial/saveCommande/'], 
         {queryParams: {id:this.clientRes.id, name:this.clientRes.nom}});}
-
+      }
       },
       error: (error: HttpErrorResponse) => {
         this.loading = false;
@@ -287,6 +309,14 @@ export class SaveClientComponent implements OnInit {
       this.selectedProducts.push(this.selectedProduct);
     }
     console.log(this.selectedProducts);
+  }
+
+  getImage(event: any): void {
+    console.log(event);
+    this.imagePersonel = event;
+    const dataImage = new FormData();
+
+    dataImage.append('image', this.imagePersonel, this.imagePersonel.name);
   }
 
 }
