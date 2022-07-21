@@ -26,7 +26,7 @@ export class ClientHistoryComponent implements OnInit {
   getAllCommande() {
     const id: number = +this.route.snapshot.paramMap.get('id')!;
     console.log('id:', id);
-    this.servCli.getAllCommande().subscribe({
+    this.servCli.getAllCommande(id).subscribe({
       next: (response : Commande[]) => {
         this.orders = response;
         console.log(this.orders);

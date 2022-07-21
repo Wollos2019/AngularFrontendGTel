@@ -21,8 +21,8 @@ export class ClientService {
     return this.http.get<any>(`${this.URL_COMMER}client/${id}`);
   }
 
-  getAllCommande (client:Client) : Observable<any> {
-    return this.http.get<any>(`${this.URL_COMMER}historique/commandes`);
+  getAllCommande (id:number) : Observable<any> {
+    return this.http.get<any>(`${this.URL_COMMER}historique/commandes/${id}`);
   }
 
   add(client:Client) : Observable<Client> {

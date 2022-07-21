@@ -47,7 +47,7 @@
                   <ng-container *ngIf="orders && orders.length">
                     <tr *ngFor="let order of orders; let i = index">
                       <th scope="row">{{ order.id }}</th>               
-                      <td>{{order.date}}</td>
+                      <td>{{order.created_at}}</td>
                       <td>
                         <span
                         class="badge"

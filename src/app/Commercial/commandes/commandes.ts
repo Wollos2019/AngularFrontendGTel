@@ -17,6 +17,7 @@ export interface Icommande {
     commandes_detail? : commandeDt[];
     client? : Client;
     status? : STATUS;
+    created_at? : Date;
 }
 
 export class Commande implements Icommande {
@@ -33,7 +34,8 @@ export class Commande implements Icommande {
         public selected? : string,
         public commandes_detail? : commandeDt[],
         public client? : Client,
-        public status? : STATUS
+        public status? : STATUS,
+        public created_at? : Date
     ) {}
 
     getStatus(status?: string): any {
