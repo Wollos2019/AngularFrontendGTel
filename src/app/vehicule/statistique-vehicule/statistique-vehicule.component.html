@@ -23,14 +23,14 @@
       <div class="container-fluid">
         
         <h5 class="mt-4 mb-2">Info Box With <code>bg-*</code></h5>
-        <div class="row">
+        <div class="row" *ngIf="data">
           <div class="col-md-3 col-sm-6 col-12">
-            <div class="info-box bg-info" *ngIf="vehicules">
+            <div class="info-box bg-info" >
               <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Bookmarks</span>
-                <span class="info-box-number">{{vehicule.libelleVehicule}}</span>
+                <span class="info-box-text">Vehicules Total</span>
+                <span class="info-box-number">{{data.totalVehicules}}</span>
 
                 <div class="progress">
                   <div class="progress-bar" style="width: 70%"></div>
@@ -49,8 +49,8 @@
               <span class="info-box-icon"><i class="far fa-thumbs-up"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Likes</span>
-                <span class="info-box-number">41,410</span>
+                <span class="info-box-text">Pannes Total</span>
+                <span class="info-box-number">{{data.totalPanne}}</span>
 
                 <div class="progress">
                   <div class="progress-bar" style="width: 70%"></div>
@@ -69,8 +69,8 @@
               <span class="info-box-icon"><i class="far fa-calendar-alt"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Events</span>
-                <span class="info-box-number">41,410</span>
+                <span class="info-box-text">Entretiens Total </span>
+                <span class="info-box-number">{{data.totalMaintenance}}</span>
 
                 <div class="progress">
                   <div class="progress-bar" style="width: 70%"></div>
@@ -89,8 +89,8 @@
               <span class="info-box-icon"><i class="fas fa-comments"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Comments</span>
-                <span class="info-box-number">41,410</span>
+                <span class="info-box-text">Fournisseurs Total</span>
+                <span class="info-box-number">{{data.totalFourniseur}}</span>
 
                 <div class="progress">
                   <div class="progress-bar" style="width: 70%"></div>

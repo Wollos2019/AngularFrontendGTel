@@ -115,6 +115,7 @@ export class TypeEntretienComponent implements OnInit {
         next: () => {
           this.loading = false;
           this.toastr.success('Suppression effectuée');
+          $('#confirm').modal('hide');
           this.getAllEntretiens();
         },
         error: (error: any) => {

@@ -15,11 +15,12 @@ import { VehiculeServiceService } from '../vehicule-service.service';
 })
 export class DetailVehiculeComponent implements OnInit {
   vehicules:Vehicule[]=[]
-  vehicule = new Vehicule
+  vehicule = new Vehicule()
   assurances:Assurance[]=[]
   assurance= new Assurance()
+  
 
- items?:any[]
+ currentVehicule!:any
   loading= false;
   constructor(private vehiculeService:VehiculeServiceService,
               private toastr:ToastrService,
@@ -35,14 +36,24 @@ export class DetailVehiculeComponent implements OnInit {
   getListVehicule(vehiculeId: number):void{
     this.loading = true;
      this.vehiculeService.getOneVehicule(vehiculeId).subscribe({
-      next: (vehicule: any) => {
+      next: (vehicules: any) => {
         this.loading = false;
-       //console.log(vehicule);
-     //this.vehicule= JSON.parse(JSON.stringify(vehicule.object));
-        this.vehicule = vehicule;
-        //this.items = Object.values(this.vehicule);
-        //console.log("Item data:"+this.items);
-        console.log('fffffffffffffffffffffffffffffffff',this.vehicule);
+
+
+        if (!vehicules) {
+          console.log('No matching document');
+        } else {
+           console.log(vehicules);
+       const deta = vehicules
+      // this.vehicule = vehicules;
+      this.currentVehicule = deta,
+      
+       console.log("Item data:", this.currentVehicule);
+     
+    
+
+        }
+     
       },
       error: (error: any) => {
         this.loading = false;

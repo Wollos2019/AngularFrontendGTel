@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CategoriePermis } from '../models/categoriePermis.model';
 import { Pagination } from '../models/pagination.model';
-import {  IVehicule, Vehicule } from '../models/vehicule.model';
+import {  IVehicule, Vehicule,TYPECARBURANT } from '../models/vehicule.model';
 import { VehiculeServiceService } from '../vehicule-service.service';
 
  declare var $:any;
@@ -20,7 +20,7 @@ paramsPage:any;
   vehicule = new Vehicule();
   categoryPermit:CategoriePermis[]=[];
   categorypermit= new CategoriePermis();
- 
+  TYPECARBURANT=TYPECARBURANT;
   submittedUpdate!: boolean;
   VehiculeUpdate!: Vehicule;
  currentID!:number;
@@ -35,12 +35,14 @@ paramsPage:any;
       libelleVehicule:['', [Validators.required]],
       numeroIdentifiant:['', [Validators.required]],
       immatriculation:['', [Validators.required]],
+      marque:['', [Validators.required]],
       carteGrise:['', [Validators.required]],
       nombrePlace:['', [Validators.required]],
       longueurVehicule:['', [Validators.required]],
       dureeVie:['', [Validators.required]],
       dateMiseCirculation:['', [Validators.required]],
       delaiAlerte:['', [Validators.required]],
+      carburant: [TYPECARBURANT.ESSENCE, [Validators.required]],
 
     });
 
@@ -48,12 +50,14 @@ paramsPage:any;
       libelleVehicule:['', [Validators.required]],
       numeroIdentifiant:['', [Validators.required]],
       immatriculation:['', [Validators.required]],
+      marque:['', [Validators.required]],
       carteGrise:['', [Validators.required]],
       nombrePlace:['', [Validators.required]],
       longueurVehicule:['', [Validators.required]],
       dureeVie:['', [Validators.required]],
       dateMiseCirculation:['', [Validators.required]],
       delaiAlerte:['', [Validators.required]],
+      carburant: [TYPECARBURANT.ESSENCE, [Validators.required]],
 
     });
 
@@ -82,10 +86,12 @@ paramsPage:any;
     
 
     console.log(this.editForm.value);
-    const { libelleVehicule, numeroIdentifiant,immatriculation,carteGrise,nombrePlace, longueurVehicule,dureeVie,dateMiseCirculation,delaiAlerte} = this.editForm.value;
+    const { libelleVehicule, numeroIdentifiant,immatriculation,marque,carburant,carteGrise,nombrePlace, longueurVehicule,dureeVie,dateMiseCirculation,delaiAlerte} = this.editForm.value;
     this.vehicule.libelleVehicule = libelleVehicule;
     this.vehicule.numeroIdentifiant = numeroIdentifiant;
     this.vehicule.immatriculation = immatriculation;
+    this.vehicule.marque = marque;
+    this.vehicule.carburant= carburant;
     this.vehicule.carteGrise = carteGrise;
     this.vehicule.nombrePlace = nombrePlace;
     this.vehicule.longueurVehicule = longueurVehicule;
@@ -161,6 +167,8 @@ updateModal(up:Vehicule):void {
   this.updateVehiculeForm.get('dureeVie')?.setValue(up.dureeVie);
   this.updateVehiculeForm.get('dateMiseCirculation')?.setValue(up.dateMiseCirculation);
   this.updateVehiculeForm.get('delaiAlerte')?.setValue(up.delaiAlerte);
+  this.updateVehiculeForm.get('carburant')?.setValue(up.carburant);
+  this.updateVehiculeForm.get('marque')?.setValue(up.marque);
  
  
 }
@@ -173,7 +181,7 @@ update():void{
   this.submittedUpdate = true;
   console.log(this.submittedUpdate);
 
-  const { libelleVehicule, numeroIdentifiant,immatriculation,carteGrise,nombrePlace, longueurVehicule,dureeVie,dateMiseCirculation,delaiAlerte} = this.updateVehiculeForm.value;
+  const { libelleVehicule, numeroIdentifiant,immatriculation,marque,carburant,carteGrise,nombrePlace, longueurVehicule,dureeVie,dateMiseCirculation,delaiAlerte} = this.updateVehiculeForm.value;
   this.VehiculeUpdate.libelleVehicule = libelleVehicule;
   this.VehiculeUpdate.numeroIdentifiant = numeroIdentifiant;
   this.VehiculeUpdate.immatriculation = immatriculation;
@@ -183,6 +191,8 @@ update():void{
   this.VehiculeUpdate.dureeVie = dureeVie;
   this.VehiculeUpdate.dateMiseCirculation = dateMiseCirculation;
   this.VehiculeUpdate.delaiAlerte = delaiAlerte;
+  this.VehiculeUpdate.carburant = carburant;
+  this.VehiculeUpdate.marque = marque;
   this.VehiculeUpdate._method="PUT";
   this.loading = true;
   this.vehiculeService.updateVehicule(this.VehiculeUpdate).subscribe({
@@ -260,6 +270,20 @@ openEntretien(): void {
 openTypeEntretien(): void {
   //$('#createModal').modal('show');
   this.router.navigate(['vehicule/type-entretien']);
+  
+}
+
+
+openFournisseur(): void {
+  //$('#createModal').modal('show');
+  this.router.navigate(['fournisseur/list-fournisseur']);
+  
+}
+
+
+openAssurance(): void {
+  //$('#createModal').modal('show');
+  this.router.navigate(['assurence/list-assurance']);
   
 }
 

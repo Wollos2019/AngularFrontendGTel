@@ -100,7 +100,7 @@ export class UpdatePanneComponent implements OnInit {
     this.editForm.get('coutMainOeuvre')?.setValue(panne.coutMainOeuvre);
     this.editForm.get('factureMainOeuvre')?.setValue(panne.factureMainOeuvre);
     this.editForm.get('vehiculeId')?.setValue(panne.vehiculeId);
-    this.editForm.get('fournisseurpanne')?.setValue(panne.append?.fourniseur);
+    this.editForm.get('fournisseurpanne')?.setValue(panne.appends?.fourniseur);
     //this.editForm.get('fournisseurId')?.setValue(panne.append?.fourniseur?.appends?.pannes?.);
       
   }
@@ -258,7 +258,7 @@ export class UpdatePanneComponent implements OnInit {
       next:(panne:IPanne)=>{
         console.log(panne);
         this.currentPanne=panne;
-        this.fournisseurPanne=(panne.append?.fourniseur as IFournisseur[])
+        this.fournisseurPanne=(panne.appends?.fourniseur as IFournisseur[])
         this.initForm(panne);
         
 
