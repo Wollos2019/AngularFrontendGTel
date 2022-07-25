@@ -17,6 +17,7 @@ import { Conducteur } from '../../conducteur/conducteur';
 import { response } from 'express';
 import { ConducteurDetailsService } from '../../conducteur/conducteur-details/services/conducteur-details.service';
 import { CommandeService } from 'src/app/Commercial/commandes/services/commande.service';
+import { ProductSelected } from 'src/app/product/productSelected';
 
 @Component({
   selector: 'app-list-commande',
@@ -271,4 +272,21 @@ export class ListCommandeComponent implements OnInit {
   }
 
   close() {}
+
+  setFrequence(products: ProductSelected[], date_debut: Date) {
+    var conducteur : Conducteur;
+    var date_cache = date_debut;
+    var frequ_cache : any;
+    for(var p of products) {
+      frequ_cache = JSON.parse(p.frequence);
+      for(var f of frequ_cache) {
+        date_cache.setDate(date_cache.getDate()+1);
+        if (f.item_id == date_cache.getDay()) {
+          conducteur = new Conducteur();
+          conducteur.date = date_cache;
+          this.servConduc.add(conducteur);
+        }
+      }
+    }
+  }
 }

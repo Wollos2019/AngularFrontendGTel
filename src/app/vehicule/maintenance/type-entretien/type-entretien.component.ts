@@ -110,13 +110,12 @@ export class TypeEntretienComponent implements OnInit {
 
   deleteType(ev: boolean): void {
     this.loading = true;
-   
-   
     if (ev) {
       this.vehiculeService.deleteTypeEntretien(this.currentID!).subscribe({
         next: () => {
           this.loading = false;
           this.toastr.success('Suppression effectuée');
+          $('#confirm').modal('hide');
           this.getAllEntretiens();
         },
         error: (error: any) => {

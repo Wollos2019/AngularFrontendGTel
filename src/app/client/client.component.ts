@@ -12,6 +12,7 @@ import { IproductSelected } from '../product/productSelected';
 import { Icommande } from '../Commercial/commandes/commandes';
 import { CommandeService } from '../Commercial/commandes/services/commande.service';
 import { response } from 'express';
+import { getImage } from '../util/images';
 
 @Component({
   selector: 'app-client',
@@ -45,6 +46,7 @@ export class ClientComponent implements OnInit {
   public quantity = new FormControl('', Validators.required);
   public idCommande = '';
   public showError = false;
+  images ! : any;
   modalRef?: BsModalRef;
   public arr: FormControl[] = [this.c1, this.c2];
 
@@ -94,12 +96,12 @@ openModal2(template: TemplateRef<any>, client?:Iclient) {
 
 ngOnInit(): void {
   this.getList();
+  this.images = getImage();
 }
 
 getList () {
   //this.service.list().subscribe(response => {this.clients = response['data']});
   this.service.list().subscribe(response => this.clients = response);
-  this.serviceP.list().subscribe(response => this.products = response);
       
 }
 
@@ -134,43 +136,43 @@ save(){
   }
 }
 
-save2(){
+// save2(){
 
-  for (var val of this.selectedProducts) {
-    val.quantity = this.listServiceFeature[val.id];
-  }
+//   for (var val of this.selectedProducts) {
+//     val.quantity = this.listServiceFeature[val.id];
+//   }
   
-  for (var val of this.selectedProducts) {
-    let i:number = 0;
-    while (i < this.selectedProducts.length) {
-      this.contenus[i] = " Nom du produit: "+val.productName+" Quantity: "+val.quantity;
-      i++;
-    }
+//   for (var val of this.selectedProducts) {
+//     let i:number = 0;
+//     while (i < this.selectedProducts.length) {
+//       this.contenus[i] = " Nom du produit: "+val.productName+" Quantity: "+val.quantity;
+//       i++;
+//     }
     
-  }
+//   }
 
-  this.commande.contenu = 'this.contenus';
-  this.commande.idClient = this.selectedClient.id;
-  this.commande.nomClient = this.selectedClient.nom
-  this.serviceC.add(this.commande)
-    .subscribe(response =>{
-      if(response){
-        this.commandeContenus.push(response);
-        this.router.navigate(['/commercial/commandes']);
-      }
-      this.showError = false;
-      this.idCommande = this.commandeContenus[0].id;
-      for (var val of this.selectedProducts) {
-        val.idCommande = this.idCommande;
-        console.log(this.selectedProducts);
-        this.serviceC.addProduct(val)
-        .subscribe( response => console.log(response));
-      }
-      this.selectedProducts = [];
-      this.modalRef?.hide();
-    });
-    console.log(this.commandeContenus);
-}
+//   this.commande.contenu = 'this.contenus';
+//   this.commande.idClient = this.selectedClient.id;
+//   this.commande.nomClient = this.selectedClient.nom
+//   this.serviceC.add(this.commande)
+//     .subscribe(response =>{
+//       if(response){
+//         this.commandeContenus.push(response);
+//         this.router.navigate(['/commercial/commandes']);
+//       }
+//       this.showError = false;
+//       this.idCommande = this.commandeContenus[0].id;
+//       for (var val of this.selectedProducts) {
+//         val.idCommande = this.idCommande;
+//         console.log(this.selectedProducts);
+//         this.serviceC.addProduct(val)
+//         .subscribe( response => console.log(response));
+//       }
+//       this.selectedProducts = [];
+//       this.modalRef?.hide();
+//     });
+//     console.log(this.commandeContenus);
+// }
 
 delete(product:Iclient) {
   this.service.delete(product)
@@ -208,6 +210,10 @@ reset () {
       this.router.navigate(['/commercial/saveCommande/'], {queryParams: {id:client.id, name:client.nom}});
       
     }
+  }
+
+  historique(client? : Iclient) {
+    this.router.navigate(['/commercial/historiqueClient/'+ client?.id]);
   }
 
 }

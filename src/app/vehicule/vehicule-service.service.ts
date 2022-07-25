@@ -9,6 +9,7 @@ import { Panne } from './models/panne.model';
 import { IPermis, Permis } from './models/permis.model';
 
 import { PriseVehicule } from './models/priseVehicule.model';
+import { IStatistiqueVehicule } from './models/statistiqueVehicule.model';
 import { ITypeEntretien, TypeEntretien } from './models/typeEntretien.model';
 import { UnitMesure } from './models/unitMesure.model';
 import { IVehicule, Vehicule } from './models/vehicule.model';
@@ -243,6 +244,14 @@ createEntretien(entretien:IEntretien):Observable<IEntretien>{
   return this.httpClient.post<IEntretien>(`${this.apiUrl}maintenance_vehicules`,entretien);
 }
 
-
+//GESTION DES STATISTIQUE
+/**
+ * 
+ * @param params 
+ * @returns 
+ */
+getStatistiqueVehicule(): Observable<IStatistiqueVehicule> {
+  return this.httpClient.get<IStatistiqueVehicule>(`${this.apiUrl}statistical`);
+}
 
 }

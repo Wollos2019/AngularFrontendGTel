@@ -17,10 +17,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { DashboardComponent } from './template/dashboard/dashboard.component';
 import { TokenInterceptorService } from './services/interceptors/token-interceptor.service';
 import { DashboardService } from './services/dashboard.service';
-import { ClientsModule } from './modules/commercial/clients/clients.module';
 import { ProduitsModule } from './modules/commercial/produits/produits.module';
 import { NgxPrintModule } from 'ngx-print';
-import { FactureDetailsComponent } from './facture/facture-details/facture-details.component';
 import {ReactiveFormsModule} from "@angular/forms";
 
 import { RouterModule } from '@angular/router';
@@ -46,6 +44,7 @@ import { ConducteurDetailsComponent } from './production/conducteur/conducteur-d
     
     
     
+    
   ],
   imports: [
     CommonModule,
@@ -65,7 +64,7 @@ import { ConducteurDetailsComponent } from './production/conducteur/conducteur-d
       preventDuplicates: true,
     }),
     SharedModule,
-    ClientsModule,
+    
     ProduitsModule,
     RouterModule
     

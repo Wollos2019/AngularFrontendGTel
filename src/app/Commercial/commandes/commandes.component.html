@@ -42,7 +42,7 @@
                 <ng-container *ngIf="orders2 && orders2.length">
                   <tr *ngFor="let order of orders2; let i = index">
                     <th scope="row">{{ i + 1 }}</th>               
-                    <td>{{order.nomClient}}</td>
+                    <td>{{order.client.nom + ' ' + order.client.prenom}}</td>
                     <td>
                       <button type="button" class="btn btn-primary mr-1" (click)="openModal2(template2,order)">Details</button>
                     </td>
@@ -71,9 +71,10 @@
                         </div>
                         <div class="form-group">
                           <label for="Input1">Pourcentage de la réduction</label>
-                          <input type="number" class="form-control" placeholder="Pourcentage de la réduction" [formControl]="reduction">
+                          <input type="number" class="form-control" style="width: 40%;" 
+                          placeholder="Pourcentage %" [formControl]="reduction">
                         </div>
-                        <button type="button" class="btn btn-primary mb-2" (click)="saveOrder(order)">Valider</button>
+                        <button type="button" class="btn btn-primary mb-2" (click)="toInvoice(order)">Valider</button>
                       </div>
                     </ng-template>
                 

@@ -7,12 +7,3 @@ export class Carburant implements ICarburant {
 
     ){}
 }
-export enum TYPECARBURANT {
-    ESSENCE = 'ESSENCE',
-    GAZOLE = 'GAZOLE',
-    DIHYDROGENE = 'DIHYDROGENE',
-    GPL = 'GPL',
-    KEROSENE = 'KEROSENE',
-
-
-  }
