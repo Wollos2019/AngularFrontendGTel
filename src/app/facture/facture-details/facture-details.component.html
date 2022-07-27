@@ -1,5 +1,8 @@
+<!-- <section class="content"> -->
+  <!-- <div class="container-fluid"> -->
 <div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 padding" id="htmlData">
-  <div class="card">
+  
+    <div class="card">
     <div class="card-header p-4">
       <div class="logo pt-2 d-inline-block">
         <img src="assets\image_gabonTele.jpg" alt="" class="img-fluid">
@@ -30,10 +33,10 @@
                 <th class="center">Produit</th>
                 <th class="center">Date de diffusion</th>
                 <th class="center">Heure de diffusion</th>
-                <th class="center">Durée</th>
-                <th class="center">Reduction/produit</th>
-                <th class="center">Rabais/produit</th>
-                <th class="center">Prix</th>
+                <th >Durée</th>
+                <!-- <th >Reduction par produit</th> -->
+                <!-- <th class="right">Couts supplémentaires</th> -->
+                <th class="right">Prix</th>
               </tr>
             </thead>
             <tbody>
@@ -43,8 +46,8 @@
                 <td>{{product.date_debut}}</td>
                 <td>{{product.heure_debut}}</td>
                 <td>{{product.duree}}</td>
-                <td>{{reducPro}}</td>
-                <td>{{rabaisPro}}</td>
+                <!-- <td>{{reducPro}}</td> -->
+                <!-- <td>{{rabaisPro}}</td> -->
                 <td>{{product.prix}}</td>
               </tr>
             </tbody>
@@ -55,6 +58,12 @@
           <div class="col-lg-4 col-sm-5 ml-auto">
             <table class="table table-clear">
               <tbody>
+                <tr>
+                  <td class="left">
+                    <strong class="text-dark">Couts supplémentaires</strong>
+                  </td>
+                  <td class="right">{{addCost}}</td>
+                </tr>
                 <tr>
                   <td class="left">
                     <strong class="text-dark">Montant Total</strong>
@@ -88,13 +97,19 @@
         </div>
       </div>
     
-    <div class="card-footer bg-white">
-      <p class="mb-0">Gabon Television, Libreville, Gabon</p>
+    <div class="card-footer bg-white" style="margin-top: 650px;">
+      <p class="mb-2">Gabon Television, Libreville, Gabon</p>
     </div>
   </div>
+  
 </div>
+<!-- </div> -->
+<!-- </section> -->
 
 <div style="text-align: center;">
-  <button type="button" class="btn btn-primary mb-2" printTitle="Facture Gabon TV" printSectionId="htmlData"
-    ngxPrint>Imprimer la facture</button>
+  <!-- <button type="button" class="btn btn-primary mb-2" printTitle="Facture Gabon TV" printSectionId="htmlData"
+    ngxPrint>Imprimer la facture</button> -->
+    <button type="button" class="btn btn-primary mb-1" (click)="print()">
+      Impression
+    </button>
 </div>

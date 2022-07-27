@@ -18,6 +18,7 @@ export class FactureDetailsComponent implements OnInit {
   public montantT = 0;
   public reducPro = 0;
   public rabaisPro = 0;
+  public addCost = 0;
   public rabaisT = 0;
   public tva = 0;
   public totalN = 0;
@@ -41,12 +42,21 @@ export class FactureDetailsComponent implements OnInit {
           console.log(this.invoice);
           for(var val of this.invoice.commandes_detail){
             this.montantT = this.montantT + val.prix;
-            this.rabaisT = (this.montantT*20 / 100);
-            this.tva = ((this.montantT-this.rabaisT)*18)/100;
-            this.totalN = this.montantT-this.rabaisT+this.tva;
           }
+          this.rabaisT = (this.montantT*20 / 100);
+            if(this.invoice.tva == '1')
+            {this.tva = ((this.montantT-this.rabaisT)*18)/100;}
+            if(this.invoice.coutSup)
+            {
+              this.addCost = this.invoice.coutSup;
+              this.totalN = this.montantT-this.rabaisT+this.tva + this.invoice.coutSup;
+            }
         }
     });
+  }
+
+  print() {
+    window.print();
   }
 
 

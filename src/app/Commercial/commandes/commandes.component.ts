@@ -6,9 +6,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 import { Router } from '@angular/router';
-import { IFacture } from 'src/app/facture/ifacture';
+import { Facture, IFacture } from 'src/app/facture/ifacture';
 import { FactureService } from 'src/app/facture/services/facture.service';
-import { Commande, Icommande } from 'src/app/Commercial/commandes/commandes';
+import { Commande, Icommande, STATUS } from 'src/app/Commercial/commandes/commandes';
 import { CommandeService } from 'src/app/Commercial/commandes/services/commande.service';
 import { commandeDt } from 'src/app/Commercial/commandes/commandeDetails';
 import { Pagination } from 'src/app/vehicule/models/pagination.model';
@@ -37,6 +37,7 @@ export class CommandesComponent implements OnInit {
   public name = new FormControl('', Validators.required);
   public checkbox = new FormControl('', Validators.required);
   public reduction = new FormControl('', Validators.required);
+  public coutSup = new FormControl('', Validators.required);
   public description = new FormControl('', Validators.required);
   public price = new FormControl('', Validators.required);
   public slug = new FormControl('', Validators.required);
@@ -46,6 +47,7 @@ export class CommandesComponent implements OnInit {
   constructor(
     private service: CommandeService,
     private serviceFac: FactureService,
+    private servCom : CommandeService,
     private modalService: BsModalService,
     private router : Router
   ) {}
@@ -104,10 +106,18 @@ export class CommandesComponent implements OnInit {
     this.invoice.prenClient = order.client?.prenom
     this.invoice.idClient = order.idClient;
     this.invoice.idCommande = order.id;
+    this.invoice.tva = this.checkbox.value;
+    this.invoice.coutSup = this.coutSup.value;
+    order.status = STATUS.ENABLE;
     this.serviceFac.add(this.invoice).subscribe(()=>{
       this.router.navigate(['/commercial/factures']);
     });
-    console.log(order.nomClient);    
+    console.log(order.nomClient);
+    this.servCom.update(order).subscribe(response => {
+      if(response){
+        console.log(response);
+      }
+    });    
   }
 
   checked(order:Icommande) {
@@ -142,5 +152,14 @@ export class CommandesComponent implements OnInit {
   getPage(data: any): void {
     console.log(data);
     this.getList(`page=${data}`);
+  }
+
+  openModal3(template: TemplateRef<any>, invoice?: Facture) {
+    
+      this.modalTitle = 'Ajouter les couts supplémentaires';
+      this.btnTitle = 'Enregistrer';
+      this.reset();
+    
+    this.modalRef = this.modalService.show(template);
   }
 }

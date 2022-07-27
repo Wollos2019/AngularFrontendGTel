@@ -18,6 +18,7 @@ export interface Icommande {
     client? : Client;
     status? : STATUS;
     created_at? : Date;
+    // addCost? : string
 }
 
 export class Commande implements Icommande {
@@ -36,6 +37,7 @@ export class Commande implements Icommande {
         public client? : Client,
         public status? : STATUS,
         public created_at? : Date
+        // public addCost? : string
     ) {}
 
     getStatus(status?: string): any {
