@@ -96,6 +96,7 @@ export class CommandesComponent implements OnInit {
         console.log(this.finalFrequence);
         val.commandes_detail[0].frequence = this.finalFrequence;
         this.finalFrequence = '';
+        val.commandes_detail[0].prix = val.commandes_detail[0].appends.productPrice;
       }
       this.orders2 = this.orders;
     });
@@ -110,6 +111,7 @@ export class CommandesComponent implements OnInit {
     this.invoice.coutSup = this.coutSup.value;
     order.status = STATUS.ENABLE;
     this.serviceFac.add(this.invoice).subscribe(()=>{
+      this.modalRef?.hide();
       this.router.navigate(['/commercial/factures']);
     });
     console.log(order.nomClient);

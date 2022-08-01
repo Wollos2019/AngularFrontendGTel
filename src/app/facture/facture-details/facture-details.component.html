@@ -1,6 +1,6 @@
 <!-- <section class="content"> -->
   <!-- <div class="container-fluid"> -->
-<div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 padding" id="htmlData">
+<div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 padding" id="htmlData" #content>
   
     <div class="card">
     <div class="card-header p-4">
@@ -48,7 +48,7 @@
                 <td>{{product.duree}}</td>
                 <!-- <td>{{reducPro}}</td> -->
                 <!-- <td>{{rabaisPro}}</td> -->
-                <td>{{product.prix}}</td>
+                <td>{{product.appends.productPrice}}</td>
               </tr>
             </tbody>
 
@@ -105,11 +105,14 @@
 </div>
 <!-- </div> -->
 <!-- </section> -->
+<div>
+
+</div>
 
 <div style="text-align: center;">
   <!-- <button type="button" class="btn btn-primary mb-2" printTitle="Facture Gabon TV" printSectionId="htmlData"
     ngxPrint>Imprimer la facture</button> -->
-    <button type="button" class="btn btn-primary mb-1" (click)="print()">
+    <button type="button" class="btn btn-primary mb-1" (click)="openPDF3()">
       Impression
     </button>
 </div>

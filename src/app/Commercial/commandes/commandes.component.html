@@ -87,6 +87,9 @@
                       <div class="card card-default">
                         <div class="card-header">
                           <h3 class="card-title">Details de la commande</h3>
+                          <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+                            <span aria-hidden="true" class="visually-hidden">&times;</span>
+                          </button>
                         </div>
                         <div class="card-body">
                           <table class="table table-head-fixed text-nowrap">
@@ -103,7 +106,7 @@
                 
                                 <td>{{cd.productName}}</td>
                                  <td>{{cd.date_debut | date:'dd/MM/yyyy'}}</td>                                
-                                <td>{{cd.prix}}</td>
+                                <td>{{cd.appends.productPrice}}</td>
                               </tr>
                             </tbody>
                           </table>

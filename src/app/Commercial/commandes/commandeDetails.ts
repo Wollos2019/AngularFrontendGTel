@@ -33,5 +33,5 @@ export class commandeDt implements IcommandeDt {
 }
 
 interface IAppends{
-    productCommande?:number;
+    productPrice?:number;
 }
