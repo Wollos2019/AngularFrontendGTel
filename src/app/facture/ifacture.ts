@@ -7,6 +7,8 @@ export interface IFacture {
     created_at ? : Date
     client ? : any
     commandes_detail ? : any
+    coutSup ? : number
+    tva ? : string
 }
 
 export class Facture implements IFacture {
@@ -18,4 +20,6 @@ export class Facture implements IFacture {
     created_at ? : Date
     client ? : any
     commandes_detail ? : any
+    coutSup ? : number
+    tva ? : string
 }
