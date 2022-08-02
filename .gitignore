@@ -42,6 +42,7 @@ testem.log
 /typings
 
 # System Files
+.env
 .DS_Store
 Thumbs.db
 # These are some examples of commonly ignored file patterns.
