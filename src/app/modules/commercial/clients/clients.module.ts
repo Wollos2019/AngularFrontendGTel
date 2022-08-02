@@ -6,11 +6,14 @@ import { ClientComponent } from 'src/app/client/client.component';
 import { ClientService } from 'src/app/client/services/client.service';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SaveClientComponent } from 'src/app/client/save-client/save-client.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { ClientHistoryComponent } from 'src/app/client/client-history/client-history.component';
 
 
 @NgModule({
   declarations: [
-    ClientComponent
+    ClientComponent, SaveClientComponent, ClientHistoryComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
@@ -20,7 +23,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    ClientsRoutingModule
+    ClientsRoutingModule,
+    SharedModule
   ],
   providers:[ClientService]
 })

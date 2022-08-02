@@ -1,0 +1,73 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Gestion des programmes</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a [routerLink]="'/'">Dashbord</a></li>
+          <li class="breadcrumb-item active">Gestion des programmes</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+</section>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="form-row">
+              <div [formGroup]="myGroup">
+                <div class="row">
+                  <div class="col">
+                    <label for="datePicker" class="col-form-label">Date de début<span class="text-danger">*</span></label>
+                    <input type="date" class="form-control" placeholder="Date de début" formControlName="datePicker1" />
+                  </div>
+                  <div class="col">
+                    <label for="datePicker" class="col-form-label">Date de fin<span class="text-danger">*</span></label>
+                    <input type="date" class="form-control" placeholder="Date de fin" formControlName="datePicker2" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <br>
+                <button type="submit" [disabled]="!myGroup.valid" class="btn btn-primary mt-2 ml-2" (click)="valider()">Valider</button>
+              </div>
+          
+            </div>
+          
+          </div>
+          <!-- /.card-header -->
+
+          <div class="card-body">
+            <div class="row my-3" *ngIf="conducteurs && conducteurs.length">
+              <div class="col-12">
+                <table class="table table-bordered">
+                  <thead>
+                    <th *ngFor="let c of conducteurs;">
+                      {{c.date |  date:'dd-MM-yyyy'}} 
+                    </th> 
+                  </thead>
+                  <tbody>                                   
+                      <th *ngFor="let c of conducteurs;">
+                        <tr *ngFor="let p of c.programme; let i=index" width="auto">
+                          <td>{{p.heure_debut}}</td>
+                          <td>{{p.denomination}}</td>
+                        </tr>
+                      </th>                  
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

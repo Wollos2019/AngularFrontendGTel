@@ -1,151 +1,95 @@
-<div class="page-content" id="content">
-  <div style="text-align: center">
-    <h1>Liste des produits</h1>
-  </div>
-
-  <div style="text-align: center">
-    <button
-      type="button"
-      class="btn btn-primary mb-2"
-      (click)="openModal(template)"
-    >
-      Ajouter un produit
-    </button>
-  </div>
-
-  <table class="table">
-    <thead class="thead-light">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Nom</th>
-        <th scope="col">Description</th>
-        <th scope="col">Prix</th>
-        <th scope="col">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let product of products; index as i">
-        <th scope="row">{{ i + 1 }}</th>
-        <td>{{ product.name }}</td>
-        <td>{{ product.description }}</td>
-        <td>{{ product.price }}</td>
-        <td>
-          <button
-            type="button"
-            class="btn btn-info mr-1"
-            (click)="openModal(template, product)"
-          >
-            Modifier
-          </button>
-          <button
-            type="button"
-            class="btn btn-danger"
-            (click)="delete(product)"
-          >
-            Supprimer
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <ng-template #template>
-    <div class="modal-header">
-      <h4 class="modal-title pull-left">{{ modalTitle }}</h4>
-      <button
-        type="button"
-        class="btn-close close pull-right"
-        aria-label="Close"
-        (click)="modalRef?.hide()"
-      >
-        <span aria-hidden="true" class="visually-hidden">&times;</span>
-      </button>
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Liste des produits</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a [routerLink]="'/'">Dashbord</a></li>
+          <li class="breadcrumb-item active">Liste des produits</li>
+        </ol>
+      </div>
     </div>
-    <div class="modal-body">
-      <div class="form-group">
-        <label for="exampleInputEmail1">Product Name</label>
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Enter Product Name"
-          [formControl]="name"
-        />
-        <small *ngIf="name.errors?.['required'] && showError"
-          ><b> *Name is required.</b></small
-        >
+  </div>
+  <!-- /.container-fluid -->
+</section>
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <a class="btn btn-info float-right" type="button" (click)="openModal(template)">Ajouter un produit</a>
+          </div>
+
+          <!-- /.card-header -->
+          <div class="card-body">
+            <table class="table table-bordered">
+              <thead>
+                <tr class="bg-dark text-white">
+                  <th scope="col">#</th>
+                  <th scope="col">Nom</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Prix</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let product of products; index as i">
+                  <th scope="row">{{ i + 1 }}</th>
+                  <td>{{ product.name }}</td>
+                  <td>{{ product.description }}</td>
+                  <td>{{ product.price }}</td>
+                  <td>
+                    <button type="button" class="btn btn-info mr-1" (click)="openModal(template, product)">
+                      Modifier
+                    </button>
+                    <button type="button" class="btn btn-danger" (click)="delete(product)">
+                      Supprimer
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <ng-template #template>
+            <div class="modal-header">
+              <h4 class="modal-title pull-left">{{ modalTitle }}</h4>
+              <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+                <span aria-hidden="true" class="visually-hidden">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Nom du produit</label>
+                <input type="text" class="form-control" placeholder="Entrer le nom du produit" [formControl]="name" />
+                <small *ngIf="name.errors?.['required'] && showError"><b> *Le nom est requis.</b></small>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Description du produit</label>
+                <input type="text" class="form-control" placeholder="Entrer la description du produit"
+                  [formControl]="description" />
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Prix du produit</label>
+                <input type="number" class="form-control" placeholder="Entrer le prix du produit"
+                  [formControl]="price" />
+              </div>
+              <button type="button" class="btn btn-primary mb-2" (click)="save()">
+                {{ btnTitle }}
+              </button>
+            </div>
+
+          </ng-template>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Product Description</label>
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Enter Product Description"
-          [formControl]="description"
-        />
-      </div>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Product Price</label>
-        <input
-          type="number"
-          class="form-control"
-          placeholder="Enter Product Price"
-          [formControl]="price"
-        />
-      </div>
-      <button type="button" class="btn btn-primary mb-2" (click)="save()">
-        {{ btnTitle }}
-      </button>
     </div>
+  </div>
+</section>
 
-    <table class="table">
-        <thead class="thead-light">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nom</th>
-            <th scope="col">Description</th>
-            <th scope="col">Prix</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let product of products; index as i">
-            <th scope="row">{{i+1}}</th>
-            <td>{{product.productName}}</td>
-            <td>{{product.description}}</td>
-            <td>{{product.price}}</td>
-            <td>
-              <button type="button" class="btn btn-info mr-1" (click)="openModal(template, product)">Modifier</button>
-              <button type="button" class="btn btn-danger" (click)="delete(product)">Supprimer</button>
-            </td>
-          </tr>
-        </tbody>
-    </table>
-    
-      
-    <ng-template #template>
-      <div class="modal-header">
-        <h4 class="modal-title pull-left">{{modalTitle}}</h4>
-        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
-          <span aria-hidden="true" class="visually-hidden">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label for="exampleInputEmail1">Product Name</label>
-          <input type="text" class="form-control" placeholder="Enter Product Name" [formControl]="name">
-          <small *ngIf="name.errors?.['required'] && showError"><b> *Name is required.</b></small>
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Product Description</label>
-          <input type="text" class="form-control" placeholder="Enter Product Description" [formControl]="description">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Product Price</label>
-          <input type="number" class="form-control" placeholder="Enter Product Price" [formControl]="price">
-        </div>
-        <button type="button" class="btn btn-primary mb-2" (click)="save()">{{btnTitle}}</button>
-      </div>
-    </ng-template>
-
-  </ng-template>
-</div>
+<ngx-loading
+  [show]="loading"
+  [config]="{ backdropBorderRadius: '3px' }"
+></ngx-loading>

@@ -1,0 +1,244 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Permis</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a [routerLink]="'/'">Dashbord</a></li>
+          <li class="breadcrumb-item active">Permis</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+</section>
+
+<!-- ROW-4 -->
+<div class="row">
+  <div class="col-12 col-sm-12">
+    <div class="card">
+      <div class="card-header">
+        <button
+          type="button"
+          class="btn btn-primary btn-sm float-right"
+          (click)="openModel()"
+        >
+          Ajouter un Permis
+        </button>
+      </div>
+      <div class="card-body pt-4">
+        <div class="grid-margin">
+          <div class="">
+            <div class="panel panel-primary">
+              <div class="panel-body tabs-menu-body border-0 pt-0">
+                <div class="tab-content">
+                  <div class="tab-pane active" id="tab5">
+                    <div class="table-responsive">
+                      <table class="table table-bordered">
+                        <thead>
+                          <tr class="bg-dark text-white">
+                            <th>#</th>
+                            <th>numero permis</th>
+                            <th>Categories Permis</th>
+                            <th>date Acquisition</th>
+                            <th>Personnel</th>
+                            
+
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <ng-container *ngIf="permis">
+                            <tr
+                              class="border-bottom"
+                              *ngFor="let per of permis; let i = index"
+                            >
+                              <td class="text-center">
+                                {{ per.id }}
+                              </td>
+                              <td>
+                                {{ per.numeroPermis }}
+                              </td>
+                              <td>
+                                <ng-container
+                                  *ngIf="per?.appends?.categoriePermit?.length"
+                                >
+                                  <ng-container
+                                    *ngFor="
+                                      let p of per?.appends?.categoriePermit;let i=index
+                                    "
+                                  >
+                                    <span class="badge badge-primary mx-1">
+                                      {{ p.libelle }}
+                                      <ng-container *ngIf="per?.appends?.expireCategories[i].cat===p.pivot?.category_permit_id">
+                                        <span  class="badge badge-danger" *ngIf="per?.appends?.expireCategories[i].expire">
+                                          Expirer
+                                         </span>
+                                         <span  class="badge badge-success" *ngIf="!per?.appends?.expireCategories[i].expire">
+                                          Valide
+                                         </span>
+                                      </ng-container>
+                                     
+
+                                    </span>
+                                  </ng-container>
+                                  <!-- {{ per?.appends.categoriePermit[0]?.pivot?.numeroDossierPermis}} -->
+                                </ng-container>
+                              </td>
+
+                              <td>
+                                {{ per.dateAcquisition }}
+                              </td>
+                              <!-- <td>
+                                         {{per.dateFinAssurance}}
+                                        </td>
+                                        <td>
+                                            
+                                                {{per.scanAssurance}}
+                                             
+                                        </td> -->
+                              <td>
+                                {{ per.appends?.user?.firstname }}
+                              </td>
+
+                              <td>
+                                <div class="g-2">
+                                  <button
+                                    (click)="updateModel(per)"
+                                    title="modifier"
+                                    class="btn btn-primary btn-sm mr-1"
+                                    type="button"
+                                  >
+                                    <i class="icofont-ui-edit size-18"></i>
+                                  </button>
+                                  <button
+                                    (click)="show(per)"
+                                    class="btn btn-success btn-sm mr-1"
+                                    title="voire"
+                                  >
+                                    <span
+                                      class="icofont-eye-open size-18"
+                                    ></span>
+                                  </button>
+
+                                  <button
+                                    (click)="openModalConfirm(per?.id)"
+                                    title="supprimer"
+                                    type="button"
+                                    class="btn btn-danger btn-sm"
+                                  >
+                                    <i class="icofont-ui-delete"></i>
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>
+                          </ng-container>
+
+                          <ng-container *ngIf="!permis?.length">
+                            <tr>
+                              <td colspan="7" class="text-center">
+                                Aucune données trouver
+                              </td>
+                            </tr>
+                          </ng-container>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="mb-3 mt-2" *ngIf="paramsPage && paramsPage.totalItems != 0">
+          <div class="d-inline ml-5" style="font-size: 13px">
+            Affiche {{ paramsPage.from ? paramsPage.from : 1 }} à
+            {{ paramsPage.to }} de {{ paramsPage.totalItems }} entrées
+          </div>
+          <div class="d-inline float-right">
+            <ngb-pagination
+              [pageSize]="paramsPage.itemsPerPage"
+              [collectionSize]="paramsPage.totalItems"
+              [(page)]="paramsPage.currentPage"
+              (pageChange)="getPage($event)"
+            >
+              <ng-template ngbPaginationFirst>First</ng-template>
+              <ng-template ngbPaginationLast>Last</ng-template>
+              <ng-template ngbPaginationPrevious>Prev</ng-template>
+              <ng-template ngbPaginationNext>Next</ng-template>
+            </ngb-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ROW-4 END -->
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Detail sur le Permis
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngIf="showPermis">
+        <!-- <div><p>nom du fornisseur : <strong>{{showPermis }}</strong></p></div>
+       <div><p>address du fornisseur : <strong>{{showPermis.appends?.categoriePermit. }}</strong></p></div> -->
+        <div>
+          <p>
+            numero du Permis : <strong>{{ showPermis.numeroPermis }}</strong>
+          </p>
+        </div>
+        <!-- <div>
+          <p>
+            status du permis :
+            <strong>{{ showPermis.appends?.compareDate }}</strong>
+          </p>
+        </div> -->
+        <div>
+          <p>
+            date d'enregistrement du permis :
+            <strong>{{ showPermis.created_at | date }}</strong>
+          </p>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-confirm-modal
+(actionConfirm)="deletePerm($event)"
+></app-confirm-modal>
+
+<ngx-loading
+  [show]="loading"
+  [config]="{ backdropBorderRadius: '3px' }"
+></ngx-loading>

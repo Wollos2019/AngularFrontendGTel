@@ -195,6 +195,43 @@
 
         <li class="nav-item">
           <a href="javascript:void(0)" class="nav-link">
+            <i class="nav-icon fas fa-user-alt"></i>
+            <p>
+              Service Production
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a
+                routerLink="/production/Commande"
+                [routerLinkActive]="['active']"
+                class="nav-link"
+              >
+                <i class="far fa-circle nav-icon"></i>
+                <p>Commandes</p>
+              </a>
+
+              <a routerLink="/production/grille-programmes"
+              [routerLinkActive]="['active']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Grille-programmes</p>
+              </a>
+
+              <a
+                routerLink="/production/conducteurs"
+                [routerLinkActive]="['active']"
+                class="nav-link"
+              >
+                <i class="far fa-circle nav-icon"></i>
+                <p>Conducteurs</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a href="javascript:void(0)" class="nav-link">
             <i class="nav-icon fas fa-copy"></i>
             <p>
               Commercial
@@ -371,6 +408,395 @@
             </li>
           </ul>
         </li>
+
+         <li class="nav-item">
+          <a routerLink="/vehicule/statistique-vehicule"  class="nav-link" [routerLinkActive]="['active']">
+            <i class="nav-icon icofont-vehicle-delivery-van"></i>
+            <p>
+              Parc Automobile 
+              <i class="fas fa-angle-left right"></i>
+            </p>
+            
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a
+                routerLink="/vehicule/list-vehicules"
+                class="nav-link"
+                [routerLinkActive]="['active']"
+              >
+                <i class="far fa-circle nav-icon"></i>
+                <p>vehicule</p>
+              </a> 
+            <a
+               routerLink="/vehicule/panne-vehicule"
+               class="nav-link"
+               [routerLinkActive]="['active']"
+              >
+                <i class="far fa-circle nav-icon"></i>
+                <p>panne-vehicule</p>
+             </a>
+              <a
+               routerLink="/vehicule/prise-vehicule"
+               class="nav-link"
+                [routerLinkActive]="['active']"
+              >
+                <i class="far fa-circle nav-icon"></i>
+                <p>Prise vehicules</p>
+             </a>
+
+             <a
+                routerLink="/vehicule/permis"
+                class="nav-link"
+                [routerLinkActive]="['active']"
+              >
+               <i class="far fa-circle nav-icon"></i>
+                <p>permis</p>
+              </a>
+              <a
+               routerLink="/vehicule/categorie-permis"
+               class="nav-link"
+                [routerLinkActive]="['active']"
+              >
+                <i class="far fa-circle nav-icon"></i>
+                <p>categorie-permis</p>
+              </a>
+               <a
+                routerLink="/vehicule/carburant"
+                class="nav-link"
+               [routerLinkActive]="['active']"
+             >
+                <i class="far fa-circle nav-icon"></i>
+               <p>carburant</p>
+             </a>
+
+             <a
+               routerLink="/vehicule/entretien"
+               class="nav-link"
+               [routerLinkActive]="['active']"
+              >
+               <i class="far fa-circle nav-icon"></i>
+                <p>entretien</p>
+             </a>
+             <a
+               routerLink="/vehicule/unity-mesure"
+               class="nav-link"
+                [routerLinkActive]="['active']"
+             >
+               <i class="far fa-circle nav-icon"></i>
+                <p>Symbole de mesures</p>
+              </a>
+
+              <a
+                routerLink="/vehicule/type-entretien"
+                class="nav-link"
+               [routerLinkActive]="['active']"
+              >
+                <i class="far fa-circle nav-icon"></i>
+                <p>Type entretien</p>
+              </a>
+
+              <!--<a
+                routerLink="/config/type_absences"
+                class="nav-link"
+                [routerLinkActive]="['active']"
+              >
+                <i class="far fa-circle nav-icon"></i>
+                <p>Types d'absences</p>
+              </a>
+
+              <a
+                routerLink="/config/sessions"
+                class="nav-link"
+                [routerLinkActive]="['active']"
+             >
+                <i class="far fa-circle nav-icon"></i>
+                <p>Sessions</p>
+             </a>
+              <a
+               routerLink="/config/pay"
+                class="nav-link"
+                [routerLinkActive]="['active']"
+              >
+                <i class="far fa-circle nav-icon"></i>
+                <p>Paie</p>
+              </a>
+              <a
+                routerLink="/config/contracts"
+                class="nav-link"
+                [routerLinkActive]="['active']"
+              >
+               <i class="far fa-circle nav-icon"></i>
+                <p>Type de contrat</p>
+             </a> -->
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a href="javascript:void(0)" class="nav-link">
+            <i class="nav-icon fas fa-copy"></i>
+            <p>
+              Assurances
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a
+                routerLink="/assurence/list-assurance"
+                class="nav-link"
+                [routerLinkActive]="['active']"
+              >
+                <i class="far fa-circle nav-icon"></i>
+                <p>List assurance</p>
+              </a> 
+            <!-- <a
+               routerLink="/vehicule/panne-vehicule"
+               class="nav-link"
+               [routerLinkActive]="['active']"
+              >
+                <i class="far fa-circle nav-icon"></i>
+                <p>panne-vehicule</p>
+             </a>
+              <a
+               routerLink="/vehicule/prise-vehicule"
+               class="nav-link"
+                [routerLinkActive]="['active']"
+              >
+                <i class="far fa-circle nav-icon"></i>
+                <p>Prise vehicules</p>
+             </a> -->
+
+              <!--<a
+               routerLink="/config/regions"
+               class="nav-link"
+               [routerLinkActive]="['active']"
+              >
+                <i class="far fa-circle nav-icon"></i>
+               <p>Regions/Provinces</p>
+           </a>
+
+             <a
+                routerLink="/config/banks"
+                class="nav-link"
+                [routerLinkActive]="['active']"
+              >
+               <i class="far fa-circle nav-icon"></i>
+                <p>Banque</p>
+              </a>
+              <a
+               routerLink="/config/categories"
+               class="nav-link"
+                [routerLinkActive]="['active']"
+              >
+                <i class="far fa-circle nav-icon"></i>
+                <p>Categories</p>
+              </a>
+              <a
+                routerLink="/config/fonctions"
+                class="nav-link"
+               [routerLinkActive]="['active']"
+             >
+                <i class="far fa-circle nav-icon"></i>
+               <p>Poste/Fonctions</p>
+             </a>
+
+             <a
+               routerLink="/config/working_days"
+               class="nav-link"
+               [routerLinkActive]="['active']"
+              >
+               <i class="far fa-circle nav-icon"></i>
+                <p>Jours de travail</p>
+             </a>
+             <a
+               routerLink="/config/holidays"
+               class="nav-link"
+                [routerLinkActive]="['active']"
+             >
+               <i class="far fa-circle nav-icon"></i>
+                <p>Jours de fériés</p>
+              </a>
+
+              <a
+                routerLink="/config/leave_requests"
+                class="nav-link"
+               [routerLinkActive]="['active']"
+              >
+                <i class="far fa-circle nav-icon"></i>
+                <p>Demandes congés</p>
+              </a>
+
+              <a
+                routerLink="/config/type_absences"
+                class="nav-link"
+                [routerLinkActive]="['active']"
+              >
+                <i class="far fa-circle nav-icon"></i>
+                <p>Types d'absences</p>
+              </a>
+
+              <a
+                routerLink="/config/sessions"
+                class="nav-link"
+                [routerLinkActive]="['active']"
+             >
+                <i class="far fa-circle nav-icon"></i>
+                <p>Sessions</p>
+             </a>
+              <a
+               routerLink="/config/pay"
+                class="nav-link"
+                [routerLinkActive]="['active']"
+              >
+                <i class="far fa-circle nav-icon"></i>
+                <p>Paie</p>
+              </a>
+              <a
+                routerLink="/config/contracts"
+                class="nav-link"
+                [routerLinkActive]="['active']"
+              >
+               <i class="far fa-circle nav-icon"></i>
+                <p>Type de contrat</p>
+             </a> -->
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a href="javascript:void(0)" class="nav-link">
+            <i class="nav-icon icofont-tools-bag"></i>
+            <p>
+              Fournisseurs
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a
+                routerLink="/fournisseur/list-fournisseur"
+                class="nav-link"
+                [routerLinkActive]="['active']"
+              >
+                <i class="far fa-circle nav-icon"></i>
+                <p>List Fournisseurs</p>
+              </a> 
+            <!-- <a
+               routerLink="/vehicule/panne-vehicule"
+               class="nav-link"
+               [routerLinkActive]="['active']"
+              >
+                <i class="far fa-circle nav-icon"></i>
+                <p>panne-vehicule</p>
+             </a>
+              <a
+               routerLink="/vehicule/prise-vehicule"
+               class="nav-link"
+                [routerLinkActive]="['active']"
+              >
+                <i class="far fa-circle nav-icon"></i>
+                <p>Prise vehicules</p>
+             </a> -->
+
+              <!--<a
+               routerLink="/config/regions"
+               class="nav-link"
+               [routerLinkActive]="['active']"
+              >
+                <i class="far fa-circle nav-icon"></i>
+               <p>Regions/Provinces</p>
+           </a>
+
+             <a
+                routerLink="/config/banks"
+                class="nav-link"
+                [routerLinkActive]="['active']"
+              >
+               <i class="far fa-circle nav-icon"></i>
+                <p>Banque</p>
+              </a>
+              <a
+               routerLink="/config/categories"
+               class="nav-link"
+                [routerLinkActive]="['active']"
+              >
+                <i class="far fa-circle nav-icon"></i>
+                <p>Categories</p>
+              </a>
+              <a
+                routerLink="/config/fonctions"
+                class="nav-link"
+               [routerLinkActive]="['active']"
+             >
+                <i class="far fa-circle nav-icon"></i>
+               <p>Poste/Fonctions</p>
+             </a>
+
+             <a
+               routerLink="/config/working_days"
+               class="nav-link"
+               [routerLinkActive]="['active']"
+              >
+               <i class="far fa-circle nav-icon"></i>
+                <p>Jours de travail</p>
+             </a>
+             <a
+               routerLink="/config/holidays"
+               class="nav-link"
+                [routerLinkActive]="['active']"
+             >
+               <i class="far fa-circle nav-icon"></i>
+                <p>Jours de fériés</p>
+              </a>
+
+              <a
+                routerLink="/config/leave_requests"
+                class="nav-link"
+               [routerLinkActive]="['active']"
+              >
+                <i class="far fa-circle nav-icon"></i>
+                <p>Demandes congés</p>
+              </a>
+
+              <a
+                routerLink="/config/type_absences"
+                class="nav-link"
+                [routerLinkActive]="['active']"
+              >
+                <i class="far fa-circle nav-icon"></i>
+                <p>Types d'absences</p>
+              </a>
+
+              <a
+                routerLink="/config/sessions"
+                class="nav-link"
+                [routerLinkActive]="['active']"
+             >
+                <i class="far fa-circle nav-icon"></i>
+                <p>Sessions</p>
+             </a>
+              <a
+               routerLink="/config/pay"
+                class="nav-link"
+                [routerLinkActive]="['active']"
+              >
+                <i class="far fa-circle nav-icon"></i>
+                <p>Paie</p>
+              </a>
+              <a
+                routerLink="/config/contracts"
+                class="nav-link"
+                [routerLinkActive]="['active']"
+              >
+               <i class="far fa-circle nav-icon"></i>
+                <p>Type de contrat</p>
+             </a> -->
+            </li>
+          </ul>
+        </li>
+
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

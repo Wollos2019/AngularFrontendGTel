@@ -3,13 +3,16 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { IProduct } from '../product/product';
-import { Iclient } from './client';
+import { Client, Iclient } from './client';
 import { ClientService } from './services/client.service';
 import { ProductService } from '../services/product.service';
-import { Icommande } from '../Commercial/commandes/commandes';
-import { CommandeService } from '../Commercial/commandes/services/commande.service';
+
 import { Router } from '@angular/router';
 import { IproductSelected } from '../product/productSelected';
+import { Icommande } from '../Commercial/commandes/commandes';
+import { CommandeService } from '../Commercial/commandes/services/commande.service';
+import { response } from 'express';
+import { getImage } from '../util/images';
 
 @Component({
   selector: 'app-client',
@@ -20,9 +23,10 @@ export class ClientComponent implements OnInit {
   listServiceFeature: any = [];
 
   public clients = [] as any;
-  public contenus = '';
+  public contenus = <string[]>{};
   public products = <IProduct[]>{};
   public selectedClient: any;
+  public client = new Client();
   public selectedProduct = <IproductSelected>{};
   public selectedProducts : any = [];
   public commande = <Icommande>{};
@@ -42,6 +46,7 @@ export class ClientComponent implements OnInit {
   public quantity = new FormControl('', Validators.required);
   public idCommande = '';
   public showError = false;
+  images ! : any;
   modalRef?: BsModalRef;
   public arr: FormControl[] = [this.c1, this.c2];
 
@@ -91,11 +96,12 @@ openModal2(template: TemplateRef<any>, client?:Iclient) {
 
 ngOnInit(): void {
   this.getList();
+  this.images = getImage();
 }
 
 getList () {
-  this.service.list().subscribe(response => {this.clients = response['data']});
-  this.serviceP.list().subscribe(response => this.products = response);
+  //this.service.list().subscribe(response => {this.clients = response['data']});
+  this.service.list().subscribe(response => this.clients = response);
       
 }
 
@@ -130,38 +136,43 @@ save(){
   }
 }
 
-save2(){
+// save2(){
 
-  for (var val of this.selectedProducts){
-    val.quantity = this.listServiceFeature[val.id];
-  }
+//   for (var val of this.selectedProducts) {
+//     val.quantity = this.listServiceFeature[val.id];
+//   }
   
-  for (var val of this.selectedProducts) {
-    this.contenus = " Nom du produit: "+val.productName+" Quantity: "+val.quantity+this.contenus;
-  }
+//   for (var val of this.selectedProducts) {
+//     let i:number = 0;
+//     while (i < this.selectedProducts.length) {
+//       this.contenus[i] = " Nom du produit: "+val.productName+" Quantity: "+val.quantity;
+//       i++;
+//     }
+    
+//   }
 
-  this.commande.contenu = this.contenus;
-  this.commande.idClient = this.selectedClient.id;
-  this.commande.nomClient = this.selectedClient.nom
-  this.serviceC.add(this.commande)
-    .subscribe(response =>{
-      if(response){
-        this.commandeContenus.push(response);
-        this.router.navigate(['/commercial/commandes']);
-      }
-      this.showError = false;
-      this.idCommande = this.commandeContenus[0].id;
-      for (var val of this.selectedProducts) {
-        val.idCommande = this.idCommande;
-        console.log(this.selectedProducts);
-        this.serviceC.addProduct(val)
-        .subscribe( response => console.log(response));
-      }
-      this.selectedProducts = [];
-      this.modalRef?.hide();
-    });
-    console.log(this.commandeContenus);
-}
+//   this.commande.contenu = 'this.contenus';
+//   this.commande.idClient = this.selectedClient.id;
+//   this.commande.nomClient = this.selectedClient.nom
+//   this.serviceC.add(this.commande)
+//     .subscribe(response =>{
+//       if(response){
+//         this.commandeContenus.push(response);
+//         this.router.navigate(['/commercial/commandes']);
+//       }
+//       this.showError = false;
+//       this.idCommande = this.commandeContenus[0].id;
+//       for (var val of this.selectedProducts) {
+//         val.idCommande = this.idCommande;
+//         console.log(this.selectedProducts);
+//         this.serviceC.addProduct(val)
+//         .subscribe( response => console.log(response));
+//       }
+//       this.selectedProducts = [];
+//       this.modalRef?.hide();
+//     });
+//     console.log(this.commandeContenus);
+// }
 
 delete(product:Iclient) {
   this.service.delete(product)
@@ -178,7 +189,7 @@ reset () {
   checked(product: IProduct) {
     this.selectedProduct = product;
     this.selectedProduct.idProduct = product.id
-    this.selectedProduct.productName = product.productName;
+    this.selectedProduct.productName = product.name;
     this.selectedProduct.checked = this.checkbox.value;
     //this.selectedProduct.quantity = this.input.value;
 
@@ -191,6 +202,18 @@ reset () {
       this.selectedProducts.push(this.selectedProduct);
     }
     console.log(this.selectedProducts);
+  }
+
+  relink(client? : Iclient) {
+    if(client) {
+      console.log(client);
+      this.router.navigate(['/commercial/saveCommande/'], {queryParams: {id:client.id, name:client.nom}});
+      
+    }
+  }
+
+  historique(client? : Iclient) {
+    this.router.navigate(['/commercial/historiqueClient/'+ client?.id]);
   }
 
 }

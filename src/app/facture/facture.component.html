@@ -1,56 +1,88 @@
-<div class="page-content" id="content">
-
-  <div style="text-align: center;">
-    <h1>Liste des factures</h1>
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Liste des factures</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a [routerLink]="'/'">Dashbord</a></li>
+          <li class="breadcrumb-item active">liste des factures</li>
+        </ol>
+      </div>
+    </div>
   </div>
+</section>
 
-  <table class="table">
-      <thead class="thead-light">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Numéro Commande</th>
-          <th scope="col">Nom du client</th>
-          <th scope="col">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let order of orders; index as i">
-          <th scope="row">{{i+1}}</th>
-          <td>{{order.idCommande}}</td>
-          <td>{{order.nomClient}}</td>
-          <td>
-            <!-- <button type="button" class="btn btn-info mr-1" (click)="openModal(template, order)">Modifier</button> -->
-            <button type="button" class="btn btn-info mr-1" (click)="getDetails(order)">Details</button>
-            <!-- <button type="button" class="btn btn-danger" (click)="delete(order)">Supprimer</button> -->
-          </td>
-        </tr>
-      </tbody>
-  </table>
-  
-    
-  <!-- <ng-template #template>
-    <div class="modal-header">
-      <h4 class="modal-title pull-left">{{modalTitle}}</h4>
-      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
-        <span aria-hidden="true" class="visually-hidden">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <div class="form-group">
-        <label for="exampleInputEmail1">Product Name</label>
-        <input type="text" class="form-control" placeholder="Enter Product Name" [formControl]="name">
-        <small *ngIf="name.errors?.['required'] && showError"><b> *Name is required.</b></small>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Product Description</label>
-        <input type="text" class="form-control" placeholder="Enter Product Description" [formControl]="description">
-      </div>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Product Price</label>
-        <input type="number" class="form-control" placeholder="Enter Product Price" [formControl]="price">
-      </div>
-      <button type="button" class="btn btn-primary mb-2">{{btnTitle}}</button>
-    </div>
-  </ng-template> -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <a class="btn btn-info float-right" type="button" [routerLink]="['/commercial/saveClient']">Nouveau</a>
+            <div class="input-group input-group-sm" style="width: 200px;">
+              <input type="text" name="table_search" class="form-control float-right" placeholder="Rechercher">
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-default">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <table class="table table-bordered">
+              <thead>
+                <tr class="bg-dark text-white">
+                  <th scope="col">#</th>
+                  <th scope="col">Numéro Commande</th>
+                  <th scope="col">Nom du client</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let order of orders; index as i">
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{order.idCommande}}</td>
+                  <td>{{order.client.nom + ' ' + order.client.prenom}}</td>
+                  <td>
+                    <!-- <button type="button" class="btn btn-info mr-1" (click)="openModal(template, order)">Modifier</button> -->
+                    <button type="button" class="btn btn-info mr-1" (click)="getDetails(order)">Details</button>
+                    <!-- <button type="button" class="btn btn-danger" (click)="delete(order)">Supprimer</button> -->
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-</div>
+          <div class="card-footer">
+            <div class="mb-3 mt-2" *ngIf="paramsPage && paramsPage.totalItems != 0">
+              <div class="d-inline ml-5" style="font-size: 13px" >
+                Affiche {{ paramsPage.from ? paramsPage.from : 1 }} à {{ paramsPage.to }} de
+                {{ paramsPage.totalItems }} entrées
+              </div>
+              <div class="d-inline float-right" style="font-size: 13px">
+                <ngb-pagination
+                  [pageSize]="paramsPage.itemsPerPage"
+                  [collectionSize]="paramsPage.totalItems"
+                  [(page)]="paramsPage.currentPage"
+                  (pageChange)="getPage($event)"
+                >
+                  <ng-template ngbPaginationFirst>First</ng-template>
+                  <ng-template ngbPaginationLast>Last</ng-template>
+                  <ng-template ngbPaginationPrevious>Prev</ng-template>
+                  <ng-template ngbPaginationNext>Next</ng-template>
+                </ngb-pagination>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ngx-loading
+  [show]="loading"
+  [config]="{ backdropBorderRadius: '3px' }"
+></ngx-loading>

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { IFacture } from '../ifacture';
+import { Facture, IFacture } from '../ifacture';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +18,9 @@ export class FactureService {
 
   add(facture:IFacture) : Observable<IFacture> {
     return this.http.post<IFacture>(`${this.URL_COMMER}factures`, facture);
+  }
+
+  getOneFacture(id:number): Observable<Facture> {
+    return this.http.get<Facture>(`${this.URL_COMMER}factures/${id}`);
   }
 }

@@ -1,0 +1,306 @@
+
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Pannes</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a [routerLink]="'/'">Dashbord</a></li>
+            <li class="breadcrumb-item active">Pannes</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+
+
+
+
+
+<!-- <div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+        <div class="card bg-primary img-card box-primary-shadow">
+            <div class="card-body">
+                <div class="d-flex">
+                    <div class="text-white">
+                        <h2 class="mb-0 number-font">7,865</h2>
+                        <p class="text-white mb-0">Total Followers </p>
+                    </div>
+                    <div class="ms-auto"> <i class="fa fa-user-o text-white fs-30 me-2 mt-2"></i> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- COL END -->
+    <!-- <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+        <div class="card bg-secondary img-card box-secondary-shadow">
+            <div class="card-body">
+                <div class="d-flex">
+                    <div class="text-white">
+                        <h2 class="mb-0 number-font">86,964</h2>
+                        <p class="text-white mb-0">Total Likes</p>
+                    </div>
+                    <div class="ms-auto"> <i class="fa fa-heart-o text-white fs-30 me-2 mt-2"></i> </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- COL END -->
+    <!-- <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+        <div class="card  bg-success img-card box-success-shadow">
+            <div class="card-body">
+                <div class="d-flex">
+                    <div class="text-white">
+                        <h2 class="mb-0 number-font">98</h2>
+                        <p class="text-white mb-0">Total Comments</p>
+                    </div>
+                    <div class="ms-auto"> <i class="fa fa-comment-o text-white fs-30 me-2 mt-2"></i> </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- COL END -->
+    <!-- <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+        <div class="card bg-info img-card box-info-shadow">
+            <div class="card-body">
+                <div class="d-flex">
+                    <div class="text-white">
+                        <h2 class="mb-0 number-font">893</h2>
+                        <p class="text-white mb-0">Total Posts</p>
+                    </div>
+                    <div class="ms-auto"> <i class="fa fa-envelope-o text-white fs-30 me-2 mt-2"></i> </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- COL END -->
+<!--</div> -->
+
+
+
+<!-- ROW-4 -->
+<div class="row">
+  <div class="col-12 col-sm-12">
+    <div class="card">
+      <div class="card-header">
+        <button
+          type="button"
+          class="btn btn-primary btn-sm float-right"
+          (click)="openModel()"
+        >
+          Ajouter une panne
+        </button>
+      </div>
+      <div class="card-body pt-4">
+        <div class="grid-margin">
+          <div class="">
+            <div class="panel panel-primary">
+              <div class="panel-body tabs-menu-body border-0 pt-0">
+                <div class="tab-content">
+                  <div class="tab-pane active" id="tab5">
+                    <div class="table-responsive">
+                      <table class="table table-bordered">
+                        <thead>
+                          <tr class="bg-dark text-white">
+                            <th>#</th>
+                            <th>libelle Panne</th>
+                            <th>description Panne</th>
+                            <th>date Debut Panne</th>
+                            <th>date Fin Panne</th>
+                            <th>cout Main Oeuvre</th>
+                            <th>facture Main Oeuvre</th>
+                            <!-- <th>status du permis</th> -->
+                            
+
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <ng-container *ngIf="pannes">
+                            <tr
+                              class="border-bottom"
+                              *ngFor="let per of pannes; let i = index"
+                            >
+                              <td class="text-center">
+                                {{ per.id }}
+                              </td>
+                              <td>
+                                {{ per.libellePanne }}
+                              </td>
+                              <!-- <td>
+                                <ng-container *ngIf="per?.appends?.categoriePermit?.length">
+                                  <ng-container *ngFor="let p of  per?.appends?.categoriePermit">
+                                    <span class="badge badge-primary mx-1">
+                                      {{p.libelle}}
+                                    </span>
+
+                                  </ng-container> -->
+                                  <!-- {{ per?.appends.categoriePermit[0]?.pivot?.numeroDossierPermis}} -->
+                                <!-- </ng-container>
+                              
+                              </td> -->
+                             
+                              <td>
+                                {{ per.descriptionPanne}}
+                              </td>
+                              <!-- <td>
+                                         {{per.dateFinAssurance}}
+                                        </td>
+                                        <td>
+                                            
+                                                {{per.scanAssurance}}
+                                             
+                                        </td> -->
+                              <td>
+                                {{ per.dateDebutPanne | date}}
+                              </td>
+                              <td>
+                                {{ per.dateFinPanne | date}}
+                              </td>
+                              <td>
+                                {{ per.coutMainOeuvre  | currency:'XAF':'CFA'}}  
+                              </td>
+                              <td>
+                                {{ per.factureMainOeuvre | currency:'XAF':'CFA'}}
+                              </td>
+                              
+                             
+                              <!-- <td>
+                                <ng-container *ngIf="per.appends?.compareDate==='encore valide'; else templstat">
+                                  <h4><span class="badge badge-info badge  "> {{per.appends?.compareDate}}</span></h4>
+                                 </ng-container >
+                                 <ng-template #templstat>
+                                 <h4> <span class="badge badge-danger badge  "> {{per.appends?.compareDate}}</span></h4>
+
+                                 </ng-template>
+                              </td> -->
+                              
+
+                              <td>
+                                <div class="g-2">
+                                   <button
+                                               (click)="updateModel(per)"
+                                                title="modifier"
+                                                class="btn btn-primary btn-sm mr-1"
+                                                type="button"
+                                               
+                                              >
+                                                <i class="icofont-ui-edit size-18 "></i>
+                                            </button>  
+                                 <button
+                                    (click)="show(per)"
+                                    class="btn btn-success btn-sm mr-1"
+                                          
+                                            title="voire"
+                                            ><span
+                                              class="icofont-eye-open size-18 "
+                                            ></span>
+                                  </button>
+
+                                  <button
+                                              (click)="openModalConfirm(per?.id)"
+                                                title="supprimer"
+                                                type="button"
+                                                class="btn btn-danger  btn-sm"
+                                              >
+                                                <i class="icofont-ui-delete "></i>
+                                              </button>  
+                                </div>
+                              </td>
+                            </tr>
+                          </ng-container>
+
+                          <ng-container *ngIf="!pannes?.length">
+                            <tr>
+                              <td colspan="8" class="text-center">
+                                Aucune données trouver
+                              </td>
+                            </tr>
+                          </ng-container>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="mb-3 mt-2" *ngIf="paramsPage && paramsPage.totalItems != 0">
+          <div class="d-inline ml-5" style="font-size: 13px" >
+            Affiche {{ paramsPage.from ? paramsPage.from : 1 }} à {{ paramsPage.to }} de
+            {{ paramsPage.totalItems }} entrées
+          </div>
+          <div class="d-inline float-right">
+            <ngb-pagination
+              [pageSize]="paramsPage.itemsPerPage"
+              [collectionSize]="paramsPage.totalItems"
+              [(page)]="paramsPage.currentPage"
+              (pageChange)="getPage($event)"
+            >
+              <ng-template ngbPaginationFirst>First</ng-template>
+              <ng-template ngbPaginationLast>Last</ng-template>
+              <ng-template ngbPaginationPrevious>Prev</ng-template>
+              <ng-template ngbPaginationNext>Next</ng-template>
+            </ngb-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ROW-4 END -->
+<!-- Modal -->
+<div
+class="modal fade"
+id="exampleModal"
+tabindex="-1"
+aria-labelledby="exampleModalLabel"
+aria-hidden="true"
+>
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Detail du panne</h5>
+      <button
+        type="button"
+        class="close"
+        data-dismiss="modal"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" *ngIf="showPannes">
+     
+      <div><p>Nom de la panne<strong>{{ showPannes.libellePanne }}</strong></p></div>
+      <div><p>Description de la panne : <strong>{{ showPannes.descriptionPanne }}</strong></p></div>
+      <div><p>date debut de la panne : <strong>{{ showPannes.dateDebutPanne | date}}</strong></p></div>
+      <div><p>date fin de la panne : <strong>{{ showPannes.dateFinPanne | date}}</strong></p></div>
+      <div><p>cout main oeuvre de la panne : <strong>{{ showPannes.coutMainOeuvre | currency:'XAF':'CFA'}}</strong></p></div>
+      <div><p>facture de la panne : <strong>{{ showPannes.factureMainOeuvre | currency:'XAF':'CFA'}}</strong></p></div>
+      <div><p>nom du vehicule de la panne : <strong>{{ showPannes.appends?.Vehicule?.libelleVehicule }}</strong></p></div>
+      <div><p>nom fournisseur de la panne : <strong>{{ showPannes.appends?.fourniseur?.libelleFournisseur }}</strong></p></div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+</div> 
+
+<app-confirm-modal
+(actionConfirm)="deletePanne($event)"
+></app-confirm-modal>
+  <ngx-loading
+  [show]="loading"
+  [config]="{ backdropBorderRadius: '3px' }"
+></ngx-loading>

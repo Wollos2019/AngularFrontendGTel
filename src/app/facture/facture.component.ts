@@ -13,6 +13,8 @@ import { Observable } from 'rxjs';
 import { FactureService } from './services/facture.service';
 import { IFacture } from './ifacture';
 import { Router } from '@angular/router';
+import { Pagination } from '../util/pagination';
+
 
 
 @Component({
@@ -22,6 +24,8 @@ import { Router } from '@angular/router';
 })
 export class FactureComponent implements OnInit {
   URL_COMMER = environment.URL_COMMER;
+  paramsPage:any;
+  loading = false;
 
   @ViewChild('content', {static:false}) el!:ElementRef;
   //@ViewChild('content') content!:ElementRef;
@@ -92,14 +96,18 @@ export class FactureComponent implements OnInit {
      }
 
   ngOnInit(): void {
-    //this.getList();
-    this.getFacture();
+    this.getList();
+    //this.getFacture();
     //this.getTotalAmount();
   }
 
-  getList () {
-    this.service.list()
-      .subscribe((data:IProduct[]) => this.products = data);      
+  getList (params='') {
+    this.serviceFac.list()
+      .subscribe((response:IFacture[]) => {
+        this.paramsPage = new Pagination().setPagination(response);
+        this.orders = response;
+        console.log(this.orders);
+      });      
   }
 
   getFacture () {
@@ -109,6 +117,11 @@ export class FactureComponent implements OnInit {
 
   getDetails(order:IFacture) {
     this.router.navigate(['/commercial/factures/'+ order.id]);
+  }
+
+  getPage(data: any): void {
+    console.log(data);
+    this.getList(`page=${data}`);
   }
 
 }
