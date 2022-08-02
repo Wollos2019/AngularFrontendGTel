@@ -15,41 +15,41 @@ export class AssuranceService {
    //GESTION DES ASSURANCE
 /**
  * fonction pour recuper toutes les assurance
- * @param params 
- * @returns 
+ * @param params
+ * @returns
  */
  getAllAssurances(params=''):Observable<Assurance[]>{
-  return this.httpClient.get<Assurance[]>(`${this.apiUrl}assurances/${params}`);
+  return this.httpClient.get<Assurance[]>(`${this.apiUrl}assurances?${params}`);
 }
 /**
  * fonction pour recuper une assurance
- * @param assurance 
- * @returns 
+ * @param assurance
+ * @returns
  */
 getOneAssurance(assurance:Assurance):Observable<Assurance>{
   return this.httpClient.get<Assurance>(`${this.apiUrl}assurances/${assurance.id}`);
 }
 /**
  * fonction pour mettre a jour une assurance
- * @param assurance 
- * @returns 
+ * @param assurance
+ * @returns
  */
 updateAssurance(assurance:Assurance):Observable<Assurance>{
   return this.httpClient.post<Assurance>(`${this.apiUrl}assurances/${assurance.id}`,assurance);
 }
 /**
  * fonction pour supprimer une assurance
- * @param assurance 
- * @returns 
+ * @param assurance
+ * @returns
  */
-deleteAssurance(assurance:Assurance):Observable<Assurance>{
-  return this.httpClient.delete<Assurance>(`${this.apiUrl}assurances/${assurance.id}`);
+deleteAssurance(id:Number):Observable<Assurance>{
+  return this.httpClient.delete<Assurance>(`${this.apiUrl}assurances/${id}`);
 }
 
 /**
  * fonction pour creer une assurance
- * @param assurance 
- * @returns 
+ * @param assurance
+ * @returns
  */
 createAssurance(assurance:any):Observable<Assurance>{
   return this.httpClient.post<Assurance>(`${this.apiUrl}assurances`,assurance);

@@ -33,6 +33,7 @@ export class PermisComponent implements OnInit {
   array:any[]=[];
   permisUpdate!:boolean;
   submittedUpdate=false
+  currentID!: Number;
   constructor(
     private fb:FormBuilder,
     private toastr : ToastrService,
@@ -147,14 +148,38 @@ export class PermisComponent implements OnInit {
   }
 
 
-  deletePerm(permis: IPermis): void {
+  // deletePerm(permis: IPermis): void {
+  //   this.loading = true;
+  //   var confir = confirm('Voulez vous supprimer cet element?');
+  //   if (confir) {
+  //     this.vehiculeService.deletePermi(permis).subscribe({
+  //       next: () => {
+  //         this.loading = false;
+  //         this.toastr.success('Suppression effectuée');
+  //         this.getListPermi();
+  //       },
+  //       error: (error: any) => {
+  //         this.loading = false;
+  
+  //         console.error('Error', error);
+  
+  //         this.toastr.error(
+  //           "Une Erreur c'est produite l'hors de la suppression",
+  //           'Error'
+  //         );
+  //       },
+  //     });
+  //   }
+  // }
+  deletePerm(ev: boolean): void {
     this.loading = true;
-    var confir = confirm('Voulez vous supprimer cet element?');
-    if (confir) {
-      this.vehiculeService.deletePermi(permis).subscribe({
+   
+    if (ev) {
+      this.vehiculeService.deletePermi(this.currentID).subscribe({
         next: () => {
           this.loading = false;
           this.toastr.success('Suppression effectuée');
+          $('#confirm').modal('hide');
           this.getListPermi();
         },
         error: (error: any) => {
@@ -170,7 +195,6 @@ export class PermisComponent implements OnInit {
       });
     }
   }
-
 
  
 
@@ -200,4 +224,11 @@ export class PermisComponent implements OnInit {
   asArra(ar:ICategoriePermis[] | undefined):ICategoriePermis[]{
     return (ar as ICategoriePermis[])
   }
+
+  openModalConfirm(id?: number): void {
+    this.currentID = Number(id);
+    console.log("ggggggggggggggg",this.currentID!);
+    $('#confirm').modal('show');
+  }
+
 }

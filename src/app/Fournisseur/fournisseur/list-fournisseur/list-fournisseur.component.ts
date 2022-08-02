@@ -22,14 +22,15 @@ export class ListFournisseurComponent implements OnInit {
   showFournisseur!: Fournisseur;
   submittedUpdate!: boolean;
 FournisseurUpdate!: Fournisseur;
+  currentID!: number;
   constructor(private fb:FormBuilder,
               private fournisseurService:FournisseurService,
               private toastr:ToastrService) { }
 
               editForm=this.fb.group({
                 libelleFournisseur:['', [Validators.required]],
-                telephone1:['',[Validators.required]],
-                telephone2:['', [Validators.required]],
+                telephone1:['',[Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
+                telephone2:['', [Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
                 addressFournisseur:['', [Validators.required]],
                 
               });
@@ -37,8 +38,8 @@ FournisseurUpdate!: Fournisseur;
 
               updateFournisseurForm=this.fb.group({
                 libelleFournisseur:['', [Validators.required]],
-                telephone1:['',[Validators.required]],
-                telephone2:['', [Validators.required]],
+                telephone1:['',[Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
+                telephone2:['', [Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
                 addressFournisseur:['', [Validators.required]],
                 
               });
@@ -125,14 +126,15 @@ FournisseurUpdate!: Fournisseur;
   }
 
 
-  delete(fournisseurId: Fournisseur): void {
+  deleteFourni(ev:boolean): void {
     this.loading = true;
-    var confir = confirm('Voulez vous supprimer cet element?');
-    if (confir) {
-      this.fournisseurService.deleteFournisseur(fournisseurId).subscribe({
+   
+    if (ev) {
+      this.fournisseurService.deleteFournisseur(this.currentID).subscribe({
         next: () => {
           this.loading = false;
           this.toastr.success('Suppression effectuée');
+          $('#confirm').modal('hide');
           this.getAllFournisseurs();
         },
         error: (error: any) => {
@@ -218,9 +220,15 @@ show(fournisseur: Fournisseur): void {
    * 
    * @param data 
    */
-   getPage(data: any): void {
-    console.log(data);
-    this.getAllFournisseurs(`page=${data}`);
+   getPage(params: any): void {
+    console.log(params);
+    this.getAllFournisseurs(`page=${params}`);
+  }
+
+  openModalConfirm(id?: number): void {
+    this.currentID = Number(id);
+    console.log("ggggggggggggggg",this.currentID!);
+    $('#confirm').modal('show');
   }
 
 }

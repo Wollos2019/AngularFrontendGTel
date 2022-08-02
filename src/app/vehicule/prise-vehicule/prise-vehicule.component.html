@@ -134,7 +134,7 @@
                                               
                         
                                                <button
-                                              (click)="deletePriseVehicule(pv)"
+                                              (click)="openModalConfirm(pv?.id)"
                                                 title="supprimer"
                                                 type="button"
                                                 class="btn btn-primary btn-light btn-sm"
@@ -540,6 +540,9 @@
     </div>
   </div>  
     
+  <app-confirm-modal
+  (actionConfirm)="deletePriseVehicule($event)"
+></app-confirm-modal>
 
   <ngx-loading
   [show]="loading"

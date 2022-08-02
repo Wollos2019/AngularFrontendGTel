@@ -2,7 +2,7 @@ import { IPanne } from "src/app/vehicule/models/panne.model";
 
 
 export interface IFournisseur {
-    id?:string;
+    id?:number;
     libelleFournisseur?:string;
     telephone1?:string;
     telephone2?:string;
@@ -19,7 +19,7 @@ export interface IFournisseur {
   }
   export class Fournisseur implements IFournisseur{
     constructor(
-  public id?:string,
+  public id?:number,
   public libelleFournisseur?:string,
   public telephone1?:string,
   public telephone2?:string,

@@ -4,82 +4,196 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>liste des vehicules</h1>
+          <h1>vehicules</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a [routerLink]="'/'">Dashbord</a></li>
-            <li class="breadcrumb-item active">liste des vehicules</li>
+            <li class="breadcrumb-item active">vehicules</li>
           </ol>
         </div>
       </div>
     </div>
     <!-- /.container-fluid -->
   </section>
-   
-  <div class="row">
-    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
-        <div class="card">
-            <div class="card-body text-center">
-                <i class="fas fa-angle-left  text-primary fa-3x"></i>
-                <h6 class="mt-4 mb-2">Total Visit</h6>
-                <h2 class="mb-2 number-font">834</h2>
-                <p class="text-muted">Sed ut perspiciatis unde omnis accusantium doloremque</p>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+
+
+
+
+
+      <div class="row">
+        <div class="col-md-3 col-sm-6 col-12">
+          <div class="info-box shadow-lg">
+            <span class="info-box-icon bg-info"><i class="fas fa-car"></i></span>
+
+            <div class="info-box-content">
+              <a  (click)="openVehicule()">
+              <span class="info-box-text">VEHICULES</span>
+              <span class="info-box-number">Créer un vehicule</span>
+              </a>
             </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
         </div>
-    </div>
-    <!-- COL END -->
-    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
-        <div class="card">
-            <div class="card-body text-center">
-                <i class="fas fa-angle text-secondary fa-3x"></i>
-                <h6 class="mt-4 mb-2">Cost per Click</h6>
-                <h2 class="mb-2  number-font">$34,516</h2>
-                <p class="text-muted">Sed ut perspiciatis unde omnis accusantium doloremque</p>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-12">
+          <div class="info-box shadow-lg">
+            <span class="info-box-icon bg-success">
+              <!-- <i class="far fa-flag"></i> -->
+              <i class="far fa-wrench"></i>
+              <!-- <i class="fas fa-garage"></i> -->
+            </span>
+
+            <div class="info-box-content">
+              <a  (click)="openPanne()">
+              <span class="info-box-text">PANNES</span>
+              <span class="info-box-number">Créer une panne</span>
+              </a>
             </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
         </div>
-    </div>
-    <!-- COL END -->
-    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
-        <div class="card">
-            <div class="card-body text-center">
-                <i class="fa fa-comment-o text-success fa-3x"></i>
-                <h6 class="mt-4 mb-2">Investment</h6>
-                <h2 class="mb-2 number-font">80%</h2>
-                <p class="text-muted">Sed ut perspiciatis unde omnis accusantium doloremque</p>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-12">
+          <div class="info-box shadow-lg">
+            <span class="info-box-icon bg-warning">
+              <!-- <i class="far fa-copy"></i> -->
+              <i class="fas fa-gas-pump"></i>
+            </span>
+
+            <div class="info-box-content">
+              <a  (click)="openEntretien()">
+              <span class="info-box-text">ENTRETIEN</span>
+              <span class="info-box-number">Créer un entretien</span>
+              </a>
             </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
         </div>
-    </div>
-    <!-- COL END -->
-    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
-        <div class="card">
-            <div class="card-body text-center">
-                <i class="fa fa-pie-chart text-info fa-3x"></i>
-                <h6 class="mt-4 mb-2">Revenue</h6>
-                <h2 class="mb-2  number-font">70k</h2>
-                <p class="text-muted">Sed ut perspiciatis unde omnis accusantium doloremque</p>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-12">
+          <div class="info-box shadow-lg">
+            <span class="info-box-icon bg-dark"><i class="far fa-star"></i></span>
+
+            <div class="info-box-content">
+              <a  (click)="openTypeEntretien()">
+              <span class="info-box-text">TYPE ENTRETIEN</span>
+              <span class="info-box-number">Créer un entretien</span>
+              </a>
             </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
         </div>
-    </div>
-    <!-- COL END -->
-</div>
+        <!-- /.col -->
+      </div>
+
+     <div class="row">
+        <div class="col-md-3 col-sm-6 col-12">
+          <div class="info-box shadow-lg">
+            <span class="info-box-icon bg-gradient-primary"><i class="far fa-car-tilt"></i></span>
+
+            <div class="info-box-content">
+              <a (click)="openAssurance()">
+              <span class="info-box-text">ASSURANCE</span>
+              <span class="info-box-number">creer une assurance</span>
+              </a>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-12">
+          <div class="info-box shadow-lg">
+            <span class="info-box-icon bg-secondary"><i class="far fa-flag"></i></span>
+
+            <div class="info-box-content">
+              <a (click)="openFournisseur()">
+              <span class="info-box-text">FOURNISSEUR</span>
+              <span class="info-box-number">creer un fournisseur</span>
+            </a>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-12">
+          <div class="info-box shadow-lg">
+            <span class="info-box-icon bg-indigo"><i class="far fa-copy"></i></span>
+
+            <div class="info-box-content">
+              <a routerLink="openAssurance()">
+              <span class="info-box-text">Shadows</span>
+              <span class="info-box-number">Regular</span>
+              </a>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-12">
+          <div class="info-box shadow-lg">
+            <span class="info-box-icon bg-gray"><i class="far fa-star"></i></span>
+
+            <div class="info-box-content">
+              <a href="" >
+              <span class="info-box-text">Shadows</span>
+              <span class="info-box-number">Large</span>
+              </a>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+
+
+
+
 
     <!-- ROW-4 -->
     <div class="row">
       <div class="col-12 col-sm-12">
         <div class="card">
           <div class="card-header">
-           
-           
-            <button type="button" class="btn btn-primary btn-sm float-right" (click)="openModel()">
-                Ajouter un vehicule
+            <div class="row no-print">
+              <div class="col-12">
+                <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+                <button type="button" class="btn btn-default float-right"><i class="far fa-print"></i> Excel
+                 
+                </button>
+                <button type="button" class="btn btn-default float-right" style="margin-right: 5px;">
+                  <i class="fas fa-download"></i> Generate PDF
+                </button>
+              </div>
+            </div>
+
+            <button type="button" class="btn btn-primary btn-sm float-right" (click)="openModel()"  title="Ajouter un vehicule">
+              <i class="fas fa-plus-circle size-18 "></i> ajouter
               </button>
           </div>
           <div class="card-body pt-4">
             <div class="grid-margin">
               <div class="">
                 <div class="panel panel-primary">
-                  
+
                   <div
                     class="panel-body tabs-menu-body border-0 pt-0"
                   >
@@ -87,123 +201,99 @@
                       <div class="tab-pane active" id="tab5">
                         <div class="table-responsive">
                           <table
-                           
+
                             class="table table-bordered"
                           >
                             <thead >
                               <tr class="bg-dark text-white">
                                 <th
-                                  
+
                                 >
-                                   Id
+                                   #
                                 </th>
                                 <th
-                                 
+
                                 >
                                 libelle Vehicule
                                 </th>
                                 <th
-                                  
+
                                 >
                                 numero Identifiant
                                 </th>
                                 <th
-                                  
+
                                 >
                                 immatriculation
                                 </th>
                                 <th
-                                 
+
                                 >
-                                carte Grise
+                               Type Carburant
                                 </th>
                                 <th
-                                 
+
                                 >
-                                nombre Place
+                               Marque
                                 </th>
+                               
+                               
                                 <th
-                                  
-                                >
-                                longueur Vehicule
-                                </th>
-                                <th
-                                  
-                                >
-                                duree Vie
-                                </th>
-                                <th
-                                  
+
                                 >
                                 date Mise Circulation
                                 </th>
+                              
                                 <th
-                                  
-                                >
-                                delai Alerte
-                                </th>
-                                <th
-                                  
+
                                 >
                                   Action
                                 </th>
-                               
+
                               </tr>
                             </thead>
                             <tbody>
                                 <ng-container *ngIf="vehicules">
                                     <tr class="border-bottom" *ngFor="let v of vehicules; let i=index">
                                         <td class="text-center">
-                                       
+
                                               {{v.id}}
-                                       
+
                                         </td>
                                         <td>
-                                        
+
                                                 {{v.libelleVehicule}}
-                                       
+
                                         </td>
                                         <td>
-                                         
+
                                                 {{v.numeroIdentifiant}}
-                                             
+
                                         </td>
                                         <td>
                                          {{v.immatriculation}}
                                         </td>
                                         <td>
-                                         {{v.carteGrise}}
+                                         {{v.carburant}}
                                         </td>
                                         <td>
-                                          
-                                             {{v.nombrePlace}}
-                                            
+
+                                             {{v.marque}}
+
                                         </td>
-                                        <td>
-                                         
-                                            {{v.longueurVehicule}}
-                                          
-                                        </td>
-                                        <td>
-                                           
-                                              {{v.dureeVie}}
-                                            
-                                          </td>
+                                       
+                                       
                                           <td>
-                                           
+
                                               {{v.dateMiseCirculation}}
-                                           
+
                                           </td>
-                                          <td>
-                                           
-                                              {{v.delaiAlerte}}
-                                           
-                                          </td>
+                                          
                                         <td>
                                             <div class="g-2">
                                               <button (click)="show(v)"
                                             class="btn btn-success btn-sm mr-1"
-                                          
+
                                             title="voire"
                                             ><span
                                               class="icofont-eye-open size-18 "
@@ -214,29 +304,29 @@
                                                 title="modifier"
                                                 class="btn btn-primary btn-sm mr-1"
                                                 type="button"
-                                               
+
                                               >
                                                 <i class="icofont-ui-edit size-18 "></i>
                                             </button>
-                                              
-                        
+
+
                                               <button
-                                              (click)="deleteVehicule(v)"
+                                              (click)="openModalConfirm(v?.id)"
                                                 title="supprimer"
                                                 type="button"
                                                 class="btn btn-danger  btn-sm"
                                               >
                                                 <i class="icofont-ui-delete size-18 "></i>
                                               </button>
-                                               
+
                                               </div>
                                         </td>
                                       </tr>
                                     </ng-container>
-                            
+
                                     <ng-container *ngIf="!vehicules?.length">
                                         <tr>
-                                          <td colspan="4" class="text-center">
+                                          <td colspan="11" class="text-center">
                                             Aucune données trouver
                                           </td>
                                         </tr>
@@ -245,7 +335,7 @@
                           </table>
                         </div>
                       </div>
-                    
+
                       </div>
                     </div>
                   </div>
@@ -262,6 +352,7 @@
                   <ngb-pagination
                     [pageSize]="paramsPage.itemsPerPage"
                     [collectionSize]="paramsPage.totalItems"
+                    [maxSize]="5"
                     [(page)]="paramsPage.currentPage"
                     (pageChange)="getPage($event)"
                   >
@@ -277,10 +368,10 @@
 
         </div>
       </div>
-    
+
     <!-- ROW-4 END -->
-    
-  
+
+
     <div
       class="modal fade"
       id="createModal"
@@ -288,7 +379,7 @@
       aria-labelledby="createModal"
       aria-hidden="true"
     >
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-lg ">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="createModal">Ajouter un vehicule</h5>
@@ -309,7 +400,7 @@
                     formControlName="libelleVehicule"
                   />
                 </div>
-    
+
                 <div *ngIf="submitted && f.libelleVehicule.errors" class="invalid-feedback">
                   <div *ngIf="f.libelleVehicule.errors.required">name is required</div>
                   <!-- <div *ngIf="f.libelleVehicule.errors.minlength">
@@ -332,7 +423,7 @@
                     formControlName="numeroIdentifiant"
                   />
                 </div>
-    
+
                 <div *ngIf="submitted && f.numeroIdentifiant.errors" class="invalid-feedback">
                   <div *ngIf="f.numeroIdentifiant.errors.required">numero identifiant required</div>
                   <!-- <div *ngIf="f.numeroIdentifiant.errors.minlength">
@@ -357,7 +448,7 @@
                     formControlName="immatriculation"
                   />
                 </div>
-    
+
                 <div *ngIf="submitted && f.immatriculation.errors" class="invalid-feedback">
                   <div *ngIf="f.immatriculation.errors.required">immatriculation is required</div>
                   <!-- <div *ngIf="f.immatriculation.errors.minlength">
@@ -382,7 +473,7 @@
                     formControlName="carteGrise"
                   />
                 </div>
-    
+
                 <div *ngIf="submitted && f.carteGrise.errors" class="invalid-feedback">
                   <div *ngIf="f.carteGrise.errors.required">carte Grise is required</div>
                   <!-- <div *ngIf="f.carteGrise.errors.minlength">
@@ -408,7 +499,7 @@
                     formControlName="nombrePlace"
                   />
                 </div>
-    
+
                 <div *ngIf="submitted && f.nombrePlace.errors" class="invalid-feedback">
                   <div *ngIf="f.nombrePlace.errors.required">nombre Place is required</div>
                   <!-- <div *ngIf="f.nombrePlace.errors.minlength">
@@ -434,7 +525,7 @@
                     formControlName="longueurVehicule"
                   />
                 </div>
-    
+
                 <div *ngIf="submitted && f.longueurVehicule.errors" class="invalid-feedback">
                   <div *ngIf="f.longueurVehicule.errors.required">longueur Vehicule is required</div>
                   <!-- <div *ngIf="f.longueurVehicule.errors.minlength">
@@ -444,7 +535,32 @@
               </div>
 
 
-
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="carburant"
+                    >Type Carburant<span class="text-danger">*</span></label
+                  >
+                  <select
+                    id="sexe"
+                    class="form-control"
+                    formControlName="carburant"
+                    [ngClass]="{ 'is-invalid': submitted && f.carburant.errors }"
+                  >
+                    <option selected="selected" value="">---</option>
+                    <option [value]="TYPECARBURANT.ESSENCE">Essence</option>
+                    <option [value]="TYPECARBURANT.GAZOLE">Gazole</option>
+                    <option [value]="TYPECARBURANT.DIHYDROGENE">Dihydrogene</option>
+                    <option [value]="TYPECARBURANT.KEROSENE">Kerosene</option>
+                    <option [value]="TYPECARBURANT.GPL">GPL</option>
+                  </select>
+                  <div
+                    *ngIf="submitted && f.carburant.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.carburant.errors.required">Champ requis</div>
+                  </div>
+                </div>
+              </div>
 
 
               <div class="col-md-6">
@@ -461,7 +577,7 @@
                     formControlName="dureeVie"
                   />
                 </div>
-    
+
                 <div *ngIf="submitted && f.dureeVie.errors" class="invalid-feedback">
                   <div *ngIf="f.dureeVie.errors.required">duree de Vie is required</div>
                   <!-- <div *ngIf="f.dureeVie.errors.minlength">
@@ -470,7 +586,28 @@
                 </div>
               </div>
 
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="marque" class="col-form-label"
+                  >marque du vehicule <span class="text-danger">*</span></label
+                  >
+                  <input
+                    type="text"
+                    [ngClass]="{ 'is-invalid': submitted && f.marque.errors }"
+                    class="form-control"
+                    id="marque"
+                    placeholder="marque du vehicule"
+                    formControlName="marque"
+                  />
+                </div>
 
+                <div *ngIf="submitted && f.marque.errors" class="invalid-feedback">
+                  <div *ngIf="f.marque.errors.required">marque is required</div>
+                  <!-- <div *ngIf="f.dureeVie.errors.minlength">
+                    name must be at least 3 characters
+                  </div> -->
+                </div>
+              </div>
 
 
 
@@ -488,7 +625,7 @@
                     formControlName="dateMiseCirculation"
                   />
                 </div>
-    
+
                 <div *ngIf="submitted && f.dateMiseCirculation.errors" class="invalid-feedback">
                   <div *ngIf="f.dateMiseCirculation.errors.required">date Mise Circulation is required</div>
                   <!-- <div *ngIf="f.dateMiseCirculation.errors.minlength">
@@ -514,7 +651,7 @@
                     formControlName="delaiAlerte"
                   />
                 </div>
-    
+
                 <div *ngIf="submitted && f.delaiAlerte.errors" class="invalid-feedback">
                   <div *ngIf="f.delaiAlerte.errors.required">delai Alerte is required</div>
                   <!-- <div *ngIf="f.delaiAlerte.errors.minlength">
@@ -527,9 +664,9 @@
                   <label for="impact" class="col-form-label"
                   >incident Impact<span class="text-danger">*</span></label
                   >
-                 
-    
-                  <select 
+
+
+                  <select
                   [ngClass]="{ 'is-invalid': submitted && f.impact.errors }"
                   class="form-control"
                   id="impact"
@@ -538,10 +675,10 @@
                     <ng-container *ngIf="claims">
                     <option *ngFor="let city of claims" [ngValue]="city" >{{city}}
                     </option>
-                  </ng-container> 
+                  </ng-container>
                  </select>
-    
-    
+
+
                 </div>
                 <div
                   *ngIf="submitted && f.impact.errors"
@@ -550,15 +687,15 @@
                   <div *ngIf="f.impact.errors.required">impact is required</div>
                 </div>
               </div> -->
-    
+
               <!-- <div class="col-md-6">
                 <div class="form-group">
                   <label for="owner" class="col-form-label"
                     >incident Owner</label
                   >
-                  
-    
-                  <select 
+
+
+                  <select
                   [ngClass]="{ 'is-invalid': submitted && f.Owner.errors }"
                   class="form-control"
                   id="owner"
@@ -567,9 +704,9 @@
                     <ng-container *ngIf="priorities">
                     <option *ngFor="let city of priorities" [ngValue]="city" >{{city}}
                     </option>
-                  </ng-container> 
+                  </ng-container>
                  </select>
-    
+
                 </div>
                 <div
                   *ngIf="submitted && f.Owner.errors"
@@ -578,8 +715,8 @@
                   <div *ngIf="f.Owner.errors.required">Owner is required</div>
                 </div>
               </div> -->
-    
-    
+
+
               <!-- <div class="col-md-6">
                 <div class="form-group">
                   <label for="assign" class="col-form-label"
@@ -606,8 +743,8 @@
                   <div *ngIf="f.Assign.errors.required">Assign is required</div>
                 </div>
               </div> -->
-    
-             
+
+
               <!-- <div class="form-group col-md-12">
                 <label for="description"
                 >incident Description<span class="text-danger">*</span></label
@@ -634,14 +771,14 @@
               </div> -->
             </form>
           </div>
-    
+
           <div class="modal-footer">
             <!-- <button type="button" class="btn btn-default" (click)="save()">
               close
             </button> -->
             <span></span>
             <button type="button" class="btn btn-success" (click)="save()">
-              Create vehicule
+              Creé
             </button>
           </div>
         </div>
@@ -657,7 +794,7 @@
     aria-labelledby="updateModal"
     aria-hidden="true"
   >
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg ">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="updateModal">Modifier un vehicule</h5>
@@ -678,12 +815,12 @@
                   formControlName="libelleVehicule"
                 />
               </div>
-  
+
               <div *ngIf="submittedUpdate && f1.libelleVehicule.errors" class="invalid-feedback">
                 <div *ngIf="f1.libelleVehicule.errors.required">name is required</div>
-                <!-- <div *ngIf="f.libelleVehicule.errors.minlength">
+                 <div *ngIf="f.libelleVehicule.errors.minlength">
                   name must be at least 3 characters
-                </div> -->
+                </div> 
               </div>
             </div>
 
@@ -701,12 +838,12 @@
                   formControlName="numeroIdentifiant"
                 />
               </div>
-  
+
               <div *ngIf="submittedUpdate && f1.numeroIdentifiant.errors" class="invalid-feedback">
                 <div *ngIf="f1.numeroIdentifiant.errors.required">numero identifiant required</div>
-                <!-- <div *ngIf="f.numeroIdentifiant.errors.minlength">
+                 <div *ngIf="f.numeroIdentifiant.errors.minlength">
                   name must be at least 3 characters
-                </div> -->
+                </div> 
               </div>
             </div>
 
@@ -726,12 +863,12 @@
                   formControlName="immatriculation"
                 />
               </div>
-  
+
               <div *ngIf="submittedUpdate && f1.immatriculation.errors" class="invalid-feedback">
                 <div *ngIf="f1.immatriculation.errors.required">immatriculation is required</div>
-                <!-- <div *ngIf="f.immatriculation.errors.minlength">
+                 <div *ngIf="f.immatriculation.errors.minlength">
                   name must be at least 3 characters
-                </div> -->
+                </div> 
               </div>
             </div>
 
@@ -751,12 +888,12 @@
                   formControlName="carteGrise"
                 />
               </div>
-  
+
               <div *ngIf="submittedUpdate && f1.carteGrise.errors" class="invalid-feedback">
                 <div *ngIf="f1.carteGrise.errors.required">carte Grise is required</div>
-                <!-- <div *ngIf="f.carteGrise.errors.minlength">
+                 <div *ngIf="f.carteGrise.errors.minlength">
                   name must be at least 3 characters
-                </div> -->
+                </div> 
               </div>
             </div>
 
@@ -777,12 +914,12 @@
                   formControlName="nombrePlace"
                 />
               </div>
-  
+
               <div *ngIf="submittedUpdate && f1.nombrePlace.errors" class="invalid-feedback">
                 <div *ngIf="f1.nombrePlace.errors.required">nombre Place is required</div>
-                <!-- <div *ngIf="f.nombrePlace.errors.minlength">
+                 <div *ngIf="f.nombrePlace.errors.minlength">
                   name must be at least 3 characters
-                </div> -->
+                </div> 
               </div>
             </div>
 
@@ -803,17 +940,42 @@
                   formControlName="longueurVehicule"
                 />
               </div>
-  
+
               <div *ngIf="submittedUpdate && f1.longueurVehicule.errors" class="invalid-feedback">
                 <div *ngIf="f1.longueurVehicule.errors.required">longueur Vehicule is required</div>
-                <!-- <div *ngIf="f.longueurVehicule.errors.minlength">
+                 <div *ngIf="f.longueurVehicule.errors.minlength">
                   name must be at least 3 characters
-                </div> -->
+                </div> 
               </div>
             </div>
 
 
-
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="carburant"
+                  >Type Carburant<span class="text-danger">*</span></label
+                >
+                <select
+                  id="sexe"
+                  class="form-control"
+                  formControlName="carburant"
+                  [ngClass]="{ 'is-invalid': submittedUpdate && f.carburant.errors }"
+                >
+                  <option selected="selected" value="">---</option>
+                  <option [value]="TYPECARBURANT.ESSENCE">Essence</option>
+                  <option [value]="TYPECARBURANT.GAZOLE">Gazole</option>
+                  <option [value]="TYPECARBURANT.DIHYDROGENE">Dihydrogene</option>
+                  <option [value]="TYPECARBURANT.KEROSENE">Kerosene</option>
+                  <option [value]="TYPECARBURANT.GPL">GPL</option>
+                </select>
+                <div
+                  *ngIf="submittedUpdate && f1.carburant.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f1.carburant.errors.required">Champ requis</div>
+                </div>
+              </div>
+            </div>
 
 
             <div class="col-md-6">
@@ -830,16 +992,39 @@
                   formControlName="dureeVie"
                 />
               </div>
-  
+
               <div *ngIf="submittedUpdate && f1.dureeVie.errors" class="invalid-feedback">
                 <div *ngIf="f1.dureeVie.errors.required">duree de Vie is required</div>
-                <!-- <div *ngIf="f.dureeVie.errors.minlength">
+                <div *ngIf="f.dureeVie.errors.minlength">
                   name must be at least 3 characters
-                </div> -->
+                </div> 
               </div>
             </div>
 
 
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="marque" class="col-form-label"
+                >marque du vehicule <span class="text-danger">*</span></label
+                >
+                <input
+                  type="text"
+                  [ngClass]="{ 'is-invalid': submittedUpdate && f1.marque.errors }"
+                  class="form-control"
+                  id="marque"
+                  placeholder="marque du vehicule"
+                  formControlName="marque"
+                />
+              </div>
+
+              <div *ngIf="submittedUpdate && f1.marque.errors" class="invalid-feedback">
+                <div *ngIf="f.marque.errors.required">marque is required</div>
+                 <div *ngIf="f.dureeVie.errors.minlength">
+                  name must be at least 3 characters
+                </div> 
+              </div>
+            </div>
 
 
 
@@ -857,12 +1042,12 @@
                   formControlName="dateMiseCirculation"
                 />
               </div>
-  
+
               <div *ngIf="submittedUpdate && f1.dateMiseCirculation.errors" class="invalid-feedback">
                 <div *ngIf="f1.dateMiseCirculation.errors.required">date Mise Circulation is required</div>
-                <!-- <div *ngIf="f.dateMiseCirculation.errors.minlength">
+                 <div *ngIf="f1.dateMiseCirculation.errors.minlength">
                   name must be at least 3 characters
-                </div> -->
+                </div> 
               </div>
             </div>
 
@@ -883,12 +1068,12 @@
                   formControlName="delaiAlerte"
                 />
               </div>
-  
+
               <div *ngIf="submittedUpdate && f1.delaiAlerte.errors" class="invalid-feedback">
                 <div *ngIf="f1.delaiAlerte.errors.required">delai Alerte is required</div>
-                <!-- <div *ngIf="f.delaiAlerte.errors.minlength">
+                 <div *ngIf="f1.delaiAlerte.errors.minlength">
                   name must be at least 3 characters
-                </div> -->
+                </div> 
               </div>
             </div>
             <!-- <div class="col-md-6">
@@ -896,9 +1081,9 @@
                 <label for="impact" class="col-form-label"
                 >incident Impact<span class="text-danger">*</span></label
                 >
-               
-  
-                <select 
+
+
+                <select
                 [ngClass]="{ 'is-invalid': submitted && f.impact.errors }"
                 class="form-control"
                 id="impact"
@@ -907,10 +1092,10 @@
                   <ng-container *ngIf="claims">
                   <option *ngFor="let city of claims" [ngValue]="city" >{{city}}
                   </option>
-                </ng-container> 
+                </ng-container>
                </select>
-  
-  
+
+
               </div>
               <div
                 *ngIf="submitted && f.impact.errors"
@@ -919,15 +1104,15 @@
                 <div *ngIf="f.impact.errors.required">impact is required</div>
               </div>
             </div> -->
-  
+
             <!-- <div class="col-md-6">
               <div class="form-group">
                 <label for="owner" class="col-form-label"
                   >incident Owner</label
                 >
-                
-  
-                <select 
+
+
+                <select
                 [ngClass]="{ 'is-invalid': submitted && f.Owner.errors }"
                 class="form-control"
                 id="owner"
@@ -936,9 +1121,9 @@
                   <ng-container *ngIf="priorities">
                   <option *ngFor="let city of priorities" [ngValue]="city" >{{city}}
                   </option>
-                </ng-container> 
+                </ng-container>
                </select>
-  
+
               </div>
               <div
                 *ngIf="submitted && f.Owner.errors"
@@ -947,8 +1132,8 @@
                 <div *ngIf="f.Owner.errors.required">Owner is required</div>
               </div>
             </div> -->
-  
-  
+
+
             <!-- <div class="col-md-6">
               <div class="form-group">
                 <label for="assign" class="col-form-label"
@@ -975,8 +1160,8 @@
                 <div *ngIf="f.Assign.errors.required">Assign is required</div>
               </div>
             </div> -->
-  
-           
+
+
             <!-- <div class="form-group col-md-12">
               <label for="description"
               >incident Description<span class="text-danger">*</span></label
@@ -1003,7 +1188,7 @@
             </div> -->
           </form>
         </div>
-  
+
         <div class="modal-footer">
           <!-- <button type="button" class="btn btn-default" (click)="save()">
             close
@@ -1048,9 +1233,9 @@
       <div><p>delais d'alerte du vehicule: <strong>{{showVehicule.delaiAlerte }}</strong></p></div>
       <div><p> duree de vie du vehicule: <strong>{{showVehicule.dureeVie }}</strong></p></div>
       <div><p>carte grise du vehicule: <strong>{{showVehicule.carteGrise }}</strong></p></div>
-     
+
      </div>
- 
+
      <div class="modal-footer">
        <button type="button" class="btn btn-secondary" data-dismiss="modal">
          Close
@@ -1058,10 +1243,15 @@
      </div>
    </div>
  </div>
- </div> 
+ </div>
+
+ <app-confirm-modal
+ (actionConfirm)="deleteVehicule($event)"
+></app-confirm-modal>
+ 
 
  <ngx-loading
   [show]="loading"
   [config]="{ backdropBorderRadius: '3px' }"
 ></ngx-loading>
-    
+

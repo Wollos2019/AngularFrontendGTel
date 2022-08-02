@@ -2,7 +2,7 @@ import { ICategoriePermis } from "./categoriePermis.model";
 import { IVehicule } from "./vehicule.model";
 
 export interface ICategoriePermisVehicule{
-    id:string;
+    id:number;
     categorie_permis_id:string;
     vehiculeId:string;
     appends?:IAppends;
@@ -18,7 +18,7 @@ interface IAppends{
   }
 export class CategoriePermisVehicule implements ICategoriePermisVehicule{
 constructor(
-    public id:string,
+    public id:number,
     public categorie_permis_id:string,
    public  vehiculeId:string,
     public created_at?: Date,

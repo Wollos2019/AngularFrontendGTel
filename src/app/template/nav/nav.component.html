@@ -410,12 +410,13 @@
         </li>
 
          <li class="nav-item">
-          <a href="javascript:void(0)" class="nav-link">
+          <a routerLink="/vehicule/statistique-vehicule"  class="nav-link" [routerLinkActive]="['active']">
             <i class="nav-icon icofont-vehicle-delivery-van"></i>
             <p>
-              Parc Automobile
+              Parc Automobile 
               <i class="fas fa-angle-left right"></i>
             </p>
+            
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
@@ -425,7 +426,7 @@
                 [routerLinkActive]="['active']"
               >
                 <i class="far fa-circle nav-icon"></i>
-                <p>List vehicule</p>
+                <p>vehicule</p>
               </a> 
             <a
                routerLink="/vehicule/panne-vehicule"
@@ -460,42 +461,42 @@
                 <i class="far fa-circle nav-icon"></i>
                 <p>categorie-permis</p>
               </a>
-               <!--<a
-                routerLink="/config/fonctions"
+               <a
+                routerLink="/vehicule/carburant"
                 class="nav-link"
                [routerLinkActive]="['active']"
              >
                 <i class="far fa-circle nav-icon"></i>
-               <p>Poste/Fonctions</p>
+               <p>carburant</p>
              </a>
 
              <a
-               routerLink="/config/working_days"
+               routerLink="/vehicule/entretien"
                class="nav-link"
                [routerLinkActive]="['active']"
               >
                <i class="far fa-circle nav-icon"></i>
-                <p>Jours de travail</p>
+                <p>entretien</p>
              </a>
              <a
-               routerLink="/config/holidays"
+               routerLink="/vehicule/unity-mesure"
                class="nav-link"
                 [routerLinkActive]="['active']"
              >
                <i class="far fa-circle nav-icon"></i>
-                <p>Jours de fériés</p>
+                <p>Symbole de mesures</p>
               </a>
 
               <a
-                routerLink="/config/leave_requests"
+                routerLink="/vehicule/type-entretien"
                 class="nav-link"
                [routerLinkActive]="['active']"
               >
                 <i class="far fa-circle nav-icon"></i>
-                <p>Demandes congés</p>
+                <p>Type entretien</p>
               </a>
 
-              <a
+              <!--<a
                 routerLink="/config/type_absences"
                 class="nav-link"
                 [routerLinkActive]="['active']"

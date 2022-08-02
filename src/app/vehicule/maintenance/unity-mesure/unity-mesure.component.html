@@ -1,0 +1,213 @@
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Unité de Mesures</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a [routerLink]="'/'">Dashbord</a></li>
+            <li class="breadcrumb-item active">Unité de Mesures</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-body">
+        <form class="form-row" [formGroup]="editForm">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="libelleUniteMesure" class="col-form-label"
+                >Nom  Unite Mesure<span class="text-danger">*</span></label
+              >
+              <input
+                type="text"
+                [ngClass]="{
+                  'is-invalid': submitted && f.libelleUniteMesure.errors
+                }"
+                class="form-control"
+                id="libelleUniteMesure"
+                placeholder="Nom Unite Mesure "
+                formControlName="libelleUniteMesure"
+              />
+            </div>
+  
+            <div
+              *ngIf="submitted && f.libelleUniteMesure.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.libelleUniteMesure.errors.required">
+                libelle Unite Mesure required
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="symboleUniteMesure" class="col-form-label"
+                >symbole Unite Mesure <span class="text-danger">*</span></label
+              >
+              <input
+                type="text"
+                [ngClass]="{
+                  'is-invalid': submitted && f.symboleUniteMesure.errors
+                }"
+                class="form-control"
+                id="symboleUniteMesure"
+                placeholder="km, m, L, "
+                formControlName="symboleUniteMesure"
+                
+              />
+            </div>
+  
+            <div
+              *ngIf="submitted && f.symboleUniteMesure.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.symboleUniteMesure.errors.required">
+                symbole Unite Mesure required
+              </div>
+              <div *ngIf="f.symboleUniteMesure.errors.maxlength">
+                maximun 4 characters
+               </div> 
+            </div>
+          </div>
+  
+  
+            
+        </form>
+      </div>
+      <div class="center mb-2">
+        <button
+          type="button"
+          class="btn btn-primary float-right mr-2"[disabled]="!editForm.valid"
+          (click)="saveUnite()"
+        >
+          envoyer
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  
+  <div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Liste des symboles</h3>
+        </div>
+        <div class="card-body">
+          <!-- <button id="table2-new-row-button" class="btn btn-primary mb-4"> Add New Row</button> -->
+          <div class="table-responsive">
+            <table
+              class="table table-bordered border text-nowrap mb-0"
+              id="new-edit"
+            >
+              <thead>
+                <tr class="bg-dark text-white">
+                  <th>#</th>
+                  <th>libelle Unite Mesure</th>
+                  <th>symbole Mesure </th>
+                 
+                  <!-- <th>E-mail</th> -->
+                  <th name="bstable-actions">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngIf="unitMesures">
+                  <tr *ngFor="let fourni of unitMesures, let i=index">
+                    <td>{{i+1}}</td>
+                    <td>{{fourni.libelleUniteMesure}}</td>
+                    <td>{{fourni.symboleUniteMesure}}</td>
+                    
+                    <!-- <td>b.Chloe@datatables.net</td> -->
+                    <td name="bstable-actions">
+                      <div class="btn-list">
+                        <!-- <button
+                       (click)="show(fourni)"
+                          id="bEdit"
+                          title="voire"
+                          type="button"
+                          class="btn btn-sm btn-success mr-1"
+                        >
+                          <span class="icofont-eye-open mr-1"> </span>
+                        </button> -->
+                        <button
+                          id="bDel"
+                          title="supprimer"
+                          type="button"
+                          class="btn btn-sm btn-danger mr-1"
+                          (click)="openModalConfirm(fourni?.id)"
+                        >
+                          <span class="icofont-ui-delete"> </span>
+                        </button>
+                        <!-- <button
+                        (click)="updateModal(fourni)"
+                          id="bAcep"
+                          title="modifier"
+                          type="button"
+                          class="btn btn-sm btn-primary mr-1"
+                          
+                        >
+                          <span class="icofont-ui-edit "> </span>
+                        </button> -->
+                      
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+                <ng-container *ngIf="!unitMesures?.length">
+                  <tr>
+                    <td colspan="4" class="text-center">
+                      Aucune données trouver
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="mb-3 mt-2" *ngIf="paramsPage && paramsPage.totalItems != 0">
+            <div class="d-inline ml-5" style="font-size: 13px" >
+              Affiche {{ paramsPage.from ? paramsPage.from : 1 }} à {{ paramsPage.to }} de
+              {{ paramsPage.totalItems }} entrées
+            </div>
+            <div class="d-inline float-right">
+              <ngb-pagination
+                [pageSize]="paramsPage.itemsPerPage"
+                [collectionSize]="paramsPage.totalItems"
+                [(page)]="paramsPage.currentPage"
+                (pageChange)="getPage($event)"
+              >
+                <ng-template ngbPaginationFirst>First</ng-template>
+                <ng-template ngbPaginationLast>Last</ng-template>
+                <ng-template ngbPaginationPrevious>Prev</ng-template>
+                <ng-template ngbPaginationNext>Next</ng-template>
+              </ngb-pagination>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  </div>
+  
+  
+  
+   
+  <app-confirm-modal
+  (actionConfirm)="deleteUnit($event)"
+></app-confirm-modal>
+  
+  
+     <ngx-loading
+    [show]="loading"
+    [config]="{ backdropBorderRadius: '3px' }"
+  ></ngx-loading>

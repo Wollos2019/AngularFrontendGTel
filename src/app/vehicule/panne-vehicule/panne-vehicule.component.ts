@@ -26,6 +26,7 @@ loading=false;
 submitted = false;
 paramsPage: any;
   showPannes!: Panne;
+  currentID!: Number;
 
   constructor(private vehiculeService:VehiculeServiceService,
               private toastr:ToastrService,
@@ -104,14 +105,15 @@ paramsPage: any;
   }
 
 
-  deletePanne(panne: Panne): void {
+  deletePanne(ev: boolean,): void {
     this.loading = true;
-    var confir = confirm('Voulez vous supprimer cet element?');
-    if (confir) {
-      this.vehiculeService.deletePanne(panne).subscribe({
+    
+    if (ev) {
+      this.vehiculeService.deletePanne(this.currentID).subscribe({
         next: () => {
           this.loading = false;
           this.toastr.success('Suppression effectuée');
+          $('#confirm').modal('hide');
           this.getListPanne();
         },
         error: (error: any) => {
@@ -153,5 +155,12 @@ paramsPage: any;
     console.log(data);
     this.getListPanne(`page=${data}`);
   }
+
+  openModalConfirm(id?: number): void {
+    this.currentID = Number(id);
+    console.log("ggggggggggggggg",this.currentID!);
+    $('#confirm').modal('show');
+  }
+
 
 }

@@ -37,6 +37,7 @@
               "src/assets"
             ],
             "styles": [
+              
               "src/assets/plugins/fontawesome-free/css/all.min.css",
               "src/assets/plugins/icofont/icofont.min.css",
               "src/assets/plugins/fontawesome-free/css/all.css",
@@ -62,7 +63,7 @@
               "src/assets/plugins/datatables-buttons/js/buttons.html5.min.js",
               "src/assets/plugins/datatables-buttons/js/buttons.print.min.js",
               "src/assets/plugins/datatables-buttons/js/buttons.colVis.min.js"
-             
+
             ]
           },
           "configurations": {
@@ -70,8 +71,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "4mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",

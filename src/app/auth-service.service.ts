@@ -60,7 +60,7 @@ export class AuthServiceService {
 
   logout() {
     
-    this.http.post<any>('http://localhost:8000/api/logout', {})
+    this.http.post<any>(environment.apiUrl+'api/logout', {})
     .subscribe(res => {
       if(res.status='200'){
                 

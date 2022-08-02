@@ -16,41 +16,41 @@ export class FournisseurService {
  //GESTION DES FOURNISSEUR
 /**
  * fonction pour recuper toutes les Fournisseur
- * @param params 
- * @returns 
+ * @param params
+ * @returns
  */
  getAllFournisseurs(params=''):Observable<Fournisseur[]>{
-  return this.httpClient.get<Fournisseur[]>(`${this.apiUrl}vendors/${params}`);
+  return this.httpClient.get<Fournisseur[]>(`${this.apiUrl}vendors?${params}`);
 }
 /**
  * fonction pour recuper une Fournisseur
- * @param vendors 
- * @returns 
+ * @param vendors
+ * @returns
  */
 getOneFournisseur(vendors:Fournisseur):Observable<Fournisseur>{
   return this.httpClient.get<Fournisseur>(`${this.apiUrl}vendors/${vendors.id}`);
 }
 /**
  * fonction pour mettre a jour une Fournisseur
- * @param vendors 
- * @returns 
+ * @param vendors
+ * @returns
  */
 updateFournisseur(vendors:Fournisseur):Observable<Fournisseur>{
   return this.httpClient.post<Fournisseur>(`${this.apiUrl}vendors/${vendors.id}`,vendors);
 }
 /**
  * fonction pour supprimer une Fournisseur
- * @param vendors 
- * @returns 
+ * @param vendors
+ * @returns
  */
-deleteFournisseur(vendors:Fournisseur):Observable<Fournisseur>{
-  return this.httpClient.delete<Fournisseur>(`${this.apiUrl}vendors/${vendors.id}`);
+deleteFournisseur(id:Number):Observable<Fournisseur>{
+  return this.httpClient.delete<Fournisseur>(`${this.apiUrl}vendors/${id}`);
 }
 
 /**
  * fonction pour creer une Fournisseur
- * @param vendors 
- * @returns 
+ * @param vendors
+ * @returns
  */
 createFournisseur(vendors:any):Observable<Fournisseur>{
   return this.httpClient.post<Fournisseur>(`${this.apiUrl}vendors`,vendors);

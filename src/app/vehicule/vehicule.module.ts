@@ -1,11 +1,11 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+
 import { CommonModule } from '@angular/common';
 
 import { VehiculeRoutingModule } from './vehicule-routing.module';
 import { ListVehiculeComponent } from './list-vehicule/list-vehicule.component';
 import { PanneVehiculeComponent } from './panne-vehicule/panne-vehicule.component';
 import { VehiculeServiceService } from './vehicule-service.service';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { PriseVehiculeComponent } from './prise-vehicule/prise-vehicule.component';
 import { PermisComponent } from './permis/permis.component';
 import { CategoriePermisComponent } from './categorie-permis/categorie-permis.component';
@@ -18,6 +18,15 @@ import { UpdatePermisComponent } from './permis/update-permis/update-permis.comp
 import { SharedModule } from '../shared/shared.module';
 import { UpdatePanneComponent } from './panne-vehicule/update-panne/update-panne.component';
 import { StatistiqueVehiculeComponent } from './statistique-vehicule/statistique-vehicule.component';
+import { TypeEntretienComponent } from './maintenance/type-entretien/type-entretien.component';
+import { EntretienComponent } from './maintenance/entretien/entretien.component';
+import { UnityMesureComponent } from './maintenance/unity-mesure/unity-mesure.component';
+import { CarburantComponent } from './carburant/carburant.component';
+import { TypeVehiculeComponent } from './type-vehicule/type-vehicule.component';
+import { TypeCarburantComponent } from './carburant/type-carburant/type-carburant.component';
+import { DetailVehiculeComponent } from './detail-vehicule/detail-vehicule.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 
 
@@ -33,6 +42,13 @@ import { StatistiqueVehiculeComponent } from './statistique-vehicule/statistique
     UpdatePermisComponent,
     UpdatePanneComponent,
     StatistiqueVehiculeComponent,
+    TypeEntretienComponent,
+    EntretienComponent,
+    UnityMesureComponent,
+    CarburantComponent,
+    TypeVehiculeComponent,
+    TypeCarburantComponent,
+    DetailVehiculeComponent,
    
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -2,7 +2,7 @@ import { Time } from "@angular/common";
 import { IVehicule } from "./vehicule.model";
 
 export interface IPriseVehicule {
-    id?:string;
+    id?:number;
     objetPriseVehicule?:string;
     datePriseVehicule?:Date;
     heurePriseVehicule?:Time;
@@ -23,7 +23,7 @@ export interface IPriseVehicule {
   
   export class PriseVehicule implements IPriseVehicule{
       constructor(
-    public id?:string,
+    public id?:number,
     public objetPriseVehicule?:string,
     public datePriseVehicule?:Date,
     public heurePriseVehicule?:Time,
