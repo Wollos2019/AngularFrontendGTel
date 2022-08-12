@@ -1,52 +1,188 @@
-body{
-    background: #000;
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap');
+
+body {
+    margin : 0;
+    padding: 0;
+    font-size: 16px;
+    font-weight: 300;
+    width: 100%;
+    background: rgb(204, 204, 204);
+    font-family: 'Roboto Condensed', sans-serif;
 }
 
-.padding{
-    padding: 2rem !important;
+h2, h4, p {
+    margin : 0;
 }
 
-.card{
-    margin-bottom: 30px;
-    border: none;
-    box-shadow: 0px 1px 2px 1px rgba(154,154,204,0.22);
+.page {
+    background: #fff;
+    display: block;
+    margin: 3rem auto 3rem auto;
+    position: relative;
+    box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
 }
 
-.card-haeder{
+.page {
+    width: 19cm;
+    height: 15cm;
+    overflow-x: hidden;
+}
+
+.top-section{
+    color: rgb(15, 15, 15);
+    padding: 25px;
+    height: 85px;
     background-color: #fff;
-    border-bottom: 1px solid #e6e6f2;
+    border: 2px;
+    border-color: rgb(141, 143, 185);
+    border-style: groove;
 }
 
-h3{
+/* .down-section {
+    padding: 25px;
+    height: 00px;
+    border: 2px;
+    border-color: rgb(141, 143, 185);
+    border-style: groove;
+} */
+
+.top-section h2 {
+    font-size: 25px;
+    //margin-bottom: 20px;
+    font-weight: 750;
+    float: right;
+    margin-right: 78px;
+    //margin-top: 15px;
+}
+.top-section .contact,
+.top-section .address {
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+.top-section .address-content {
+    max-width: 350px;
+}
+
+.top-section .address-content .h2,
+.address-content .p {
+    /* float: right; */
+}
+
+.contact .contact-content {
+    max-width: 250px;
+    float: right;
+    margin-top: 3px;
+    
+}
+
+.contact-content .email,
+.contact-content .number {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    
+}
+
+.contact-content .email span,
+.contact-content .number span {
+    float: right;
+    margin-left: 10px;
+    
+}
+
+.address-content img {
+    height: 50px;
+}
+
+.address-content h2 {
+    margin-top: 12px;
+}
+
+.billing-to {
+    padding: 20px;
+    margin-top: 0px;
+}
+
+.billing-to .title {
+    font-weight: 600;
     font-size: 20px;
+    margin-bottom: 7px;
 }
 
-h5{
-    font-size: 15px;
-    line-height: 26px;
-    color: #3d405c;
+.billing-to .billed-sec {
+    width: 50%;
+    float: left;
+    font-size: 18px;
+    margin-bottom: 25px;
 }
 
-.text-dark{
-    color: #3d405c !important;
+.billing-to .sub-title, 
+.billing-to .name {
+    font-weight: 400;
+    font-size: 18px;
+    margin-bottom: 5px;
 }
 
-.logo img {
-    height: 60px;
+.billing-to .ship-add {
+    max-width: 300px;
 }
 
-@media print {
-    button {
-        display : none; 
-    }
-
-    footer {
-        display : none;
-    }
+.table {
+    padding: 0 20px;
 }
 
-// .card-footer {
-//     position: absolute;
-//   width: 50%;
-//   bottom: 10px;
-// }
+.table table {
+    width: 100%;
+}
+
+.table .table2 {
+    width: 50%;
+    float: right;
+}
+
+.table table, th, td {
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #616161;
+    border-collapse: collapse;
+}
+
+.table tr th {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.table table tr:first-child {
+    color: rgb(14, 13, 13);
+    background-color: #3d7dd1;
+}
+
+.table .table2 tr:first-child {
+    color: rgb(14, 13, 13);
+    background-color: #eff0f1;
+}
+
+.table tr th:nth-child(2),
+.table tr td:nth-child(2) {
+    text-align: left;
+    width: 230px;
+}
+
+/* Bottom Section */
+.bottom-section {
+    margin-top: 5px;
+    padding: 20px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.bottom-section .status-content h4 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 50px;
+    float: right;
+}

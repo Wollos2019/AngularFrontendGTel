@@ -64,7 +64,8 @@ export class FactureDetailsComponent implements OnInit {
   @ViewChild('content', {static:false}) el!:ElementRef;
   //@ViewChild('content') content!:ElementRef;
   generatePdf(){
-    let pdf = new jsPDF('l', 'pt', 'letter');
+    //let pdf = new jsPDF('l', 'pt', 'letter');
+    let pdf = new jsPDF('p', 'mm', 'a4');
     pdf.html(this.el.nativeElement, {
       callback:(pdf) => {
         pdf.output("dataurlnewwindow");
@@ -74,11 +75,13 @@ export class FactureDetailsComponent implements OnInit {
 
   public convertToPDF() {
     html2canvas(document.getElementById("htmlData")!).then(canvas => {
+      
       const contentDataURL = canvas.toDataURL('image/png');
       let pdf = new jsPDF('p', 'mm', 'a4');
       var width = pdf.internal.pageSize.getWidth();
       var height = canvas.height * width / canvas.width;
-      pdf.addImage(contentDataURL, 'PNG', 1, 1, width, height);
+      
+      pdf.addImage(contentDataURL, 'PNG', 0, 0, width, height);
       pdf.save('output.pdf');
     });
   }
@@ -107,7 +110,7 @@ export class FactureDetailsComponent implements OnInit {
       let fileHeight = ((canvas.height * fileWidth) / canvas.width);
       const FILEURI = canvas.toDataURL('image/png');
       let PDF = new jsPDF('p', 'mm', 'a4');
-      let position = 5;
+      let position = 0;
       PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
       PDF.save('angular-demo.pdf');
     });
@@ -133,5 +136,88 @@ export class FactureDetailsComponent implements OnInit {
       console.log(e.message);
     });
   }
+
+// public canvasToImage(backgroundColor)
+// {
+// 	//cache height and width		
+// 	var w = canvas.width;
+// 	var h = canvas.height;
+
+// 	var data;		
+
+// 	if(backgroundColor)
+// 	{
+// 		//get the current ImageData for the canvas.
+// 		data = context.getImageData(0, 0, w, h);
+		
+// 		//store the current globalCompositeOperation
+// 		var compositeOperation = context.globalCompositeOperation;
+
+// 		//set to draw behind current content
+// 		context.globalCompositeOperation = "destination-over";
+
+// 		//set background color
+// 		context.fillStyle = backgroundColor;
+
+// 		//draw background / rect on entire canvas
+// 		context.fillRect(0,0,w,h);
+// 	}
+
+// 	//get the image data from the canvas
+// 	var imageData = this.canvas.toDataURL("image/png");
+
+// 	if(backgroundColor)
+// 	{
+// 		//clear the canvas
+// 		context.clearRect (0,0,w,h);
+
+// 		//restore it with original / cached ImageData
+// 		context.putImageData(data, 0,0);		
+
+// 		//reset the globalCompositeOperation to what it was
+// 		context.globalCompositeOperation = compositeOperation;
+// 	}
+
+// 	//return the Base64 encoded data url string
+// 	return imageData;
+// }
+
+generarPDF() {
+  const options = {
+    background: 'white',
+    scale: 3,
+  };
+
+  html2canvas(this.el.nativeElement, options)
+    .then((canvas) => {
+      var img = canvas.toDataURL('image/PNG');
+      var doc = new jsPDF('p', 'pt', 'a4', true);
+
+      // Add image Canvas to PDF
+      const bufferX = 5;
+      const bufferY = 5;
+      const imgProps = (<any>doc).getImageProperties(img);
+      const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      console.log(pdfWidth, pdfHeight);
+
+      doc.addImage(
+        img,
+        'PNG',
+        bufferX,
+        bufferY,
+        pdfWidth,
+        pdfHeight,
+        undefined,
+        'FAST'
+      );
+
+      return doc;
+    })
+    .then((doc) => {
+      doc.save('output.pdf');
+      //doc.output('dataurlnewwindow');
+    });
+}
 
 }

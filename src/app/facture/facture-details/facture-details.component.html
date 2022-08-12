@@ -1,118 +1,113 @@
 <!-- <section class="content"> -->
-  <!-- <div class="container-fluid"> -->
-<div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 padding" id="htmlData" #content>
-  
-    <div class="card">
-    <div class="card-header p-4">
-      <div class="logo pt-2 d-inline-block">
-        <img src="assets\image_gabonTele.jpg" alt="" class="img-fluid">
-      </div>
-      <div class="float-right">
-        <h3 class="mb-0">Facture #{{invoice.id}}</h3>
-        Date: {{invoice.created_at}}
-      </div>
+<!-- <div class="container-fluid"> -->
+    <div class="page" size="A5" id="htmlData" #content>
+
+        <div class="top-section">
+
+            <div class="address">
+
+                <div class="address-content">
+                    <img src="assets\image_gabonTele.jpg" class="img-fluid">
+                    <h2>Gabon Television</h2>
+
+                </div>
+            </div>
+            <div class="contact">
+                <div class="contact-content">
+                    <div class="email">Email: <span class="span">gabontelevision@gmail.com</span></div>
+                    <div class="number">Number: <span class="span">533-345-345</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="down-section">
+            <div class="billing-to">
+
+                <div class="billed-sec">
+                    <div class="name">
+                        {{invoice.client.prenom
+                            + ' ' + invoice.client.nom}}
+                    </div>
+                    <p>{{invoice.client.email}}</p>
+                    <p>{{invoice.client.telephone}}</p>
+                </div>
+
+                <div class="billed-sec">
+                    <div class="sub-title">Facture #{{invoice.id}}</div>
+                    <div class="ship-add">Date: {{invoice.created_at | date:'dd/MM/yyyy'}}</div>
+                </div>
+            </div>
+
+            <div class="table">
+                <table>
+                    <tr>
+                        <th>#</th>
+                        <th style="width:30%">Produit</th>
+                        <th>Date de diffusion</th>
+                        <th>Heure de diffusion</th>
+                        <th>Durée</th>
+                        <th>Prix</th>
+                        
+                    </tr>
+                    <tr *ngFor="let product of invoice.commandes_detail; index as i">
+                        <td>{{i+1}}</td>
+                        <td>{{product.productName}}</td>
+                        <td>{{product.date_debut | date:'dd/MM/yyyy'}}</td>
+                        <td>{{product.heure_debut}}</td>
+                        <td>{{product.duree}}</td>
+                        <td>{{product.appends.productPrice}}</td>
+                        
+                    </tr>
+                </table>
+                <table class="table2">
+                    <tr>
+                        <td><strong class="text-dark">Couts supplémentaires</strong></td>
+                        <td style="width:30%; text-align: center;">{{addCost}}</td>
+                    </tr>
+                    <tr>
+                        <td class="left">
+                          <strong class="text-dark">Montant Total</strong>
+                        </td>
+                        <td style="width:30%; text-align: center;">{{montantT}}</td>
+                      </tr>
+      
+                      <tr>
+                        <td class="left">
+                          <strong class="text-dark">Rabais(20%)</strong>
+                        </td>
+                        <td style="width:30%; text-align: center;">{{rabaisT}}</td>
+                      </tr>
+      
+                      <tr>
+                        <td class="left">
+                          <strong class="text-dark">TVA(18%)</strong>
+                        </td>
+                        <td style="width:30%; text-align: center;">{{tva}}</td>
+                      </tr>
+      
+                      <tr>
+                        <td class="left">
+                          <strong class="text-dark">Total</strong>
+                        </td>
+                        <td style="width:30%; text-align: center;">{{totalN}}</td>
+                      </tr>
+                </table>
+            </div>
+
+            <div class="bottom-section">
+                <div class="status-content">
+                    <h4>Signature</h4>
+                </div>
+            </div>
+        </div>
     </div>
-    
-      <div class="card-body">
-        <div class="row mb-4">
-          <div class="col-sm-6">
-            <h5 class="mb-3">Destinataire: </h5>
-            <h3 class="text-dark mb-1">{{invoice.client.prenom
-              + ' ' + invoice.client.nom}}</h3>
-            <div>{{invoice.client.adresse}}</div>
-            <div>{{invoice.client.town}}</div>
-            <div>{{invoice.client.email}}</div>
-            <div>{{invoice.client.telephone}}</div>
-          </div>
-        </div>
-        <div class="table-response-sm">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th class="center">#</th>
-                <th class="center">Produit</th>
-                <th class="center">Date de diffusion</th>
-                <th class="center">Heure de diffusion</th>
-                <th >Durée</th>
-                <!-- <th >Reduction par produit</th> -->
-                <!-- <th class="right">Couts supplémentaires</th> -->
-                <th class="right">Prix</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let product of invoice.commandes_detail; index as i">
-                <th scope="row">{{i+1}}</th>
-                <td>{{product.productName}}</td>
-                <td>{{product.date_debut}}</td>
-                <td>{{product.heure_debut}}</td>
-                <td>{{product.duree}}</td>
-                <!-- <td>{{reducPro}}</td> -->
-                <!-- <td>{{rabaisPro}}</td> -->
-                <td>{{product.appends.productPrice}}</td>
-              </tr>
-            </tbody>
-
-          </table>
-        </div>
-        <div class="row">
-          <div class="col-lg-4 col-sm-5 ml-auto">
-            <table class="table table-clear">
-              <tbody>
-                <tr>
-                  <td class="left">
-                    <strong class="text-dark">Couts supplémentaires</strong>
-                  </td>
-                  <td class="right">{{addCost}}</td>
-                </tr>
-                <tr>
-                  <td class="left">
-                    <strong class="text-dark">Montant Total</strong>
-                  </td>
-                  <td class="right">{{montantT}}</td>
-                </tr>
-
-                <tr>
-                  <td class="left">
-                    <strong class="text-dark">Rabais(20%)</strong>
-                  </td>
-                  <td class="right">{{rabaisT}}</td>
-                </tr>
-
-                <tr>
-                  <td class="left">
-                    <strong class="text-dark">TVA(18%)</strong>
-                  </td>
-                  <td class="right">{{tva}}</td>
-                </tr>
-
-                <tr>
-                  <td class="left">
-                    <strong class="text-dark">Total</strong>
-                  </td>
-                  <td class="right">{{totalN}}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    
-    <div class="card-footer bg-white" style="margin-top: 650px;">
-      <p class="mb-2">Gabon Television, Libreville, Gabon</p>
-    </div>
-  </div>
-  
-</div>
 <!-- </div> -->
 <!-- </section> -->
-<div>
-
-</div>
 
 <div style="text-align: center;">
-  <!-- <button type="button" class="btn btn-primary mb-2" printTitle="Facture Gabon TV" printSectionId="htmlData"
+    <!-- <button type="button" class="btn btn-primary mb-2" printTitle="Facture Gabon TV" printSectionId="htmlData"
     ngxPrint>Imprimer la facture</button> -->
-    <button type="button" class="btn btn-primary mb-1" (click)="openPDF3()">
-      Impression
+    <button type="button" class="btn btn-primary mb-1" (click)="generarPDF()">
+        Impression
     </button>
 </div>
